@@ -223,7 +223,7 @@ class FinanceController < ApplicationController
     if request.get?
       query = 
       "SELECT 
-           CONCAT(s.first_name, ' ', s.middle_name, ' ', s.last_name) 
+           CONCAT_WS(' ', s.first_name, s.middle_name, s.last_name) 
                                        AS student_name, 
            sid.rfc                     AS rfc, 
            i.concept                   AS concept, 
@@ -247,6 +247,38 @@ class FinanceController < ApplicationController
           end
           send_data(tsv_str,
                     :filename => "invoices_#{Time.now.to_date.to_s}.csv",
+                    :type => 'text/csv')
+        }
+      end
+    end
+  end
+
+  def generate_receipts_report
+    if request.get?
+      query = 
+      "SELECT 
+           CONCAT_WS(' ', s.first_name, s.middle_name, s.last_name) 
+                          AS student_name, 
+           ffc.name       AS concept, 
+           ffp.amount     AS total, 
+           ffp.created_at AS print_date
+       FROM 
+           finance_fee_particulars     ffp 
+       INNER JOIN finance_fee_categories ffc  ON ffc.id         = ffp.finance_fee_category_id
+       INNER JOIN students s                  ON s.admission_no = ffp.admission_no; "
+
+      receipts = FinanceFeeParticulars.find_by_sql(query)
+
+      respond_to do |format|
+        format.csv  { 
+          tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
+            tsv << ['Alumno', 'Concepto', 'Total', 'Fecha']
+            receipts.each do |t|
+              tsv << [t.student_name, t.concept, t.total, t.print_date]
+            end
+          end
+          send_data(tsv_str,
+                    :filename => "receipts_#{Time.now.to_date.to_s}.csv",
                     :type => 'text/csv')
         }
       end

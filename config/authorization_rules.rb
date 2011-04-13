@@ -1155,7 +1155,8 @@ authorization do
         :update_categories_for_transaction_report,
         :generate_transaction_report,
 
-        :generate_invoices_report
+        :generate_invoices_report,
+        :generate_receipts_report
     ]
         
     has_permission_on [:xml], :to =>
