@@ -7,6 +7,8 @@ class CashBoxesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @cash_boxes }
+      format.xls  { send_data @cash_boxes.to_xls }
+      format.csv  { send_data @cash_boxes.to_csv ( :except => [:id] ) }
     end
   end
 
