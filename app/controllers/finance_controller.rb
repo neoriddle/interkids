@@ -37,9 +37,11 @@ class FinanceController < ApplicationController
   end
 
   def expense_create
-    flash[:notice]=nil
     @expense = FinanceTransaction.new(params[:transaction])
     @categories = FinanceTransactionCategory.expense_categories
+    @payment_forms = PaymentForm.all
+    @batches = Batch.all(:conditions => ["is_deleted = ?", false])
+
     if @categories.empty?
       flash[:notice] = "Please create category for expense!"
     end
@@ -99,7 +101,7 @@ class FinanceController < ApplicationController
     logger.debug "FinanceTransaction found\t#{@transaction.inspect}"
     @categories = FinanceTransactionCategory.income_categories
     @payment_forms = PaymentForm.all
-    @batches = Batch.all
+    @batches = Batch.all(:joins => :course, :conditions => {:is_deleted => false} )
 
     if @categories.empty?
       flash[:notice] = "Please create category for income!"
