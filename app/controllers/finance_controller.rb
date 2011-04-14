@@ -944,7 +944,7 @@ class FinanceController < ApplicationController
       transaction.amount          = params[:transaction][:amount]
       transaction.fine_included   = !params[:fine].nil?
       transaction.finance_fees_id = @financefee.id
-      transaction.payment_form    = params[:transaction][:payment_form]
+      transaction.payment_form_id = params[:transaction][:payment_form]
       transaction.save
 
       part = FinanceFeeParticulars.new(:name                      => 'Abono', 
