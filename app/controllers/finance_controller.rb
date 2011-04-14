@@ -965,6 +965,8 @@ class FinanceController < ApplicationController
       @fee_particulars = nil
     end
 
+    @payment_forms = PaymentForm.all
+
     render :update do |page|
       page.replace_html "student", :partial => "student_fees_submission"
     end
