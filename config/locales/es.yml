@@ -1,4 +1,37 @@
 es:
+  activerecord:
+    errors:
+      template:
+        body: 'Por favor revise los siguientes campos'
+        header: 
+          one: "1 error evita que %{model} sea guardado"
+          other: "%{count} errores evitan que %{model} sea guardado"
+        messages:
+          inclusion: "no está en la lista"
+          exclusion: "no está disponible"
+          invalid: "no es válido"
+          confirmation: "no coincide con la confirmación"
+          accepted: "debe se aceptado"
+          empty: "no puede estar vacío"
+          blank: "no puede estar en blanco"
+          too_long: "es muy largo (máximo %{count} caracteres)"
+          too_short: "es muy corto (mínimo %{count} caracteres)"
+          wrong_length: "logitud incorrecta (deben ser %{count} caracteres)"
+          taken: "ya ha sido tomado"
+          not_a_number: "no es un número"
+          greater_than: "debe ser mayor que %{count}"
+          greater_than_or_equal_to: "debe ser mayor o igual que %{count}"
+          equal_to: "debe ser igual que %{count}"
+          less_than: "debe ser menor que %{count}"
+          less_than_or_equal_to: "debe ser menor o igual que %{count}"
+          odd: "debe ser impar"
+          even: "debe ser par"
+    models:
+      transaction: 'transacción'
+    attributes:
+      transaction:
+        title: 'Título'
+        amount: 'Cantidad'
   app:
     views:
       user:
