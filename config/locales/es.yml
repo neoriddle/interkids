@@ -2,7 +2,7 @@ es:
   activerecord:
     errors:
       template:
-        body: 'Por favor revise los siguientes campos'
+        body: 'Por favor revise los siguientes campos (que hueva)'
         header: 
           one: "1 error evita que %{model} sea guardado"
           other: "%{count} errores evitan que %{model} sea guardado"
@@ -98,7 +98,7 @@ es:
           start_date: 'Start date'
           end_date: 'End date'
           due_date: 'Due date'
-          save: '► Save'
+          save: '? Save'
         additional_fees_list:
           fees: 'Fees'
           additional_fees: 'Additional Fees'
