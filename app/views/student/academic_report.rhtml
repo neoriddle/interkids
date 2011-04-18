@@ -1,6 +1,6 @@
 <div id="content-header">
   <img src="/images/admission/admission_page_logo.jpg" />
-  <h1>Academic reports</h1>
+  <h1><%= t('app.views.student.academic_report.academic_reports') %></h1>
   <h3> <%= @student.first_name %> <%= @student.middle_name %> <%= @student.last_name %> </h3>
   <div id="app-back-button">
     <%= link_to image_tag("/images/buttons/back.png", :border => 0), :back %>
@@ -27,11 +27,11 @@
         <div class="subject-heading"><%= s.name %></div>
 
         <div class="subject-results-th">
-          <div class="subject-results-exam">Exam</div>
-          <div class="subject-results-marks">Marks</div>
-          <div class="subject-results-maxmarks">Max</div>
-          <div class="subject-results-grade">Grade</div>
-          <div class="subject-results-percentage">(in %)</div>
+          <div class="subject-results-exam"><%= t('app.views.student.academic_report.exam') %></div>
+          <div class="subject-results-marks"><%= t('app.views.student.academic_report.marks') %></div>
+          <div class="subject-results-maxmarks"><%= t('app.views.student.academic_report.max') %></div>
+          <div class="subject-results-grade"><%= t('app.views.student.academic_report.grade') %></div>
+          <div class="subject-results-percentage"><%= t('app.views.student.academic_report.in_percent') %></div>
         </div>
 
         <%- @examtypes.each do |e_type| -%>
@@ -45,7 +45,7 @@
               <% unless examres.grading.nil? %>
                 <div class="subject-results-grade"><%= examres.grading.name %></div>
               <% else %>
-                <div class="subject-results-grade">NA</div>
+                <div class="subject-results-grade"><%= t('app.views.student.academic_report.na') %></div>
               <% end %>
               <div class="subject-results-precentage"><%= examres.percentage_marks %></div>
             </div>
@@ -55,7 +55,7 @@
         <% sub_percent_total = @arr_score_wt[s.name] * 100.0 / @arr_total_wt[s.name] unless @arr_total_wt[s.name] %>
 
         <div class="subject-results-tf">
-          <div class="subject-results-exam">Weighted scores</div>
+          <div class="subject-results-exam"><%= t('app.views.student.academic_report.weighted_scores') %></div>
           <div class="subject-results-marks"> <%= @arr_score_wt[s.name] %></div>
           <div class="subject-results-maxmarks"> <%= @arr_total_wt[s.name] %></div>
           <div class="subject-results-grade"> <%= Grading.find_from_percentage(sub_percent_total) if sub_percent_total %></div>
@@ -67,20 +67,20 @@
     <% end %>
 
 
-    <div class="subject-heading">Total</div>
+    <div class="subject-heading"><%= t('app.views.student.academic_report.total') %></div>
 
     <div class="subject-results-th">
       <div class="subject-results-exam">&nbsp;</div>
       <div class="subject-results-marks">&nbsp;</div>
       <div class="subject-results-maxmarks">&nbsp;</div>
-      <div class="subject-results-grade">Grade</div>
-      <div class="subject-results-percentage">(in %)</div>
+      <div class="subject-results-grade"><%= t('app.views.student.academic_report.grade') %></div>
+      <div class="subject-results-percentage"><%= t('app.views.student.academic_report.in_percent') %></div>
     </div>
 
     <% percentage_total = @student.annual_average_marks_for_a_course(@course) %>
 
     <div class="subject-results-tr">
-      <div class="subject-results-exam">Overall</div>
+      <div class="subject-results-exam"><%= t('app.views.student.academic_report.overall') %></div>
       <div class="subject-results-marks">&nbsp;</div>
       <div class="subject-results-maxmarks">&nbsp;</div>
       <div class="subject-results-grade">&nbsp;<%= Grading.find_from_percentage(percentage_total).name %>
@@ -91,7 +91,7 @@
   </div>
 
   <div id="pdf-view-button">
-    <%= link_to '► View PDF view',
+    <%= link_to t('app.views.student.academic_report.view_pdf_view'),
       :controller => "student", :action => "academic_pdf", :id => @student.id %>
   </div>
 

@@ -1,7 +1,7 @@
 <div id="content-header">
   <img src="/images/admission/admission_page_logo.jpg" />
-  <h1>Student info</h1>
-  <h3>Subject wise results overview</h3>
+  <h1><%= t('app.views.student.subject_wise_report.student_info') %></h1>
+  <h3><%= t('app.views.student.subject_wise_report.subject_wise_results_overview') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -12,11 +12,11 @@
   <%= @graph %>
 
   <div class="subject-results-th">
-    <div class="subject-results-exam">Exam</div>
-    <div class="subject-results-marks">Marks</div>
-    <div class="subject-results-maxmarks">Max</div>
-    <div class="subject-results-grade">Grade</div>
-    <div class="subject-results-percentage">(in %)</div>
+    <div class="subject-results-exam"><%= t('app.views.student.subject_wise_report.exam') %></div>
+    <div class="subject-results-marks"><%= t('app.views.student.subject_wise_report.marks') %></div>
+    <div class="subject-results-maxmarks"><%= t('app.views.student.subject_wise_report.max') %></div>
+    <div class="subject-results-grade"><%= t('app.views.student.subject_wise_report.grade') %></div>
+    <div class="subject-results-percentage"><%= t('app.views.student.subject_wise_report.in_percent') %></div>
   </div>
 
   <%- @examtypes.uniq.each do |e_type| -%>
@@ -41,7 +41,7 @@
   <% end %>
 
   <div class="subject-results-tf">
-    <div class="subject-results-exam">Weighted scores</div>
+    <div class="subject-results-exam"><%=t('app.views.student.subject_wise_report.weighted_scores')%></div>
     <div class="subject-results-marks">&nbsp;</div>
     <div class="subject-results-maxmarks">&nbsp;</div>
     <div class="subject-results-grade">&nbsp;</div><% results_percentage = @student.annual_weighted_marks_for_a_subject(@subject) %>
