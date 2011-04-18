@@ -59,6 +59,8 @@ es:
           fees_structure_desc: 'Displays fees Structure for student'
           fees_defaulters: 'Fees Defaulters'
           fees_defaulters_desc: 'Students with fees dues'
+          reports: 'Reportes'
+          reports_desc: 'Reportes de Finanzas'
         fees_create:
           fees_create: 'Fees Create'
           master_fees_and_additional_fees: 'Master Fees and Additional Fees'
@@ -155,3 +157,6 @@ es:
           select_fee_collection_date: 'Select fee collection date'
         fees_collection_dates_defaulters:
           select_fees_collection_date: 'Select fees collection date'
+        reports:
+          start_date: 'Start date'
+          end_date: 'End date'

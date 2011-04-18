@@ -6,6 +6,10 @@ class FinanceTransaction < ActiveRecord::Base
   belongs_to :payment_form,
              :class_name => 'PaymentForm', 
              :foreign_key => 'payment_form_id'
+  has_many :finance_fees, 
+           :class_name => 'FinanceFee',
+           :foreign_key => 'id'
+
   cattr_reader :per_page
 
   # Validators
@@ -96,5 +100,23 @@ class FinanceTransaction < ActiveRecord::Base
     donations_income-donations_expenses
     
   end
+
+
+# SELECT 
+#     ffca.name, 
+#     ffc.name, 
+#     ft.title, 
+#     CONCAT(s.first_name, ' ', s.last_name), 
+#     pf.name, 
+#     ft.amount, 
+#     date_format(ft.created_at,'%d/%m/%y') 
+# FROM 
+#     finance_transactions ft 
+#     INNER JOIN students s ON ft.student_id = s.id
+#     INNER JOIN payment_forms pf ON ft.payment_form_id = pf.id 
+#     INNER JOIN finance_fees ff ON ft.finance_fees_id = ff.id 
+#     INNER JOIN finance_fee_collections ffc ON ff.fee_collection_id = ffc.id 
+#     INNER JOIN finance_fee_categories ffca ON ffc.fee_category_id = ffca.id
+
 
 end

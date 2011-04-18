@@ -1268,6 +1268,49 @@ class FinanceController < ApplicationController
 
   #reports pdf---------------------------
 
+  def reports
+  end
+
+  def transaction_report
+    start_date = Date.parse(params[:finance_fee_collection][:start_date])
+    end_date = Date.parse(params[:finance_fee_collection][:end_date])
+
+    transactions = FinanceTransaction.find_by_sql(
+    "SELECT 
+        ffca.name AS name, 
+        ffc.name AS name1, 
+        ft.title AS title, 
+        concat(s.first_name, ' ', s.last_name) AS full_name, 
+        pf.name AS payform, 
+        ft.amount AS amount, 
+        date_format(ft.created_at,'%d/%m/%y') AS time
+    FROM 
+        finance_transactions ft 
+        INNER JOIN students s                  ON ft.student_id = s.id 
+        INNER JOIN payment_forms pf            ON ft.payment_form_id = pf.id 
+        INNER JOIN finance_fees ff             ON ft.finance_fees_id = ff.id 
+        INNER JOIN finance_fee_collections ffc ON ff.fee_collection_id = ffc.id 
+        INNER JOIN finance_fee_categories ffca ON ffc.fee_category_id = ffca.id
+    WHERE
+        ft.created_at BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s}'"
+    )
+
+    respond_to do |format|
+      format.csv  { 
+        tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
+          tsv << ["Category","Collection","Title","Student","Payment Form","Amount","Datetime"]
+          transactions.each do |t|
+            tsv << [t.name,t.name1,t.title,t.full_name,t.payform,t.amount,t.time]
+          end
+        end
+        send_data(tsv_str,
+                  :filename => "transaction_report-#{Time.now.to_date.to_s}.csv",
+                  :type => 'text/csv')
+      }
+    end
+
+  end
+
   def pdf_fee_structure
     @student = Student.find(params[:id])
     @institution_name = Configuration.find_by_config_key("InstitutionName")

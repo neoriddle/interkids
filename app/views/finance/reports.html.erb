@@ -1,0 +1,35 @@
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%= t('app.views.finance.fees_defaulters.fees_defaulters') %></h1>
+  <h3><%= t('app.views.finance.fees_defaulters.students_with_fee_dues') %></h3>
+  
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% if flash[:notice] %>
+    <p class="flash-msg"><%= flash[:notice] %></p>
+  <% end %>
+
+  <% form_tag '/finance/transaction_report', :method => :get do -%>
+
+    <div class="label-field-pair">
+      <label for="reason"><%= t('app.views.finance.reports.start_date') %>:</label>
+      <div class="text-input-bg"><%= calendar_date_select_tag 'finance_fee_collection[start_date]', Date.today %></div>
+    </div>
+
+    <div class="label-field-pair">
+      <label for="reason"><%= t('app.views.finance.reports.end_date') %>:</label>
+      <div class="text-input-bg"><%= calendar_date_select_tag 'finance_fee_collection[end_date]', Date.today %></div>
+    </div>
+
+    <div id="submit-button">
+      <%=  submit_tag "► Create", :class => 'submit_button' %>
+    </div>
+
+  <% end -%>
+
+  </div>
+</div>
