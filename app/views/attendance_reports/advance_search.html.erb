@@ -2,8 +2,8 @@
 <%= f.text_field :student%>
 <%= f.text_field :student_id %>
 <%= f.select :mode, :id,
-  ["Monthly", "Overall"],
-  {:prompt => 'Select a mode'},
+  {t('app.views.attendance_report.advance_search.monthly')=>"Monthly", t('app.views.attendance_report.advance_search.overall')=>"Overall"},
+  {:prompt => t('app.views.attendance_report.advance_search.select_mode')},
   {:onchange => "#{remote_function(
   :url => { :action => 'month' },
   :with => "'mode='+value",

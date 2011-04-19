@@ -9,18 +9,18 @@
       <%= f.hidden_field :subject , :value=> params[:subject_id] %>
     <% end %>
 
-    <%= submit_tag 'Filter',:class=>'submit_button'  %>
+    <%= submit_tag  t('app.views.attendance_report._report.execute'),:class=>'submit_button'  %>
     <div class="label-field-pair1">
-      <label>Filter:</label>
-      <div class="text-input-bg1"><%= f.select :range, ['Below', 'Above', 'Equals'] %></div>
+      <label><%= t('app.views.attendance_report._report.filter') %></label>
+      <div class="text-input-bg1"><%= f.select :range, {t('app.views.attendance_report._report.below')=>"Below", t('app.views.attendance_report._report.adove')=>"Above", t('app.views.attendance_report._report.equals')=>"Equals"} %></div>
       <div class="text-input-bg1"><%= f.text_field :value %></div></div>
   <% end %>
   <div class="label-field-pair">
     <label>
       <%  if @config.config_value == 'Daily' %>
-        <%= "Total no. of working days = " + working_days.to_s %>
+        <%= t('app.views.attendance_report._report.working_days') + working_days.to_s %>
       <% else %>
-        <%= "Total no. of working hours = " + working_days.to_s %>
+        <%= t('app.views.attendance_report._report.working_hours') + working_days.to_s %>
 
       <% end  %>
     </label>
@@ -29,13 +29,13 @@
   <table id="listing" align="center" width="80%">
     <tr class="tr-head">
       <td>
-        Name
+        <%= t('app.views.attendance_report._report.name') %>
       </td>
       <td>
-        Total
+        <%= t('app.views.attendance_report._report.total') %>
       </td>
       <td>
-        Percentage(%)
+        <%= t('app.views.attendance_report._report.percentage') %>
       </td>
     </tr>
     <tr class="blank"></tr>
@@ -66,6 +66,6 @@
   </table>
 <% else %>
   <div class="label-field-pair2" >
-    No reports for the selected month.
+    <%= t('app.views.attendance_report._report.no_report_for_month') %>No reports for the selected month.
   </div>
 <%  end %>
