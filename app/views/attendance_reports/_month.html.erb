@@ -1,10 +1,10 @@
 <div class="label-field-pair"><label>
-  Select a month & year :
+  <%= t('app.views.attendance_report._month.select_month_year') %>
 </label>
 <div class="text-input-bg2">
 <%= select :month, :id,
-  [['Jan','01'], ['Feb','02'], ['Mar','03'], ['Apr','04'], ['May','05'], ['Jun','06'], ['Jul','07'], ['Aug','08'], ['Sept','09'], ['Oct','10'], ['Nov','11'], ['Dec','12']],
-  {:prompt => 'Select a month'},
+  [[t('app.views.attendance_report._month.jan'),'01'], [t('app.views.attendance_report._month.feb'),'02'], [t('app.views.attendance_report._month.mar'),'03'], [t('app.views.attendance_report._month.apr'),'04'], [t('app.views.attendance_report._month.may'),'05'], [t('app.views.attendance_report._month.jun'),'06'], [t('app.views.attendance_report._month.jul'),'07'], [t('app.views.attendance_report._month.aug'),'08'], [t('app.views.attendance_report._month.sept'),'09'], [t('app.views.attendance_report._month.oct'),'10'], [t('app.views.attendance_report._month.nov'),'11'], [t('app.views.attendance_report._month.dec'),'12']],
+  {:prompt => t('app.views.attendance_report._month.select_month') },
   {:onchange => "#{remote_function(
   :url => { :action => 'year' },
   :with => "'month='+value+'&batch_id='+#{@batch.id}+'&subject_id='+#{@subject}",

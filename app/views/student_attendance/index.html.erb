@@ -1,8 +1,8 @@
 
 <div id="content-header">
   <img src="/images/attendence/attendence.png" />
-  <h1>Attendance</h1>
-  <h3>Attendance home</h3>
+  <h1><%= t('app.views.student_attendance.index.attendance') %></h1>
+  <h3><%= t('app.views.student_attendance.index.attendance_home') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -17,34 +17,34 @@
   <div id="box">
     <% if @current_user.admin? %>
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Attendance Register", :controller => 'attendances', :action => 'index'  %></div>
-        <div class="link-descr">Attendance register for students</div>
+        <div class="link-heading"><%= link_to t('app.views.student_attendance.index.attendance_register'), :controller => 'attendances', :action => 'index'  %></div>
+        <div class="link-descr"><%= t('app.views.student_attendance.index.attendance_register_for_students') %></div>
       </div>
 
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Attendance Report", :controller => "attendance_reports", :action => "index" %></div>
-        <div class="link-descr">Attendance report of students</div>
+        <div class="link-heading"><%= link_to t('app.views.student_attendance.index.attendance_report'), :controller => "attendance_reports", :action => "index" %></div>
+        <div class="link-descr"><%= t('app.views.student_attendance.index.attendance_report_of_students') %></div>
       </div>
     <% else %>
 
       <% if permitted_to? :index, :attendances %>
         <div class="link-box">
-          <div class="link-heading"><%= link_to "Attendance Register", :controller => 'attendances', :action => 'index'  %></div>
-          <div class="link-descr">Attendance register for students</div>
+          <div class="link-heading"><%= link_to t('app.views.student_attendance.index.attendance_register'), :controller => 'attendances', :action => 'index'  %></div>
+          <div class="link-descr"><%= t('app.views.student_attendance.index.attendance_register_for_students') %></div>
         </div>
       <% end %>
 
       <% if permitted_to? :index, :attendance_reports or permitted_to? :index, :attendances %>
         <div class="link-box">
-          <div class="link-heading"><%= link_to "Attendance Report", :controller => "attendance_reports", :action => "index" %></div>
-          <div class="link-descr">Attendance report of students</div>
+          <div class="link-heading"><%= link_to t('app.views.student_attendance.index.attendance_report'), :controller => "attendance_reports", :action => "index" %></div>
+          <div class="link-descr"><%= t('app.views.student_attendance.index.attendance_report_of_students') %></div>
         </div>
       <% end %>
     <% end %>
     <!--
        <div class="link-box">
-           <div class="link-heading"><%= link_to "Attendance Report", :controller => "attendance_reports", :action => "advance_search" %></div>
-           <div class="link-descr">Attendance report for students</div>
+           <div class="link-heading"><%= link_to t('app.views.student_attendance.index.attendance_report'), :controller => "attendance_reports", :action => "advance_search" %></div>
+           <div class="link-descr">t('app.views.student_attendance.index.attendance_report_for_students')</div>
          </div>
     -->
 

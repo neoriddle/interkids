@@ -40,6 +40,30 @@ es:
     controllers:
       additional_exam_controller:
     views:
+      attendances:
+        _edit:
+          edit_attendance_for: 'Editar asistencia para: '
+          reason_for_absence: 'Razón de ausencia'
+          forenoon: 'Matutino'
+          afternoon: 'vespertino'
+          update: 'Actualizar'
+          delete: 'Borrar'
+          are_you_sure: '¿Está usted seguro?'
+        _new:
+          edit_attendance_for: 'Crear falta para: '
+          reason_for_absence: 'Razón de ausencia'
+          forenoon: 'Matutino'
+          afternoon: 'Vespertino'
+          add: 'Agregar'
+          are_you_sure: '¿Está usted seguro?'
+        _register:
+          name: 'Nombre'
+        _subjects:
+          select_a_subject: 'Selecciona materia'
+        index:
+          attendance: 'Asistencia'
+          attendance_register: 'Registro de asistencia'
+          select_a_batch: 'Seleccion el curso'
       xmlfolder:
         index:
           export_data: 'Exportar datos'
@@ -1006,8 +1030,8 @@ es:
           nationality: 'Nacionalidad'
           year_of_admission: 'A&ntildeo de ingreso'
           year_of_birth: 'A&ntildeo nacimiento'
-          present_students: 'Alumnos asistentes'
-          former_students: 'Alumnos residentes'
+          present_students: 'Alumnos'
+          former_students: 'Egresado'
           all_students: 'Ambos'
           search_again: 'Nueva b&uacutesqueda'
           #view_pdf_report: 'Ver pdf'
@@ -1171,8 +1195,8 @@ es:
           student_details: 'Detalles del alumno'
           view_details: 'Ver detalles'
           search: 'B&uacutesqueda'
-          present_students: 'Alumnos asistentes'
-          former_students: 'Alumnos residentes'
+          present_students: 'Alumno'
+          former_students: 'Egresado'
           view_all: 'Ver Todos'
           advanced: 'Avanzado'
           option: 'Opci&oacuten'

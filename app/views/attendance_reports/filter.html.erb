@@ -1,7 +1,7 @@
 <div id="content-header">
   <img src="/images/attendence/attendence.png" />
-  <h1>Attendance Report</h1>
-  <h3>Filtered Report</h3>
+  <h1><%=t('app.views.attendance_report.filter.attendance_report')%></h1>
+  <h3><%=t('app.views.attendance_report.filter.filtered_report')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -10,20 +10,20 @@
 <% working_days = @report.size %>
       <div class="label-field-pair">
         <label>
-          <%= "Total no. of working days : " + working_days.to_s %><br/>
-          Filtered: <%=  @range %> <%= @value %>
+          <%= t('app.views.attendance_report.filter.working_days') + working_days.to_s %><br/>
+          t('app.views.attendance_report.filter.filter') <%=  @range %> <%= @value %>
         </label>
       </div>
       <table id="listing" align="center" width="80%">
         <tr class="tr-head">
           <td>
-            Name
+            <%=t('app.views.attendance_report.filter.name')%>
           </td>
           <td>
-            Total
+            <%=t('app.views.attendance_report.filter.total')%>
           </td>
           <td>
-            Percentage(%)
+            <%=t('app.views.attendance_report.filter.percentages')%>
           </td>
         </tr>
         <tr class="blank"></tr>
