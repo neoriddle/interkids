@@ -38,9 +38,7 @@ class Student < ActiveRecord::Base
   end
 
   def gender_as_text
-    return 'Male' if gender.downcase == 'm'
-    return 'Female' if gender.downcase == 'f'
-    nil
+    return (gender.downcase == 'f') ?  I18n.t('app.models.student.female') : I18n.t('app.models.student.male');
   end
 
   def user

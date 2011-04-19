@@ -42,7 +42,7 @@
         <div class="text-input-bg"><%= s.text_field :relation, :value => @parent.relation %></div>
       </div>
 
-      <div class="label-field-pair">
+      <!--<div class="label-field-pair">
         <label for="parent_detail_dob"><%= t('app.views.student.edit_guardian.date_of_birth') %></label>
         <div class="text-input-bg"><%= calendar_date_select_tag 'parent_detail[dob]', @parent.dob,:year_range => 60.years.ago..20.years.ago %></div>
       </div>
@@ -50,17 +50,17 @@
       <div class="label-field-pair">
         <label for="parent_detail_education"><%= t('app.views.student.edit_guardian.education') %></label>
         <div class="text-input-bg"><%= s.text_field :education, :value => @parent.education %></div>
-      </div>
+      </div>-->
 
       <div class="label-field-pair">
         <label for="parent_detail_occupation"><%= t('app.views.student.edit_guardian.occupation') %></label>
         <div class="text-input-bg"><%= s.text_field :occupation, :value => @parent.occupation %></div>
       </div>
 
-      <div class="label-field-pair">
+      <!--<div class="label-field-pair">
         <label for="parent_detail_income"><%= t('app.views.student.edit_guardian.income') %></label>
         <div class="text-input-bg"><%= s.text_field :income, :value => @parent.income %></div>
-      </div>
+      </div>-->
 
       <div class="label-field-pair">
         <label for="parent_detail_email"><%= t('app.views.student.edit_guardian.email') %></label>

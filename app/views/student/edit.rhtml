@@ -111,11 +111,11 @@
           <div class="text-input-bg"><%= s.text_field :birth_place, :value =>@student.birth_place %></div>
         </div>
 
-        <hr class="label-underline"></hr>
+        <!--<hr class="label-underline"></hr>
 
         <div class="label-field-pair">
           <label for="master_student_nationality"><%= t('app.views.student.edit.nationality') %></label>
-          <div class="text-input-bg"><%= select :student, :nationality_id, Country.all.map {|c| [c.name, c.id]}, :selected => @student.nationality.id %></div>
+          <div class="text-input-bg"><%#= select :student, :nationality_id, Country.all.map {|c| [c.name, c.id]}, :selected => @student.nationality.id %></div>
         </div>
 
         <hr class="label-underline"></hr>
@@ -130,7 +130,7 @@
         <div class="label-field-pair">
           <label for="master_student_religion"><%= t('app.views.student.edit.religion') %></label>
           <div class="text-input-bg"><%= s.text_field :religion, :value =>@student.religion %></div>
-        </div>
+        </div>-->
 
         <hr class="label-underline"></hr>
 
@@ -141,7 +141,8 @@
       </div>
       <br/>
 
-      <span class="span-sub-heading"><%= t('app.views.student.edit.contact_details') %></span>
+      <span class="span-sub-heading">
+      <!--<%= t('app.views.student.edit.contact_details') %></span>
       <hr class="sub-heading"></hr>
 
       <div id="admission1_form_vertical_block_right">
@@ -183,7 +184,7 @@
 
         <div class="label-field-pair">
           <label for="master_student_country"><%= t('app.views.student.edit.country') %></label>
-          <div class="text-input-bg"><%= select :student, :country_id, Country.all.map {|c| [c.name, c.id]}, :selected => @student.country.id %></div>
+          <div class="text-input-bg"><%#= select :student, :country_id, Country.all.map {|c| [c.name, c.id]}, :selected => @student.country.id %></div>
         </div>
 
         <hr class="label-underline"></hr>
@@ -206,6 +207,7 @@
           <label for="master_student_email"><%= t('app.views.student.edit.email') %></label>
           <div class="text-input-bg"><%= s.text_field :email, :value => @student.email %></div>
         </div>
+        -->
         <% if @application_sms_enabled.is_enabled == true %>
         <hr class="label-underline"></hr>
         <div class="label-field-pair">

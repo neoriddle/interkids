@@ -114,7 +114,7 @@
           <div class="text-input-bg"><%= s.text_field :birth_place %></div>
         </div>
 
-        <hr class="label-underline"></hr>
+        <!--<hr class="label-underline"></hr>
 
         <div class="label-field-pair">
           <label for="student_nationality"><%= t('app.views.student.admission1.nationality') %></label>
@@ -128,7 +128,7 @@
         <div class="label-field-pair">
           <label for="student_birth_place"><%= t('app.views.student.admission1.language') %></label>
           <div class="text-input-bg"><%= s.text_field :language %></div>
-        </div>
+        </div>-->
 
         <hr class="label-underline"></hr>
 
@@ -137,17 +137,17 @@
           <div class="text-input-bg"><%= s.select :student_category_id, StudentCategory.all.map {|c| [c.name, c.id]}, { :prompt => 'Select category' } %></div>
         </div>
 
-        <hr class="label-underline"></hr>
+        <!--<hr class="label-underline"></hr>
 
         <div class="label-field-pair">
           <label for="student_religion"><%= t('app.views.student.admission1.religion') %></label>
           <div class="text-input-bg"><%= s.text_field :religion %></div>
-        </div>
+        </div>-->
 
       </div>
 
       <div id="admission1_form_vertical_block_right">
-        <span class="span-sub-heading"><%= t('app.views.student.admission1.contact_details') %></span>
+        <!--<span class="span-sub-heading"><%= t('app.views.student.admission1.contact_details') %></span>
         <hr class="sub-heading"></hr>
         <div class="label-field-pair">
           <label for="student_city"><%= t('app.views.student.admission1.address_line_1') %></label>
@@ -162,7 +162,7 @@
         <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
-          <label for="student_city">City</label>
+          <label for="student_city"><%= t('app.views.student.admission1.city') %></label>
           <div class="text-input-bg"><%= s.text_field :city %></div>
         </div>
         <hr class="label-underline"></hr>
@@ -201,7 +201,7 @@
         <div class="label-field-pair">
           <label for="student_email"><%= t('app.views.student.admission1.email') %></label>
           <div class="text-input-bg"><%= s.text_field :email %></div>
-        </div>
+        </div>-->
         <% if @application_sms_enabled.is_enabled == true %>
         <hr class="label-underline"></hr>
         <div class="label-field-pair">

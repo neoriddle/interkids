@@ -415,7 +415,7 @@ class StudentController < ApplicationController
 
   def profile
     @current_user = current_user
-    @address = @student.address_line1 + ' ' + @student.address_line2
+    #@address = @student.address_line1 + ' ' + @student.address_line2
     @additional_fields = StudentAdditionalField.all(:conditions=>"status = true")
     @previous_data = StudentPreviousData.find_by_student_id(@student.id)
     @immediate_contact = Guardian.find(@student.immediate_contact_id) \
@@ -535,7 +535,7 @@ class StudentController < ApplicationController
   def profile_pdf
     @current_user = current_user
     @student = Student.find(params[:id])
-    @address = @student.address_line1 + ' ' + @student.address_line2
+    #@address = @student.address_line1 + ' ' + @student.address_line2
     @immediate_contact = Guardian.find(@student.immediate_contact_id) \
       unless @student.immediate_contact_id.nil? or @student.immediate_contact_id == ''
     @additional_fields = StudentAdditionalField.all(:conditions=>"status = true")
