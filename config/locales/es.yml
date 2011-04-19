@@ -33,6 +33,10 @@ es:
         title: 'Título'
         amount: 'Cantidad'
   app:
+    models:
+      student: 
+        male: 'Masculino'
+        female: 'Femenino'
     controllers:
       additional_exam_controller:
     views:
@@ -899,8 +903,8 @@ es:
           course_&_batch: 'Clave ciclo-curso escolar'
           date_of_birth: 'Fecha de nacimiento'
           gender: 'Genero'
-          male: 'Femenino'
-          female: 'Masculino'
+          male: 'Masculino'
+          female: 'Femenino'
           blood_group: 'Tipo de sangre'
           birth_place: 'Lugar de nacimiento'
           nationality: 'Nacionalidad'
@@ -919,7 +923,7 @@ es:
           enable_sms_features: 'Activar servicio sms'
           upload_user_photo: 'Foto perfil'
           upload_photo_(50kb_max): 'Fotograf&iacutea (50kb max)'
-          save_and_continue: 'â–º Guardar & continuar'
+          save_and_continue: 'Guardar & continuar'
         admission2:
           admission: 'Nuevo Ingreso'
           step_2_-_parent/guardian_details: 'Paso 2 - Padres o tutores'
