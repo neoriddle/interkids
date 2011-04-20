@@ -40,6 +40,99 @@ es:
     controllers:
       additional_exam_controller:
     views:
+      subjects:
+        index:
+          subjects: 'Materias'
+          home: 'Principal'
+          select_batch: 'Selecciona Grado/Curso'
+        _subjects:
+          add_normal_subject: 'Agregar materia base'
+          add_subject_to_this_elective_group: 'Agregar materia a este sub-grupo'
+          edit: 'Editar'
+          delete: 'Borrar'
+          are_you_sure: '¿Está seguro?'
+          assing_students: 'Asignar alumnos'
+          new_elective_group: 'Crear Sub-curso'
+        _new:
+          name: 'Nombre'
+          code: 'Código'
+          max_weekly_classes: 'Número de clases'
+          no_exam: 'Sin examen'
+          save: 'Guardar'
+        _edit:
+          name: 'Nombre'
+          code: 'Código'
+          max_weekly_classes: 'Número de clases'
+          no_exam: 'Sin examen'
+          save: 'Guardar'
+      grading_levels:
+        newrjs:
+          add_new_grading_level: 'Agregar una nueva definición de calificación'
+        _edit:
+          name: 'Nombre'
+          min_score: 'Calificación correspondiente'
+          save: 'Guardar'
+        _grading_levels:
+          add_grades: 'Agregar definición de calificación'
+          name: 'Nombre'
+          min_score: 'Calificación mínima'
+          edit: 'Editar'
+          delete: 'Borrar'
+          are_you_sure: '¿Está seguro?'
+          set_in_common: 'Asignar grado común'
+        _new:
+          name: 'Nombre'
+          min_score_for_this_grade: 'Calificación correspondiente'
+          min_score: 'Calificación mínima'
+          save: 'Guardar'
+        index:
+          exams: 'Escala'
+          grading_levels: 'Definición de calificaciones'
+          courses: 'Curso/Grado'
+          common: 'Estándar'
+      batch_transfers:
+        _list_courses:
+          graduation: 'Graduación'
+        _new:
+          name: 'Nombre'
+          code: 'Código'
+          max_weekly_classes: 'Máximo clases por semana'
+          no_exam: 'No requiere examen'
+          save: 'Guardar'
+        _previous_batch_subjects:
+          previous_batch: 'Ciclo anterior'
+          select_all: 'Todo'
+          normal_subjects: 'Materias base'
+          select: 'Selecciona'
+        _subjects:
+          normal_subjects: 'Materias base'
+        graduation:
+          batch_transfer: 'Procesamiento por grupo'
+          graduation: 'Graduación'
+          generate_tc_for_all: 'TC Generado para todos'
+          graduating_batch: 'Grupo graduado: '
+          these_students_will_now_be_trasferred: 'Los siguientes alumnos pasarán a ser egresados. Agregar una descripción del proceso. Por ejemplo: Graduado Maternal 2011'
+          status_description: 'Descripción estado'
+          from_the_below_list: 'Eliga los alumnos que serán graduados.'
+          save: 'Guardar'
+        index:
+          batch_transfer: 'Graduación por grupo'
+          home: 'Principal'
+          select_a_course: 'Selecciona un curso/grado'
+        show:
+          batch_transfer: 'Graduación por grupo'
+          transfer: 'Graduar'
+          transferring_batch: 'Grupo graduado'
+          select_a_batch: 'Selecciona un curso/grado'
+          from_the_below_list_uncheck_the_students: 'Eliga los alumnos que serán graduados.'
+          save: 'Guardar'
+        subject_transfer:
+          subjects: 'Materias'
+          assign_subjects: 'Asignacion de materias'
+          add_normal_subject: 'Agrega una materia base'
+          add_electives: 'Agrega elecciones'
+          assign_old_batch_subjects: 'Adigna una materia de ciclo anterior'
+          normal_subjects: 'Materias base'
       attendances:
         _edit:
           edit_attendance_for: 'Editar asistencia para: '
@@ -1152,7 +1245,7 @@ es:
           update: 'Actualizar'
         electives:
           student: 'Alumnos'
-          electives: 'electives'
+          electives: 'Asignar alumnos a Sub-grupo'
           batch: 'Ciclo'
           elective_group: 'elective_group'
           subject: 'Materia'
@@ -1413,18 +1506,47 @@ es:
           forenoon: 'Vespertino'
           absent: 'Faltas'
       configuration:
+        add_weekly_holidays:
+          monday: 'lunes'
+          tuesday: 'martes'
+          wednesday: 'miercoles'
+          thursday: 'jueves'
+          friday: 'viernes'
+          saturday: 'sabado'
+          sunday: 'domingo'
+          delete: 'borrar'
+        index:
+          configuration: 'Configuraci&oacuten'
+          configuration_home: 'Principal'
+          manage_courses_batches: 'Curso/Grado'
+          add_a_new_course_or_batch_for_this_academic_year: 'Agrega un grado/curso para el año académico en curso'
+          manage_student_categories: 'Categorias de alúmno'
+          add _student _category: 'Gestión de categorias de alúmno'
+          manage_subjects: 'Materias'
+          manage_subjects_corresponding: 'Gestiona las materias correspondientes al año escolar'
+          general_settings: 'Configuración general'
+          set_some_general_configurations_related_to_institution: 'Asignar caracteristicas generales relacionadas con la institución'
+          add_admission_additional_details: 'Agrega detalles de inscripción'
+          set_some_additional_details_for_admission: 'Agrega detalles adicionales a la forma de inscripción'
+          sms: 'sms'
+          sms_module: 'Módulo SMS'
+          enable_disable_sms_settings: 'Activa o deactiva el módulo sms'
         settings:
           configuration: 'Configuraci&oacuten'
           general_settings: 'Caracter&iacutesticas generales'
-          school/college_name: 'Instituci&oacuten'
-          school/college_address: 'Direcci&oacuten instituci&oacuten'
-          school/college_phone: 'Tel&eacutefono instituci&oacuten'
+          school_college_name: 'Instituci&oacuten'
+          school_college_address: 'Direcci&oacuten instituci&oacuten'
+          school_college_phone: 'Tel&eacutefono instituci&oacuten'
           student_attendance_type: 'Tipo de alumnado'
           currency_type: 'Moneda'
           upload_logo: 'Actualizar Logotipo'
           student_auto_increment: 'Activar: N&uacutemero de admision de alumno auto-incrementable'
           employee_auto_increment: 'Activar: N&uacutemero de empleado auto-incrementable'
           update: 'Actualizar'
+          maximum_limit_cash: 'Límite máximo caja chica'
+          minimum_limit_cash: 'Límite mínimo caja chica'
+          enable_auto_increment_student_admission_no: 'Autoincrementar el folio de los alumnos'
+          enable_auto_increment_employee_no: 'Autoincrementar el folio de los empleados'
       course:
         email:
           class: 'Tipo'

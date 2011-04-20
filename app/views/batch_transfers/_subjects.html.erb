@@ -1,5 +1,5 @@
 <% unless @normal_subjects.nil? %>
-<h4>Normal subjects</h4>
+<h4><%=  t('app.views.batch_transfers._subjects.normal_subjects')%></h4>
   <ul id="category-list">
   <% @normal_subjects.each do |sub| %>
     <li id="subject-<%=sub.id%>" class="list<%=cycle('odd', 'even')%>">

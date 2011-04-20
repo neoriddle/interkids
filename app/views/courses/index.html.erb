@@ -1,7 +1,7 @@
 <div id="content-header">
     <img src="/images/show_settings.png" alt="Courses" />
-  <h1>Courses</h1>
-  <h3>Home</h3>
+  <h1><%= t('app.views.courses.index.courses') %></h1>
+  <h3><%= t('app.views.courses.index.home') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -16,12 +16,12 @@
   <div class="box">
 
     <div class="link-box">
-      <div class="link-heading"><%= link_to 'Manage courses' ,:action=>'manage_course' %> </div>
-      <div class="link-descr">Manage Courses and create batches</div>
+      <div class="link-heading"><%= link_to t('app.views.courses.index.manage_courses'),:action=>'manage_course' %> </div>
+      <div class="link-descr"><%= t('app.views.courses.index.manage_courses_and_create_batches') %></div>
     </div>
     <div class="link-box">
-      <div class="link-heading"><%= link_to 'Manage Batches' ,:action=>'manage_batches' %>  </div>
-      <div class="link-descr">Manage active batches</div>
+      <div class="link-heading"><%= link_to t('app.views.courses.index.manage_batches'),:action=>'manage_batches' %>  </div>
+      <div class="link-descr"><%= t('app.views.courses.index.manage_active_batches') %></div>
     </div>
 
     <div class="extender"></div>

@@ -10,16 +10,16 @@
     <%= f.hidden_field :batch_id, :value => batch_id %>
 
     <div class="label-field-pair">
-      <%= f.label :name %>
+      <%= f.label t('app.views.grading_levels._new.name') %>
       <div class="input-field"><%= f.text_field :name %></div>
     </div>
 
     <div class="label-field-pair">
-      <%= f.label :min_score, 'Min score for this grade' %>
+      <%= f.label t('app.views.grading_levels._new.min_score'), t('app.views.grading_levels._new.min_score_for_this_grade') %>
       <div class="input-field"><%= f.text_field :min_score %></div>
     </div>
 
-  <%= f.submit '► Save', :class => 'submit_button' %>
+  <%= f.submit t('app.views.grading_levels._new.save'), :class => 'submit_button' %>
     
 
 

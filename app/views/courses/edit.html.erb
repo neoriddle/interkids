@@ -1,7 +1,7 @@
 <div id="content-header">
   <img src="/images/examination/show_exam.png" alt="Exam" />
-  <h1>Courses</h1>
-  <h3>Edit</h3>
+  <h1><%= t('app.views.courses.edit.courses') %></h1>
+  <h3><%= t('app.views.courses.edit.edit') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -15,8 +15,8 @@
 
   <div class="box">
     <div class="bread_crumb">
-        <%= link_to 'Courses', courses_path %> &raquo;
-        Edit
+        <%= link_to t('app.views.courses.edit.courses'), courses_path %> &raquo;
+        <%= t('app.views.courses.edit.go_principal') %>
         </div>
 
 
@@ -25,21 +25,21 @@
       <%= error_messages_for :course %>
 
       <div class="label-field-pair">
-        <div class="label-container"><%= f.label :course_name %></div>
+        <div class="label-container"><%= f.label t('app.views.courses.edit.course_name')%></div>
         <div class="input-container"><%= f.text_field :course_name %></div>
       </div>
 
       <div class="label-field-pair">
-        <div class="label-container"><%= f.label :section_name %></div>
+        <div class="label-container"><%= f.label t('app.views.courses.edit.section_name') %></div>
         <div class="input-container"><%= f.text_field :section_name %></div>
       </div>
 
       <div class="label-field-pair">
-        <div class="label-container"><%= f.label :code %></div>
+        <div class="label-container"><%= f.label t('app.views.courses.edit.code') %></div>
         <div class="input-container"><%= f.text_field :code %></div>
       </div>
 
-      <%= submit_tag "", :value => "► Save", :class => "submit_button" %>
+      <%= submit_tag "", :value => t('app.views.courses.edit.save'), :class => "submit_button" %>
 
     <% end %>
     <div class="extender"></div>

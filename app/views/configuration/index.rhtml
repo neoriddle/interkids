@@ -1,8 +1,8 @@
 
 <div id="content-header">
   <img src="/images/show_settings.png" />
-  <h1>Configuration</h1>
-  <h3>Configuration home</h3>
+  <h1><%= t('app.views.configuration.index.configuration') %></h1>
+  <h3><%= t('app.views.configuration.index.configuration_home') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -18,35 +18,35 @@
 
     <% if permitted_to? :create, :courses %>
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage Courses / Batches", courses_path %></div>
-        <div class="link-descr">Add a new Course or Batch for this academic year.</div>
+        <div class="link-heading"><%= link_to t('app.views.configuration.index.manage_courses_batches'), courses_path %></div>
+        <div class="link-descr"><%= t('app.views.configuration.index.add_a_new_course_or_batch_for_this_academic_year') %></div>
       </div>
     <% end %>
 
     <% if permitted_to? :settings, :configuration %>
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage student categories", :controller => "student", :action => "categories" %></div>
-        <div class="link-descr">Add student category.</div>
+        <div class="link-heading"><%= link_to t('app.views.configuration.index.manage_student_categories'), :controller => "student", :action => "categories" %></div>
+        <div class="link-descr"><%= t('app.views.configuration.index.add _student _category') %></div>
       </div>
     <% end %>
     <% if permitted_to? :index, :subjects %>
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Manage subjects", subjects_path %></div>
-        <div class="link-descr">Manage subjects corresponding to different courses.</div>
+        <div class="link-heading"><%= link_to t('app.views.configuration.index.manage_subjects'), subjects_path %></div>
+        <div class="link-descr"><%= t('app.views.configuration.index.manage_subjects_corresponding') %>.</div>
       </div>
     <% end %>
 
     <% if permitted_to? :settings, :configuration %>
       <div class="link-box">
-        <div class="link-heading"><%= link_to "General settings", :action => "settings" %></div>
-        <div class="link-descr">Set some general configurations related to institution,attendance, etc.</div>
+        <div class="link-heading"><%= link_to t('app.views.configuration.index.general_settings'), :action => "settings" %></div>
+        <div class="link-descr"><%= t('app.views.configuration.index.set_some_general_configurations_related_to_institution') %></div>
       </div>
     <% end %>
 
     <% if permitted_to? :settings, :configuration %>
       <div class="link-box">
-        <div class="link-heading"><%= link_to "Add admission additional details", :controller=>"student", :action => "add_additional_details" %></div>
-        <div class="link-descr">Set some additional details for admission.</div>
+        <div class="link-heading"><%= link_to t('app.views.configuration.index.add_admission_additional_details'), :controller=>"student", :action => "add_additional_details" %></div>
+        <div class="link-descr"><%= t('app.views.configuration.index.set_some_additional_details_for_admission') %></div>
       </div>
     <% end %>
 
@@ -54,8 +54,8 @@
       <% @config = Configuration.available_modules %>
       <% if @config.include?('SMS') %>
         <div class="link-box">
-          <div class="link-heading"><%= link_to "SMS Module", :controller=>"sms", :action => "index" %></div>
-          <div class="link-descr">Enable/Disable SMS settings</div>
+          <div class="link-heading"><%= link_to t('app.views.configuration.index.sms_module'), :controller=>"sms", :action => "index" %></div>
+          <div class="link-descr"><%= t('app.views.configuration.index.enable_disable_sms_settings')%></div>
         </div>
       <% end %>
     <% end %>
