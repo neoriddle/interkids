@@ -1,14 +1,14 @@
-<h4 style="text-align: center;">Previous Batch : <%= @previous_batch.name %></h4>
+<h4 style="text-align: center;"> <%=  t('app.views.batch_transfers._previous_batch_subjects.previous_batch')%> <%= @previous_batch.name %></h4>
 <% unless @previous_batch_normal_subject.empty? %>
   <ul id="category-list">
     <div class="linker2">
-<%= link_to_remote 'Select all', :url => { :controller=>'batch_transfers',:action => 'assign_all_previous_batch_subjects', :id => @batch} %>
+<%= link_to_remote t('app.views.batch_transfers._previous_batch_subjects.select_all'), :url => { :controller=>'batch_transfers',:action => 'assign_all_previous_batch_subjects', :id => @batch} %>
 </div>
-    <h4 style="width:300px;">Normal subjects</h4>
+    <h4 style="width:300px;"><%=  t('app.views.batch_transfers._previous_batch_subjects.normal_subjects')%></h4>
   <% @previous_batch_normal_subject.each do |sub| %>
     <li id="prev-subject-name-<%=sub.id%>" class="list<%=cycle('odd', 'even')%>">
      <div class="category-name"> <%= sub.name %> </div>
-    <div class="category-sel"><%= link_to_remote "Select", :url=>{:controller=>"batch_transfers", :action=>"assign_previous_batch_subject",:id=>sub.id,:id2=>@batch.id} %></div>
+    <div class="category-sel"><%= link_to_remote t('app.views.batch_transfers._previous_batch_subjects.select'), :url=>{:controller=>"batch_transfers", :action=>"assign_previous_batch_subject",:id=>sub.id,:id2=>@batch.id} %></div>
     </li>
   <% end %>
   </ul>
@@ -25,7 +25,7 @@
         <% if elect.elective_group_id == eg.id %>
           <li id="prev-subject-name-<%=elect.id%>" class="list<%=cycle('odd', 'even')%>">
            <div class="category-name"> <%= elect.name %> </div>
-           <div class="category-sel"> <%= link_to_remote "Select", :url=>{:controller=>"batch_transfers", :action=>"assign_previous_batch_subject",:id=>elect.id,:id2=>@batch.id} %></div>
+           <div class="category-sel"> <%= link_to_remote t('app.views.batch_transfers._previous_batch_subjects.select'), :url=>{:controller=>"batch_transfers", :action=>"assign_previous_batch_subject",:id=>elect.id,:id2=>@batch.id} %></div>
           </li>
         <% end %>
       <% end %>
