@@ -959,6 +959,7 @@ class FinanceController < ApplicationController
     logger.debug "FeeParticulars found\t#{@fee_particulars.inspect}"
 
     @payment_forms = PaymentForm.all
+    @categories = FinanceTransactionCategory.find_all_by_is_income(true)
 
     render :update do |page|
       page.replace_html "student", :partial => "student_fees_submission"
@@ -986,7 +987,7 @@ class FinanceController < ApplicationController
       total_fees += params[:fine].to_f unless params[:fine].nil?
 
       transaction = FinanceTransaction.new
-      transaction.category        = FinanceTransactionCategory.find(3)
+      transaction.category_id     = params[:transaction][:category_id]
       transaction.student         = @student
       transaction.amount          = params[:transaction][:amount]
       transaction.fine_included   = !params[:fine].nil?
@@ -1013,6 +1014,7 @@ class FinanceController < ApplicationController
     end
 
     @payment_forms = PaymentForm.all
+    @categories = FinanceTransactionCategory.find_all_by_is_income(true)
 
     render :update do |page|
       page.replace_html "student", :partial => "student_fees_submission"

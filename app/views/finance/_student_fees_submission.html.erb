@@ -111,6 +111,7 @@
           <%= submit_tag "► Pay Fees", :class=>'submit_button', :confirm => 'Are you sure to submit payment?' %>
 	  <%= text_field :transaction, :amount, :value => total_fees %>
 	  <%= select :transaction, :payment_form, options_from_collection_for_select(@payment_forms, :id, :name) %>
+	  <%= select :transaction, :category_id, options_from_collection_for_select(@categories, :id, :name) %>
         <%end%>
 	
         <% if total_fees == 0 %>
