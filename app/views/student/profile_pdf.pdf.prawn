@@ -48,18 +48,20 @@ data = []
 
 if @immediate_contact
   [
-   [t('app.views.student.profile_pdf.address'),@immediate_contact.address],
+   #[t('app.views.student.profile_pdf.address'),@immediate_contact.address],
    [t('app.views.student.profile_pdf.city'), @immediate_contact.city],
    [t('app.views.student.profile_pdf.state'),@immediate_contact.state],
    [t('app.views.student.profile_pdf.country'),@immediate_contact.country.name],
-   [t('app.views.student.profile_pdf.phone'),@immediate_contact.phone1],
-   [t('app.views.student.profile_pdf.mobile'),@immediate_contact.phone2],
+   [t('app.views.student.profile_pdf.phone'),@immediate_contact.office_phone1],
+   [t('app.views.student.profile_pdf.mobile'),@immediate_contact.office_phone2],
    [t('app.views.student.profile_pdf.email'),@immediate_contact.email]
-  ].each { |d| data << d if d.last }
+  ].each { |d| data << d if d.last  }
 end
 
 unless @immediate_contact.nil?
-    data.push [t('app.views.student.profile_pdf.emergencies'), @immediate_contact.first_name+" "+@immediate_contact.last_name+ "(" + @immediate_contact.mobile_phone + ")"]
+  data.push [t('app.views.student.profile_pdf.emergencies'), 
+             @immediate_contact.first_name+" "+@immediate_contact.last_name+
+             (@immediate_contact.mobile_phone.nil? ? '' : "("+@immediate_contact.mobile_phone+")")]
 end
 
             

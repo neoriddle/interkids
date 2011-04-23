@@ -128,7 +128,7 @@
       <div class="profile_info_text_top2">
         <%= link_to @immediate_contact.full_name, :controller => "student", :action => "guardians", :id => @student.id \
           unless @immediate_contact.nil? %>
-        <%= "(" + @immediate_contact.mobile_phone + ")" if @immediate_contact and !@immediate_contact.mobile_phone.empty? %>
+        <%= "(" + @immediate_contact.mobile_phone + ")" if @immediate_contact && !@immediate_contact.mobile_phone.nil? && !@immediate_contact.mobile_phone.empty? %>
         <% if @current_user.admin? %>
           <% unless @immediate_contact.nil? %>
             <span>(<%= link_to t('app.views.student.profile.change_contact'), :controller => 'student', :action => 'admission3_1', :id => @student.id %>)</span>
