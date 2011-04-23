@@ -174,22 +174,67 @@ class FinanceController < ApplicationController
 
   #transaction-----------------------
 
+    
+  def update_categories_for_transaction_report
+    @categories = params[:is_income]=='1' ? FinanceTransactionCategory.income_categories : 
+      (params[:is_income]=='0' ? FinanceTransactionCategory.expense_categories : [])
+
+    render :partial => 'transaction_categories_select'
+  end
+
+  def generate_transaction_report
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+    category_id = params[:transaction][:category_id]
+
+    query = "SELECT 
+        ft.title  AS title, 
+        CONCAT(s.first_name, ' ',s.last_name) AS full_name, 
+        pf.name   AS payform, 
+        ft.amount AS amount
+    FROM 
+        finance_transactions ft 
+        INNER JOIN students s       ON ft.student_id = s.id 
+        INNER JOIN payment_forms pf ON ft.payment_form_id = pf.id 
+    WHERE 
+        ft.created_at BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s}' "
+
+    query << "AND ft.category_id = #{category_id}" if category_id && category_id!=''
+
+    transactions = FinanceTransaction.find_by_sql(query)
+
+    respond_to do |format|
+      format.csv  { 
+        tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
+          tsv << ["Title","Student","Payment Form","Amount"]
+          transactions.each do |t|
+            tsv << [t.title,t.full_name,t.payform,t.amount]
+          end
+        end
+        send_data(tsv_str,
+                  :filename => "transaction_report-#{Time.now.to_date.to_s}.csv",
+                  :type => 'text/csv')
+      }
+    end
+
+  end
   
   def update_monthly_report
-
     @hr = Configuration.find_by_config_value("HR")
     @start_date = (params[:start_date]).to_date
     @end_date = (params[:end_date]).to_date
-    @transactions = FinanceTransaction.find(:all,
-      :order => 'created_at desc', :conditions => ["created_at >= '#{@start_date}' and created_at <= '#{@end_date}'"])
+    @transactions = FinanceTransaction.all(:order => 'created_at desc', 
+                                           :conditions => ["created_at BETWEEN '?' AND '?'", 
+                                                           @start_date, @end_date])
     @other_transactions = FinanceTransaction.report(@start_date,@end_date,params[:page])
     @transactions_fees = FinanceTransaction.total_fees(@start_date,@end_date)
-    employees = Employee.find(:all)
+    employees = Employee.all
     @salary = Employee.total_employees_salary(employees, @start_date, @end_date)
     @donations_total = FinanceTransaction.donations_triggers(@start_date,@end_date)
-    @batchs = Batch.find(:all)
+    @batchs = Batch.all
     @grand_total = FinanceTransaction.grand_total(@start_date,@end_date)
     @graph = open_flash_chart_object(960, 500, "graph_for_update_monthly_report?start_date=#{@start_date}&end_date=#{@end_date}")
+    @categories = []
 
   end
   def transaction_pdf

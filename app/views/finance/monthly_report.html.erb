@@ -1,5 +1,5 @@
 <div id="content-header">
-     <img src="/images/show_finance.png" alt="" />
+  <img src="/images/show_finance.png" alt="" />
   <h1>Transactions</h1>
   <h3>Monthly Transactions</h3>
   <div id="app-back-button">
@@ -9,19 +9,34 @@
 
 <div id="page-yield">
   <div class="box">
-  <% form_for :report, :url => {:action => 'update_monthly_report'} do |form| %>
-    <div class="label-field-pair">
-      <label>Select start date:</label>
-      <div class="input-container"><%= calendar_date_select_tag 'start_date', Date.today %></div>
-    </div>
-    <div class="label-field-pair">
-      <label>Select End date: </label>
-      <div class="input-container"><%= calendar_date_select_tag 'end_date', Date.today %></div>
-    </div>
+    <% form_for :report, :url => {:action => 'generate_transaction_report'} do |f| %>
+      <div class="label-field-pair">
+	<label>Select start date:</label>
+	<div class="input-container">
+	  <%= calendar_date_select_tag 'start_date', Date.today %>
+	</div>
+      </div>
 
-         <%=  submit_tag "► Monthly Report",:class=>'submit_button' %>
-  <%end%>
+      <div class="label-field-pair">
+	<label>Select end date:</label>
+	<div class="input-container">
+	  <%= calendar_date_select_tag 'end_date', Date.today %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
+	<label>Type:</label>
+	<div class="text-input-bg">
+	  <%= select(:transaction,
+                     :is_income,
+                     options_for_select([['Income',1],['Expense',0]]),
+                     {:prompt => 'Select type'},
+                     {:onChange => "#{remote_function(:update => 'categories', :url => {:action => 'update_categories_for_transaction_report'}, :with => "'is_income='+value")}"} ) %>
+	</div>
+      </div>
+
+      <div id="categories"></div>
+
+    <%end%>
+  </div>
 </div>
-</div>
-
-
