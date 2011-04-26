@@ -1,7 +1,7 @@
   <div id="content-header">
  <img src="/images/HR/show_hr.png" alt="" />
-  <h1>Employee Admission</h1>
-  <h3>Step-3</h3>
+  <h1><%= t('app.views.employee.admission3.employee_admission') %></h1>
+  <h3><%= t('app.views.employee.admission3.step3') %></h3>
   <div id="app-back-button">
  <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -17,7 +17,7 @@
   <%= error_messages_for 'employee_bank_details' %>
 
   <div id="form-contents">
-    <span class="span-sub-heading">Bank Details</span>
+    <span class="span-sub-heading"><%= t('app.views.employee.admission3.bank_details') %></span>
     <hr class="sub-heading"></hr>
 
     <% @bank_fields.each do |bd| %>
@@ -31,7 +31,7 @@
   </div>
 
   <div class="save-proceed-button">
-    <%= submit_tag "► Save & Proceed" %>
+    <%= submit_tag t('app.views.employee.admission3.save_&_proceed') %>
   </div>
   <% end %>
   </div>

@@ -4,12 +4,12 @@
     <div class="type_name<%=cycle("odd", "even")%>"><%= lt.name  %>:</div>
     <% @report = EmployeeAttendance.find_all_by_employee_id_and_employee_leave_type_id(@employee.id, lt.id) %>
     <% if @report == [] %>
-      <div class="date-even">No dates found</div>
+      <div class="date-even"><%= t('app.views.employee._attendance_report.no_dates_found') %></div>
     <% else %>
       <% @report.each do |r| %>
         <div class="date-<%=cycle("even", "odd")%>"><%= r.attendance_date.strftime("%B %d, %Y") %>
         <% if r.is_half_day==true %>
-          (Half Day)
+          <%= t('app.views.employee._attendance_report.half_day') %>
         <% end %>
           </div>
       <% end %>
@@ -31,18 +31,18 @@
         <% end %>
       <% end %>
       <% unless lt.max_leave_count == "" %>
-        <div class="type_name<%=cycle("odd", "even")%> ">Total <%= lt.name %>: <%= leave_count %>/<%= lt.max_leave_count %></div>
+        <div class="type_name<%=cycle("odd", "even")%> "><%= t('app.views.employee._attendance_report.total') %> <%= lt.name %>: <%= leave_count %>/<%= lt.max_leave_count %></div>
       <% else %>
-        <div class="type_name<%=cycle("odd", "even")%>">Total <%= lt.name %>: <%= leave_count %></div>
+        <div class="type_name<%=cycle("odd", "even")%>"><%= t('app.views.employee._attendance_report.total') %> <%= lt.name %>: <%= leave_count %></div>
       <% end %>
     <% end %>
 
-    <div class="type_nameeven">Total leaves taken: <%= @total_leaves %></div>
+    <div class="type_nameeven"><%= t('app.views.employee._attendance_report.total_leaves_taken') %><%= @total_leaves %></div>
   </div>
 </div>
 
 <div class="pdf-link">
-  <%=  link_to "PDF Report", :controller=>"employee_attendance", :action=>"employee_attendance_pdf", :id=>@employee.id, :format=>'pdf' %>
+  <%=  link_to t('app.views.employee._attendance_report.pdf_report'), :controller=>"employee_attendance", :action=>"employee_attendance_pdf", :id=>@employee.id, :format=>'pdf' %>
 </div>
 
 

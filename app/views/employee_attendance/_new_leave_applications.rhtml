@@ -1,9 +1,9 @@
-<div class="heading">New applications from reporting employees</div>
+<div class="heading"><%= t('app.views.employee_attendance._new_leave_applications.new_applications_from_reporting_employees')%></div>
 <table id="listing" width="100%">
   <tr class="tr-head">
-    <td>Name</td>
-  <td>Start date</td>
-  <td>End date</td>
+    <td><%= t('app.views.employee_attendance._new_leave_applications.name')%></td>
+  <td><%= t('app.views.employee_attendance._new_leave_applications.start_date')%></td>
+  <td><%= t('app.views.employee_attendance._new_leave_applications.end_date')%></td>
   </tr>
 
   <% @reporting_employees.each do |e| %>

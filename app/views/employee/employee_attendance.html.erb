@@ -1,7 +1,7 @@
 <div id="content-header">
    <img src="/images/attendence/attendence.png" alt="" />
-  <h1>Manage Attendance</h1>
-  <h3>Leave and Attendance</h3>
+  <h1><%= t('app.views.employee.employee_attendance.manage_attendance') %></h1>
+  <h3><%= t('app.views.employee.employee_attendance.leave_and_attendance') %></h3>
   <div id="app-back-button">
    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -14,18 +14,18 @@
   <% end %>
   <div id="box">
     <div class="link-box">
-      <div class="link-heading"><%= link_to "Add Leave types", :controller=>"employee_attendance", :action=>"add_leave_types"%></div>
-      <div class="link-descr">Add and edit employee attendance types.</div>
+      <div class="link-heading"><%= link_to t('app.views.employee.employee_attendance.add_leave_type'), :controller=>"employee_attendance", :action=>"add_leave_types"%></div>
+      <div class="link-descr"><%= t('app.views.employee.employee_attendance.add_and_edit_employee_attendance_types') %></div>
     </div>
 
     <div class="link-box">
-      <div class="link-heading"><%= link_to "Attendance register", :controller=>"employee_attendances", :action=>"index"%></div>
-      <div class="link-descr">Register attendance.</div>
+      <div class="link-heading"><%= link_to t('app.views.employee.employee_attendance.attendance_register'), :controller=>"employee_attendances", :action=>"index"%></div>
+      <div class="link-descr"><%= t('app.views.employee.employee_attendance.register_attendance.') %></div>
     </div>
 
     <div class="link-box">
-      <div class="link-heading"><%= link_to "Attendance report", :controller=>"employee_attendance", :action=>"report" %></div>
-      <div class="link-descr">Attendance reports.</div>
+      <div class="link-heading"><%= link_to t('app.views.employee.employee_attendance.attendance_report'), :controller=>"employee_attendance", :action=>"report" %></div>
+      <div class="link-descr"><%= t('app.views.employee.employee_attendance.attendance_reports') %></div>
     </div>
   </div>
 

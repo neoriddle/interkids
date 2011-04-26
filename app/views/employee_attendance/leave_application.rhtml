@@ -1,7 +1,7 @@
  <div id="content-header">
    <img src="/images/attendence/attendence.png" alt="" />
-    <h1>Leave Application</h1>
-    <h3>Approve/Deny</h3>
+    <h1><%= t('app.views.employee_attendance.leave_application.leave_application')%></h1>
+    <h3><%= t('app.views.employee_attendance.leave_application.approve_deny')%></h3>
     <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
     </div>
@@ -20,41 +20,41 @@
 
 <div id="leave-info">
   <ul id="category-list">
-       <li class="list<%= cycle('odd','even') %>"><div class="category-name">Name:</div>
+       <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.name')%></div>
         <%= Employee.find(@applied_leave.employee_id).first_name %></li>
-       <li class="list<%= cycle('odd','even') %>"><div class="category-name">Manager Name:</div>
+       <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.manager_name')%></div>
         <% reporting_manager = Employee.find(@applied_leave.employee_id).reporting_manager_id %>
        <%= Employee.find(reporting_manager).first_name %></li>
-        <li class="list<%= cycle('odd','even') %>"><div class="category-name">Leave type:</div>
+        <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.leave_type')%></div>
         <%= @leave_type.name %></li>
-        <li class="list<%= cycle('odd','even') %>"><div class="category-name">Half day:</div>
+        <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.half_day')%></div>
         <% if @applied_leave.is_half_day == true %>
-        <%= "Yes" %>
+        <%= t('app.views.employee_attendance.leave_application.yes') %>
         <% else %>
-        <%= "No" %>
+        <%= t('app.views.employee_attendance.leave_application.no') %>
         <% end %>
         </li>
-       <li class="list<%= cycle('odd','even') %>"><div class="category-name">Leave start date:</div>
+       <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.leave_start_date')%></div>
         <%= @applied_leave.start_date.strftime("%d %b, %Y") %></li>
-       <li class="list<%= cycle('odd','even') %>"><div class="category-name">Leave end date:</div>
+       <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.leave_end_date')%></div>
         <%= @applied_leave.end_date.strftime("%d %b, %Y") %></li>
-       <li class="list<%= cycle('odd','even') %>"><div class="category-name">Reason:</div>
+       <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.reason')%></div>
         <%= @applied_leave.reason %></li>
-       <li class="list<%= cycle('odd','even') %>"><div class="category-name">Status:</div>
-        <%= "Approved" if @applied_leave.approved == true and @applied_leave.viewed_by_manager == true %>
-        <%= "Denied" if @applied_leave.approved == false and @applied_leave.viewed_by_manager == true %>
-        <%= "Pending approval" if @applied_leave.approved == false and @applied_leave.viewed_by_manager == false %>
+       <li class="list<%= cycle('odd','even') %>"><div class="category-name"><%= t('app.views.employee_attendance.leave_application.status')%></div>
+        <%= t('app.views.employee_attendance.leave_application.approved') if @applied_leave.approved == true and @applied_leave.viewed_by_manager == true %>
+        <%= t('app.views.employee_attendance.leave_application.denied') if @applied_leave.approved == false and @applied_leave.viewed_by_manager == true %>
+        <%= t('app.views.employee_attendance.leave_application.pending_approval') if @applied_leave.approved == false and @applied_leave.viewed_by_manager == false %>
        </li>
   </ul>
 
 
       <% unless @applied_leave.viewed_by_manager == true %>
   <div class="buttons">
-      <div class="approve_button">    <%= link_to_remote "► Approve",
+      <div class="approve_button">    <%= link_to_remote t('app.views.employee_attendance.leave_application.approve'),
              :update => "remark-form",
              :url => {:action => "approve_remarks", :id=>@applied_leave.id},:class=>'approve_button' %> </div>
 
-   <div class="cancel_button"><%= link_to_remote "► Deny",
+   <div class="cancel_button"><%= link_to_remote t('app.views.employee_attendance.leave_application.deny'),
              :update => "remark-form",
              :url => {:action => "deny_remarks", :id=>@applied_leave.id},:class=>'cancel_button'  %>
    </div>

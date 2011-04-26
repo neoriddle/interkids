@@ -1,17 +1,17 @@
 <% if @users.nil? or @users.empty? %>
-  <div id="user_no_result">No users found</div>
+  <div id="user_no_result"> <%= t('app.views.user._users.no_users_found')%> </div>
 <% else %>
   <div class="students-table">
     <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
       <tr class="tr-head">
         <td>
-          Sl no.
+          <%= t('app.views.user._users.sl_no')%>
         </td>
         <td>
-          Name
+          <%= t('app.views.user._users.name')%>
         </td>
         <td>
-         Username
+         <%= t('app.views.user._users.username')%>
         </td>
         <td>
         
@@ -43,7 +43,7 @@
             <%= user.username %>
           </td>
           <td class="col-4">
-            <%= link_to 'View Profile', :controller => 'user', :action => 'profile', :id => user.username  %>
+            <%= link_to t('app.views.user._users.view_profile'), :controller => 'user', :action => 'profile', :id => user.username  %>
           </td>
 
         </tr>

@@ -3,7 +3,7 @@
 <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
   <tr class="tr-head">
     <td>
-      Name
+      <%= t('app.views.employee_attendance._attendance_report.name')%>
     </td>
 
     <% @leave_types.each do |lt| %>
@@ -12,7 +12,7 @@
       </td>
     <% end %>
     <td>
-      Total&nbsp;&nbsp;
+      <%= t('app.views.employee_attendance._attendance_report.total')%>&nbsp;&nbsp;
     </td>
     <!-- attendance_tr -->
   </tr>

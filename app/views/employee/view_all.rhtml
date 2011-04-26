@@ -1,7 +1,7 @@
 <div id="content-header">
    <img src="/images/HR/show_hr.png" alt="" />
-  <h1>View all</h1>
-  <h3>view all</h3>
+  <h1><%= t('app.views.employee.view_all.employee_manager') %></h1>
+  <h3><%= t('app.views.employee.view_all.view_all') %></h3>
   <div id="app-back-button">
   <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -9,9 +9,9 @@
 
 <div id="page-yield">
        <div class="label-field-pair">
-  <label>Select a Department : </label>
+  <label><%= t('app.views.employee.view_all.select_a_department') %></label>
 <div class="text-input-bg"><%= select :subject_assignment, :department_id, @departments.map { |s| [s.name, s.id] },
-                                        {:prompt => "Select department"},
+                                        {:prompt => t('app.views.employee.view_all.select_department')},
                                         {:onChange => "#{remote_function(:url => {:action => "employees_list"},
                                         :with => "'department_id='+value")}"} %>
   </div>
