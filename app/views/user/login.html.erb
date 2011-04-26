@@ -9,7 +9,7 @@
   </div>
 
   <div id="help_top">
-    <div id="help_link"><a href="http://www.projectfedena.org/forum/" target="_blank"><%= t 'app.views.user.login.help' %></a></div>
+    <div id="help_link"><a href="http://www.projectfedena.org/forum/" target="_blank"><%= t('app.views.user.login.help') %></a></div>
   </div>
 
   <div id="login_area_bg">
@@ -17,20 +17,20 @@
     <% form_for :user do |form| %>
 
       <div id="login_area">
-        <label for="username"><%= t 'app.views.user.login.username' %></label>
+        <label for="username"><%= t('app.views.user.login.username') %></label>
         <div id="username_textbox_bg">
           <%= form.text_field :username,
             :maxlength => 40%>
         </div>
 
-        <label for="password"><%= t 'app.views.user.login.password' %></label>
+        <label for="password"><%= t('app.views.user.login.password') %></label>
         <div id="password_textbox_bg">
           <%= form.password_field :password %>
         </div>
 
         <div id="checkbox_area">
           <input type="checkbox" id="remember" />
-          <label for="remember"><%= t 'app.views.user.login.remember_me' %></label>
+          <label for="remember"><%= t('app.views.user.login.remember_me') %></label>
         </div>
 
         <div id="submit_area">
@@ -46,7 +46,7 @@
     </div>
   <% end %>
   <div id="help_forgot_pw">
-    <%= link_to t('app.views.user.login.help_forgotten_my_password'),
+    <%= link_to t('app.views.user.login.help_ive_forgotten_my_password'),
       :controller => "user",
       :action => "forgot_password" %>
 
@@ -57,7 +57,7 @@
     <div id="footer">
       <div id="footer_logo">
             <div id="powered_by">
-          Powered by <a href="http://www.projectfedena.org/" target="_blank">Fedena</a>
+          <%= t('app.views.user.login.powered_by') %><a href="http://www.projectfedena.org/" target="_blank"><%= t('app.views.user.login.fedena') %></a>
         </div>
           <a href="http://www.projectfedena.org/" target="_blank" class="footer-logo"></a>
           

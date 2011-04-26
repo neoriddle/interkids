@@ -385,7 +385,7 @@ es:
           confirm_password: 'Confirmar clave'
           reset: 'Reestablecer'
           faq: 'faq'
-          fedena: 'xds'
+          fedena: 'OpenFactorySolutions'
           support: 'Soporte'
         user_change_password:
           edit_user: 'Editar usuario'
