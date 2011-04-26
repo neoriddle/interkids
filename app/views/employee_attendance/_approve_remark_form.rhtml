@@ -9,7 +9,7 @@
              :url => {:action => "cancel"} %>
 
       <div class="remark-field-pair">
-        <label for="course_grade">Approval remarks</label>
+        <label for="course_grade"><%= t('app.views.employee_attendance._approve_remark_form.approval_remarks') %></label>
         <div class="remark-input-bg"> <%= text_field_tag :manager_remark %> </div>
         <%= hidden_field_tag :applied_leave, @applied_leave.id %>
       </div>

@@ -2,8 +2,8 @@
 
 <div id="content-header">
   <img src="/images/attendence/attendence.png" alt="" />
-  <h1>Leave Management</h1>
-  <h3>Apply or check status</h3>
+  <h1><%= t('app.views.employee_attendance.leaves.leave_management')%></h1>
+  <h3><%= t('app.views.employee_attendance.leaves.apply_or_check_status')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -11,19 +11,19 @@
 
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to "Apply", :controller=>"employee_attendance", :action=>"leaves", :id=> @employee.id %></li>
-    <li><%= link_to_remote "My leaves",
+    <li><%= link_to t('app.views.employee_attendance.leaves.apply'), :controller=>"employee_attendance", :action=>"leaves", :id=> @employee.id %></li>
+    <li><%= link_to_remote t('app.views.employee_attendance.leaves.my_leaves'),
         :update => "application-list",
         :url => {:action => "individual_leave_applications", :id=>@employee.id} %></li>
       <% unless @reporting_employees == [] %>
         <% if @total_leave_count == 0 %>
 
         <% else %>
-        <span class="new-leaves-count">  <li><b><%= link_to_remote "New leaves (#{@total_leave_count})",
+        <span class="new-leaves-count">  <li><b><%= link_to_remote t('app.views.employee_attendance.leaves.new_leaves') + "(#{@total_leave_count})",
                 :update => "application-list",
                 :url => {:action => "new_leave_applications", :id=>@employee.id} %></b></li></span>
             <% end %>
-      <li><%= link_to_remote "All leaves",
+      <li><%= link_to_remote t('app.views.employee_attendance.leaves.all_leaves'),
           :update => "application-list",
           :url => {:action => "all_leave_applications", :id=>@employee.id} %></li>
       <% end %>
@@ -42,41 +42,41 @@
         <% reporting_manager = Employee.find(@employee.id).reporting_manager_id %>
     <% unless @current_user.admin? %>
         <% if reporting_manager.nil?  %>
-    <p class="flash-msg">Sorry, You cannot apply for a leave without a reporting manager. Please contact administrator. </p>
+    <p class="flash-msg"><%= t('app.views.employee_attendance.leaves.sorry_you_cannot_apply_for_a_leave')%> </p>
 </div>
 <% end %>
 <% end %>
  <% unless reporting_manager.nil? and not @current_user.admin? %>
   <div id="application-list">
-    <div class="heading">Apply for a leave</div>
+    <div class="heading"><%= t('app.views.employee_attendance.leaves.apply_for_a_leave')%></div>
     <% form_for :leave_apply do |l| %>
       <%= error_messages_for :leave_apply %>
       <%= l.hidden_field :employee_id, :value=>@employee.id %>
       <div class="label-field-pair">
-        <label for="leave_type">Leave type:</label>
-        <div class="text-input-bg"><%= select :leave_apply, :employee_leave_types_id, @leave_types.map {|s| [s.name, s.id]},:prompt => "Select" %></div>
+        <label for="leave_type"><%= t('app.views.employee_attendance.leaves.leave_type')%></label>
+        <div class="text-input-bg"><%= select :leave_apply, :employee_leave_types_id, @leave_types.map {|s| [s.name, s.id]},:prompt => t('app.views.employee_attendance.leaves.select') %></div>
       </div>
       <div class="label-field-pair">
-          <label for="create_user" id="create_user_option"> Is half day?</label>
+          <label for="create_user" id="create_user_option"> <%= t('app.views.employee_attendance.leaves.is_half_day')%></label>
          <div class="text-input-bg"><%= check_box_tag :is_half_day, :checked => false %></div>
       </div>
 
       <div class="label-field-pair">
-        <label for="start_date">Start date</label>
+        <label for="start_date"><%= t('app.views.employee_attendance.leaves.start_date')%></label>
         <div class="text-input-bg"><%= calendar_date_select_tag 'leave_apply[start_date]'  %></div>
       </div>
       <div class="label-field-pair">
-        <label for="end_date">End date:</label>
+        <label for="end_date"><%= t('app.views.employee_attendance.leaves.end_date')%></label>
         <div class="text-input-bg"><%= calendar_date_select_tag 'leave_apply[end_date]'  %></div>
       </div>
       <div class="label-field-pair">
-        <label for="reason">Reason:</label>
+        <label for="reason"><%= t('app.views.employee_attendance.leaves.reason')%></label>
         <div class="text-input-bg"><%= l.text_field   :reason %></div>
       </div>
       
 
       <div id="submit-button">
-        <%=  submit_tag("► Create") %>
+        <%=  submit_tag(t('app.views.employee_attendance.leaves.create')) %>
       </div>
     <% end %>
     <div class="extender"></div>

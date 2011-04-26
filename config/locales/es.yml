@@ -2496,7 +2496,7 @@ es:
           apply_or_check_status: 'Aplicar o verificar estatus'
           apply: 'Aplicar'
           my_leaves: 'Mis faltas'
-          new_leaves: 'Nueva falta'
+          new_leaves: 'Nueva falta '
           all_leaves: 'Todas faltas'
           sorry_you_cannot_apply_for_a_leave: 'Disculpe, usted no puede aplicar este tipo de falta'
           apply_for_a_leave: 'Aplicar'
