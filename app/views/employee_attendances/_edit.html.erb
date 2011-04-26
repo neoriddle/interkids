@@ -1,25 +1,25 @@
-<label class="head_label">Edit attendance for <span><%= @employee.first_name %></span></label>
+<label class="head_label"><%= t('app.views.employee_attendances._edit.edit_attendance_for') %> <span><%= @employee.first_name %></span></label>
 
 <div id="ajax-edit">
   <% form_remote_for @attendance do |f| %>
   <br/>
     <div class="label-field-pair">
-      <label for="leave_type"> Leave type</label>
+      <label for="leave_type"> <%= t('app.views.employee_attendances._edit.leave_type') %></label>
       <div class="text-input-bg"><%= f.select :employee_leave_type_id, @leave_types.map {|c| [c.name, c.id]} %></div>
     </div>
     <div class="label-field-pair">
-      <label for="leave_type"> Reason for absence</label>
+      <label for="leave_type"> <%= t('app.views.employee_attendances._edit.reason_for_absence') %></label>
       <div class="text-input-bg"><%= f.text_field :reason %></div>
     </div>
     <div class="label-checkbox-pair">
-      <label><%= f.check_box :is_half_day %>is half day?</label>
+      <label><%= f.check_box :is_half_day %><%= t('app.views.employee_attendances._edit.is_half_day') %></label>
     </div>
     <div class="extender"></div>
-    <%= f.submit 'Submit', :class => 'submit-button', :confirm => 'Are you sure?' %>
+    <%= f.submit t('app.views.employee_attendances._edit.submit'), :class => 'submit-button', :confirm => t('app.views.employee_attendances._edit.are_you_sure') %>
   <% end %>
-    <div id="delete-button"><%= link_to_remote('Delete',
+    <div id="delete-button"><%= link_to_remote(t('app.views.employee_attendances._edit.delete'),
           :url => employee_attendance_path(@attendance),
           :method =>'delete',
-          :confirm => 'Are you sure?') %></div>
+          :confirm => t('app.views.employee_attendances._edit.are_you_sure')) %></div>
 <div id="form-errors"></div>
 </div>

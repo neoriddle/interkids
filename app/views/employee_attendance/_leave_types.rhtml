@@ -4,16 +4,16 @@
 
 <ul class="leave-type-list">
 <% unless @leave_types.empty? %>
-  <li class="heading"> Leave types </li>
+  <li class="heading"> <%= t('app.views.employee_attendance._leave_types.leave_types')%> </li>
     <%- @leave_types.each do |c| -%>
       <li>
         <div class="leave-type-name"><%= c.name %>-<%= c.code %></div>
-        <div class="leave-type-edit"><%= link_to "Edit", {:action => "edit_leave_types", :id=>c.id} %></div>
-        <div class="leave-type-edit"><%= "(Inactive)" unless c.status == true %></div>
+        <div class="leave-type-edit"><%= link_to t('app.views.employee_attendance._leave_types.edit'), {:action => "edit_leave_types", :id=>c.id} %></div>
+        <div class="leave-type-edit"><%= t('app.views.employee_attendance._leave_types.inactive') unless c.status == true %></div>
         </li>
      <% end %>
 
   <% else %>
-<p class="flash-msg">Employee leave types records not found</p>
+<p class="flash-msg"><%= t('app.views.employee_attendance._leave_types.employee_leave_types_records_not_found')%></p>
   <% end %>
 </ul>

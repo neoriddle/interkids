@@ -1,7 +1,7 @@
 <div id="content-header">
  <img src="/images/HR/show_hr.png" alt="" />
-  <h1>Employee</h1>
-  <h3>Advanced search</h3>
+  <h1><%= t('app.views.employee.advanced_search.employee') %></h1>
+  <h3><%= t('app.views.employee.advanced_search.advanced_search') %></h3>
   <div id="app-back-button">
    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -11,74 +11,74 @@
   <div id="search-form">
     <% form_for @search do |f| %>
       <div class="label-field-pair">
-        <label for="name">Name</label>
+        <label for="name"><%= t('app.views.employee.advanced_search.name') %></label>
         <div class="text-input-bg">
           <%= f.text_field :first_name_or_middle_name_or_last_name_like %>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Employee no</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.employee_no') %></label>
         <div class="text-input-bg">
           <%= f.text_field :employee_number_equals %>
         </div>
       </div>
       <div class="label_field_pair">
-        <label class="label_for_student" >Gender</label>
+        <label class="label_for_student" ><%= t('app.views.employee.advanced_search.gender') %></label>
         <div class="student_gender_value">
-          <label class="label_for_gender" >All</label>
+          <label class="label_for_gender" ><%= t('app.views.employee.advanced_search.all') %></label>
           <%= f.radio_button  :gender_equals, "" %>
-          <label class="label_for_gender" >Male</label>
+          <label class="label_for_gender" ><%= t('app.views.employee.advanced_search.male') %></label>
           <%= f.radio_button  :gender_equals, "m"%>
-          <label class="label_for_gender" >Female</label>
+          <label class="label_for_gender" ><%= t('app.views.employee.advanced_search.female') %></label>
           <%= f.radio_button  :gender_equals, "f" %>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Blood group</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.blood_group') %></label>
         <div class="text-input-bg">
-          <%= select :search, :blood_group_like, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{:prompt=>"Select"}%>
+          <%= select :search, :blood_group_like, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{:prompt=> t('app.views.employee.advanced_search.select') }%>
         </div>
       </div>
 
       <div class="label-field-pair">
-        <label for="student_admission_no">Marital status</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.marital_status') %></label>
         <div class="text-input-bg">
-          <%= select :search, :marital_status_like, ["Single", "Married", "Divorced"],{:prompt=>"Select"}%>
+          <%= select :search, :marital_status_like, {t('app.views.employee.advanced_search.single') => "Single", t('app.views.employee.advanced_search.married') => "Married", t('app.views.employee.advanced_search.divorced') => "Divorced"},{:prompt=>t('app.views.employee.advanced_search.select')}%>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Country</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.country') %></label>
         <div class="text-input-bg">
-          <%= f.collection_select :nationality_id_equals, Country.all,:id,:name,{:prompt=>"Select"}%>
+          <%= f.collection_select :nationality_id_equals, Country.all,:id,:name,{:prompt=> t('app.views.employee.advanced_search.select')}%>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Category</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.category') %></label>
         <div class="text-input-bg">
-          <%= f.collection_select :employee_category_id_equals, EmployeeCategory.all, :id, :name, {:prompt=>"Select"} %>
+          <%= f.collection_select :employee_category_id_equals, EmployeeCategory.all, :id, :name, {:prompt=>t('app.views.employee.advanced_search.select')} %>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Department</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.department') %></label>
         <div class="text-input-bg">
-          <%= f.collection_select :employee_department_id_equals, EmployeeDepartment.all, :id, :name, {:prompt=>"Select"} %>
+          <%= f.collection_select :employee_department_id_equals, EmployeeDepartment.all, :id, :name, {:prompt=>t('app.views.employee.advanced_search.select')} %>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Position</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.position') %></label>
         <div class="text-input-bg">
-          <%= f.collection_select :employee_position_id_equals, EmployeePosition.all, :id, :name, {:prompt=>"Select"}%>
+          <%= f.collection_select :employee_position_id_equals, EmployeePosition.all, :id, :name, {:prompt=>t('app.views.employee.advanced_search.select')}%>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Grade</label>
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.grade') %></label>
         <div class="text-input-bg">
-          <%= f.collection_select :employee_grade_id_equals, EmployeeGrade.all, :id, :name,{:prompt=>"Select"} %>
+          <%= f.collection_select :employee_grade_id_equals, EmployeeGrade.all, :id, :name,{:prompt=>t('app.views.employee.advanced_search.select')} %>
         </div>
       </div>
 
       <div class="label-field-pair">
-        <label for="student_admission_no">Date of joining
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.date_of_joining') %>
           <%= image_tag("loader.gif",
             :align => "absmiddle",
             :border => 0,
@@ -86,7 +86,7 @@
             :style =>"display: none;" ) %>
         </label>
         <div class="text-input-bg">
-          <%= select :adv_search,:doj_option,["equal to","less than","greater than"],{:prompt=>"choose your option"},
+          <%= select :adv_search,:doj_option,{ t('app.views.employee.advanced_search.equals') => "equal to",t('app.views.employee.advanced_search.less_than') =>"less than",t('app.views.employee.advanced_search.greater_than') => "greater than"},{:prompt=>t('app.views.employee.advanced_search.choose_your_option')},
             {:onChange => "#{remote_function(:url => {:action => "list_doj_year"},
             :with=>"'doj_option='+value",
             :before => "Element.show('loader')",
@@ -94,13 +94,13 @@
             )}"}
         %>
           <div id="doj_year">
-            <%= select :adv_search,:doj_year,[],{:prompt=>"Select"} %>
+            <%= select :adv_search,:doj_year,[],{:prompt=>t('app.views.employee.advanced_search.select')} %>
           </div>
           <div id="doj_year_hidden"></div>
         </div>
       </div>
       <div class="label-field-pair">
-        <label for="student_admission_no">Birth date
+        <label for="student_admission_no"><%= t('app.views.employee.advanced_search.birth_date') %>
           <%= image_tag("loader.gif",
             :align => "absmiddle",
             :border => 0,
@@ -108,7 +108,7 @@
             :style =>"display: none;" ) %>
         </label>
         <div class="text-input-bg">
-          <%= select :adv_search,:dob_option,["equal to","less than","greater than"],{:prompt=>"choose your option"},
+          <%= select :adv_search,:dob_option,{ t('app.views.employee.advanced_search.equals') => "equal to",t('app.views.employee.advanced_search.less_than') =>"less than",t('app.views.employee.advanced_search.greater_than') => "greater than"},{:prompt=>t('app.views.employee.advanced_search.choose_your_option')},
             {:onChange => "#{remote_function(:url => {:action => "list_dob_year"},
             :with=>"'dob_option='+value",
             :before => "Element.show('loader')",
@@ -116,25 +116,25 @@
             )}"}
         %>
           <div id="dob_year">
-            <%= select :adv_search,:dob_year,[],{:prompt=>"Select"} %>
+            <%= select :adv_search,:dob_year,[],{:prompt=>t('app.views.employee.advanced_search.select')} %>
           </div>
           <div id="dob_year_hidden"></div>
         </div>
       </div>
       <div class="label_field_pair">
-        <label class="label_for_student" for="student_gender">Status</label>
+        <label class="label_for_student" for="student_gender"><%= t('app.views.employee.advanced_search.status') %></label>
         <div class="student_gender_value">
-          <label class="label_for_gender" for="student_gender_true">Present</label>
+          <label class="label_for_gender" for="student_gender_true"><%= t('app.views.employee.advanced_search.present') %></label>
           <%= f.radio_button  :status_equals, "true", {:checked => false } %>
-          <label class="label_for_gender" for="student_gender_false">Former</label>
+          <label class="label_for_gender" for="student_gender_false"><%= t('app.views.employee.advanced_search.former') %></label>
           <%= f.radio_button  :status_equals, "false" %>
-          <label class="label_for_gender" for="student_gender_false">All</label>
+          <label class="label_for_gender" for="student_gender_false"><%= t('app.views.employee.advanced_search.all') %></label>
           <%= f.radio_button  :status_equals, "", {:checked => 'checked'} %>
         </div>
       </div>
 
 
-      <%= f.submit "Search", :class=>'submit' %>
+      <%= f.submit t('app.views.employee.advanced_search.search'), :class=>'submit' %>
     <% end %>
   </div>
 
@@ -146,46 +146,46 @@
     </script>
     <div id="search-result">
 
-      <p>You have searched for:</p>
+      <p><%= t('app.views.employee.advanced_search.you_have_searched_for') %></p>
       <div class="search-again">
   <%#= link_to_function '► Search again' do |page|
   page.visual_effect :toggle_slide, "search-form"
   page.hide "search-result"
   end %>
-        <% searched_for = 'Listed by ' %>
+        <% searched_for = t('app.views.employee.advanced_search.listed_by') %>
        
-          <% searched_for += 'Name: ' + params[:search][:first_name_or_middle_name_or_last_name_like].to_s unless params[:search][:first_name_or_middle_name_or_last_name_like].empty? %>
-          <% searched_for += ' Employee number: ' + params[:search][:employee_number_equals].to_s unless params[:search][:employee_number_equals].empty? %>
-          <% searched_for += ' Employee department: ' + EmployeeDepartment.find(params[:search][:employee_department_id_equals]).name.to_s unless params[:search][:employee_department_id_equals].empty? %>
-          <% searched_for += ' Employee category: ' + EmployeeCategory.find(params[:search][:employee_category_id_equals]).name.to_s unless params[:search][:employee_category_id_equals].empty? %>
-          <% searched_for += ' Employee position: ' + EmployeePosition.find(params[:search][:employee_position_id_equals]).name.to_s unless params[:search][:employee_position_id_equals].empty? %>
-          <% searched_for += ' Employee grade: ' + EmployeeGrade.find(params[:search][:employee_grade_id_equals]).name.to_s unless params[:search][:employee_grade_id_equals].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.name') + params[:search][:first_name_or_middle_name_or_last_name_like].to_s unless params[:search][:first_name_or_middle_name_or_last_name_like].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.employee_number') + params[:search][:employee_number_equals].to_s unless params[:search][:employee_number_equals].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.employee_department') + EmployeeDepartment.find(params[:search][:employee_department_id_equals]).name.to_s unless params[:search][:employee_department_id_equals].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.employee_category') + EmployeeCategory.find(params[:search][:employee_category_id_equals]).name.to_s unless params[:search][:employee_category_id_equals].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.employee_position') + EmployeePosition.find(params[:search][:employee_position_id_equals]).name.to_s unless params[:search][:employee_position_id_equals].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.employee_grade') + EmployeeGrade.find(params[:search][:employee_grade_id_equals]).name.to_s unless params[:search][:employee_grade_id_equals].empty? %>
           <% unless  params[:search][:gender_equals].empty? %>
           <% if  params[:search][:gender_equals] == 'm' %>
-            <% searched_for += " Gender: male" %>
+            <% searched_for += t('app.views.employee.advanced_search.gender_male') %>
           <% elsif  params[:search][:gender_equals] == 'f' %>
-            <% searched_for += " Gender: female" %>
+            <% searched_for += t('app.views.employee.advanced_search.gender_female') %>
           <% else %>
-            <% searched_for += " Gender: all" %>
+            <% searched_for += t('app.views.employee.advanced_search.gender_all') %>
           <% end %>
         <% end %>
-          <% searched_for += ' Blood group: ' + params[:search][:blood_group_like].to_s unless params[:search][:blood_group_like].empty? %>
-          <% searched_for += ' Marital status: ' + params[:search][:marital_status_like].to_s unless params[:search][:marital_status_like].empty? %>
-          <% searched_for += ' Nationality: ' + Country.find(params[:search][:nationality_id_equals]).name.to_s unless params[:search][:nationality_id_equals].empty? %>
-          <% searched_for += ' Year of join: ' +  params[:adv_search][:doj_option].to_s + params[:adv_search][:joining_date_year].to_s unless  params[:adv_search][:doj_option].empty? %>
-          <% searched_for += ' Year of birth: ' +  params[:adv_search][:dob_option].to_s + params[:adv_search][:birth_date_year].to_s unless  params[:adv_search][:dob_option].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.blood_group') + params[:search][:blood_group_like].to_s unless params[:search][:blood_group_like].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.marital_status') + params[:search][:marital_status_like].to_s unless params[:search][:marital_status_like].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.nationality') + Country.find(params[:search][:nationality_id_equals]).name.to_s unless params[:search][:nationality_id_equals].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.year_of_join') +  params[:adv_search][:doj_option].to_s + params[:adv_search][:joining_date_year].to_s unless  params[:adv_search][:doj_option].empty? %>
+          <% searched_for += t('app.views.employee.advanced_search.year_of_birth') +  params[:adv_search][:dob_option].to_s + params[:adv_search][:birth_date_year].to_s unless  params[:adv_search][:dob_option].empty? %>
           <% if params[:search][:status_equals]=="true" %>
-          <% searched_for += " Present employees" %>
+          <% searched_for += t('app.views.employee.advanced_search.present_employees') %>
           <% elsif params[:search][:status_equals]=="false" %>
-            <% searched_for += " Former employees" %>
+            <% searched_for += t('app.views.employee.advanced_search.former_employees') %>
           <% else %>
-            <% searched_for += " All employees" %>
+            <% searched_for += t('app.views.employee.advanced_search.all_employees') %>
           <% end %>
 
         
-        <%= link_to "► Search again", {:action=>"advanced_search"}%>
+        <%= link_to t('app.views.employee.advanced_search.search_again'), {:action=>"advanced_search"}%>
         <% unless @employees1.empty? %>
-        <%= link_to "► View PDF report",   {:action => "advanced_search_pdf",:for =>searched_for, :result2=>@employees2 , :result =>@employees1,:status=>params[:search][:status_equals], :format => 'pdf'}, :target => '_blank' , :class=> 'submit_button' %>
+        <%= link_to t('app.views.employee.advanced_search.view_pdf_report'),   {:action => "advanced_search_pdf",:for =>searched_for, :result2=>@employees2 , :result =>@employees1,:status=>params[:search][:status_equals], :format => 'pdf'}, :target => '_blank' , :class=> 'submit_button' %>
         <% end %>
       </div>
       <div class="extender"></div>
@@ -193,62 +193,62 @@
       <div class="searched_for">
         <% unless params[:search][:first_name_or_middle_name_or_last_name_like].empty? %>
           <% searched_for = params[:search][:first_name_or_middle_name_or_last_name_like] %>
-          <span>Name:</span> <%= params[:search][:first_name_or_middle_name_or_last_name_like] %>
+          <span><%= t('app.views.employee.advanced_search.name') %> </span> <%= params[:search][:first_name_or_middle_name_or_last_name_like] %>
         <% end %>
         <% unless  params[:search][:employee_number_equals].empty? %>
-          <span>Employee no:</span> <%= params[:search][:employee_number_equals] %>
+          <span><%= t('app.views.employee.advanced_search.employee_no') %> </span> <%= params[:search][:employee_number_equals] %>
         <% end %>
         <% unless params[:search][:employee_department_id_equals].empty? %>
           <% dept = EmployeeDepartment.find(params[:search][:employee_department_id_equals]) %>
-          <span>Department:</span> <%= dept.name %>
+          <span><%= t('app.views.employee.advanced_search.department') %> </span> <%= dept.name %>
         <% end %>
         <% unless  params[:search][:employee_category_id_equals].empty? %>
           <% category = EmployeeCategory.find(params[:search][:employee_category_id_equals]) %>
-          <span> Category: </span> <%= category.name %>
+          <span> <%= t('app.views.employee.advanced_search.category') %> </span> <%= category.name %>
         <% end %>
         <% unless  params[:search][:employee_position_id_equals].empty? %>
           <% position = EmployeePosition.find(params[:search][:employee_position_id_equals]) %>
-          <span> Employee position: </span> <%= position.name %>
+          <span> <%= t('app.views.employee.advanced_search.employee_position') %> </span> <%= position.name %>
         <% end %>
         <% unless  params[:search][:employee_grade_id_equals].empty? %>
           <% grade = EmployeeGrade.find(params[:search][:employee_grade_id_equals]) %>
-          <span> Employee grade: </span> <%= grade.name %>
+          <span> <%= t('app.views.employee.advanced_search.employee_grade') %> </span> <%= grade.name %>
         <% end %>
         <% unless  params[:search][:gender_equals].empty? %>
           <% if  params[:search][:gender_equals] == 'm' %>
-            <span> Gender: </span> male
+            <span> <%= t('app.views.employee.advanced_search.gender') %> </span> <%= t('app.views.employee.advanced_search.male') %>
           <% elsif  params[:search][:gender_equals] == 'f' %>
-            <span> Gender: </span> female
+            <span> <%= t('app.views.employee.advanced_search.gender') %> </span> <%= t('app.views.employee.advanced_search.female') %>
           <% else %>
-            <span> Gender: </span> All
+            <span> <%= t('app.views.employee.advanced_search.gender') %> </span> <%= t('app.views.employee.advanced_search.gender_all') %>
           <% end %>
           <% end %>
         <% unless  params[:search][:blood_group_like].empty? %>
-          <span> Blood group:</span> <%= params[:search][:blood_group_like] %>
+          <span> <%= t('app.views.employee.advanced_search.blood_group') %></span> <%= params[:search][:blood_group_like] %>
         <% end %>
         <% unless  params[:search][:marital_status_like].empty? %>
-          <span> Marital status:</span> <%= params[:search][:marital_status_like] %>
+          <span> <%= t('app.views.employee.advanced_search.marital_status') %></span> <%= params[:search][:marital_status_like] %>
         <% end %>
         <% unless  params[:search][:nationality_id_equals].empty? %>
           <% nationality = Country.find(params[:search][:nationality_id_equals]) %>
-          <span> Nationality: </span> <%= nationality.name %>
+          <span> <%= t('app.views.employee.advanced_search.nationality') %> </span> <%= nationality.name %>
         <% end %>
         <% unless  params[:adv_search][:doj_option].empty? %>
-          <span> Year of joining: </span> <%= params[:adv_search][:doj_option] %>
+          <span> <%= t('app.views.employee.advanced_search.year_of_joining') %> </span> <%= params[:adv_search][:doj_option] %>
 
           <%= params[:adv_search][:joining_date_year] %>
         <% end %>
         <% unless  params[:adv_search][:dob_option].empty? %>
-          <span>Year of birth: </span> <%= params[:adv_search][:dob_option] %>
+          <span><%= t('app.views.employee.advanced_search.year_of_birth') %> </span> <%= params[:adv_search][:dob_option] %>
 
           <%= params[:adv_search][:birth_date_year] %>
         <% end %>
         <% if params[:search][:status_equals]=="true" %>
-          <span> Present employees </span>
+          <span> <%= t('app.views.employee.advanced_search.present_employees') %> </span>
         <% elsif params[:search][:status_equals]=="false" %>
-          <span> Former employees </span>
+          <span> <%= t('app.views.employee.advanced_search.former_employees') %> </span>
         <% else %>
-          <span> All </span>
+          <span> <%= t('app.views.employee.advanced_search.all') %> </span>
         <% end %>
 
       </div>
@@ -257,16 +257,16 @@
       <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
         <tr class="tr-head">
           <td>
-            Sl no.
+            <%= t('app.views.employee.advanced_search.sl_no') %>
           </td>
           <td>
-            <%= order @search, :by => :first_name %>
+            <%= t('app.views.employee.advanced_search.name') %>
           </td>
           <td>
-            Employee ID
+            <%= t('app.views.employee.advanced_search.employee_id') %>
           </td>
           <td>
-            Employee dept
+            <%= t('app.views.employee.advanced_search.employee_dept') %>
           </td>
         </tr>
         <tr class="tr-blank"></tr>
@@ -299,7 +299,7 @@
           <tr class="tr-<%= cycle('odd', 'even') %>">
 
             <td class="col-1"></td>
-            <td class="col-2">No employee found</td>
+            <td class="col-2"><%= t('app.views.employee.advanced_search.no_employee_found') %></td>
           </tr>
         <% end %>
       </table>

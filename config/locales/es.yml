@@ -385,7 +385,7 @@ es:
           confirm_password: 'Confirmar clave'
           reset: 'Reestablecer'
           faq: 'faq'
-          fedena: 'xds'
+          fedena: 'OpenFactorySolutions'
           support: 'Soporte'
         user_change_password:
           edit_user: 'Editar usuario'
@@ -1877,6 +1877,7 @@ es:
           select: 'Sel. posición'
         admission1:
           employee_admission: 'Ingreso de empleado'
+          employee_number: 'No. Empleado'
           step1: 'Paso 1'
           employee_number_of_last_employee_is: 'El último número de empleado es: '
           fields_marked_with: 'Los campos marcados con '
@@ -2500,7 +2501,7 @@ es:
           apply_or_check_status: 'Aplicar o verificar estatus'
           apply: 'Aplicar'
           my_leaves: 'Mis faltas'
-          new_leaves: 'Nueva falta'
+          new_leaves: 'Nueva falta '
           all_leaves: 'Todas faltas'
           sorry_you_cannot_apply_for_a_leave: 'Disculpe, usted no puede aplicar este tipo de falta'
           apply_for_a_leave: 'Aplicar'

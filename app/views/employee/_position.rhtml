@@ -1,15 +1,15 @@
 
 <ul id="position-list">
 <% unless @positions.empty? %>
-  <li class="heading"> Position name </li>
+  <li class="heading"> <%= t('app.views.employee._position.position_name')%> </li>
 <% @positions.each do |p| %>
   <li class="list<%=cycle('odd', 'even')%>">
     <div class="position-name"><%= p.name %>(<%= p.employee_category.prefix unless p.employee_category_id.nil? %>)</div>
-    <div class="position-edit"><%= link_to "Edit", :action => "edit_position", :id=>p.id %></div>
-    <div class="position-edit"><%= link_to "Delete", {:action => "delete_position", :id=>p.id}, :confirm =>"Are you sure?" %></div>
+    <div class="position-edit"><%= link_to t('app.views.employee._position.edit'), :action => "edit_position", :id=>p.id %></div>
+    <div class="position-edit"><%= link_to t('app.views.employee._position.delete'), {:action => "delete_position", :id=>p.id}, :confirm =>t('app.views.employee._position.are_you_sure') %></div>
   </li>
 <% end %>
 <% else %>
-<p class="flash-msg"> No Empoloyee positions record found</p>
+<p class="flash-msg"> <%= t('app.views.employee._position.no_empoloyee_positions_record_found')%></p>
 <% end %>
 </ul>

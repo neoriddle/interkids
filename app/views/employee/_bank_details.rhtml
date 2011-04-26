@@ -12,16 +12,16 @@
   <div class="edit-pdf-group">
     <% if permitted_to? :edit3,:employee %>
       <div class="edit">
-        <%= link_to "► Edit",   :controller => "employee", :action => "edit3", :id =>@employee.id %>
+        <%= link_to t('app.views.employee._bank_details.edit'),   :controller => "employee", :action => "edit3", :id =>@employee.id %>
       </div>
     <%end%>
     <% if permitted_to?  :profile_pdf , :employee %>
   <div class="pdf">
-    <%= link_to " ► PDF Report",
+    <%= link_to t('app.views.employee._bank_details.pdf_report'),
       {:controller => "employee", :action => "profile_pdf", :id => @employee.id},:target => '_blank', :class=> 'user_button' %>
   </div>
   <% end %>
   </div>
 <% else %>
-  <p class="flash-msg">No bank details entered for <%= @employee.first_name%>. <%= link_to "ADD", :controller => "employee", :action => "edit3", :id => @employee.id %></p>
+  <p class="flash-msg"><%=  t('app.views.employee._bank_details.no_bank_details_entered_for')%><%= @employee.first_name%>. <%= link_to t('app.views.employee._bank_details.add'), :controller => "employee", :action => "edit3", :id => @employee.id %></p>
 <% end %>

@@ -4,19 +4,19 @@
   :update => "individual-payslip-categories-list" do %>
   <%= hidden_field_tag :employee_id, @employee.id %>
   <div class="label-field-pair">
-    <label for="category_name">Name</label>
+    <label for="category_name"><%= t('app.views.employee._payslip_category_form.name') %></label>
     <div class="text-input-bg"> <%= text_field_tag :name %> </div>
   </div>
   <div class="label-field-pair">
-    <label for="category_amount">Amount</label>
+    <label for="category_amount"><%= t('app.views.employee._payslip_category_form.amount') %></label>
     <div class="text-input-bg"> <%= text_field_tag :amount %> </div>
   </div>
   <div class="label-field-pair">
-    <label for="category_amount">Is Deduction ?</label>
+    <label for="category_amount"><%= t('app.views.employee._payslip_category_form.is_deduction') %></label>
     <div class="text-input-bg"> <%= check_box_tag :is_deduction %>  </div>
   </div>
   <div id="new-category-submit-button">
-    <%=submit_tag("► Create") %>
+    <%=submit_tag(t('app.views.employee._payslip_category_form.create')) %>
   </div>
 
 
