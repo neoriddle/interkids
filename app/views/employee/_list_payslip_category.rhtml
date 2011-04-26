@@ -8,8 +8,8 @@
    
 <div class="name"><%= c.name %></div>
 <div class="val"> <span>:</span><%= c.amount %></div>
- <div class="del-button"> <%= link_to_remote image_tag("/images/buttons/delete-new.png", :alt=>'Delete', :border => 0), :url => { :action => "remove_new_paylist_category", :id => c.id },
-                                      :update => "list-payslip-category", :confirm=>"Are you sure" %></div>
+ <div class="del-button"> <%= link_to_remote image_tag("/images/buttons/delete-new.png", :alt=> t('app.views.employee._list_payslip_category.delete'), :border => 0), :url => { :action => "remove_new_paylist_category", :id => c.id },
+                                      :update => "list-payslip-category", :confirm=>t('app.views.employee._list_payslip_category.are_you_sure') %></div>
 
 
 </li>

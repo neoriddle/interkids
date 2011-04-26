@@ -1872,6 +1872,7 @@ es:
           select: 'Sel. posición'
         admission1:
           employee_admission: 'Ingreso de empleado'
+          employee_number: 'No. Empleado'
           step1: 'Paso 1'
           employee_number_of_last_employee_is: 'El último número de empleado es: '
           fields_marked_with: 'Los campos marcados con '

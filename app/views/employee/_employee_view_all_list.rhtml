@@ -1,8 +1,8 @@
 <table id="listing" width="100%">
   <tr class="tr-head">
-    <td>Name</td>
-    <td>Emp. Number</td>
-    <td>Department</td>
+    <td><%= t('app.views.employee._employee_view_all_list.name')%></td>
+    <td><%= t('app.views.employee._employee_view_all_list.emp_number')%></td>
+    <td><%= t('app.views.employee._employee_view_all_list.department')%></td>
   </tr>
 <% @employees.each do |e| %>
   <tr class="tr-<%= cycle('odd','even') %>">
