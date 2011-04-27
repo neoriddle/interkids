@@ -1,7 +1,7 @@
 <div id="content-header">
   <img src="/images/HR/show_hr.png" alt="" />
-  <h1>Payroll</h1>
-  <h3>index</h3>
+  <h1><%= t('app.views.payroll.index.payroll') %></h1>
+  <h3><%= t('app.views.payroll.index.index') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -18,8 +18,8 @@
   <% end %>
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to "Add payroll category", :controller=>"payroll", :action=>"add_category" %></div>
-    <div class="link-descr">Add and edit employee payroll category.</div>
+    <div class="link-heading"><%= link_to t('app.views.payroll.index.add_payroll_category'), :controller=>"payroll", :action=>"add_category" %></div>
+    <div class="link-descr"><%= t('app.views.payroll.index.add_and_edit_employee_payroll_category') %></div>
   </div>
 
    </div>

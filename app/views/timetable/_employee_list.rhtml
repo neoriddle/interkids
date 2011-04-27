@@ -1,7 +1,7 @@
 <% unless @employees_subject.empty? %>
   <% unless  @employees_subject[0].subject.elective_group_id.nil?  %>
 
-      <%  @employees_subject[0].employee.first_name  = @employees_subject[0].subject.elective_group.name + " Employees" %>
+      <%  @employees_subject[0].employee.first_name  = @employees_subject[0].subject.elective_group.name + t('app.views.timetable._employee_list.employees') %>
       <div class="employees_subject" id="emp_sub_<%= @employees_subject[0].id %>"> <%=  @employees_subject[0].employee.first_name %> </div>
       <%= draggable_element("emp_sub_#{@employees_subject[0].id}", :revert => true) %>
     <%  else %>
@@ -12,5 +12,5 @@
        <% end %>
      <% end %>
 <% else %>
-<h5>No teacher associated to this subject.</h5>
+<h5><%=  t('app.views.timetable._employee_list.no_teacher_associated_to_this_subject') %></h5>
 <% end %>

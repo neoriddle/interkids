@@ -1,7 +1,7 @@
 <div id="content-header">
    <img src="/images/show_timetable.png" />
-  <h1>Timetable</h1>
-  <h3>Weekdays</h3>
+  <h1><%= t('app.views.weekday.index.timetable') %></h1>
+  <h3><%= t('app.views.weekday.index.weekdays') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -15,10 +15,10 @@
 
     <div class="box">
   <div class="label-field-pair">
-    <label for="timetable_entry_course_id">Select a batch:</label>
+    <label for="timetable_entry_course_id"><%= t('app.views.weekday.index.select_batch') %></label>
     <div class="text-input-bg"><%= select :batch, :id,
         @batches.map {|b| [b.full_name, b.id] },
-        {:prompt => 'Common'},
+        {:prompt => t('app.views.weekday.index.common')},
         {:onchange => "#{remote_function(
         :url => { :action => 'week' },
         :with => "'batch_id='+value",

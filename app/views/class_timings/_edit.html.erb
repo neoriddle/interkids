@@ -1,4 +1,4 @@
-<label class="head_label">Edit class timing for
+<label class="head_label"><%=t('app.views.class_timings._edit.edit_title')%>
   <span>
     <% if @batch.nil?%>
       <%= "common" %>
@@ -13,27 +13,27 @@
     <div id="form-errors"></div>
 
     <div class="label-field-pair">
-      <label for="name"> Name</label>
+      <label for="name"> <%=t('app.views.class_timings._edit.name')%></label>
       <div class="text-input-bg"><%= f.text_field :name %></div>
     </div>
 
     
 
     <div class="label-field-pair">
-      <label for="name"> Start time </label>
+      <label for="name"> <%=t('app.views.class_timings._edit.start_time')%></label>
     <div class="time-select-field"><%= time_select :class_timing, :start_time, {:minute_step => 5} %></div>
     </div>
 
     <div class="label-field-pair">
-      <label for="name"> End time </label>
+      <label for="name"> <%=t('app.views.class_timings._edit.end_time')%></label>
     <div class="time-select-field"><%= time_select :class_timing, :end_time, {:minute_step => 5} %></div>
     </div>
 
     <div class="label-checkbox-pair">
-      <label><%= f.check_box :is_break, :checked => false %> Is a break</label>
+      <label><%= f.check_box :is_break, :checked => false %> <%=t('app.views.class_timings._edit.is_break')%></label>
     </div>
 
-    <%= submit_tag '► Save', :class => 'submit-button' %>
+    <%= submit_tag t('app.views.class_timings._edit.save'), :class => 'submit-button' %>
 
 
   <% end %>

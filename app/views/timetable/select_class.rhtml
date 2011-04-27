@@ -1,7 +1,7 @@
 <div id="content-header">
   <img src="/images/show_timetable.png" />
-  <h1>Timetable</h1>
-  <h3>Select class to edit</h3>
+  <h1><%= t('app.views.timetable.select_class.timetable') %></h1>
+  <h3><%= t('app.views.timetable.select_class.select_class_to_edit') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -16,12 +16,12 @@
   <% form_for :timetable_entry do |s| %>
 
     <div class="label-field-pair">
-      <label for="timetable_entry_course_id">Select a batch</label>
-      <div class="text-input-bg"><%= select :timetable_entry, :batch_id, @batches.map {|c| [c.full_name, c.id]},:prompt=>'Select a batch'  %></div>
+      <label for="timetable_entry_course_id"><%= t('app.views.timetable.select_class.select_a_batch') %></label>
+      <div class="text-input-bg"><%= select :timetable_entry, :batch_id, @batches.map {|c| [c.full_name, c.id]},:prompt=>t('app.views.timetable.select_class.select_a_batch')  %></div>
     </div>
 
     <div class="submit-button">
-      <%= submit_tag "", :value => "► Go" %>
+      <%= submit_tag "", :value => t('app.views.timetable.select_class.go') %>
     </div>
     
   <% end %>

@@ -9,7 +9,7 @@
 
     <p>
       <%= f.label :select_weekday %>
-      <%= select :weekday, :weekday, { "Monday"=>'1', "Tuesday" => '2',"Thursday" =>'3',"Wednesday" =>'4',"Friday" =>'5',"Saturday"=>'6', "Sunday"=>'0' }%>
+      <%= select :weekday, :weekday, { t('app.views.weekday._new.monday') =>'1', t('app.views.weekday._new.tuesday') => '2',t('app.views.weekday._new.wednesday') =>'3',t('app.views.weekday._new.thursday') =>'4',t('app.views.weekday._new.friday') =>'5',t('app.views.weekday._new.saturday')=>'6', t('app.views.weekday._new.sunday')=>'0' }%>
     </p>
 <%= f.check_box :is_break, :checked => false %> Check if this is a break
 <%= f.check_box :is_break, :checked => false %> Check if this is a break

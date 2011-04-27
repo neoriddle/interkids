@@ -1,48 +1,48 @@
 
 <ul class="category-list">
   <% unless @categories.empty? %>
-    <li class="heading">Non-deductible</li>
+    <li class="heading"><%= t('app.views.payroll._category.non_deductible') %></li>
     <%- @categories.each do |c| -%>
       <li class="list<%=cycle('odd', 'even')%>">
         <div class="category-name"><%= c.name %></div>
-        <div class="category-edit"><%= link_to "Edit", {:action => "edit_category", :id=>c.id} %></div>
-        <div class="category-edit"><%= link_to "Delete", {:action => "delete_category", :id=>c.id}, :confirm => "Are you sure?" %></div>
+        <div class="category-edit"><%= link_to t('app.views.payroll._category.edit'), {:action => "edit_category", :id=>c.id} %></div>
+        <div class="category-edit"><%= link_to t('app.views.payroll._category.delete'), {:action => "delete_category", :id=>c.id}, :confirm => t('app.views.payroll._category.are_you_sure') %></div>
         <% unless c.status == false %>
-          <div class="category-edit"><%= link_to_remote "Inactivate", :url => {:action => "inactivate_category", :id => c.id},
-              :confirm=>"Are you sure you want to inactivate this Category?",
+          <div class="category-edit"><%= link_to_remote t('app.views.payroll._category.inactivate'), :url => {:action => "inactivate_category", :id => c.id},
+              :confirm=>t('app.views.payroll._category.are_you_sure_you_want_to_inactivate_this_category'),
               :update => "category-list" %></div>
           <% else %>
-          <div class="category-edit"><%= link_to_remote "Activate", :url => {:action => "activate_category", :id => c.id},
-              :confirm=>"Are you sure you want to activate this Category?",
+          <div class="category-edit"><%= link_to_remote t('app.views.payroll._category.activate'), :url => {:action => "activate_category", :id => c.id},
+              :confirm=>t('app.views.payroll._category.are_you_sure_you_want_to_activate_this_category'),
               :update => "category-list" %></div>
           <% end %>
       </li>
     <% end %>
   <% else %>
-    <p class="flash-msg">   No employee payroll non-deductionable category record found</p>
+    <p class="flash-msg"> <%= t('app.views.payroll._category.no_employee_payroll_non_deductionable') %></p>
   <% end %>
 </ul>
 
 <ul class="category-list">
   <% unless @deductionable_categories.empty? %>
-    <li class="heading">Deductible</li>
+    <li class="heading"><%= t('app.views.payroll._category.deductible') %></li>
     <%- @deductionable_categories.each do |c| -%>
       <li class="list<%=cycle('odd', 'even')%>">
         <div class="category-name"><%= c.name %></div>
-        <div class="category-edit"><%= link_to "Edit", {:action => "edit_category", :id=>c.id} %></div>
-        <div class="category-edit"><%= link_to "Delete", {:action => "delete_category", :id=>c.id}, :confirm => "Are you sure?" %></div>
+        <div class="category-edit"><%= link_to t('app.views.payroll._category.edit'), {:action => "edit_category", :id=>c.id} %></div>
+        <div class="category-edit"><%= link_to t('app.views.payroll._category.delete'), {:action => "delete_category", :id=>c.id}, :confirm => t('app.views.payroll._category.are_you_sure') %></div>
         <% unless c.status == false %>
-          <div class="category-edit"><%= link_to_remote "Inactivate", :url => {:action => "inactivate_category", :id => c.id},
-              :confirm=>"Are you sure you want to inactivate this Category?",
+          <div class="category-edit"><%= link_to_remote t('app.views.payroll._category.inactivate'), :url => {:action => "inactivate_category", :id => c.id},
+              :confirm=>t('app.views.payroll._category.are_you_sure_you_want_to_inactivate_this_category'),
               :update => "category-list" %></div>
           <% else %>
-          <div class="category-edit"><%= link_to_remote "Activate", :url => {:action => "activate_category", :id => c.id},
-              :confirm=>"Are you sure you want to activate this Category?",
+          <div class="category-edit"><%= link_to_remote t('app.views.payroll._category.activate'), :url => {:action => "activate_category", :id => c.id},
+              :confirm=>t('app.views.payroll._category.are_you_sure_you_want_to_activate_this_category'),
               :update => "category-list" %></div>
           <% end %>
       </li>
     <% end %>
   <% else %>
-    <p class="flash-msg">   No employee payroll deductionable category record found</p>
+    <p class="flash-msg"> <%=  t('app.views.payroll._category.no_employee_payroll_deductionable_category_record_found')%> </p>
   <% end %>
 </ul>

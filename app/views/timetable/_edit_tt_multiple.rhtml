@@ -74,17 +74,17 @@
   <div id="errors">
     <% @validation_problems.each do |tte_id, errors| %>
       <div id="error_div_<%= tte_id %>" class="error-explanation">
-        <b>Warning</b> :
+        <b><%= t('app.views.timetable._edit_tt_multiple.warning')%> </b> :
         <%- errors["messages"].each do |err| -%>
           <%= err -%>
         <%- end -%>
         - On <%= @weekday[TimetableEntry.find(tte_id).week_day_id.to_i] %> (<%= TimetableEntry.find(tte_id).class_timing.name -%>)
-        <%= link_to_remote "Continue", :url=> {:action=> "tt_entry_update"},
+        <%= link_to_remote t('app.views.timetable._edit_tt_multiple.continue'), :url=> {:action=> "tt_entry_update"},
           :with   => "'&sub_id=#{errors["info"]["sub_id"]}' + '&tte_id=#{errors["info"]["tte_id"]}'",
           :before => "Element.show('loader')",
           :success => "Element.hide('loader')",
           :update=> "timetable" -%> |
-        <%= link_to_remote "Cancel", :url=>{:action=>"tt_entry_noupdate"},
+        <%= link_to_remote t('app.views.timetable._edit_tt_multiple.cancel'), :url=>{:action=>"tt_entry_noupdate"},
           :before => "Element.show('loader')",
           :success => "Element.hide('loader')",
           :with   => "'emp_id=#{errors["info"]["emp_id"]}' + '&sub_id=#{errors["info"]["sub_id"]}' + '&tte_id=#{errors["info"]["tte_id"]}'",
