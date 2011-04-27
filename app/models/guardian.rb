@@ -16,6 +16,10 @@ class Guardian < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def address
+    [office_address_line1, office_address_line2, city, state].join(' ').strip
+  end
+
   def archive_guardian(archived_student)
     guardian_attributes = self.attributes
     guardian_attributes.delete "id"

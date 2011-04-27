@@ -48,7 +48,7 @@ data = []
 
 if @immediate_contact
   [
-   #[t('app.views.student.profile_pdf.address'),@immediate_contact.address],
+   [t('app.views.student.profile_pdf.address'),@immediate_contact.address],
    [t('app.views.student.profile_pdf.city'), @immediate_contact.city],
    [t('app.views.student.profile_pdf.state'),@immediate_contact.state],
    [t('app.views.student.profile_pdf.country'),@immediate_contact.country.name],
