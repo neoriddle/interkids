@@ -1,14 +1,14 @@
 <div id="content-header">
    <img src="/images/show_finance.png" alt="" />
-  <h1>Donations</h1>
-  <h3>Add new donation</h3>
+  <h1><%=t('app.views.finance.donation.add_new_donation')%></h1>
+  <h3><%=t('app.views.finance.donation.manage_donation')%></h3>
   <div id="app-back-button">
    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
 </div>
 <div id="inner-tab-menu">
  <ul>
-  <li><%= link_to "Donors", :action => "donors" %></li>
+  <li><%= link_to t('app.views.finance.donation.donors'), :action => "donors" %></li>
  </ul>
 </div>
 <div id="page-yield">
@@ -19,18 +19,18 @@
 
     <div id="create_user_form">
       <div class="label-field-pair">
-        <label for="donor_name">Donor name:</label>
+        <label for="donor_name"><%=t('app.views.finance.donation.donor_name')%></label>
         <div class="text-field-bg"><%= f.text_field :donor %></div>
       </div>
       <div class="label-field-pair">
-        <label for="description">Description:</label>
+        <label for="description"><%=t('app.views.finance.donation.description')%></label>
         <div class="text-field-bg"><%= f.text_field :description %></div>
       </div>
       <div class="label-field-pair">
-        <label for="amount">Amount:</label>
+        <label for="amount"><%=t('app.views.finance.donation.amount')%></label>
         <div class="text-field-bg"><%= f.text_field :amount %></div>
       </div>
-     <%=  submit_tag "► Add",:class=>'submit_button' %>
+     <%=  submit_tag t('app.views.finance.donation.add'),:class=>'submit_button' %>
     </div>
 
 

@@ -1,7 +1,7 @@
 <div id="content-header">
   <img src="/images/show_finance.png" alt="Finance" />
-  <h1>Employee Salary Report</h1>
-  <h3>Payslip for <%= @employee.first_name+" "+@employee.last_name %> on <%= @salary_date %></h3>
+  <h1><%=t('app.views.finance.employee_payslip_monthly_report.salary')%> <%= @employee.first_name+" "+@employee.last_name %> <%=t('app.views.finance.employee_payslip_monthly_report.test')%> <%= @salary_date %></h1>
+  <h3><%=t('app.views.finance.employee_payslip_monthly_report.manage_transactions')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -14,7 +14,7 @@
 
 
 <ul class="item-list">
-  <li class="heading">Payslip generated for <%= @employee.first_name+" "+@employee.last_name %></li>
+  <li class="heading"><%=t('app.views.finance.employee_payslip_monthly_report.payslip_generated_to')%> <%= @employee.first_name+" "+@employee.last_name %></li>
 </ul>
 <ul class="item-list">
   <% @monthly_payslips.each do |mp| %>
@@ -30,7 +30,7 @@
 </ul>
 
 <ul class="item-list">
-  <li class="heading">Deductions:</li>
+  <li class="heading"><%=t('app.views.finance.employee_payslip_monthly_report.deductions')%></li>
   <% @monthly_payslips.each do |mp| %>
     <% category = PayrollCategory.find(mp.payroll_category_id) %>
     <% @emp = Employee.find(mp.employee_id) %>
@@ -45,7 +45,7 @@
 
 <% unless @individual_payslip_category.empty? %>
   <ul class="item-list">
-    <li class="heading">Additional :</li>
+    <li class="heading"><%=t('app.views.finance.employee_payslip_monthly_report.additional')%></li>
     <% @individual_payslip_category.each do |pc| %>
       <li class="list<%=cycle('odd', 'even')%>">
         <div class="item-name"><%= pc.name %></div>
@@ -58,11 +58,11 @@
 <ul class="item-list">
   <li class="heading">Total:</li>
   <li class="listodd">
-    <div class="item-name">Deductions :</div>
+    <div class="item-name"><%=t('app.views.finance.employee_payslip_monthly_report.deductions')%></div>
     <div class="item-edit"><span class="currency-type"><%= @currency_type %></span> <%=@net_deductionable_amount %></div>
   </li>
   <li class="listeven">
-    <div class="item-name">Salary :</div>
+    <div class="item-name"><%=t('app.views.finance.employee_payslip_monthly_report.salary_')%></div>
     <div class="item-edit"><span class="currency-type"><%= @currency_type %></span> <%=@net_amount%></div>
   </li>
 </ul>

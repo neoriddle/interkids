@@ -1,7 +1,7 @@
 <div id="content-header">
    <img src="/images/show_finance.png" alt="" />
-  <h1>Finance </h1>
-  <h3>Automatic Transactions</h3>
+  <h1><%=t('app.views.finance.automatic_transactions.automatic_transaction')%></h1>
+  <h3><%=t('app.views.finance.automatic_transactions.manage_transactions')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -10,11 +10,11 @@
 <div id="page-yield">
   <div class="box">
   <div class="link-heading">
-    <%= link_to_function("Create") { |page|
+    <%= link_to_function(t('app.views.finance.automatic_transactions.create')) { |page|
       page.replace_html 'modal-box', :partial => 'transaction_trigger_create_form'
       page << "Modalbox.show($('modal-box'), {title: '', width: 500});"
     } %>
-    <div class="link-descr"> Creates an auto transaction</div>
+    <div class="link-descr"> <%=t('app.views.finance.automatic_transactions.creates_auto_transaction')%></div>
   </div>
   <div class="link-descr"></div>
   <div id="transaction-triggers-list">

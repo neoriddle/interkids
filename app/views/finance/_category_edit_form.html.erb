@@ -4,7 +4,7 @@
 
 <div class="label-field-pair">
   <div class="label-container">
-    <%= f.label :name %>
+    <%= f.label t('app.views.finance._category_edit_form.category_name') %>
   </div>
   <div class="input-container">
     <%= f.text_field :name %>
@@ -13,7 +13,7 @@
 
 <div class="label-field-pair">
   <div class="label-container">
-    <%= f.label :description %>
+    <%= f.label t('app.views.finance._category_edit_form.description') %>
   </div>
   <div class="input-container">
     <%= f.text_field :description %>
@@ -22,16 +22,16 @@
 
 <div class="label-field-pair">
   <div class="label-container">
-    <%= f.label :cash_box_id %>
+    <%= f.label t('app.views.finance._category_edit_form.cash_box_id') %>
   </div>
   <div class="text-input-bg">
-    <%= f.select(:cash_box_id, options_from_collection_for_select(CashBox.all, :id, :name, @finance_category.cash_box_id), :prompt => 'Select a cash box' ) %>
+    <%= f.select(:cash_box_id, options_from_collection_for_select(CashBox.all, :id, :name, @finance_category.cash_box_id), :prompt => t('app.views.finance._category_edit_form.select_cash_box') ) %>
   </div>
 </div>
 
 <div class="label-field-pair">
   <div class="label-container">
-    <label>Is this under income?</label>
+    <label><%=t('app.views.finance._category_edit_form.question')%></label>
   </div>
   <div class="input-container">
     <%= f.check_box :is_income %>
@@ -39,6 +39,6 @@
 </div>
   
 <div id="modelbox-submit">
-  <%= f.submit "► Update", :class=>'submit_button' %>
+  <%= f.submit t('app.views.finance._category_edit_form.update'), :class=>'submit_button' %>
 </div>
 <% end %>

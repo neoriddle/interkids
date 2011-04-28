@@ -1,21 +1,21 @@
 <div id="content-header">
    <img src="/images/show_finance.png" alt="" />
-  <h1>Fees Submission</h1>
-  <h3><%= @student.first_name+" "+@student.last_name%></h3>
+  <h1><%= @student.first_name+" "+@student.last_name%></h1>
+  <h3><%=t('app.views.finance.pay_fees_defaulters.fees_submission')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
 </div>
 <div id="page-yield">
 
-  <div class="name">Fees Receipt Number</div><div class="val"><span>:</span>F<%= @financefee.id %></div>
+  <div class="name"><%=t('app.views.finance.pay_fees_defaulters.fees_receipt_number')%></div><div class="val"><span>:</span>F<%= @financefee.id %></div>
   <% unless @fee_category.nil? %>
-  <div class="name">Fee Category Name</div><div class="val"><span>:</span><%= @fee_category.name %></div>
+  <div class="name"><%=t('app.views.finance.pay_fees_defaulters.fee_category')%></div><div class="val"><span>:</span><%= @fee_category.name %></div>
   <% end %>
   <% unless @student.student_category.nil? %>
-    <div class="name">Student Category</div><div class="val"><span>:</span><%= @student.student_category.name %></div
+    <div class="name"><%=t('app.views.finance.pay_fees_defaulters.student_category')%></div><div class="val"><span>:</span><%= @student.student_category.name %></div
    <% else %>
-    <div class="name">Student Category</div><div class="val"><span>:</span>N.A</div>
+    <div class="name"><%=t('app.views.finance.pay_fees_defaulters.student_category')%></div><div class="val"><span>:</span>N.A</div>
   <% end %>
 
   <% total_fees =0 %>
@@ -27,9 +27,9 @@
           <% end %>
       <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
         <tr class="tr-head">
-          <td>Sl no.</td>
-          <td>Particulars</td>
-          <td>Amount (<%= currency %>  )</td>
+          <td><%=t('app.views.finance.pay_fees_defaulters.id')%></td>
+          <td><%=t('app.views.finance.pay_fees_defaulters.particulars')%></td>
+          <td><%=t('app.views.finance.pay_fees_defaulters.amount')%>(<%= currency %>)</td>
         </tr>
         <tr class="tr-blank"></tr>
         <% @fee_particulars.each_with_index do |fee,i| %>
@@ -43,7 +43,7 @@
           <% unless @fine.nil? %>
         <tr class="tr-<%= cycle("odd","even") %>">
           <td class="col-1"><%= @fee_particulars.size+1 %></td>
-          <td class="col-2">Fine</td>
+          <td class="col-2"><%=t('app.views.finance.pay_fees_defaulters.fine')%></td>
           <td class="col-6"><%= @fine %></td>
         </tr>
         <% total_fees += @fine.to_f %>
@@ -51,7 +51,7 @@
         <tr class="tr-blank"></tr>
         <tr class="tr-blank"></tr>
         <tr class="tr-<%= cycle("odd","even") %>" cellpadding="1" cellspacing="1">
-          <td class="col-1" >Total Fees</td>
+          <td class="col-1" ><%=t('app.views.finance.pay_fees_defaulters.total_fees')%></td>
           <td class="col-1" ></td>
           <td class="col-6" ><%= total_fees%></td>
         </tr>
@@ -59,9 +59,9 @@
 
         <p>
           <%if @financefee.transaction_id.nil? %>
-            <%=  submit_tag "► Pay Fees",:class=>'submit_button' %>
+            <%=  submit_tag t('app.views.finance.pay_fees_defaulters.pay_fees'),:class=>'submit_button' %>
           <% else %>
-            Fees Paid
+            <%=t('app.views.finance.pay_fees_defaulters.fees_paid')%>
           <%end%>
         </p>
       </table>

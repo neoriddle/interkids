@@ -670,6 +670,9 @@ es:
           pay_fees: 'Realizar pago'
           print_receipt: 'Imprimir recibo'
           fees_paid: 'Cuota cubierta'
+          receipt: 'Recibo'
+          print: 'Imprimir'
+          are_you_sure: '¿Está seguro de realizar el cobro?'
         _student_fine_submission:
           info: 'La fecha de pago se ha superado. Agregar recargo =>'
           add_fine: 'Guardar'
@@ -755,6 +758,10 @@ es:
           description: 'Descripción'
           question: 'Forma parte de los ingresos'
           create: 'Crear'
+          cash_box_id: 'Nombre caja chica'
+          select_cash_box: 'Sel. caja chica'
+        _load_students_for_income:
+          select_student: 'Sel. Alumno'
         donation:
           add_new_donation: 'Agregar una donación'
           manage_donation: 'Gestión de donaciones'
@@ -800,6 +807,9 @@ es:
           category: 'Categoria'
           select_cat: 'Sel. categoria'
           save: 'Guardar'
+          student_id: 'No. Alumno'
+          batches: 'Grado/Curso'
+          payment_id: 'Tipo de pago'
         income_create:
           create_income: 'Agregar ingreso'
           manage_transactions: 'gestión de transacciones'

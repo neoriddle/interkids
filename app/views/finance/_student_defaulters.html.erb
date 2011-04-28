@@ -1,7 +1,7 @@
 <div id="application-list">
   <div class="container-head">
-    <div id="head-slno">Sl No.</div>
-    <div id="head-name">Students Name</div>
+    <div id="head-slno"><%=t('app.views.finance._student_defaulters.id')%></div>
+    <div id="head-name"><%=t('app.views.finance._student_defaulters.students_name')%></div>
     <div class="extender"></div>
   </div>
   <% i=1 %>
@@ -10,11 +10,11 @@
       <div class="container<%= cycle('odd', 'even')%> ">
         <div class="sl_no "><%= i %></div>
         <div class="name"> <%=s.full_name%></div>
-        <div class="small"> <%= link_to "Pay fees",:action => "pay_fees_defaulters",:id => s.id,:date => @date.id %> </div>
+        <div class="small"> <%= link_to t('app.views.finance._student_defaulters.pay_fees'),:action => "pay_fees_defaulters",:id => s.id,:date => @date.id %> </div>
       </div>
       <% i+=1 %>
     <%end%>
   <%end%>
-<%= link_to " ► PDF Report",
+<%= link_to t('app.views.finance._student_defaulters.pdf_report'),
         {:controller => "finance", :action => "fee_defaulters_pdf", :batch_id => @batch.id, :date => @date.id},:target => '_blank', :class=> 'user_button' %>
 </div>

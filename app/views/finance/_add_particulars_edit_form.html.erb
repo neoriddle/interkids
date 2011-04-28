@@ -1,4 +1,4 @@
-<label class="head_label">Edit Particulars for Additional Fees<span></span></label>
+<label class="head_label"><%= t('app.views.finance._add_particulars_edit_form.edit_particulars') %><span></span></label>
 
 <% form_remote_for :finance_fee_particulars,
   :url => {:action => 'add_particulars_update',:id => @finance_fee_particulars.id},
@@ -6,17 +6,17 @@
 
   <div id="form-errors"></div>
    <div class="label-field-pair">
-    <div class="label-container"><label>Fee name :</label> </div>
+    <div class="label-container"><label><%= t('app.views.finance._add_particulars_edit_form.name') %></label> </div>
     <div class="input-container"><%= form.text_field :name %></div>
    </div>
      <div class="label-field-pair">
-    <div class="label-container"><label>Fee description :</label> </div>
+    <div class="label-container"><label><%= t('app.views.finance._add_particulars_edit_form.description') %></label> </div>
     <div class="input-container"><%= form.text_field :description %></div>
    </div>
 
   <%  unless @finance_fee_particulars.admission_no.nil? %>
     <div class="label-field-pair">
-    <div class="label-container"><label>Admission No :</label> </div>
+    <div class="label-container"><label><%= t('app.views.finance._add_particulars_edit_form.admission_no') %></label> </div>
     <div class="input-container"><%= form.text_field :admission_no, :value => @finance_fee_particulars.admission_no ,
         :disabled => true %></div>
    </div>
@@ -25,7 +25,7 @@
 
   <% unless @finance_fee_particulars.student_category_id.nil? %>
     <div class="label-field-pair">
-    <div class="label-container"><label>Student Category :</label> </div>
+    <div class="label-container"><label><%= t('app.views.finance._add_particulars_edit_form.student_category') %></label> </div>
     <div class="input-container"><%= form.text_field :student_category_id,
         :value => StudentCategory.find(@finance_fee_particulars.student_category_id).name,
         :disabled => true %></div>
@@ -34,8 +34,8 @@
 
 
      <div class="label-field-pair">
-    <div class="label-container"><label>Fee amount :</label> </div>
+    <div class="label-container"><label><%= t('app.views.finance._add_particulars_edit_form.amount') %></label> </div>
     <div class="input-container"><%= form.text_field :amount, :value => @finance_fee_particulars.amount, :disabled => true   %></div>
    </div>
-   <%=  submit_tag "► Update",:class=>'submit_button' %>
+   <%=  submit_tag t('app.views.finance._add_particulars_edit_form.update'),:class=>'submit_button' %>
 <% end %>

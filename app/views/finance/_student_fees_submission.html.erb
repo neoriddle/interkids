@@ -6,7 +6,7 @@
 <% end %>
 
 <% if @fee_collection.fee_category %>
-  <div class="name">Fee Category Name</div>
+  <div class="name"><%=t('app.views.finance._student_fees_submission.fee_category_name')%></div>
   <div class="val">
     <span>:</span><%= @fee_collection.fee_category.name %>
   </div>
@@ -24,7 +24,7 @@
 <div id="register">
   <div class="header">
     <div class="prev">
-      <%= link_to_remote '◄',
+      <%= link_to_remote '<',
                          :url => {:action => 'load_fees_submission_batch', 
                                   :batch_id => @batch.id, 
                                   :student => @prev_student.id, 
@@ -34,7 +34,7 @@
       <%= @student.full_name %>
     </div>
     <div class="next">
-      <%= link_to_remote '►',
+      <%= link_to_remote '>',
                          :url => {:action => 'load_fees_submission_batch', 
                                   :batch_id => @batch.id, 
                                   :student => @next_student.id, 
@@ -56,10 +56,10 @@
   <% if @fee_particulars %>
     <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
       <tr class="tr-head">
-        <td>Sl no.</td>
-        <td>Particulars</td>
-        <td>Amount (<%= currency %>)</td>
-        <td>Receipt</td>
+        <td><%=t('app.views.finance._student_fees_submission.id')%></td>
+        <td><%=t('app.views.finance._student_fees_submission.particulars')%></td>
+        <td><%=t('app.views.finance._student_fees_submission.amount')%>(<%= currency %>)</td>
+        <td><%=t('app.views.finance._student_fees_submission.receipt')%></td>
       </tr>
       <tr class="tr-blank">
       </tr>
@@ -70,7 +70,7 @@
 	<td class="col-2"><%= shorten_string(fee.name,20) %></td>
 	<td class="col-6"><%= fee.amount %></td>
 	<td class="col-6">
-          <%= link_to "Print",
+          <%= link_to t('app.views.finance._student_fees_submission.print'),
                       {:controller => 'finance', 
                        :action => 'student_fee_particular_receipt_pdf', 
                        :id => fee},
@@ -83,7 +83,7 @@
       <% if @fine %>
         <tr class="tr-<%= cycle("odd","even") %>">
           <td class="col-1"><%= @fee_particulars.size+1 %></td>
-          <td class="col-2">Fine</td>
+          <td class="col-2"><%=t('app.views.finance._student_fees_submission.fine')%></td>
           <td class="col-6"><%= @fine %></td>
         </tr>
         <% total_fees += @fine.to_f %>
@@ -92,7 +92,7 @@
       <% if @financefee.transaction && @financefee.transaction.fine_included %>
         <tr class="tr-<%= cycle("odd","even") %>">
 	  <td class="col-1"><%= @fee_particulars.size+1 %></td>
-	  <td class="col-2">Fine</td>
+            <td class="col-2"><%=t('app.views.finance._student_fees_submission.fine')%></td>
 	  <td class="col-6"><%= @financefee.transaction.amount.to_f-total_fees %></td>
 	</tr>
 	<% total_fees = @financefee.transaction.amount.to_f %>
@@ -101,21 +101,21 @@
       <tr class="tr-blank"></tr>
       <tr class="tr-blank"></tr>
       <tr class="tr-<%= cycle("odd","even") %>" cellpadding="1" cellspacing="1">
-        <td class="col-1" >Total Fees</td>
+        <td class="col-1" ><%=t('app.views.finance._student_fees_submission.total_fees')%></td>
         <td class="col-1" ></td>
         <td class="col-6" ><%= total_fees %></td>
       </tr>
 
       <p>
         <%if total_fees > 0 %>
-          <%= submit_tag "► Pay Fees", :class=>'submit_button', :confirm => 'Are you sure to submit payment?' %>
+          <%= submit_tag t('app.views.finance._student_fees_submission.pay_fees'), :class=>'submit_button', :confirm => t('app.views.finance._student_fees_submission.are_you_sure') %>
 	  <%= text_field :transaction, :amount, :value => total_fees %>
 	  <%= select :transaction, :payment_form, options_from_collection_for_select(@payment_forms, :id, :name) %>
         <%end%>
 	
         <% if total_fees == 0 %>
-	  <h4>Fees Paid</h4>
-          <%= link_to "► Print receipt",
+	  <h4><%=t('app.views.finance._student_fees_submission.fees_paid')%></h4>
+          <%= link_to t('app.views.finance._student_fees_submission.print_receipt'),
                       {:controller => "finance", 
                        :action => "student_fee_receipt_pdf", 
                        :id => @student.id, 

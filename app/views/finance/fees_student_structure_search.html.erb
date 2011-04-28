@@ -21,7 +21,7 @@
               :style =>"display: none;" ) %>
         </label>
         <div id="search_textbox">
-          <%= text_field_tag(t('app.views.finance.fees_student_structure_search.query'), params['query'], :autocomplete => 'off') %><br/>
+          <%= text_field_tag("query", params['query'], :autocomplete => 'off') %><br/>
         </div>
       </form>
   </div>

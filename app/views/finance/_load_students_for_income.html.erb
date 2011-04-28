@@ -1,6 +1,6 @@
 <%= select :transaction, 
            :student_id, 
            options_from_collection_for_select(@students, :id, :full_name),
-           :prompt => 'Select a student' %>
+           :prompt => t('app.views.finance._load_students_for_income.select_student')%>
 
 

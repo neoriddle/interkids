@@ -1,7 +1,7 @@
 <div id="content-header">
   <img src="/images/show_finance.png" alt="" />
-  <h1>Finance</h1>
-  <h3>Manage Finance</h3>
+  <h1><%=t('app.views.finance.index.home')%></h1>
+  <h3><%=t('app.views.finance.index.manage_finance')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -12,44 +12,47 @@
   <div class="box">
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to "Fees", :action => "fees_index" %> </div>
-    <div class="link-descr">Manages Fees</div>
+    <div class="link-heading"><%= link_to t('app.views.finance.index.fees'), :action => "fees_index" %> </div>
+    <div class="link-descr"><%=t('app.views.finance.index.manage_fees')%></div>
   </div>
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to "Category", :action => "categories" %> </div>
-    <div class="link-descr">Manages Category </div>
+    <div class="link-heading"><%= link_to t('app.views.finance.index.category'), :action => "categories" %> </div>
+    <div class="link-descr"><%=t('app.views.finance.index.manages_category')%></div>
   </div>
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to "Transactions", :action => "transactions" %> </div>
-    <div class="link-descr">Creates expense and income </div>
+    <div class="link-heading"><%= link_to t('app.views.finance.index.transactions'), :action => "transactions" %> </div>
+    <div class="link-descr"><%=t('app.views.finance.index.transaction_description')%></div>
   </div>
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to "Donations", :action => "donation" %></div>
-    <div class="link-descr">Creates new donations</div>
+    <div class="link-heading"><%= link_to t('app.views.finance.index.donations'), :action => "donation" %></div>
+    <div class="link-descr"><%=t('app.views.finance.index.create_new_donations')%></div>
   </div>
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to "Auto transactions", :action => "automatic_transactions" %></div>
-    <div class="link-descr">Add automatic transactions</div>
+    <div class="link-heading"><%= link_to t('app.views.finance.index.auto_transaction'), :action => "automatic_transactions" %></div>
+    <div class="link-descr"><%=t('app.views.finance.index.add_automatic_transaction')%></div>
   </div>
   <% unless @hr.nil? %>
     <div class="link-box">
-      <div class="link-heading"><%= link_to "Payslip", :action => "payslip_index" %></div>
-      <div class="link-descr">Employee Payslips </div>
+      <div class="link-heading"><%= link_to t('app.views.finance.index.payslip'), :action => "payslip_index" %></div>
+      <div class="link-descr"><%=t('app.views.finance.index.employee_payslip')%></div>
     </div>
   <% end %>
 
+  <!-- Se comenta ya que se analizo que la manipulación de los activos y pasivos ya se realiza dentro de las tranasacciones
+  Y dentro de la base de datos no se encuentra una relación seria con las demñas tablas
   <div class="link-box">
-    <div class="link-heading"><%= link_to " Asset liability management", :action => "asset_liability" %></div>
-    <div class="link-descr"> Asset liability management</div>
+    <div class="link-heading"><%= link_to t('app.views.finance.index.asset_liability_manager'), :action => "asset_liability" %></div>
+    <div class="link-descr"> t('app.views.finance.index.asset_liability_manager_desc')</div>
   </div>
+  -->
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to " Export",:controller => 'xml', :action => "index" %></div>
-    <div class="link-descr"> Creates xml import file</div>
+    <div class="link-heading"><%= link_to t('app.views.finance.index.export'),:controller => 'xml', :action => "index" %></div>
+    <div class="link-descr"> <%=t('app.views.finance.index.export_description')%></div>
   </div>
 
   </div>

@@ -1,20 +1,20 @@
 <div id="content-header">
    <img src="/images/show_finance.png" alt="" />
-  <h1>Donations</h1>
-  <h3>Donors</h3>
+  <h1><%=t('app.views.finance.donors.donations')%></h1>
+  <h3><%=t('app.views.finance.donors.manage_donation')%></h3>
   <div id="app-back-button">
    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
 </div>
 
 <div id="page-yield">
-<h4> List of Donors </h4>
+<h4> <%=t('app.views.finance.donors.list_of_donors')%></h4>
   <table id="listing">
     <tr class="tr-head">
-      <td>Name</td>
-      <td>Description</td>
-      <td>Amount</td>
-      <td>Created At</td>
+      <td><%=t('app.views.finance.donors.name')%></td>
+      <td><%=t('app.views.finance.donors.description')%></td>
+      <td><%=t('app.views.finance.donors.amount')%></td>
+      <td><%=t('app.views.finance.donors.created')%></td>
     </tr>
 <% @donations.each do |d| %>
   <tr class="tr-<%= cycle('odd','even') %>">

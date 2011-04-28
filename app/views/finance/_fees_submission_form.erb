@@ -9,9 +9,9 @@
   <% unless @fee_particulars.nil? %>
     <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
       <tr class="tr-head">
-        <td>Sl no.</td>
-        <td>Particulars</td>
-        <td>Amount (<%= currency %>  )</td>
+        <td><%= t('app.views.finance._fees_submission_form.id') %></td>
+        <td><%= t('app.views.finance._fees_submission_form.particulars') %></td>
+        <td><%= t('app.views.finance._fees_submission_form.amount') %>(<%= currency %>)</td>
       </tr>
       <tr class="tr-blank"></tr>
       <% @fee_particulars.each_with_index do |fee,i| %>
@@ -26,7 +26,7 @@
         <% unless @fine.nil? %>
         <tr class="tr-<%= cycle("odd","even") %>">
           <td class="col-1"><%= @fee_particulars.size+1 %></td>
-          <td class="col-2">Fine</td>
+          <td class="col-2"><%= t('app.views.finance._fees_submission_form.fine') %></td>
           <td class="col-6"><%= @fine %></td>
         </tr>
         <% total_fees += @fine.to_f %>
@@ -37,7 +37,7 @@
         <% if @trans.fine_included %>
           <tr class="tr-<%= cycle("odd","even") %>">
             <td class="col-1"><%= @fee_particulars.size+1 %></td>
-            <td class="col-2">Fine</td>
+            <td class="col-2"><%= t('app.views.finance._fees_submission_form.fine') %></td>
             <td class="col-6"><%= @trans.amount.to_f-total_fees %></td>
           </tr>
 
@@ -47,17 +47,17 @@
        <tr class="tr-blank"></tr>
        <tr class="tr-blank"></tr>
         <tr class="tr-<%= cycle("odd","even") %>" cellpadding="1" cellspacing="1">
-          <td class="col-1" >Total Fees</td>
+          <td class="col-1" ><%= t('app.views.finance._fees_submission_form.total_fees') %></td>
           <td class="col-1" ></td>
           <td class="col-6" ><%= total_fees%></td>
         </tr>
       <p>
         <%if @financefee.transaction_id.nil? %>
-           <%=  submit_tag "► Pay Fees",:class=>'submit_button' %>
+           <%=  submit_tag t('app.views.finance._fees_submission_form.pay_fees'),:class=>'submit_button' %>
 
         <% else %>
-      <h4> Fees Paid </h4>
-<%= link_to " ► Print receipt",
+      <h4> <%=t('app.views.finance._fees_submission_form.fees_paid')%> </h4>
+<%= link_to t('app.views.finance._fees_submission_form.print_receipt'),
             {:controller => "finance", :action => "student_fee_receipt_pdf", :id => @student.id, :id2=>@date.id},:target => '_blank', :class=> 'user_button' %>
 
         <%end%>

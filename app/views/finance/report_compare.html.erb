@@ -1,7 +1,7 @@
 <div id="content-header">
    <img src="/images/show_finance.png" alt="" />
-  <h1>Transactions</h1>
-  <h3>Transactions comparison</h3>
+  <h1><%=t('app.views.finance.report_compare.compare_report')%></h1>
+  <h3><%=t('app.views.finance.report_compare.manage_transactions')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -16,16 +16,16 @@
 <br/>
 <br/>
 <br/>
-<h4>Report for the period from <%= @start_date.strftime("%d-%m-%Y") %> to <%= @end_date.strftime("%d-%m-%Y") %></h4>
+<h4><%=t('app.views.finance.report_compare.report_for')%><%= @start_date.strftime("%d-%m-%Y") %> <%=t('app.views.finance.report_compare.to')%> <%= @end_date.strftime("%d-%m-%Y") %></h4>
   <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
     <% unless @salary == 0 and @donations_total == 0 and @transactions_fees and @other_transactions.empty? %>
       <tr class="tr-head">
-        <td>Sl no.</td>
-        <td>Particulars</td>
-        <td>Expenses ( <%= currency %> )</td>
-        <td>Income ( <%= currency %> )</td>
+        <td><%=t('app.views.finance.report_compare.id')%></td>
+        <td><%=t('app.views.finance.report_compare.particulars')%></td>
+        <td><%=t('app.views.finance.report_compare.expense')%>(<%= currency %>)</td>
+        <td><%=t('app.views.finance.report_compare.income')%>(<%= currency %>)</td>
 
-        <td>Date</td>
+        <td><%=t('app.views.finance.report_compare.date')%></td>
       </tr>
       <tr class="tr-blank"></tr>
       <% index = 0  %>
@@ -37,9 +37,9 @@
         <tr class="tr-odd">
           <td class="col-1"><%= index+=1 %></td>
           <% unless @salary == 0 %>
-            <td class="col-2"><%= link_to "Salary Account" , :action => 'salary_department' , :start => @start_date,:end => @end_date%> </td>
+            <td class="col-2"><%= link_to t('app.views.finance.report_compare.salary_account'), :action => 'salary_department' , :start => @start_date,:end => @end_date%> </td>
           <% else %>
-            <td class="col-2">Salary Account</td>
+            <td class="col-2"><%=t('app.views.finance.report_compare.salary_account')%></td>
           <% end %>
           <td class="col-3" align="right"><%= @salary%></td>
           <td> </td>
@@ -51,9 +51,9 @@
       <tr class="tr-even">
       <td class="col-1"><%= index+=1 %></td>
         <% unless @donations_total == 0 %>
-          <td class="col-2"><%= link_to "Donations" , :action => 'donations_report',:start => @start_date,:end => @end_date%></td>
+          <td class="col-2"><%= link_to t('app.views.finance.report_compare.donations'), :action => 'donations_report',:start => @start_date,:end => @end_date%></td>
         <% else %>
-          <td class="col-2">Donations</td>
+          <td class="col-2"><%=t('app.views.finance.report_compare.donations')%></td>
         <% end %>
         <td></td>
         <td class="col-3" align="right"><%=@donations_total%></td>
@@ -64,9 +64,9 @@
       <tr class="tr-odd">
         <td class="col-1"><%= index+=1 %></td>
         <% unless @transactions_fees == 0 %>
-          <td class="col-2"><%= link_to "Fees Account" , :action => 'fees_report' , :start => @start_date,:end => @end_date%> </td>
+          <td class="col-2"><%= link_to t('app.views.finance.report_compare.fees_account') , :action => 'fees_report' , :start => @start_date,:end => @end_date%> </td>
         <% else %>
-          <td class="col-2">Fees Account</td>
+          <td class="col-2"><%=t('app.views.finance.report_compare.fees_account')%></td>
         <% end %>
         <td></td>
         <td class="col-3" align="right"><%=@transactions_fees%></td>
@@ -96,7 +96,7 @@
       <tr class="tr-blank"></tr>
       <tr class="tr-odd">
         <td class="col-1"> </td>
-        <td class="col-2">Grand Total</td>
+        <td class="col-2"><%=t('app.views.finance.report_compare.grand_total')%></td>
         <% if @grand_total >= 0 %>
           <td></td>
           <td class="col-3" align="right"><%= @grand_total%></td>
@@ -108,22 +108,22 @@
       </tr>
     <% else %>
       <tr class="tr-head">
-        <td>No records for the date !</td>
+        <td><%=t('app.views.finance.report_compare.no_records_found')%></td>
       </tr>
     <% end %>
   </table>
 <%#= will_paginate@other_transactions,:params => {:start_date => @start_date , :end_date => @end_date}%>
 <br/>
-<h4>Report for the period from <%= @start_date2.strftime("%d-%m-%Y") %> to <%= @end_date2.strftime("%d-%m-%Y") %></h4>
+<h4><%=t('app.views.finance.report_compare.report_for')%> <%= @start_date2.strftime("%d-%m-%Y") %> <%=t('app.views.finance.report_compare.to')%> <%= @end_date2.strftime("%d-%m-%Y") %></h4>
   <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
     <% unless @salary2 == 0 and @donations_total2 == 0 and @transactions_fees2 and @other_transactions2.empty? %>
       <tr class="tr-head">
-        <td>Sl no.</td>
-        <td>Particulars</td>
-        <td>Expenses ( <%= currency %> )</td>
-        <td>Income ( <%= currency %> )</td>
+        <td><%=t('app.views.finance.report_compare.id')%></td>
+        <td><%=t('app.views.finance.report_compare.particulars')%></td>
+        <td><%=t('app.views.finance.report_compare.expense')%>(<%= currency %>)</td>
+        <td><%=t('app.views.finance.report_compare.income')%>(<%= currency %>)</td>
 
-        <td>Date</td>
+        <td><%=t('app.views.finance.report_compare.date')%></td>
       </tr>
       <tr class="tr-blank"></tr>
       <% index = 0  %>
@@ -135,9 +135,9 @@
         <tr class="tr-odd">
           <td class="col-1"><%= index+=1 %></td>
           <% unless @salary2 == 0 %>
-            <td class="col-2"><%= link_to "Salary Account" , :action => 'salary_department' , :start => @start_date2,:end => @end_date2%> </td>
+            <td class="col-2"><%= link_to t('app.views.finance.report_compare.salary_account') , :action => 'salary_department' , :start => @start_date2,:end => @end_date2%> </td>
           <% else %>
-            <td class="col-2">Salary Account</td>
+            <td class="col-2"><%=t('app.views.finance.report_compare.salary_account')%></td>
           <% end %>
           <td class="col-3" align="right"><%= @salary2%></td>
           <td> </td>
@@ -149,9 +149,9 @@
       <tr class="tr-even">
       <td class="col-1"><%= index+=1 %></td>
         <% unless @donations_total2 == 0 %>
-          <td class="col-2"><%= link_to "Donations" , :action => 'donations_report',:start => @start_date2,:end => @end_date2%></td>
+          <td class="col-2"><%= link_to t('app.views.finance.report_compare.donations') , :action => 'donations_report',:start => @start_date2,:end => @end_date2%></td>
         <% else %>
-          <td class="col-2">Donations</td>
+          <td class="col-2"><%=t('app.views.finance.report_compare.donations')%></td>
         <% end %>
         <td></td>
         <td class="col-3" align="right"><%=@donations_total2%></td>
@@ -162,9 +162,9 @@
       <tr class="tr-odd">
         <td class="col-1"><%= index+=1 %></td>
         <% unless @transactions_fees2 == 0 %>
-          <td class="col-2"><%= link_to "Fees Account" , :action => 'fees_report' , :start => @start_date2,:end => @end_date2%> </td>
+          <td class="col-2"><%= link_to t('app.views.finance.report_compare.fees_account')  , :action => 'fees_report' , :start => @start_date2,:end => @end_date2%> </td>
         <% else %>
-          <td class="col-2">Fees Account</td>
+          <td class="col-2"><%=t('app.views.finance.report_compare.fees_account')%> </td>
         <% end %>
         <td></td>
         <td class="col-3" align="right"><%=@transactions_fees2%></td>
@@ -194,7 +194,7 @@
       <tr class="tr-blank"></tr>
       <tr class="tr-odd">
         <td class="col-1"> </td>
-        <td class="col-2">Grand Total</td>
+        <td class="col-2"><%=t('app.views.finance.report_compare.grand_total')%></td>
         <% if @grand_total2 >= 0 %>
           <td></td>
           <td class="col-3" align="right"><%= @grand_total2%></td>
@@ -206,7 +206,7 @@
       </tr>
     <% else %>
       <tr class="tr-head">
-        <td>No records for the date !</td>
+                <td><%=t('app.views.finance.report_compare.no_records_found')%></td>
       </tr>
     <% end %>
   </table>

@@ -4,7 +4,7 @@
     <%= f.error_messages %>
 
     <div class="label-field-pair">
-      <%= f.label :batches_id %>
+      <%= f.label t('app.views.finance._transaction_create_form.batches') %>
       <div class="text-input-bg">
 	<%= select(:batch, 
                    :id, 
@@ -15,45 +15,45 @@
     </div>
 
     <div class="label-field-pair">
-      <%= f.label :student_id %>
+      <%= f.label t('app.views.finance._transaction_create_form.student_id') %>
       <div class="text-input-bg" id="students_by_batch"></div>
     </div>
 
     <div class="label-field-pair">
-      <%= f.label :title %>
+      <%= f.label t('app.views.finance._transaction_create_form.title') %>
       <div class="text-field-bg">
         <%= f.text_field :title %>
       </div>
     </div>
 
     <div class="label-field-pair">
-      <%= f.label :description %>
+      <%= f.label t('app.views.finance._transaction_create_form.description') %>
       <div class="text-field-bg">
 	<%= f.text_field :description %>
       </div>
     </div>
 
     <div class="label-field-pair">
-      <%= f.label :amount %>
+      <%= f.label t('app.views.finance._transaction_create_form.amount') %>
       <div class="text-field-bg">
 	<%= f.text_field :amount %>
       </div>
     </div>
 
     <div class="label-field-pair">
-      <%= f.label :payment_form_id %>
+      <%= f.label t('app.views.finance._transaction_create_form.payment_id') %>
       <div class="text-input-bg">
 	<%= f.select :payment_form_id, options_from_collection_for_select(@payment_forms, :id, :name), :prompt => 'Select a payment form' %>
       </div>
     </div>
 
     <div class="label-field-pair">
-      <%= f.label :category_id %>
+      <%= f.label t('app.views.finance._transaction_create_form.category') %>
       <div class="text-input-bg">
 	<%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name), :prompt => 'Select a category' %>
       </div>
     </div>
 
-    <%= f.submit "► Save", :class=>'submit_button' %>
+       <%=  submit_tag t('app.views.finance._transaction_create_form.save'),:class=>'submit_button' %>
   </div>
 <% end %>
