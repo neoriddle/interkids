@@ -422,6 +422,8 @@ es:
           fees_structure_desc: 'Muestra la estructura de servicios asignados a cada estudiante'
           fees_defaulters: 'Servicios Vencidos'
           fees_defaulters_desc: 'Estudiantes con pagos vencidos'
+          reports: 'Reportes'
+          reports_desc: 'Reportes de Finanzas'
         fees_create:
           fees_create: 'Crear servicio base o adicional'
           master_fees_and_additional_fees: 'Gestor de servicios'
@@ -658,6 +660,9 @@ es:
           pdf_report: 'Reporte PDF'
         fees_collection_dates_defaulters:
           select_fees_collection_date: 'Select fees collection date'
+        reports:
+          start_date: 'Start date'
+          end_date: 'End date'
         _student_fees_submission:
           fees_receipt_number: 'No. recibo'
           fee_category_name: 'Cat. servcicio'
@@ -819,6 +824,7 @@ es:
           select_start_date: 'Selecciona fecha de inicio'
           select_end_date: 'Selecciona fecha de fin'
           monthly_report: 'Reporte mensual'
+          select_type: 'Sel. Tipo'
         update_monthly_report:
           transactions_report: 'Reporte financiero'
           manage_transactions: 'Gestión de transacciones'

@@ -31,26 +31,37 @@ unless @student.student_category.nil?
 else
     cat = " "
 end
-    pdf.move_down(20)
-     data = [[t('app.views.student.profile_pdf.admission_number'), @student.admission_no],
-                 [t('app.views.student.profile_pdf.batch'), @student.batch.full_name ],
-                 [t('app.views.student.profile_pdf.course'),(@student.batch.course).course_name],
-		[t('app.views.student.profile_pdf.date_birth'),@student.date_of_birth.strftime("%d %b, %Y")],
-                [t('app.views.student.profile_pdf.blood_group'), @student.blood_group],
-                [t('app.views.student.profile_pdf.gender'),@student.gender_as_text],
-                [t('app.views.student.profile_pdf.nationality'), @student.nationality.name],
-                [t('app.views.student.profile_pdf.language'),@student.language],
-                [t('app.views.student.profile_pdf.category'),cat],
-                [t('app.views.student.profile_pdf.religion'), @student.religion],
-                [t('app.views.student.profile_pdf.address'),@address],
-                [t('app.views.student.profile_pdf.city'), @student.city],
-                [t('app.views.student.profile_pdf.state'),@student.state],
-                [t('app.views.student.profile_pdf.country'),@student.country.name],
-                [t('app.views.student.profile_pdf.phone'),@student.phone1],
-                [t('app.views.student.profile_pdf.mobile'),@student.phone2],
-                [t('app.views.student.profile_pdf.email'),@student.email]]
+
+pdf.move_down(20)
+
+data = []
+
+[
+ [t('app.views.student.profile_pdf.admission_number'), @student.admission_no],
+ [t('app.views.student.profile_pdf.batch'), @student.batch.full_name ],
+ [t('app.views.student.profile_pdf.course'),(@student.batch.course).course_name],
+ [t('app.views.student.profile_pdf.date_birth'),@student.date_of_birth.strftime("%d %b, %Y")],
+ [t('app.views.student.profile_pdf.blood_group'), @student.blood_group],
+ [t('app.views.student.profile_pdf.gender'),@student.gender_as_text],
+ [t('app.views.student.profile_pdf.category'),cat],
+].each { |d| data << d if d.last }
+
+if @immediate_contact
+  [
+   [t('app.views.student.profile_pdf.address'),@immediate_contact.address],
+   [t('app.views.student.profile_pdf.city'), @immediate_contact.city],
+   [t('app.views.student.profile_pdf.state'),@immediate_contact.state],
+   [t('app.views.student.profile_pdf.country'),@immediate_contact.country.name],
+   [t('app.views.student.profile_pdf.phone'),@immediate_contact.office_phone1],
+   [t('app.views.student.profile_pdf.mobile'),@immediate_contact.office_phone2],
+   [t('app.views.student.profile_pdf.email'),@immediate_contact.email]
+  ].each { |d| data << d if d.last  }
+end
+
 unless @immediate_contact.nil?
-    data.push [t('app.views.student.profile_pdf.emergencies'), @immediate_contact.first_name+" "+@immediate_contact.last_name+ "(" + @immediate_contact.mobile_phone + ")"]
+  data.push [t('app.views.student.profile_pdf.emergencies'), 
+             @immediate_contact.first_name+" "+@immediate_contact.last_name+
+             (@immediate_contact.mobile_phone.nil? ? '' : "("+@immediate_contact.mobile_phone+")")]
 end
 
             

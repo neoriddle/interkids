@@ -554,7 +554,8 @@ authorization do
         :graph_for_update_monthly_report,
         :graph_for_compare_monthly_report,
         :graph_for_transaction_comparison,
-        :fees_student_structure_search
+        :fees_student_structure_search,
+        :reports
         ]
     has_permission_on [:xml],
       :to => [
@@ -1147,8 +1148,12 @@ authorization do
         :pdf_fee_structure,
 
         #graph-------------
-        :graph_for_update_monthly_report
+        :graph_for_update_monthly_report,
 
+        :reports,
+        :transaction_report,
+        :update_categories_for_transaction_report,
+        :generate_transaction_report
     ]
         
     has_permission_on [:xml], :to =>
