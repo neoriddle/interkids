@@ -21,11 +21,11 @@ pdf.table info, :width => 400,
         end
 end
 pdf.move_down(100)
-pdf.text "Time Table", :size => 18 ,:align => :center
+pdf.text t('app.views.timetable.timetable_pdf.time_table'), :size => 18 ,:align => :center
 pdf.text @batch.full_name, :size => 18 ,:align => :center
 data = Array.new(){Array.new()}
 timings= Array.new()
-timings.push "Day"
+timings.push t('app.views.timetable.timetable_pdf.day')
 @class_timing.each do |class_time|
    timings.push class_time.name
  end
@@ -50,7 +50,7 @@ end
 data.push timetable_row
 end
 pdf.table data, :width => 500,
-                :headers => timings,
+                :headers => t('app.views.timetable.timetable_pdf.timings'),
                 :border_color => "000000",
                 :header_color => "eeeeee",
                 :header_text_color  => "97080e",

@@ -53,8 +53,8 @@ class EventController < ApplicationController
           #          student_user = User.find_by_username(s.admission_no)
           #          unless student_user.nil?
           #            Reminder.create(:sender => current_user.id,:recipient=>student_user.id,
-          #              :subject=>"New Event : #{event.title}",
-          #              :body=>" New event description : #{event.description} <br/> start date : #{event.start_date} <br/> end date : #{event.end_date}")
+          #              :subject=> t('app.controllers.event_controller.new_event') + "#{event.title}",
+          #              :body=> t('app.controllers.event_controller.new_event_description') + "#{event.description} <br/>" + t('app.controllers.event_controller.start_date') + "#{event.start_date} <br/>" + t('app.controllers.event_controller.end_date') + "#{event.end_date}"
           #          end
           #        end
           #send reminder to students end
@@ -62,7 +62,7 @@ class EventController < ApplicationController
       end
     end
 
-    flash[:notice] = "event created for selected courses"
+    flash[:notice] = t('app.controllers.event_controller.event_created_for_selected_courses')
     redirect_to :action=>"show", :id => event.id
   end
 
@@ -99,7 +99,7 @@ class EventController < ApplicationController
         end
       end
     end
-    flash[:notice] = "event created for selected departments"
+    flash[:notice] = t('app.controllers.event_controller.event_created_for_selected_departments')
     redirect_to :action=>"show", :id=>event.id
   end
 
@@ -135,8 +135,8 @@ class EventController < ApplicationController
       @users = User.find(:all)
       @users.each do |u|
         Reminder.create(:sender=> current_user.id,:recipient=>u.id,
-          :subject=>"New Event : #{event.title}",
-          :body=>" New event description : #{event.description} <br/> Start date : " + event.start_date.strftime("%d/%m/%Y %I:%M %p") + " <br/> End date : " + event.end_date.strftime("%d/%m/%Y %I:%M %p"))
+          :subject=> t('app.controllers.event_controller.new_event') + "#{event.title}",
+          :body=> t('app.controllers.event_controller.new_event_description') + "#{event.description} <br/>" + t('app.controllers.event_controller.start_date') + event.start_date.strftime("%d/%m/%Y %I:%M %p") + "<br/>" + t('app.controllers.event_controller.end_date') + event.end_date.strftime("%d/%m/%Y %I:%M %p"))
       end
       sms_setting = SmsSetting.new()
       if sms_setting.application_sms_active and sms_setting.event_news_sms_active
@@ -165,7 +165,7 @@ class EventController < ApplicationController
           end
         end
         unless recipients.empty?
-          message = "Event Notification: #{event.title}. From : #{event.start_date} to #{event.end_date}"
+          message = t('app.controllers.event_controller.event_notification') + "#{event.title}" + t('app.controllers.event_controller.from') + "#{event.start_date}" + t('app.controllers.event_controller.to') + "#{event.end_date}"
           sms = SmsManager.new(message,recipients)
           sms.send_sms
         end
@@ -187,8 +187,8 @@ class EventController < ApplicationController
             student_user = s.user
             unless student_user.nil?
               Reminder.create(:sender => current_user.id,:recipient=>student_user.id,
-                :subject=>"New Event : #{event.title}",
-                :body=>" New event description : #{event.description} <br/> Start date : " + event.start_date.strftime("%d/%m/%Y %I:%M %p") + " <br/> End date : " + event.end_date.strftime("%d/%m/%Y %I:%M %p"))
+                :subject=> t('app.controllers.event_controller.new_event') + "#{event.title}",
+                :body=> t('app.controllers.event_controller.new_event_description') + "#{event.description}" + "<br/>" + t('app.controllers.event_controller.start_date') + event.start_date.strftime("%d/%m/%Y %I:%M %p") + "<br/>" + t('app.controllers.event_controller.end_date') + event.end_date.strftime("%d/%m/%Y %I:%M %p"))
             end
           end
         end
@@ -200,8 +200,8 @@ class EventController < ApplicationController
           @dept_emp.each do |e|
             emp_user = e.user
             Reminder.create(:sender => current_user.id,:recipient=>emp_user.id,
-              :subject=>"New Event : #{event.title}",
-              :body=>" New event description : #{event.description} <br/> Start date : " + event.start_date.strftime("%d/%m/%Y %I:%M %p") + " <br/> End date : " + event.end_date.strftime("%d/%m/%Y %I:%M %p"))
+              :subject=> t('app.controllers.event_controller.new_event') + "#{event.title}",
+              :body=> t('app.controllers.event_controller.new_event_description') + "#{event.description} <br/>" + t('app.controllers.event_controller.start_date') + event.start_date.strftime("%d/%m/%Y %I:%M %p") + "<br/>" + t('app.controllers.event_controller.end_date') + event.end_date.strftime("%d/%m/%Y %I:%M %p"))
           end
         end
       end
@@ -217,7 +217,7 @@ class EventController < ApplicationController
     
     batch_event.each { |x| x.destroy } unless batch_event.nil?
     dept_event.each { |x| x.destroy } unless dept_event.nil?
-    flash[:notice] = 'Event creation cancelled'
+    flash[:notice] = t('app.controllers.event_controller.event_creation_cancelled')
     redirect_to :action=>"index"
   end
 

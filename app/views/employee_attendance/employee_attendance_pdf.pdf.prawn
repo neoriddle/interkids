@@ -28,7 +28,7 @@ data = Array.new(){Array.new()}
 
  @report = EmployeeAttendance.find_all_by_employee_id_and_employee_leave_type_id(@employee.id, lt.id)
     if @report == []
-        data.push [lt.name ,"No dates"]
+        data.push [lt.name ,t('app.views.employee_attendance.employee_attendance_pdf.no_dates')]
     else
         @report.each do |r|
            data.push [lt.name,r.attendance_date.strftime("%B %d, %Y")]
@@ -41,15 +41,15 @@ pdf.move_down(30)
 @leave_types.each do |lt|
 leave_count = EmployeeAttendance.find_all_by_employee_id_and_employee_leave_type_id(@employee.id,lt.id).size
 if lt.max_leave_count == ""
-data.push  ["Total #{lt.name}","#{leave_count}"]
+data.push  [t('app.views.employee_attendance.employee_attendance_pdf.total') "#{lt.name}","#{leave_count}"]
 else
-data.push ["Total #{lt.name}","#{leave_count}/#{lt.max_leave_count}"]
+data.push [t('app.views.employee_attendance.employee_attendance_pdf.total') "#{lt.name}","#{leave_count}/#{lt.max_leave_count}"]
 end
 end
 
 pdf.move_down(10)
 
-data.push ["Net total leaves","#{@total_leaves}"]
+data.push [t('app.views.employee_attendance.employee_attendance_pdf.net_total_leaves'),"#{@total_leaves}"]
              
 
 pdf.move_down(20)
@@ -58,7 +58,7 @@ pdf.table data, :width => 450,
                 :column_widths => {0=>300,1=>150},
                 :border_color => "000000",
                 :position => :center,
-                :headers => ['Leave Types','Dates'],
+                :headers => [t('app.views.employee_attendance.employee_attendance_pdf.leave_types'),t('app.views.employee_attendance.employee_attendance_pdf.dates')],
                 :header_color => "EEEEEE",
                 :header_text_color => "97080e",
                 :row_colors => ["FFFFFF","DDDDDD"],

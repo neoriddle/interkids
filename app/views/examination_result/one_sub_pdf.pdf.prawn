@@ -5,9 +5,9 @@ pdf.image logo, :position=>:left, :height=>50, :width=>50
       pdf.font "Helvetica" do
       info = [
         [ @institute_name.config_value],
-        ["Examination Result"],
-        ["Class: #{@exm.subject.course.name}"],
-        ["Exam: #{@exm.examination_type.name}"]]
+        [t('app.views.examination_result.one_sub_pdf.examination_result')],
+        [t('app.views.examination_result.one_sub_pdf.class') + "#{@exm.subject.course.name}"],
+        [t('app.views.examination_result.one_sub_pdf.exam') + "#{@exm.examination_type.name}"]]
 pdf.table info, :width => 500,
                 :align => {0 => :left},
                 :position => :left,
@@ -35,7 +35,7 @@ end
 
 
 pdf.table students_data, :border_style => :grid,
-                         :headers => ["Sl","Name","Marks Obtained","Max. Marks","Grade"],
+                         :headers => [t('app.views.examination_result.one_sub_pdf.sl'),t('app.views.examination_result.one_sub_pdf.name'),t('app.views.examination_result.one_sub_pdf.marks_obtained'),t('app.views.examination_result.one_sub_pdf.max_marks'),t('app.views.examination_result.one_sub_pdf.grade')],
                          :header_color => 'BBBBBB',
                          :table_header_style => :bold,
                          :row_colors => ["DDDDDD", "FFFFFF"],
@@ -48,7 +48,7 @@ pdf.table students_data, :border_style => :grid,
 
 pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
      pdf.font "Helvetica" do
-        signature = [["Signature"]]
+        signature = [[t('app.views.examination_result.one_sub_pdf.signature')]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right},
                 :border_color => "FFFFFF",

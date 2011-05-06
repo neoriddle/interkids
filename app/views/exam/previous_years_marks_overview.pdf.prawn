@@ -47,11 +47,11 @@ end
   @aggr =  exam.batch_wise_aggregate(@student,b)
     data =Array.new(){Array.new()}
   table_header = Array.new()
-  table_header<<"Subject"
+  table_header<< t('app.views.exam.previous_years_marks_overview.subject')
   @exam_groups.each do |exam_group|
     table_header<<exam_group.name
   end
-  table_header<<"Total"
+  table_header<< t('app.views.exam.previous_years_marks_overview.total')
 
 col_widths = Hash.new()
 col_widths[0]=200
@@ -98,7 +98,7 @@ table_row<<sub_total
 
 end
   totals_row = Array.new()
-  totals_row<<"Total"
+  totals_row<< t('app.views.exam.previous_years_marks_overview.total')
   @max_total = 0
   @marks_total = 0
   @exam_groups.each do |exam_group|
@@ -120,7 +120,7 @@ data<<totals_row
 
 col_widths[@exam_groups.size+1]=50
         pdf.move_down(100)
-  pdf.text "Marklist for #{@student.full_name}  in  #{b.full_name}   "
+  pdf.text t('app.views.exam.previous_years_marks_overview.marklist_for') + "#{@student.full_name}" + t('app.views.exam.previous_years_marks_overview.in') + "#{b.full_name}"
     pdf.move_down(10)
       pdf.table data,
           :width=>500,
@@ -140,9 +140,9 @@ col_widths[@exam_groups.size+1]=50
                data = Array.new(){Array.new()}
               @additional_exams = AdditionalExam.find_all_by_additional_exam_group_id(additional_exam_group)
               table_header = Array.new()
-              table_header<<"Subject"
-              table_header<<"Marks" unless additional_exam_group.exam_type == "Grades"
-              table_header<<"Grades" unless additional_exam_group.exam_type == "Marks"
+              table_header<< t('app.views.exam.previous_years_marks_overview.subject')
+              table_header<< t('app.views.exam.previous_years_marks_overview.marks') unless additional_exam_group.exam_type == "Grades"
+              table_header<< t('app.views.exam.previous_years_marks_overview.grades') unless additional_exam_group.exam_type == "Marks"
               @additional_exams.each do |exam|
                     unless (exam.score_for(@student).marks.nil? &&  exam.score_for(@student).grading_level_id.nil?)
                             table_row=Array.new()
@@ -178,7 +178,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.exam.previous_years_marks_overview.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

@@ -140,7 +140,7 @@ class ExaminationResultController < ApplicationController
 #
 #    if request.post?
 #      if params[:examination_result][:examtype_id] == ""
-#        flash[:notice] = "Please select an examination type"
+#        flash[:notice] = t('app.controllers.examination_result_controller.please_select_an_examination_type')
 #        redirect_to :action => "view_all_subs"
 #        return
 #      end
@@ -193,7 +193,7 @@ class ExaminationResultController < ApplicationController
 #    @exams = []
 #    if request.post?
 #      if params[:examination_result][:exam_id] == ""
-#        flash[:notice] = "Please select an examination."
+#        flash[:notice] = t('app.controllers.examination_result_controller.please_select_an_examination')
 #        redirect_to :action => "view_one_sub"
 #        return
 #      end

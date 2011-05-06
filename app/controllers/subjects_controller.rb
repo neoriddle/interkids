@@ -61,7 +61,7 @@ class SubjectsController < ApplicationController
    if @subject_exams.nil?
     @subject.inactivate
    else
-    @error_text = "Cannot delete subjects"
+    @error_text = t('app.controllers.subjects_controller.cannot_delete_subjects')
     end
   end
 

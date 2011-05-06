@@ -22,19 +22,19 @@ pdf.header pdf.margin_box.top_left do
 end
 pdf.move_down(100)
 pdf.text @exam_group.batch.name+"-"+@exam_group.name , :size => 18 ,:at=>[10,620]
-pdf.text "Consolidated Report",:size => 7,:at=>[10,610]
+pdf.text t('app.views.exam.consolidated_exam_report_pdf.consolidated_report'),:size => 7,:at=>[10,610]
 pdf.move_down(20)
 data = Array.new(){Array.new()}
 table_heading = Array.new()
-table_heading.push "Name"
+table_heading.push t('app.views.exam.consolidated_exam_report_pdf.name')
 
 @exam_group.exams.each do |exam|
   table_heading.push exam.subject.code
 end
 unless @exam_group.exam_type == 'Grades'
-  table_heading.push "Total"
-  table_heading.push "Maximum Marks"
-  table_heading.push "Percentage"
+  table_heading.push t('app.views.exam.consolidated_exam_report_pdf.total')
+  table_heading.push t('app.views.exam.consolidated_exam_report_pdf.maximum_marks')
+  table_heading.push t('app.views.exam.consolidated_exam_report_pdf.percentage')
 end
 
 widths = {0=>100}
@@ -99,7 +99,7 @@ pdf.font "Helvetica" do
   signature = [[""]]
   pdf.table signature, :width => 500,
     :align => {0 => :right,1 => :right},
-    :headers => ["Signature"],
+    :headers => [t('app.views.exam.consolidated_exam_report_pdf.signature')],
     :header_text_color  => "DDDDDD",
     :border_color => "FFFFFF",
     :position => :center

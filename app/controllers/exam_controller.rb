@@ -54,8 +54,8 @@ class ExamController < ApplicationController
         students.each do |s|
           student_user = s.user
           Reminder.create(:sender=> current_user.id,:recipient=>student_user.id,
-            :subject=>"Exam Scheduled",
-            :body=>"#{@exam_group.name} has been scheduled  <br/> Please view calendar for more details")
+            :subject=> t('app.controllers.exam_controller.exam_scheduled'),
+            :body=>"#{@exam_group.name}" + t('app.controllers.exam_controller.has_been_scheduled') + "<br/>" + t('app.controllers.exam_controller.please_view_calendar_for_more_details'))
         end
       
     end
@@ -77,8 +77,8 @@ class ExamController < ApplicationController
               recipients.push guardian.mobile_phone unless guardian.mobile_phone.nil?
               end
             end
-            @message = "#{@exam_group.name} exam Timetable has been published." if params[:status] == "schedule"
-            @message = "#{@exam_group.name} exam result has been published." if params[:status] == "result"
+            @message = "#{@exam_group.name}" + t('app.controllers.exam_controller.exam_timetable_has_been_published') if params[:status] == "schedule"
+            @message = "#{@exam_group.name}" + t('app.controllers.exam_controller.exam_result_has_been_published') if params[:status] == "result"
             unless recipients.empty?
               sms = SmsManager.new(@message,recipients)
               sms.send_sms
@@ -88,11 +88,11 @@ class ExamController < ApplicationController
       else
         @conf = Configuration.available_modules
         if @conf.include?('SMS')
-          @sms_setting_notice = "Exam schedule published, No sms was sent as Sms setting was not activated" if params[:status] == "schedule"
-          @sms_setting_notice = "Exam result published, No sms was sent as Sms setting was not activated" if params[:status] == "result"
+          @sms_setting_notice = t('app.controllers.exam_controller.exam_schedule_published_no_sms_was_sent_as_sms_setting_was_not_activated') if params[:status] == "schedule"
+          @sms_setting_notice = t('app.controllers.exam_controller.exam_result_published_no_sms_was_sent_as_sms_setting_was_not_activated') if params[:status] == "result"
         else
-          @sms_setting_notice = "Exam schedule published" if params[:status] == "schedule"
-          @sms_setting_notice = "Exam result published" if params[:status] == "result"
+          @sms_setting_notice = t('app.controllers.exam_controller.exam_schedule_published') if params[:status] == "schedule"
+          @sms_setting_notice = t('app.controllers.exam_controller.exam_result_published') if params[:status] == "result"
         end
       end
       if params[:status] == "result"
@@ -100,12 +100,12 @@ class ExamController < ApplicationController
         students.each do |s|
           student_user = s.user
           Reminder.create(:sender=> current_user.id,:recipient=>student_user.id,
-            :subject=>"Result Published",
-            :body=>"#{@exam_group.name} result has been published  <br/> Please view reports for your result")
+            :subject=> t('app.controllers.exam_controller.result_published'),
+            :body=>"#{@exam_group.name}" + t('app.controllers.exam_controller.result_has_been_published') + "<br/>" + t('app.controllers.exam_controller.please_view_reports_for_your_result'))
         end
       end
     else
-      @no_exam_notice = "Exam scheduling not done yet."
+      @no_exam_notice = t('app.controllers.exam_controller.exam_scheduling_not_done_yet')
     end
   end
 
@@ -124,7 +124,7 @@ class ExamController < ApplicationController
       else
         GroupedExam.delete_all(:batch_id=>@batch.id)
       end
-        flash[:notice]="Selected exams grouped successfully."
+        flash[:notice]= t('app.controllers.exam_controller.selected_exams_grouped_successfully')
     end
   end
 
@@ -146,12 +146,12 @@ class ExamController < ApplicationController
   def generated_report
     if params[:student].nil?
       if params[:exam_report].nil? or params[:exam_report][:exam_group_id].empty?
-        flash[:notice] = "Select a batch and exam to continue."
+        flash[:notice] = t('app.controllers.exam_controller.select_a_batch_and_exam_to_continue')
         redirect_to :action=>'exam_wise_report' and return
       end
     else
       if params[:exam_group].nil?
-        flash[:notice] = "Invalid parameters."
+        flash[:notice] = t('app.controllers.exam_controller.invalid_parameters')
         redirect_to :action=>'exam_wise_report' and return
       end
     end
@@ -235,7 +235,7 @@ class ExamController < ApplicationController
       @students = @batch.students
       @exam_groups = ExamGroup.find(:all,:conditions=>{:batch_id=>@batch.id})
     else
-      flash[:notice] = "select a subject to continue"
+      flash[:notice] = t('app.controllers.exam_controller.select_a_subject_to_continue')
       redirect_to :action=>'subject_wise_report'
     end
   end
@@ -271,12 +271,12 @@ class ExamController < ApplicationController
   def generated_report4
     if params[:student].nil?
       if params[:exam_report].nil? or params[:exam_report][:batch_id].empty?
-        flash[:notice] = "Select a batch to continue"
+        flash[:notice] = t('app.controllers.exam_controller.select_a_batch_to_continue')
         redirect_to :action=>'grouped_exam_report' and return
       end
     else
       if params[:type].nil?
-        flash[:notice] = "Invalid parameters."
+        flash[:notice] = t('app.controllers.exam_controller.invalid_parameters')
         redirect_to :action=>'grouped_exam_report' and return
       end
     end
@@ -462,14 +462,14 @@ class ExamController < ApplicationController
     bargraph.width = 1;
     bargraph.colour = '#bb0000';
     bargraph.dot_size = 5;
-    bargraph.text = "Student's marks"
+    bargraph.text = t('app.controllers.exam_controller.students_marks')
     bargraph.values = data
 
     bargraph2 = BarFilled.new
     bargraph2.width = 1;
     bargraph2.colour = '#5E4725';
     bargraph2.dot_size = 5;
-    bargraph2.text = "Class average"
+    bargraph2.text = t('app.controllers.exam_controller.class_average')
     bargraph2.values = data2
 
     x_axis = XAxis.new
@@ -480,10 +480,10 @@ class ExamController < ApplicationController
 
     title = Title.new(student.full_name)
 
-    x_legend = XLegend.new("Subjects")
+    x_legend = XLegend.new(t('app.controllers.exam_controller.subjects'))
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Marks")
+    y_legend = YLegend.new(t('app.controllers.exam_controller.marks'))
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new
@@ -530,10 +530,10 @@ class ExamController < ApplicationController
 
     title = Title.new(subject.name)
 
-    x_legend = XLegend.new("Examination name")
+    x_legend = XLegend.new(t('app.controllers.exam_controller.examination_name'))
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Marks")
+    y_legend = YLegend.new(t('app.controllers.exam_controller.marks'))
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new
@@ -576,10 +576,10 @@ class ExamController < ApplicationController
 
     title = Title.new(student.full_name)
 
-    x_legend = XLegend.new("Academic year")
+    x_legend = XLegend.new(t('app.controllers.exam_controller.academic_year'))
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Total marks")
+    y_legend = YLegend.new(t('app.controllers.exam_controller.total_marks'))
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new

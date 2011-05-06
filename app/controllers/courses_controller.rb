@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new params[:course]
     if @course.save
-      flash[:notice] = 'Created course sucessfully.'
+      flash[:notice] = t('app.controllers.courses_controller.created_course_sucessfully')
       redirect_to :action=>'manage_course'
     else
       render 'new'
@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
 
   def update
     if @course.update_attributes(params[:course])
-      flash[:notice] = 'Updated course details successfully.'
+      flash[:notice] = t('app.controllers.courses_controller.updated_course_details_successfully')
       redirect_to :action=>'manage_course'
     else
       render 'edit'
@@ -53,10 +53,10 @@ class CoursesController < ApplicationController
   def destroy
     if @course.batches.active.empty?
       @course.inactivate
-       flash[:notice]="Course deleted successfully."
+       flash[:notice]= t('app.controllers.courses_controller.course_deleted_successfully')
       redirect_to :action=>'manage_course'
     else
-      flash[:warn_notice]="<p>Unable to Delete. Please remove exising batches and students.</p>"
+      flash[:warn_notice]="<p>" + t('app.controllers.courses_controller.unable_to_delete_please_remove_exising_batches_and_students') + "</p>"
       redirect_to :action=>'manage_course'
     end
   
@@ -87,7 +87,7 @@ class CoursesController < ApplicationController
   #      unless recipient_list.empty?
   #        recipients = recipient_list.join(', ')
   #        FedenaMailer::deliver_email(recipients, params[:email][:subject], params[:email][:message])
-  #        flash[:notice] = "Mail sent to #{recipients}"
+  #        flash[:notice] = t('app.controllers.courses_controller.mail_sent_to') #{recipients}"
   #        redirect_to :controller => 'user', :action => 'dashboard'
   #      end
   #    end
@@ -98,7 +98,7 @@ class CoursesController < ApplicationController
   #    if request.post?
   #      sms = SmsManager.new params[:message], ['9656001824']
   #      sms.send_sms
-  #      flash[:notice] = 'Text messages sent successfully!'
+  #      flash[:notice] = t('app.controllers.courses_controller.text_messages_sent_successfully')
   #    end
   #  end
 

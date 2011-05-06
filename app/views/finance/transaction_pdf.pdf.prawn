@@ -22,8 +22,8 @@ pdf.header pdf.margin_box.top_left do
 end
 data = Array.new(){Array.new()}
 pdf.move_down(100)
-pdf.text "Finance Transaction Report",  :size=>14
-pdf.text "From( #{@start_date})to( #{@end_date})" ,:size => 9
+pdf.text t('app.views.finance.transaction_pdf.finance_transaction_report'),  :size=>14
+pdf.text t('app.views.finance.transaction_pdf.from') + "(#{@start_date})" + t('app.views.finance.transaction_pdf.to') + "(#{@end_date})" ,:size => 9
 
  pdf.move_down(20)
 index = 0
@@ -32,10 +32,10 @@ expenses_total = 0
 
         
 unless @hr.nil?
-                data .push [ index+=1,'Salary', @salary, ''  ]
+                data .push [ index+=1, t('app.views.finance.transaction_pdf.salary'), @salary, ''  ]
 end
-                data.push [ index+=1, 'Donations', '', @donations_total  ]
-                data.push [ index+=1, 'Fees account', '', @transactions_fees  ]
+                data.push [ index+=1, t('app.views.finance.transaction_pdf.donations'), '', @donations_total  ]
+                data.push [ index+=1, t('app.views.finance.transaction_pdf.fees_account'), '', @transactions_fees  ]
 @other_transactions.each_with_index do |t,i|
 if t.category.is_income?
                 data.push [ i+index, t.title, '', t.amount  ]
@@ -46,14 +46,14 @@ else
 end
 end
 if @grand_total >= 0
-                data.push [ '', 'Grand total',  '', @grand_total ]
+                data.push [ '', t('app.views.finance.transaction_pdf.grand_total'),  '', @grand_total ]
 else
-                data.push [ '', 'Grand total',   @grand_total, '' ]
+                data.push [ '', t('app.views.finance.transaction_pdf.grand_total'),   @grand_total, '' ]
 end
 
 
 pdf.table data, :width => 500,
-  :headers => [ 'Sl no.', 'Particulars', "Expenses( #{currency})","Income( #{currency})"  ],
+  :headers => [ t('app.views.finance.transaction_pdf.sl_no'), t('app.views.finance.transaction_pdf.particulars'), t('app.views.finance.transaction_pdf.expenses') + "( #{currency})", t('app.views.finance.transaction_pdf.income') + "( #{currency})"  ],
   :border_color => "000000",
   :header_color => "eeeeee",
   :header_text_color  => "97080e",
@@ -75,7 +75,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.finance.transaction_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

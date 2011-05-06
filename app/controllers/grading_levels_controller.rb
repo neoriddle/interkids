@@ -22,7 +22,7 @@ class GradingLevelsController < ApplicationController
         @grading_level.batch.nil? ?
           @grading_levels = GradingLevel.default :
           @grading_levels = GradingLevel.for_batch(@grading_level.batch_id)
-        #flash[:notice] = 'Grading level was successfully created.'
+        #flash[:notice] = t('app.controllers.grading_levels_controller.grading_level_was_successfully_created')
         format.html { redirect_to grading_level_url(@grading_level) }
         format.js { render :action => 'create' }
       else
@@ -48,7 +48,7 @@ class GradingLevelsController < ApplicationController
         @grading_level.batch.nil? ? 
           @grading_levels = GradingLevel.default :
           @grading_levels = GradingLevel.for_batch(@grading_level.batch_id)
-        #flash[:notice] = 'Grading level update successfully.'
+        #flash[:notice] = t('app.controllers.grading_levels_controller.grading_level_update_successfully')
         format.html { redirect_to grading_level_url(@grading_level) }
         format.js { render :action => 'update' }
       else

@@ -22,10 +22,10 @@ pdf.table info, :width => 400,
 end
 
 pdf.move_down(80)
-pdf.text "Fee Structre" , :size => 14 ,:align => :center
+pdf.text t('app.views.finance.pdf_fee_structure.fee_structre') , :size => 14 ,:align => :center
 pdf.move_down(20)
-pdf.text "Name : #{@student.full_name} " , :size => 11
-pdf.text "Admission no : #{@student.admission_no}" , :size => 11
+pdf.text t('app.views.finance.pdf_fee_structure.name') + "#{@student.full_name} " , :size => 11
+pdf.text t('app.views.finance.pdf_fee_structure.admission_no') + "#{@student.admission_no}" , :size => 11
 pdf.move_down(30)
 data = Array.new(){Array.new()}
 
@@ -35,10 +35,10 @@ unless @fee_particulars.nil?
    end
 end
 
-data.push ["Total Fees",@currency_type.to_s+@total.to_s]
+data.push [t('app.views.finance.pdf_fee_structure.total_fees'),@currency_type.to_s+@total.to_s]
 
 pdf.table data, :width => 500,
-                :headers => ["Particulars","Amount"],
+                :headers => [t('app.views.finance.pdf_fee_structure.particulars'),t('app.views.finance.pdf_fee_structure.amount')],
                 :border_color => "000000",
                 :header_color => "eeeeee",
                 :header_text_color  => "97080e",
@@ -49,7 +49,7 @@ pdf.table data, :width => 500,
 
 pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
      pdf.font "Helvetica" do
-        signature = [["Signature"]]
+        signature = [[t('app.views.finance.pdf_fee_structure.signature')]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right},
                 :border_color => "FFFFFF",

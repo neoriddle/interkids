@@ -75,7 +75,7 @@ class SmsController < ApplicationController
         end
       end
       render(:update) do |page|
-        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\"> SMS sent successfully selected students and their guardians</p>"
+        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\">" + t('app.controllers.sms_controller.sms_sent_successfully_selected_students_and_their_guardians') + "</p>"
         page.visual_effect(:highlight, 'status-message')
       end
     end
@@ -117,7 +117,7 @@ class SmsController < ApplicationController
         end
       end
       render(:update) do |page|
-        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\">SMS sent successfully to students(guardians) of selected course</p>"
+        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\">" + t('app.controllers.sms_controller.sms_sent_successfully_to_students_guardians_of_selected_course') + "</p>"
         page.visual_effect(:highlight, 'status-message')
       end
     end
@@ -184,7 +184,7 @@ class SmsController < ApplicationController
         end
       end
       render(:update) do |page|
-        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\">SMS sent successfully to selected employees</p>"
+        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\">" + t('app.controllers.sms_controller.sms_sent_successfully_to_selected_employees') + "</p>"
         page.visual_effect(:highlight, 'status-message')
       end
     end
@@ -218,7 +218,7 @@ class SmsController < ApplicationController
         end
       end
       render(:update) do |page|
-        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\">SMS sent successfully to employees of selected department</p>"
+        page.replace_html 'status-message',:text=>"<p class=\"flash-msg\">" + t('app.controllers.sms_controller.sms_sent_successfully_to_employees_of_selected_department') + "</p>"
         page.visual_effect(:highlight, 'status-message')
       end
     end

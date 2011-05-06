@@ -29,7 +29,7 @@ i = 530
 pdf.move_down(30)
 pdf.text s.name, :at => [0,i],:style => :bold
     pdf.move_down(10)
-     heading = [["Examination Name","Marks Obtained","Max Marks","Grade","(IN %)"]]
+     heading = [[t('app.views.student.academic_pdf.examination_name'), t('app.views.student.academic_pdf.marks_obtained'), t('app.views.student.academic_pdf.max_marks'), t('app.views.student.academic_pdf.grade'), t('app.views.student.academic_pdf.in_percent')]]
         pdf.table heading,          :border_color => "000000",
                                      
                                      :row_colors => ["DDDDDD"],
@@ -63,7 +63,7 @@ pdf.text s.name, :at => [0,i],:style => :bold
     end
     sub_percent_total = @arr_score_wt[s.name] * 100.0 / @arr_total_wt[s.name] unless @arr_total_wt[s.name]
     grade_weighted_scores = Grading.find_from_percentage(sub_percent_total) if sub_percent_total
-    weighted_marks = [["Weighted scores",@arr_score_wt[s.name],@arr_total_wt[s.name],grade_weighted_scores,sub_percent_total]]
+    weighted_marks = [[t('app.views.student.academic_pdf.weighted_scores'), @arr_score_wt[s.name],@arr_total_wt[s.name],grade_weighted_scores,sub_percent_total]]
     pdf.table weighted_marks,  :border_color => "000000",
                                :position => :center,
                                :column_widths => { 0 => 120, 1 => 100,2 => 100,3 => 100,4 => 100 },
@@ -71,9 +71,9 @@ pdf.text s.name, :at => [0,i],:style => :bold
   
     i = i - 120
 end
-    pdf.text "TOTAL (overall)", :at => [0,i],:style => :bold
+    pdf.text t('app.views.student.academic_pdf.total_overall'), :at => [0,i],:style => :bold
     pdf.move_down(80)
-    overall = [["Grade","(IN%)"]]
+    overall = [[t('app.views.student.academic_pdf.grade'), t('app.views.student.academic_pdf.in_percent')]]
     
     pdf.table overall,:border_color => "000000",
                       :row_colors => ["DDDDDD"],
@@ -89,7 +89,7 @@ end
 
 
      pdf.font "Helvetica" do
-        signature = [["Signature"]]
+        signature = [[t('app.views.student.academic_pdf.signature')]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right},
                 :border_color => "FFFFFF",

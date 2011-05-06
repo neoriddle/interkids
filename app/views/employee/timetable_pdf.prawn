@@ -21,7 +21,7 @@ pdf.header pdf.margin_box.top_left do
   end
 end
 pdf.move_down(100)
-pdf.text "Time Table", :size => 18 ,:align => :center
+pdf.text t('app.views.employee.timetable_pdf.time_table'), :size => 18 ,:align => :center
 pdf.text @employee.full_name, :size => 18 ,:align => :center
 
 widths =  {0=>50}

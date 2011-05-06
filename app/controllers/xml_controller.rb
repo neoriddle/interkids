@@ -13,19 +13,19 @@ class XmlController < ApplicationController
     @xml = Xml.get_multiple_finance_as_hash ['Salary', 'Fee', 'Donation']
     if request.post?
       Xml.set_ledger_name(params[:xml_settings])
-      flash[:notice] = "XML settings updated successfully"
+      flash[:notice] = t('app.controllers.xml_controller.xml_settings_updated_successfully')
       redirect_to  :action => "settings"
     end
   end
   #enevelope = REXML::Element.new "ENVELOPE"
   #    header = enevelope.add_element "HEADER"
   #    tally_request = header.add_element "TALLYREQUEST"
-  #    tally_request.text = "Import Data"
+  #    tally_request.text = t('app.controllers.xml_controller.import_data')
   #    body = enevelope.add_element "BODY"
   #    import_data = body.add_element "IMPORTDATA"
   #    requestdesc = import_data.add_element "REQUESTDESC"
   #    report_name = requestdesc.add_element "REPORTNAME"
-  #    report_name.text = "All Masters"
+  #    report_name.text = t('app.controllers.xml_controller.all_masters')
   #    static_variables = requestdesc.add_element "STATICVARIABLES"
   #    svcurrentcompany = static_variables.add_element "SVCURRENTCOMPANY"
   #    svcurrentcompany.text = @institution.config_value
@@ -66,12 +66,12 @@ class XmlController < ApplicationController
       enevelope = REXML::Element.new "ENVELOPE"
       header = enevelope.add_element "HEADER"
       tally_request = header.add_element "TALLYREQUEST"
-      tally_request.text = "Import Data"
+      tally_request.text = t('app.controllers.xml_controller.import_data')
       body = enevelope.add_element "BODY"
       import_data = body.add_element "IMPORTDATA"
       requestdesc = import_data.add_element "REQUESTDESC"
       report_name = requestdesc.add_element "REPORTNAME"
-      report_name.text = "All Masters"
+      report_name.text = t('app.controllers.xml_controller.all_masters')
       static_variables = requestdesc.add_element "STATICVARIABLES"
       svcurrentcompany = static_variables.add_element "SVCURRENTCOMPANY"
       svcurrentcompany.text = @institution.config_value
@@ -82,7 +82,7 @@ class XmlController < ApplicationController
             fee = FinanceFee.find_by_transaction_id(trans.id)
             student = Student.find(fee.student_id)
             collection = FinanceFeeCollection.find(fee.fee_collection_id)
-            nar = "Fee recieved from #{student.full_name} for #{collection.name} - #{trans.title} "
+            nar = t('app.controllers.xml_controller.fee_recieved_from') + "#{student.full_name}" + t('app.controllers.xml_controller.for') + "#{collection.name} - #{trans.title} "
           else
             nar = "#{trans.title} - #{trans.description}"
           end
@@ -418,12 +418,12 @@ class XmlController < ApplicationController
       #    enevelope = REXML::Element.new "ENVELOPE"
       #    header = enevelope.add_element "HEADER"
       #    tally_request = header.add_element "TALLYREQUEST"
-      #    tally_request.text = "Import Data"
+      #    tally_request.text = t('app.controllers.xml_controller.import_data')
       #    body = enevelope.add_element "BODY"
       #    import_data = body.add_element "IMPORTDATA"
       #    requestdesc = import_data.add_element "REQUESTDESC"
       #    report_name = requestdesc.add_element "REPORTNAME"
-      #    report_name.text = "All Masters"
+      #    report_name.text = t('app.controllers.xml_controller.all_masters')
       #    static_variables = requestdesc.add_element "STATICVARIABLES"
       #    svcurrentcompany = static_variables.add_element "SVCURRENTCOMPANY"
       #    svcurrentcompany.text = @institution.config_value

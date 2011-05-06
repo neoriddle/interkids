@@ -15,7 +15,7 @@ class FinanceController < ApplicationController
   def donation
     @donation = FinanceDonation.new(params[:donation])
     if request.post? and @donation.save
-      flash[:notice] = 'Donation accepted.'
+      flash[:notice] = t('app.controllers.finance_controller.donation_accepted')
       redirect_to :action => 'donation_receipt', :id => @donation.id
     end
   end
@@ -43,10 +43,10 @@ class FinanceController < ApplicationController
     @batches = Batch.all(:conditions => ["is_deleted = ?", false])
 
     if @categories.empty?
-      flash[:notice] = "Please create category for expense!"
+      flash[:notice] = t('app.controllers.finance_controller.please_create_category_for_expense')
     end
     if request.post? and @expense.save
-      flash[:notice] = "Expense has been added to the accounts."
+      flash[:notice] = t('app.controllers.finance_controller.expense_has_been_added_to_the_accounts')
       check_maximum_minimum_cash(1.day.ago)
     end
   end
@@ -66,13 +66,13 @@ class FinanceController < ApplicationController
 
     unless (min_limit..max_limit).include? amount 
       if amount > max_limit
-        body = "<p>Cash limit is overload<br />Amount #{amount}.<br />"
-        subject = "Cash limit is overload"
-        flash[:maximum] = "Amount (#{amount}) in cash is overload."
+        body = "<p>" + t('app.controllers.finance_controller.cash_limit_overload') +"<br />"+t('app.controllers.finance_controller.amount')+ "#{amount}.<br />"
+        subject = t('app.controllers.finance_controller.cash_limit_overload')
+        flash[:maximum] = t('app.controllers.finance_controller.amount') + "(#{amount})" + t('app.controllers.finance_controller.in_cash_overload')
       else
-        body = "<p>Cash limit is underload<br />Amount #{amount}.<br />"
-        subject = "Cash limit is underload"
-        flash[:minimum] = "Amount (#{amount}) in cash is underload."
+        body = "<p>" + t('app.controllers.finance_controller.cash_limit_underload') + "<br />"+t('app.controllers.finance_controller.amount') + " #{amount}.<br />"
+        subject = t('app.controllers.finance_controller.cash_limit_underload')
+        flash[:minimum] = t('app.controllers.finance_controller.amount_total') + "(#{amount})" + t('app.controllers.finance_controller.in_cash_overload')
       end
 
       admins = User.all(:conditions => {:admin => true} )
@@ -93,7 +93,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.find(params[:id])
     @categories = FinanceTransactionCategory.all(:conditions => {:is_income => false} )
     if request.post? and @transaction.update_attributes(params[:transaction])
-      flash[:notice] = "The entry has been edited."
+      flash[:notice] = t('app.controllers.finance_controller.the_entry_has_been_edited')
     end
   end
   def income_create
@@ -104,10 +104,10 @@ class FinanceController < ApplicationController
     @batches = Batch.all(:joins => :course, :conditions => {:is_deleted => false} )
 
     if @categories.empty?
-      flash[:notice] = "Please create category for income!"
+      flash[:notice] = t('app.controllers.finance_controller.please_create_category_for_income')
     end
     if request.post? and @transaction.save
-      flash[:notice] = "Income has been added to the accounts."
+      flash[:notice] = t('app.controllers.finance_controller.income_has_been_added')
       check_maximum_minimum_cash(1.day.ago)
       @transaction = FinanceTransaction.new
     end
@@ -129,7 +129,7 @@ class FinanceController < ApplicationController
     @transaction = FinanceTransaction.find(params[:id])
     @categories = FinanceTransactionCategory.all(:conditions => {:is_income => true} )
     if request.post? and @transaction.update_attributes(params[:transaction])
-      flash[:notice] = "The entry has been edited."
+      flash[:notice] = t('app.controllers.finance_controller.the_entry_has_been_edited')
     end
   end
 
@@ -206,7 +206,7 @@ class FinanceController < ApplicationController
     respond_to do |format|
       format.csv  { 
         tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
-          tsv << ["Title","Student","Payment Form","Amount"]
+          tsv << [t('app.controllers.finance_controller.title'),t('app.controllers.finance_controller.student'),t('app.controllers.finance_controller.payment_form'),t('app.controllers.finance_controller.amount')]
           transactions.each do |t|
             tsv << [t.title,t.full_name,t.payform,t.amount]
           end
@@ -377,7 +377,7 @@ class FinanceController < ApplicationController
     dates.each do |d|
       d.approve(current_user.id)
     end
-    flash[:notice] = 'Payslip has been approved'
+    flash[:notice] = t('app.controllers.finance_controller.payslip_has_been_approved')
     redirect_to :action => "index"
     
   end
@@ -388,7 +388,7 @@ class FinanceController < ApplicationController
     dates.each do |d|
       d.approve(current_user.id)
     end
-    flash[:notice] = 'Payslip has been approved'
+    flash[:notice] = t('app.controllers.finance_controller.payslip_has_been_approved')
     redirect_to :action => "index"
   end
 
@@ -684,12 +684,12 @@ class FinanceController < ApplicationController
         :batch_id => params[:additional_fees][:batch_id],
         :fee_category_id => @additional_category.id
       )
-      body = "<p>Fee submission date for "+@additional_category.name+" has been published <br />
-                               Fees submitting date starts on<br />
-                               Start date :"+@collection_date.start_date.to_s+"<br />"+
-        "End date :"+@collection_date.end_date.to_s+"<br /"+
-        "Due date :"+@collection_date.due_date.to_s
-      subject = "Fees submission date"
+      body = "<p>" + t('app.controllers.finance_controller.fee_submission_date_for') + @additional_category.name + t('app.controllers.finance_controller.has_been_published') + "<br />"
+                               t('app.controllers.finance_controller.fees_submitting_date_starts_on') + "<br />"
+                               t('app.controllers.finance_controller.start_date') + @collection_date.start_date.to_s + "<br />" +
+        t('app.controllers.finance_controller.end_date') + @collection_date.end_date.to_s + "<br /" +
+        t('app.controllers.finance_controller.due_date') + @collection_date.due_date.to_s
+      subject = t('app.controllers.finance_controller.fees_submission_date')
       @due_date = @collection_date.due_date.strftime("%Y-%b-%d") +  " 00:00:00"
       unless batch.empty?
         @students.each do |s|
@@ -697,7 +697,7 @@ class FinanceController < ApplicationController
           Reminder.create(:sender=>@user.id, :recipient=>s.id, :subject=> subject,
             :body => body, :is_read=>false, :is_deleted_by_sender=>false,:is_deleted_by_recipient=>false)
         end
-        Event.create(:title=> "Fees Due", :description =>@additional_category.name, :start_date => @due_date, :end_date => @due_date, :is_due => true)
+        Event.create(:title=> t('app.controllers.finance_controller.fees_due'), :description =>@additional_category.name, :start_date => @due_date, :end_date => @due_date, :is_due => true)
       else
         @batches.each do |b|
           @students = Student.find_all_by_batch_id(b.id)
@@ -707,12 +707,12 @@ class FinanceController < ApplicationController
               :body => body, :is_read=>false, :is_deleted_by_sender=>false,:is_deleted_by_recipient=>false)
            end
         end
-        Event.create(:title=> "Fees Due", :description =>@additional_category.name, :start_date => @due_date, :end_date => @due_date, :is_due => true)
+        Event.create(:title=> t('app.controllers.finance_controller.fees_due'), :description =>@additional_category.name, :start_date => @due_date, :end_date => @due_date, :is_due => true)
       end
-      flash[:notice] = "Category created, please add Particulars for the category"
+      flash[:notice] = t('app.controllers.finance_controller.category_created_please_add_particulars_for_the_category')
       redirect_to(:action => "add_particulars" ,:id => @collection_date.id)
     else
-      flash[:notice] = 'Fields with * cannot be empty'
+      flash[:notice] = t('app.controllers.finance_controller.fields_with_cannot_be_empty')
       redirect_to :action => "additional_fees_create_form"
     end
   end
@@ -854,12 +854,12 @@ class FinanceController < ApplicationController
       if @finance_fee_collection.save
         @students = Student.find_all_by_batch_id(b)
         @students.each do |s|
-          body = "<p><b>Fee submission date for<i>"+fee_category.name+"</i>has been published</b><br /><br/>
-                                Start date :"+@finance_fee_collection.start_date.to_s+"<br />"+
-            "End date :"+@finance_fee_collection.end_date.to_s+"<br />"+
-            "Dude date :"+@finance_fee_collection.due_date.to_s+"<br /><br /><br />"+
-            "check your  <a href='../../finance/student_fees_structure/#{s.id}/#{@finance_fee_collection.id}'>Fee structure</a> <br/><br/><br/>
-                               regards,<br/>"+@user.full_name.capitalize
+          body = "<p><b>" + t('app.controllers.finance_controller.fee_submission_date_for') + "<i>" + fee_category.name + "</i>" + t('app.controllers.finance_controller.has_been_published') + "</b><br /><br/>"
+                                t('app.controllers.finance_controller.start_date') + @finance_fee_collection.start_date.to_s + "<br />" +
+            t('app.controllers.finance_controller.end_date') + @finance_fee_collection.end_date.to_s + "<br />" +
+            t('app.controllers.finance_controller.dude_date') + @finance_fee_collection.due_date.to_s + "<br /><br /><br />" +
+            t('app.controllers.finance_controller.check_your') + "<a href='../../finance/student_fees_structure/#{s.id}/#{@finance_fee_collection.id}'>" + t('app.controllers.finance_controller.fee_structure') +  "</a> <br/><br/><br/>"
+                               t('app.controllers.finance_controller.regards') + "<br/>" + @user.full_name.capitalize
 
           FinanceFee.create(:student_id => s.id,
                             :fee_collection_id => @finance_fee_collection.id)
@@ -871,7 +871,7 @@ class FinanceController < ApplicationController
                           :is_deleted_by_sender=>false,
                           :is_deleted_by_recipient=>false)
        end
-          Event.create(:title=> "Fees Due", 
+          Event.create(:title=> t('app.controllers.finance_controller.fees_due'), 
                        :description =>fee_category.name,
                        :start_date => @finance_fee_collection.due_date,
                        :end_date => @finance_fee_collection.due_date,
@@ -902,7 +902,7 @@ class FinanceController < ApplicationController
   
   def fee_collection_update
     @finance_fee_collection = FinanceFeeCollection.find(params[:id])
-    flash[:notice]="Fee Collection updated successfully" if @finance_fee_collection.update_attributes(params[:fee_collection]) if request.post?
+    flash[:notice]=t('app.controllers.finance_controller.fee_collection_updated_successfully') if @finance_fee_collection.update_attributes(params[:fee_collection]) if request.post?
     @finance_fee_collections = FinanceFeeCollection.find_all_by_batch_id_and_is_deleted(@finance_fee_collection.batch_id, false)
   end
 
@@ -995,8 +995,8 @@ class FinanceController < ApplicationController
       transaction.payment_form_id = params[:transaction][:payment_form]
       transaction.save
 
-      part = FinanceFeeParticulars.new(:name                      => 'Abono', 
-                                       :description               => "Abono de #{transaction.amount}", 
+      part = FinanceFeeParticulars.new(:name                      => t('app.controllers.finance_controller.abono'), 
+                                       :description               => t('app.controllers.finance_controller.abono_de')+"#{transaction.amount}", 
                                        :amount                    => -transaction.amount,
                                        :finance_fee_category_id   => @fee_collection.fee_category.id, 
                                        :admission_no              => @student.admission_no, 
@@ -1005,7 +1005,7 @@ class FinanceController < ApplicationController
                                        :finance_fee_collection_id => @fee_collection.id)
       part.save
 
-      transaction.title = "Recipit No. #{part.id}" 
+      transaction.title = t('app.controllers.finance_controller.recipit_no')+ "#{part.id}" 
       transaction.save
 
       @financefee.update_attribute(:transaction_id, transaction.id)
@@ -1142,7 +1142,7 @@ class FinanceController < ApplicationController
   
     if request.post?
       transaction = FinanceTransaction.new
-      transaction.title = "Recipit No. F#{@financefee.id}"
+      transaction.title = t('app.controllers.finance_controller.recipit_no_f') + "#{@financefee.id}"
       transaction.category = FinanceTransactionCategory.find_by_name("Fee")
       transaction.student_id = params[:student]
       transaction.finance_fees_id = @financefee.id
@@ -1151,7 +1151,7 @@ class FinanceController < ApplicationController
       transaction.save
       @financefee.update_attribute(:transaction_id, transaction.id)
     end
-    flash[:notice] = 'Fees Paid'
+    flash[:notice] = t('app.controllers.finance_controller.fees_paid')
     redirect_to  :action => "fees_student_search"
   end
 
@@ -1242,7 +1242,7 @@ class FinanceController < ApplicationController
     if request.post?
 
       transaction = FinanceTransaction.new
-      transaction.title = "Recipit No. F#{@financefee.id}"
+      transaction.title = t('app.controllers.finance_controller.recipit_no_f') + "#{@financefee.id}"
       transaction.category = FinanceTransactionCategory.find_by_name("Fee")
       transaction.student_id = params[:student]
       transaction.finance_fees_id = @financefee.id
@@ -1251,7 +1251,7 @@ class FinanceController < ApplicationController
       transaction.save
       @financefee.update_attribute(:transaction_id, transaction.id)
 
-      flash[:notice] = "Fees Paid"
+      flash[:notice] = t('app.controllers.finance_controller.fees_paid')
       redirect_to  :action => "fees_defaulters"
     
     end
@@ -1345,7 +1345,7 @@ class FinanceController < ApplicationController
     respond_to do |format|
       format.csv  { 
         tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
-          tsv << ["Category","Collection","Title","Student","Payment Form","Amount","Datetime"]
+          tsv << [t('app.controllers.finance_controller.category'),t('app.controllers.finance_controller.collection'),t('app.controllers.finance_controller.title'),t('app.controllers.finance_controller.student'),t('app.controllers.finance_controller.payment_form'),t('app.controllers.finance_controller.amount'),t('app.controllers.finance_controller.datetime')]
           transactions.each do |t|
             tsv << [t.name,t.name1,t.title,t.full_name,t.payform,t.amount,t.time]
           end
@@ -1396,19 +1396,19 @@ class FinanceController < ApplicationController
     unless hr.nil?
       salary = Employee.total_employees_salary(employees,start_date,end_date)
       unless salary <= 0
-        x_labels << "Salary"
+        x_labels << t('app.controllers.finance_controller.salary')
         data << salary-(salary*2)
         largest_value = salary if largest_value < salary
       end
     end
     unless donations_total <= 0
-      x_labels << "Donations"
+      x_labels << t('app.controllers.finance_controller.donations')
       data << donations_total
       largest_value = donations_total if largest_value < donations_total
     end
 
     unless fees <= 0
-      x_labels << "Fees"
+      x_labels << t('app.controllers.finance_controller.fees')
       data << fees
       largest_value = fees if largest_value < fees
     end
@@ -1428,7 +1428,7 @@ class FinanceController < ApplicationController
     bargraph.width = 1;
     bargraph.colour = '#bb0000';
     bargraph.dot_size = 3;
-    bargraph.text = "Amount"
+    bargraph.text = t('app.controllers.finance_controller.amount')
     bargraph.values = data
 
     x_axis = XAxis.new
@@ -1437,9 +1437,9 @@ class FinanceController < ApplicationController
     y_axis = YAxis.new
     y_axis.set_range(largest_value-(largest_value*2),largest_value,largest_value/5)
 
-    title = Title.new("Finance Transaction")
+    title = Title.new t('app.controllers.finance_controller.finance_transaction')
 
-    x_legend = XLegend.new("Examination name")
+    x_legend = XLegend.new t('app.controllers.finance_controller.examination_name')
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
     y_legend = YLegend.new("Marks")
@@ -1486,7 +1486,7 @@ class FinanceController < ApplicationController
       salary = Employee.total_employees_salary(employees,start_date,end_date)
       salary2 = Employee.total_employees_salary(employees,start_date2,end_date2)
       unless salary <= 0 and salary2 <= 0
-        x_labels << "Salary"
+        x_labels << t('app.controllers.finance_controller.salary')
         data << salary-(salary*2)
         data2 << salary2-(salary2*2)
         largest_value = salary if largest_value < salary
@@ -1494,7 +1494,7 @@ class FinanceController < ApplicationController
       end
     end
     unless donations_total <= 0 and donations_total2 <= 0
-      x_labels << "Donations"
+      x_labels << t('app.controllers.finance_controller.donations')
       data << donations_total
       data2 << donations_total2
       largest_value = donations_total if largest_value < donations_total
@@ -1502,7 +1502,7 @@ class FinanceController < ApplicationController
     end
 
     unless fees <= 0 and fees2 <= 0
-      x_labels << "Fees"
+      x_labels << t('app.controllers.finance_controller.fees')
       data << fees
       data2 << fees2
       largest_value = fees if largest_value < fees
@@ -1517,7 +1517,7 @@ class FinanceController < ApplicationController
         other -= trans.amount
       end
     end
-    x_labels << "other"
+    x_labels << t('app.controllers.finance_controller.other')
     data << other
     largest_value = other if largest_value < other
     other2 = 0
@@ -1537,13 +1537,13 @@ class FinanceController < ApplicationController
     bargraph.width = 1;
     bargraph.colour = '#bb0000';
     bargraph.dot_size = 3;
-    bargraph.text = "For the period #{start_date}-#{end_date}"
+    bargraph.text = t('app.controllers.finance_controller.for_the_period') + "#{start_date}-#{end_date}"
     bargraph.values = data
     bargraph2 = BarFilled.new()
     bargraph2.width = 1;
     bargraph2.colour = '#000000';
     bargraph2.dot_size = 3;
-    bargraph2.text = "For the period #{start_date2}-#{end_date2}"
+    bargraph2.text = t('app.controllers.finance_controller.for_the_period') + "#{start_date2}-#{end_date2}"
     bargraph2.values = data2
 
     x_axis = XAxis.new
@@ -1552,12 +1552,12 @@ class FinanceController < ApplicationController
     y_axis = YAxis.new
     y_axis.set_range(largest_value-(largest_value*2),largest_value,largest_value/5)
 
-    title = Title.new("Finance Transaction")
+    title = Title.new t('app.controllers.finance_controller.finance_transaction')
 
-    x_legend = XLegend.new("Examination name")
+    x_legend = XLegend.new t('app.controllers.finance_controller.examination_name')
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Marks")
+    y_legend = YLegend.new t('app.controllers.finance_controller.marks')
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new
@@ -1600,18 +1600,18 @@ class FinanceController < ApplicationController
       salary = Employee.total_employees_salary(employees,start_date,end_date)
     end
     unless salary <= 0
-      x_labels << "Salary"
+      x_labels << t('app.controllers.finance_controller.salary')
       data << salary-(salary*2)
       largest_value = salary if largest_value < salary
     end
     unless donations_total <= 0
-      x_labels << "Donations"
+      x_labels << t('app.controllers.finance_controller.donations')
       data << donations_total
       largest_value = donations_total if largest_value < donations_total
     end
 
     unless fees <= 0
-      x_labels << "Fees"
+      x_labels << t('app.controllers.finance_controller.fees')
       data << fees
       largest_value = fees if largest_value < fees
     end
@@ -1631,7 +1631,7 @@ class FinanceController < ApplicationController
     bargraph.width = 1;
     bargraph.colour = '#bb0000';
     bargraph.dot_size = 3;
-    bargraph.text = "Amount"
+    bargraph.text = t('app.controllers.finance_controller.amount')
     bargraph.values = data
 
     x_axis = XAxis.new
@@ -1640,12 +1640,12 @@ class FinanceController < ApplicationController
     y_axis = YAxis.new
     y_axis.set_range(largest_value-(largest_value*2),largest_value,largest_value/5)
 
-    title = Title.new("Finance Transaction")
+    title = Title.new t('app.controllers.finance_controller.finance_transaction')
 
-    x_legend = XLegend.new("Examination name")
+    x_legend = XLegend.new t('app.controllers.finance_controller.examination_name')
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Marks")
+    y_legend = YLegend.new t('app.controllers.finance_controller.marks')
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new

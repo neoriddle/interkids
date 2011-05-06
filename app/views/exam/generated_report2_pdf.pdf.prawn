@@ -28,11 +28,11 @@ data = Array.new(){Array.new()}
 pdf.text exam_group.name+"-"+@subject.name , :size => 18 ,:at=>[10,620]
 pdf.text exam_group.batch.name,:size => 12,:at=>[10,610]
   if exam_group.exam_type == 'Marks'
-    data.push [ 'Student', 'Marks', 'Max Marks'  ]
+    data.push [t('app.views.exam.generated_report2_pdf.student'), t('app.views.exam.generated_report2_pdf.marks'), t('app.views.exam.generated_report2_pdf.max_marks')  ]
   elsif exam_group.exam_type == 'Grades'
-    data.push [ 'Student', 'Grades']
+    data.push [ t('app.views.exam.generated_report2_pdf.student'), t('app.views.exam.generated_report2_pdf.grades')]
   else
-    data.push [ 'Student', 'Marks', 'Max marks', 'Grades']
+    data.push [ t('app.views.exam.generated_report2_pdf.student'), t('app.views.exam.generated_report2_pdf.marks'), t('app.views.exam.generated_report2_pdf.max_marks'), t('app.views.exam.generated_report2_pdf.grades')]
   end
   exam = Exam.find_by_exam_group_id_and_subject_id(exam_group.id,@subject.id)
   @students.each do |student|
@@ -63,13 +63,13 @@ pdf.text exam_group.batch.name,:size => 12,:at=>[10,610]
   end
   unless exam.nil?
     if exam_group.exam_type == 'Marks'
-      data.push [ 'Average', exam_group.subject_wise_batch_average_marks(@subject.id),'-']
+      data.push [ t('app.views.exam.generated_report2_pdf.average'), exam_group.subject_wise_batch_average_marks(@subject.id),'-']
     elsif exam_group.exam_type == 'MarksAndGrades'
 
-      data.push [ "Average",exam_group.subject_wise_batch_average_marks(@subject.id),  '-','-']
+      data.push [ t('app.views.exam.generated_report2_pdf.average'),exam_group.subject_wise_batch_average_marks(@subject.id),  '-','-']
 
     else
-      data.push [ "Average","-"]
+      data.push [ t('app.views.exam.generated_report2_pdf.average'),"-"]
     end
   end
   pdf.table data, :width => 500,
@@ -87,7 +87,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
     signature = [[""]]
     pdf.table signature, :width => 500,
       :align => {0 => :right,1 => :right},
-      :headers => ["Signature"],
+      :headers => [t('app.views.exam.generated_report2_pdf.signature')],
       :header_text_color  => "DDDDDD",
       :border_color => "FFFFFF",
       :position => :center

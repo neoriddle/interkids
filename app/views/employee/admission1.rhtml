@@ -26,9 +26,9 @@
         <label for="employee_id"><%= t('app.views.employee.admission1.employee_no') %> <span class="necessary-field">*</span> </label>
         <div class="text-input-bg">
           <% unless @config.config_value == '0' or @last_admitted_employee.nil? %>
-            <%= a.text_field t('app.views.employee.admission1.employee_number'), :value=> @last_admitted_employee.employee_number.next%>
+            <%= a.text_field :employee_number, :value=> @last_admitted_employee.employee_number.next%>
           <% else %>
-            <%= a.text_field t('app.views.employee.admission1.employee_number'),:value=>'E1' %>
+            <%= a.text_field :employee_number, :value=>'E1' %>
           <% end %></div>
       </div>
       <hr class="label-underline"></hr>

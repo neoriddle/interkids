@@ -33,7 +33,7 @@ subject_no.times do |i|
     exam_no.times do |j|
         @exam = Exam.find_by_subject_id_and_exam_group_id(@subjects[i-1].id,@exam_groups[j-1].id)
         exam_score = ExamScore.find_by_student_id(@student.id, :conditions=>{:exam_id=>@exam.id})unless @exam.nil?
-            data[0][0] = 'Subject'
+            data[0][0] = t('app.views.exam.generated_report4_pdf.subject')
             data[0][j] = @exam_groups[j-1].name
 unless exam_score.nil?
                 if @exam_groups[j-1].exam_type == "MarksAndGrades"
@@ -45,7 +45,7 @@ unless exam_score.nil?
                     @g = 1
                     @gr = 1
                 end
-                    data[0][exam_no] = 'Total'
+                    data[0][exam_no] = t('app.views.exam.generated_report4_pdf.total')
                     unless @g == 1
                     total_score = ExamScore.new()
                         data[i][exam_no] = total_score.grouped_exam_subject_total(@subjects[i-1],@student,@type)
@@ -74,7 +74,7 @@ end
     end
                     data[i][0]= @subjects[i-1].name
                     
-                    data[subject_no][0] = 'Total'
+                    data[subject_no][0] = t('app.views.exam.generated_report4_pdf.total')
 end
                     
 
@@ -92,15 +92,15 @@ aggregate=0 if aggregate==nil
 
 
 pdf.text @student.full_name, :size => 18 ,:at=>[10,620]
-pdf.text "Examination results" ,:size => 7,:at=>[10,610]
-pdf.text "Total marks: #{@marks_total} , Aggregate: " + "%.2f" %aggregate + "%",  :at=>[350,620]
+pdf.text t('app.views.exam.generated_report4_pdf.examination_results') ,:size => 7,:at=>[10,610]
+pdf.text t('app.views.exam.generated_report4_pdf.total_marks') #{@marks_total} , t('app.views.exam.generated_report4_pdf.aggregate') + "%.2f" %aggregate + "%",  :at=>[350,620]
 end
 pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
      pdf.font "Helvetica" do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.exam.generated_report4_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

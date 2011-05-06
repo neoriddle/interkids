@@ -22,9 +22,9 @@ pdf.header pdf.margin_box.top_left do
 end
 
 pdf.move_down(80)
-pdf.text "Fee Defaulters" , :size => 14 ,:align => :center
+pdf.text t('app.views.finance.fee_defaulters_pdf.fee_defaulters'), :size => 14 ,:align => :center
 pdf.move_down(20)
-pdf.text "Class :"+@batch.full_name , :size => 14
+pdf.text t('app.views.finance.fee_defaulters_pdf.class') + @batch.full_name , :size => 14
 
 
 total_fees = 0
@@ -50,7 +50,7 @@ pdf.move_down(30)
 unless data.empty?
 pdf.move_down(30)
 pdf.table data, :width => 500,
-  :headers => [ 'Sl no.', 'Name', 'Amount'  ],
+  :headers => [ t('app.views.finance.fee_defaulters_pdf.sl_no'), t('app.views.finance.fee_defaulters_pdf.name'), t('app.views.finance.fee_defaulters_pdf.amount')  ],
   :border_color => "000000",
   :header_color => "eeeeee",
   :header_text_color  => "97080e",
@@ -67,7 +67,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
     signature = [[""]]
     pdf.table signature, :width => 500,
       :align => {0 => :right,1 => :right},
-      :headers => ["Signature"],
+      :headers => [t('app.views.finance.fee_defaulters_pdf.signature')],
       :header_text_color  => "DDDDDD",
       :border_color => "FFFFFF",
       :position => :center

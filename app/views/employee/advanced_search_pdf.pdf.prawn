@@ -22,7 +22,7 @@ pdf.table info, :width => 400,
 end
 pdf.move_down(100)
 pdf.bounding_box([20,620], :width => 500) do
-pdf.text "Employee "+@searched_for.downcase, :size => 12 
+pdf.text t('app.views.employee.advanced_search_pdf.employee')+@searched_for.downcase, :size => 12
 end
 pdf.move_down(30)
 data=Array.new(){Array.new()}
@@ -30,7 +30,7 @@ data=Array.new(){Array.new()}
         data.push [employee1.first_name,employee1.employee_department.name,employee1.employee_number, employee1.joining_date.strftime("%d %b, %Y")]
     end
 pdf.table data, :width => 500,
-                :headers => ["Name","Department","Employee Number", "Date Of Joining"],
+                :headers => [t('app.views.employee.advanced_search_pdf.name'),t('app.views.employee.advanced_search_pdf.department'),t('app.views.employee.advanced_search_pdf.employee_number'), t('app.views.employee.advanced_search_pdf.date_of_joining')],
                 :border_color => "000000",
                 :header_color => "eeeeee",
                 :header_text_color  => "97080e",
@@ -48,7 +48,7 @@ unless @employees2.nil?
 unless data1.empty?
 pdf.move_down(80)
 pdf.table data1, :width => 500,
-                :headers => ["Name","Department","Employee Number", "Date Of Joining"],
+                :headers => [t('app.views.employee.advanced_search_pdf.name'),t('app.views.employee.advanced_search_pdf.department'),t('app.views.employee.advanced_search_pdf.employee_number'), t('app.views.employee.advanced_search_pdf.date_of_joining')],
                 :border_color => "000000",
                 :header_color => "eeeeee",
                 :header_text_color  => "97080e",
@@ -71,7 +71,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.employee.advanced_search_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

@@ -22,11 +22,11 @@ class ConfigurationController < ApplicationController
       unless params[:upload].nil?
         @temp_file=params[:upload][:datafile]
         unless FILE_EXTENSIONS.include?(File.extname(@temp_file.original_filename).downcase)
-          flash[:notice] = 'Invalid Extention. Image must be .JPG'
+          flash[:notice] = t('app.controllers.configuration_controller.invalid_extention_image_must_be_jpg')
           redirect_to :action => "settings"  and return
         end
         if @temp_file.size > FILE_MAXIMUM_SIZE_FOR_FILE
-          flash[:notice] = 'File too large. File size should be less than 1 MB'
+          flash[:notice] = t('app.controllers.configuration_controller.file_too_large_file_size_should_be_less_than_1_mb')
           redirect_to :action => "settings" and return
         end
       end
@@ -34,7 +34,7 @@ class ConfigurationController < ApplicationController
       Configuration.set_config_values(params[:configuration])
       Configuration.save_institution_logo(params[:upload]) unless params[:upload].nil?
 
-      flash[:notice] = 'Settings has been saved'
+      flash[:notice] = t('app.controllers.configuration_controller.settings_has_been_saved')
       redirect_to :action => "settings"  and return
     end
   end

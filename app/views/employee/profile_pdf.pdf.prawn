@@ -23,22 +23,22 @@ end
 
 pdf.move_down(100)
 pdf.text @employee.full_name , :size => 18 ,:at=>[75,620]
-pdf.text "Employee Profile" ,:size => 7,:at=>[75,610]
+pdf.text t('app.views.employee.profile_pdf.employee_profile'),:size => 7,:at=>[75,610]
 pdf.move_down(20)
 
-data= [ ["General Profile" , ""],
-        ["Employee no.", @employee.employee_number],
-        ["DOJ", @employee.joining_date.strftime("%d %b, %Y")],
-        ["Department", @employee.employee_department.name],
-        ["Category", @employee.employee_category.name],
-        ["Position", @employee.employee_position.name],
-        ["Job title", @employee.job_title],
-        ["Manager", @reporting_manager],
-        ["Gender", @gender],
-        ["Status", @status],
-        ["Qualification", @employee.qualification],
-        ["Total experience", @total_years.to_s+"Years "+@total_months.to_s+"Months"],
-        ["Experience info", @employee.experience_detail] ]
+data= [ [t('app.views.employee.profile_pdf.general_profile'), ""],
+        [t('app.views.employee.profile_pdf.employee_no'), @employee.employee_number],
+        [t('app.views.employee.profile_pdf.doj'), @employee.joining_date.strftime("%d %b, %Y")],
+        [t('app.views.employee.profile_pdf.department'), @employee.employee_department.name],
+        [t('app.views.employee.profile_pdf.category'), @employee.employee_category.name],
+        [t('app.views.employee.profile_pdf.position'), @employee.employee_position.name],
+        [t('app.views.employee.profile_pdf.job_title'), @employee.job_title],
+        [t('app.views.employee.profile_pdf.manager'), @reporting_manager],
+        [t('app.views.employee.profile_pdf.gender'), @gender],
+        [t('app.views.employee.profile_pdf.status'), @status],
+        [t('app.views.employee.profile_pdf.qualification'), @employee.qualification],
+        [t('app.views.employee.profile_pdf.total_experience'), @total_years.to_s + t('app.views.employee.profile_pdf.years') + @total_months.to_s + t('app.views.employee.profile_pdf.months')],
+        [t('app.views.employee.profile_pdf.experience_info'), @employee.experience_detail] ]
 
 pdf.table data, :width => 500,
                 :border_color => "000000",
@@ -52,16 +52,16 @@ pdf.table data, :width => 500,
     pdf.start_new_page
     pdf.move_down(100)
     pdf.text @employee.full_name , :size => 18 ,:at=>[75,620]
-    pdf.text "Employee Profile(Personal)" ,:size => 7,:at=>[75,610]
+    pdf.text t('app.views.employee.profile_pdf.employee_profile_personal'),:size => 7,:at=>[75,610]
     pdf.move_down(20)
-data = [["Date Of Birth", @employee.date_of_birth],
-        ["Marital status", @employee.marital_status],
-        ["No. of children", @employee.children_count],
-        ["Father's name", @employee.father_name],
-        ["Mother's name", @employee.mother_name],
-        ["Spouse name", @employee.husband_name],
-        ["Blood group", @employee.blood_group],
-        ["Nationality", @employee.nationality.name]]
+data = [[t('app.views.employee.profile_pdf.date_of_birth'), @employee.date_of_birth],
+        [t('app.views.employee.profile_pdf.marital_status'), @employee.marital_status],
+        [t('app.views.employee.profile_pdf.no_of_children'), @employee.children_count],
+        [t('app.views.employee.profile_pdf.fathers_name'), @employee.father_name],
+        [t('app.views.employee.profile_pdf.mothers_name'), @employee.mother_name],
+        [t('app.views.employee.profile_pdf.spouse_name'), @employee.husband_name],
+        [t('app.views.employee.profile_pdf.blood_group'), @employee.blood_group],
+        [t('app.views.employee.profile_pdf.nationality'), @employee.nationality.name]]
 
 pdf.table data, :width => 500,
                 :border_color => "000000",
@@ -74,21 +74,21 @@ pdf.table data, :width => 500,
     pdf.start_new_page
     pdf.move_down(100)
     pdf.text @employee.full_name , :size => 18 ,:at=>[75,620]
-    pdf.text "Employee Profile(Address details)" ,:size => 7,:at=>[75,610]
+    pdf.text t('app.views.employee.profile_pdf.employee_profile_address_details'),:size => 7,:at=>[75,610]
     pdf.move_down(20)
 
-data = [["Home address", @employee.home_address_line1],
+data = [[t('app.views.employee.profile_pdf.home_address'), @employee.home_address_line1],
         ["",@employee.home_address_line2],
-        ["City", @employee.home_city],
-        ["State", @employee.home_state],
-        ["Country", @home_country],
-        ["Pin code", @employee.home_pin_code],
-        ["Office address", @employee.office_address_line1],
+        [t('app.views.employee.profile_pdf.city'), @employee.home_city],
+        [t('app.views.employee.profile_pdf.state'), @employee.home_state],
+        [t('app.views.employee.profile_pdf.country'), @home_country],
+        [t('app.views.employee.profile_pdf.pin_code'), @employee.home_pin_code],
+        [t('app.views.employee.profile_pdf.office_address'), @employee.office_address_line1],
         ["",@employee.office_address_line2],
-        ["City", @employee.office_city],
-        ["State", @employee.office_state],
-        ["Country", @office_country],
-        ["Pin code", @employee.office_pin_code]]
+        [t('app.views.employee.profile_pdf.city'), @employee.office_city],
+        [t('app.views.employee.profile_pdf.state'), @employee.office_state],
+        [t('app.views.employee.profile_pdf.country'), @office_country],
+        [t('app.views.employee.profile_pdf.pin_code'), @employee.office_pin_code]]
   pdf.table data, :width => 500,
                 :border_color => "000000",
                 :border_width   => 1,
@@ -100,14 +100,14 @@ data = [["Home address", @employee.home_address_line1],
 pdf.start_new_page
 pdf.move_down(100)
 pdf.text @employee.full_name , :size => 18 ,:at=>[75,620]
-pdf.text "Employee Profile(Contact details)" ,:size => 7,:at=>[75,610]
+pdf.text t('app.views.employee.profile_pdf.employee_profile_contact_details'),:size => 7,:at=>[75,610]
 pdf.move_down(20)
-data=[["Office phone1", @employee.office_phone1],
-      ["Office phone2", @employee.office_phone2],
-      ["Mobile phone", @employee.mobile_phone],
-      ["Home phone", @employee.home_phone],
-      ["Email", @employee.email],
-      ["Fax", @employee.fax] ]
+data=[[t('app.views.employee.profile_pdf.office_phone1'), @employee.office_phone1],
+      [t('app.views.employee.profile_pdf.office_phone2'), @employee.office_phone2],
+      [t('app.views.employee.profile_pdf.mobile_phone'), @employee.mobile_phone],
+      [t('app.views.employee.profile_pdf.home_phone'), @employee.home_phone],
+      [t('app.views.employee.profile_pdf.email'), @employee.email],
+      [t('app.views.employee.profile_pdf.fax'), @employee.fax] ]
 
 pdf.table data, :width => 500,
                 :border_color => "000000",
@@ -121,7 +121,7 @@ unless @bank_details.empty?
 pdf.start_new_page
 pdf.move_down(100)
 pdf.text @employee.full_name , :size => 18 ,:at=>[75,620]
-pdf.text "Employee Profile(Bank Account Details)" ,:size => 7,:at=>[75,610]
+pdf.text t('app.views.employee.profile_pdf.employee_profile_bank_account_details'),:size => 7,:at=>[75,610]
 pdf.move_down(20)
 
 
@@ -142,7 +142,7 @@ unless @additional_details.empty?
 pdf.start_new_page
 pdf.move_down(100)
 pdf.text @employee.full_name , :size => 18 ,:at=>[75,620]
-pdf.text "Employee Profile(Additional Details)" ,:size => 7,:at=>[75,610]
+pdf.text t('app.views.employee.profile_pdf.employee_profile_additional_details'),:size => 7,:at=>[75,610]
 pdf.move_down(20)
 
 
@@ -165,7 +165,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.employee.profile_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

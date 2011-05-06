@@ -24,7 +24,7 @@ class BatchTransfersController < ApplicationController
     if @stu.empty?
       batch.update_attribute :is_active, false
     end
-    flash[:notice] = 'Trasferred students sucessfully.'
+    flash[:notice] = t('app.controllers.batch_transfers_controller.trasferred_students_sucessfully')
     redirect_to :controller => 'batch_transfers'
   end
 
@@ -46,7 +46,7 @@ class BatchTransfersController < ApplicationController
       if @stu.empty?
         @batch.update_attribute :is_active, false
       end
-      flash[:notice]="Graduated selected students successfully."
+      flash[:notice]= t('app.controllers.batch_transfers_controller.graduated_selected_students_successfully')
       redirect_to :action=>"graduation", :id=>params[:id], :ids => @admission_list
     end
   end
@@ -102,12 +102,12 @@ class BatchTransfersController < ApplicationController
       end
       render(:update) do |page|
         page.replace_html "prev-subject-name-#{subject.id}", :text=>""
-        page.replace_html "errors", :text=>"#{subject.name}  has been added to batch:#{batch.name}"
+        page.replace_html "errors", :text=>"#{subject.name}  t('app.controllers.batch_transfers_controller.has_been_added_to_batch') #{batch.name}"
       end
     else
       render(:update) do |page|
         page.replace_html "prev-subject-name-#{subject.id}", :text=>""
-        page.replace_html "errors", :text=>"<div class=\"errorExplanation\" ><p>#{batch.name} Already has the subject with name #{subject.name}</p></div>"
+        page.replace_html "errors", :text=>"<div class=\"errorExplanation\" ><p>#{batch.name} t('app.controllers.batch_transfers_controller.already_has_the_subject_with_name') #{subject.name}</p></div>"
       end
     end
   end
@@ -138,9 +138,9 @@ class BatchTransfersController < ApplicationController
               :max_weekly_classes=>subject.max_weekly_classes,:elective_group_id=>elect_group_exists.id,:is_deleted=>false)
           end
         end
-        msg += "<li> The subject #{subject.name}  has been added to Batch #{batch.name}</li>"
+        msg += "<li> t('app.controllers.batch_transfers_controller.the_subject') #{subject.name}  t('app.controllers.batch_transfers_controller.has_been_added_to_batch') #{batch.name}</li>"
       else
-        err +=   "<li>Batch #{batch.name} already has a subject with name #{subject.name}" + "</li>"
+        err +=   "<li>Batch #{batch.name} t('app.controllers.batch_transfers_controller.already_has_a_subject_with_name') #{subject.name}" + "</li>"
       end
     end
     @batch = batch
@@ -151,12 +151,12 @@ class BatchTransfersController < ApplicationController
     @elective_groups = @previous_batch.elective_groups
     @previous_batch_electives = Subject.find_all_by_batch_id(@previous_batch.id,:conditions=>["elective_group_id IS NOT NULL AND is_deleted = false"])
     render(:update) do |page|
-      page.replace_html 'previous-batch-subjects', :text=>"<p>Subjects have been assigned.</p> "
+      page.replace_html 'previous-batch-subjects', :text=>"<p> t('app.controllers.batch_transfers_controller.subjects_have_been_assigned') </p> "
       unless msg.empty?
         page.replace_html "msg", :text=>"<div class=\"flash-msg\"><ul>" +msg +"</ul></p>"
       end
       unless err.empty?
-        page.replace_html "errors", :text=>"<div class=\"errorExplanation\" ><p>Following errors were found :</p><ul>" +err + "</ul></div>"
+        page.replace_html "errors", :text=>"<div class=\"errorExplanation\" ><p> t('app.controllers.batch_transfers_controller.following_errors_were_found') </p><ul>" +err + "</ul></div>"
       end
     end
 

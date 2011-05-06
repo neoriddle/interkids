@@ -13,7 +13,7 @@ student = @students.map do |s|
             @i = @i+1
 
     pdf.move_down(20)
-    table_header = [["Sub-Code","Marks-obtained","Grade"]]
+    table_header = [[t('app.views.examination_result.all_sub_pdf.sub_code'),t('app.views.examination_result.all_sub_pdf.marks_obtained'),t('app.views.examination_result.all_sub_pdf.grade')]]
     pdf.table table_header, :width => 300,
                             :border_color => "000000",
                             :position => :center,
@@ -48,7 +48,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.examination_result.all_sub_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

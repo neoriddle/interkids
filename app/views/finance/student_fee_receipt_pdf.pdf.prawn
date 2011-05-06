@@ -22,10 +22,10 @@ pdf.table info, :width => 400,
 end
 
 pdf.move_down(80)
-pdf.text "Fee Reciept" , :size => 14 ,:align => :center
+pdf.text t('app.views.finance.student_fee_receipt_pdf.fee_reciept') , :size => 14 ,:align => :center
 pdf.move_down(20)
-pdf.text "Name : #{@student.full_name} " , :size => 11
-pdf.text "Admission no : #{@student.admission_no}" , :size => 11
+pdf.text t('app.views.finance.student_fee_receipt_pdf.name') + "#{@student.full_name} " , :size => 11
+pdf.text t('app.views.finance.student_fee_receipt_pdf.admission_no') + "#{@student.admission_no}" , :size => 11
 
 total_fees = 0
 
@@ -39,14 +39,14 @@ end
 unless @financefee.transaction_id.nil?
 @trans = FinanceTransaction.find(@financefee.transaction_id)
     if @trans.fine_included
-                 data.push [ @fee_particulars.size+1, 'Fine', @currency_type.to_s+(@trans.amount.to_f-total_fees).to_s  ]
+                 data.push [ @fee_particulars.size+1, t('app.views.finance.student_fee_receipt_pdf.fine'), @currency_type.to_s+(@trans.amount.to_f-total_fees).to_s  ]
   total_fees = @trans.amount.to_f
     end
 end
 pdf.move_down(20)
-data.push [ 'Total', '', @currency_type.to_s+total_fees.to_s ]
+data.push [ t('app.views.finance.student_fee_receipt_pdf.total'), '', @currency_type.to_s+total_fees.to_s ]
 pdf.table data, :width => 500,
-                :headers => [ 'Sl no.', 'Particulars', 'Amount'  ],
+                :headers => [ t('app.views.finance.student_fee_receipt_pdf.sl_no'), t('app.views.finance.student_fee_receipt_pdf.particulars'), t('app.views.finance.student_fee_receipt_pdf.amount')  ],
                 :border_color => "000000",
                 :header_color => "eeeeee",
                 :header_text_color  => "97080e",
@@ -60,7 +60,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.finance.student_fee_receipt_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

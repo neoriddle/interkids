@@ -23,7 +23,7 @@ class ClassTimingsController < ApplicationController
         @class_timing.batch.nil? ?
           @class_timings = ClassTiming.default :
           @class_timings = ClassTiming.for_batch(@class_timing.batch_id)
-      #  flash[:notice] = 'Class timing was successfully created.'
+      #  flash[:notice] = t('app.controllers.class_timings_controller.class_timing_was_successfully_created')
         format.html { redirect_to class_timing_url(@class_timing) }
         format.js { render :action => 'create' }
       else
@@ -49,7 +49,7 @@ class ClassTimingsController < ApplicationController
         @class_timing.batch.nil? ?
           @class_timings = ClassTiming.default :
           @class_timings = ClassTiming.for_batch(@class_timing.batch_id)
-   #     flash[:notice] = 'Class timing updated successfully.'
+   #     flash[:notice] = t('app.controllers.class_timings_controller.class_timing_updated_successfully')
         format.html { redirect_to class_timing_url(@class_timing) }
         format.js { render :action => 'update' }
       else

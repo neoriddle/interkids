@@ -22,7 +22,7 @@ pdf.table info, :width => 400,
 end
 pdf.move_down(100)
 pdf.bounding_box([20,620], :width => 500) do
-pdf.text "Students "+@searched_for.downcase , :size => 11
+pdf.text t('app.views.student.advanced_search_pdf.students') + @searched_for.downcase , :size => 11
 end
 pdf.move_down(20)
 data=Array.new(){Array.new()}
@@ -30,7 +30,7 @@ data=Array.new(){Array.new()}
     data.push  [student.full_name,student.batch.full_name,student.admission_no, student.date_of_birth.strftime("%d %b, %Y")]
 end
 pdf.table data, :width => 500,
-                :headers => ["Name","Batch","Admission Number", "Date Of Birth"],
+                :headers => [t('app.views.student.advanced_search_pdf.name'), t('app.views.student.advanced_search_pdf.batch'), t('app.views.student.advanced_search_pdf.admission_number'), t('app.views.student.advanced_search_pdf.date_of_birth')],
                 :border_color => "000000",
                 :header_color => "eeeeee",
                 :header_text_color  => "97080e",
@@ -50,7 +50,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.student.advanced_search_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

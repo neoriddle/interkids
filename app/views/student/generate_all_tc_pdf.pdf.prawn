@@ -25,41 +25,41 @@ end
 @students.each do |student|
 
 pdf.move_down(100)
-pdf.text "Transfer Certificate" , :size => 12 ,:align=>:center
+pdf.text t('app.views.student.generate_all_tc_pdf.transfer_certificate') , :size => 12 ,:align=>:center
 
 pdf.move_down(20)
 data=Array.new(){Array.new()}
 
-data = [["Name",student.full_name],
-["Admission no.",student.admission_no],
-["Date of admission",student.admission_date.strftime("%d %B %Y")],
-["DOB",student.date_of_birth.strftime("%d %B %Y")],
-["Last attended course",student.batch.full_name],
-["Blood group",student.blood_group],
-["Gender",student.gender_as_text],
-["Nationality",student.nationality.name],
-["Language",student.language]]
+data = [[t('app.views.student.generate_all_tc_pdf.name'),student.full_name],
+[t('app.views.student.generate_all_tc_pdf.admission_no'),student.admission_no],
+[t('app.views.student.generate_all_tc_pdf.date_of_admission'),student.admission_date.strftime("%d %B %Y")],
+[t('app.views.student.generate_all_tc_pdf.dob'),student.date_of_birth.strftime("%d %B %Y")],
+[t('app.views.student.generate_all_tc_pdf.last_attended_course'),student.batch.full_name],
+[t('app.views.student.generate_all_tc_pdf.blood_group'),student.blood_group],
+[t('app.views.student.generate_all_tc_pdf.gender'),student.gender_as_text],
+[t('app.views.student.generate_all_tc_pdf.nationality'),student.nationality.name],
+[t('app.views.student.generate_all_tc_pdf.language'),student.language]]
 
 if @father
-                data.push ['Father', @father.full_name]
+                data.push [t('app.views.student.generate_all_tc_pdf.father'), @father.full_name]
 elsif @mother
-                data.push ['Mother', @mother.full_name]
+                data.push [t('app.views.student.generate_all_tc_pdf.mother'), @mother.full_name]
 else
     unless @immediate_contact.nil?
                 data.push [@immediate_contact.relation, @immediate_contact.full_name ]
    end
 end
 unless student.student_category.nil?
-                data.push ["Category",student.student_category.name]
+                data.push [t('app.views.student.generate_all_tc_pdf.category'),student.student_category.name]
 end
 
-data.push  ["Religion",student.religion],
-        ["Address",student.address_line1],
+data.push  [t('app.views.student.generate_all_tc_pdf.religion'),student.religion],
+        [t('app.views.student.generate_all_tc_pdf.address'),student.address_line1],
         ["",student.address_line2],
-        ["City",student.city],
-        ["State",student.state],
-        ["Country",student.country.name],
-       ["Reason for leaving",student.status_description]
+        [t('app.views.student.generate_all_tc_pdf.city'),student.city],
+        [t('app.views.student.generate_all_tc_pdf.state'),student.state],
+        [t('app.views.student.generate_all_tc_pdf.country'),student.country.name],
+       [t('app.views.student.generate_all_tc_pdf.reason_for_leaving'),student.status_description]
 
 
 
@@ -81,7 +81,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.student.generate_all_tc_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

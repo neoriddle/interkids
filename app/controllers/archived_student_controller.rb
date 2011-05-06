@@ -15,7 +15,7 @@ class ArchivedStudentController < ApplicationController
   def destroy
     archived_student = ArchivedStudent.find(params[:id])
     ArchivedStudent.destroy(params[:id])
-    flash[:notice] = "All records have been deleted for student with admission no. #{archived_student.admission_no}."
+    flash[:notice] = "t('app.controllers.archived_student_controller.all_records_have_been_deleted_for_student_with_admission_no') #{archived_student.admission_no}"
     redirect_to :controller => 'user', :action => 'dashboard'
   end
 
@@ -241,14 +241,14 @@ class ArchivedStudentController < ApplicationController
     bargraph.width = 1;
     bargraph.colour = '#bb0000';
     bargraph.dot_size = 5;
-    bargraph.text = "Student's marks"
+    bargraph.text = t('app.controllers.archived_student_controller.students_marks')
     bargraph.values = data
 
     bargraph2 = BarFilled.new
     bargraph2.width = 1;
     bargraph2.colour = '#5E4725';
     bargraph2.dot_size = 5;
-    bargraph2.text = "Class average"
+    bargraph2.text = t('app.controllers.archived_student_controller.class_average')
     bargraph2.values = data2
 
     x_axis = XAxis.new
@@ -259,10 +259,10 @@ class ArchivedStudentController < ApplicationController
 
     title = Title.new(student.full_name)
 
-    x_legend = XLegend.new("Subjects")
+    x_legend = XLegend.new t('app.controllers.archived_student_controller.subjects')
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Marks")
+    y_legend = YLegend.new t('app.controllers.archived_student_controller.marks')
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new
@@ -309,10 +309,10 @@ class ArchivedStudentController < ApplicationController
 
     title = Title.new(subject.name)
 
-    x_legend = XLegend.new("Examination name")
+    x_legend = XLegend.new t('app.controllers.archived_student_controller.examination_name')
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Marks")
+    y_legend = YLegend.new t('app.controllers.archived_student_controller.marks')
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new
@@ -356,10 +356,10 @@ class ArchivedStudentController < ApplicationController
 
     title = Title.new(student.full_name)
 
-    x_legend = XLegend.new("Academic year")
+    x_legend = XLegend.new t('app.controllers.archived_student_controller.academic_year')
     x_legend.set_style('{font-size: 14px; color: #778877}')
 
-    y_legend = YLegend.new("Total marks")
+    y_legend = YLegend.new t('app.controllers.archived_student_controller.total_marks')
     y_legend.set_style('{font-size: 14px; color: #770077}')
 
     chart = OpenFlashChart.new

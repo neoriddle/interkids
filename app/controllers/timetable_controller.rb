@@ -13,7 +13,7 @@ class TimetableController < ApplicationController
       holiday = []
       @holiday = Weekday.find_all_by_batch_id(@batch.id)
       @holiday = Weekday.default if @holiday.empty?
-      flash[:notice] = 'You have set the weekdays!' if @holiday.empty?
+      flash[:notice] = t('app.controllers.timetable_controller.you_have_set_the_weekdays') if @holiday.empty?
       @holiday.each do |h|
         holiday.push h.weekday
       end
@@ -58,11 +58,11 @@ class TimetableController < ApplicationController
         end
           
         if set == 0
-          flash[:notice] = 'Timetable has already been published'
+          flash[:notice] = t('app.controllers.timetable_controller.timetable_has_already_been_published')
         elsif set == 1
-          flash[:notice] = 'Timetable updated'
+          flash[:notice] = t('app.controllers.timetable_controller.timetable_updated')
         else
-          flash[:notice] = 'Timetable created successfully'
+          flash[:notice] = t('app.controllers.timetable_controller.timetable_created_successfully')
         end
       end
     
@@ -170,7 +170,7 @@ class TimetableController < ApplicationController
 
         redirect_to :action => "edit", :id => @batch.id
       else
-        flash[:notice]="Select a batch to continue"
+        flash[:notice]= t('app.controllers.timetable_controller.select_a_batch_to_continue')
         redirect_to :action => "select_class"
       end
     end
@@ -190,7 +190,7 @@ class TimetableController < ApplicationController
   end
 
   def tt_entry_noupdate
-    render :update => "error_div_#{params[:tte_id]}", :text => "Cancelled."
+    render :update => "error_div_#{params[:tte_id]}", :text => t('app.controllers.timetable_controller.cancelled')
   end
 
   def update_multiple_timetable_entries
@@ -205,7 +205,7 @@ class TimetableController < ApplicationController
         "messages" => [] }
 
       # check for weekly subject limit.
-      errors["messages"] << "Weekly subject limit reached." \
+      errors["messages"] << t('app.controllers.timetable_controller.weekly_subject_limit_reached') \
         if subject.max_weekly_classes <= TimetableEntry.count(:conditions => "subject_id = #{subject.id}")
 
       if errors["messages"].empty?
@@ -288,7 +288,7 @@ class TimetableController < ApplicationController
         end
         redirect_to :action => "edit2", :id => @batch.id
       else
-        flash[:notice]="Select a batch to continue"
+        flash[:notice]= t('app.controllers.timetable_controller.select_a_batch_to_continue')
         redirect_to :action => "select_class2"
       end
     end
@@ -321,7 +321,7 @@ class TimetableController < ApplicationController
   end
 
   def update_multiple_timetable_entries2
-    @weekday = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    @weekday = [t('app.controllers.timetable_controller.sun'), t('app.controllers.timetable_controller.mon'), t('app.controllers.timetable_controller.tue'), t('app.controllers.timetable_controller.wed'), t('app.controllers.timetable_controller.thu'), t('app.controllers.timetable_controller.fri'), t('app.controllers.timetable_controller.sat')]
     employees_subject = EmployeesSubject.find(params[:emp_sub_id])
     tte_ids = params[:tte_ids].split(",").each {|x| x.to_i}
     @batch = employees_subject.subject.batch
@@ -335,22 +335,22 @@ class TimetableController < ApplicationController
         "messages" => [] }
 
       # check for weekly subject limit.
-      errors["messages"] << "Weekly subject limit reached." \
+      errors["messages"] << t('app.controllers.timetable_controller.weekly_subject_limit_reached') \
         if subject.max_weekly_classes <= TimetableEntry.count(:conditions => "subject_id = #{subject.id}")
 
       #check for overlapping classes
-      errors["messages"] << "Class overlap occured." \
+      errors["messages"] << t('app.controllers.timetable_controller.class_overlap_occured') \
         unless TimetableEntry.find(:first,
         :conditions => "week_day_id = #{tte.week_day_id} AND
                                                class_timing_id = #{tte.class_timing_id} AND
                                                employee_id = #{employee.id}").nil?
 
       # check for max_hour_day exceeded
-      errors["messages"] << "Max hours per day exceeded." \
+      errors["messages"] << t('app.controllers.timetable_controller.max_hours_per_day_exceeded') \
         if employee.max_hours_per_day <= TimetableEntry.count(:conditions => "employee_id = #{employee.id} AND week_day_id = #{tte.week_day_id}")
 
       # check for max hours per week
-      errors["messages"] << "Max hours per week exceeded." \
+      errors["messages"] << t('app.controllers.timetable_controller.max_hours_per_week_exceeded') \
         if employee.max_hours_per_week <= TimetableEntry.count(:conditions => "employee_id = #{employee.id}")
 
       if errors["messages"].empty?
@@ -389,7 +389,7 @@ class TimetableController < ApplicationController
   end
 
   def tt_entry_noupdate2
-    render :update => "error_div_#{params[:tte_id]}", :text => "Cancelled."
+    render :update => "error_div_#{params[:tte_id]}", :text => t('app.controllers.timetable_controller.cancelled')
   end
   #PDF Reports
   def timetable_pdf

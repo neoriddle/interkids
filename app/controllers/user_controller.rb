@@ -78,13 +78,13 @@ class UserController < ApplicationController
           @user.update_attributes(:password => @user.password,
             :role => @user.role_name
           )
-          flash[:notice] = 'Password changed successfully.'
+          flash[:notice] = t('app.controllers.user_controller.password_changed_successfully')
           redirect_to :action => 'dashboard'
         else
-          flash[:warn_notice] = '<p>Password confirmation failed. Please try again.</p>'
+          flash[:warn_notice] = '<p>' + t('app.controllers.user_controller.password_confirmation_failed_please_try_again') + '</p>'
         end
       else
-        flash[:warn_notice] = '<p>The old password you entered is incorrect. Please enter valid password.</p>'
+        flash[:warn_notice] = '<p>' + t('app.controllers.user_controller.the_old_password_you_entered_is_incorrect_please_enter_valid_password') + '</p>'
       end
     end
   end
@@ -94,17 +94,17 @@ class UserController < ApplicationController
 
     if request.post?
       if params[:user][:new_password]=='' and params[:user][:confirm_password]==''
-        flash[:warn_notice]= "<p>Password fields cannot be blank!</p>"
+        flash[:warn_notice]= "<p>" + t('app.controllers.user_controller.password_fields_cannot_be_blank') + "</p>"
       else
         if params[:user][:new_password] == params[:user][:confirm_password]
           user.password = params[:user][:new_password]
           user.update_attributes(:password => user.password,
             :role => user.role_name
           )
-          flash[:notice]= "Password has been updated successfully!"
+          flash[:notice]= t('app.controllers.user_controller.password_has_been_updated_successfully')
           redirect_to :action=>"edit", :id=>user.username
         else
-          flash[:warn_notice] = '<p>Password confirmation failed. Please try again.</p>'
+          flash[:warn_notice] = '<p>' + t('app.controllers.user_controller.password_confirmation_failed_please_try_again') + '</p>'
         end
       end
 
@@ -132,17 +132,17 @@ class UserController < ApplicationController
           @employee.joining_date =  Date.today - 5.year
           @employee.save
         end
-        flash[:notice] = 'User account created!'
+        flash[:notice] = t('app.controllers.user_controller.user_account_created')
         redirect_to :controller => 'user', :action => 'edit', :id => @user.username
       else
-        flash[:notice] = 'User account not created!'
+        flash[:notice] = t('app.controllers.user_controller.user_account_not_created')
       end
     end
   end
 
   def delete
     @user = User.find_by_username(params[:id]).destroy
-    flash[:notice] = 'User account deleted!'
+    flash[:notice] = t('app.controllers.user_controller.user_account_deleted')
     redirect_to :controller => 'user'
   end
 
@@ -159,13 +159,13 @@ class UserController < ApplicationController
     @user = User.find_by_username(params[:id])
     @current_user = current_user
     if request.post? and @user.update_attributes(params[:user])
-      flash[:notice] = 'User account updated!'
+      flash[:notice] = t('app.controllers.user_controller.user_account_updated')
       redirect_to :controller => 'user', :action => 'profile', :id => @user.username
     end
   end
 
   def forgot_password
-#    flash[:notice]="You do not have permission to access forgot password!"
+#    flash[:notice]= t('app.controllers.user_controller.you_do_not_have_permission_to_access_forgot_password')
 #    redirect_to :action=>"login"
   
     if request.post? and params[:reset_password]
@@ -175,10 +175,10 @@ class UserController < ApplicationController
         user.role = user.role_name
         user.save(false)
         UserNotifier.deliver_forgot_password(user)
-        flash[:notice] = "Reset Password link emailed to #{user.email}"
+        flash[:notice] = t('app.controllers.user_controller.reset_password_link_emailed_to') + "#{user.email}"
         redirect_to :action => "index"
       else
-        flash[:notice] = "No user exists with email address #{params[:reset_password][:email]}"
+        flash[:notice] = t('app.controllers.user_controller.no_user_exists_with_email_address') + "#{params[:reset_password][:email]}"
       end
     end
   end
@@ -190,17 +190,17 @@ class UserController < ApplicationController
       user = User.find_by_username @user.username
       if user and User.authenticate?(@user.username, @user.password)
         session[:user_id] = user.id
-        flash[:notice] = "Welcome, #{user.first_name} #{user.last_name}!"
+        flash[:notice] = t('app.controllers.user_controller.welcome') + ", #{user.first_name} #{user.last_name}!"
         redirect_to :controller => 'user', :action => 'dashboard'
       else
-        flash[:notice] = 'Invalid username or password combination'
+        flash[:notice] = t('app.controllers.user_controller.invalid_username_or_password_combination')
       end
     end
   end
 
   def logout
     session[:user_id] = nil
-    flash[:notice] = 'Logged out'
+    flash[:notice] = t('app.controllers.user_controller.logged_out')
     redirect_to :controller => 'user', :action => 'login'
   end
 
@@ -212,7 +212,7 @@ class UserController < ApplicationController
     @employee = Employee.find_by_employee_number(@user.username)
     @student = Student.find_by_admission_no(@user.username)
     if @user.nil?
-      flash[:notice] = 'User profile not found.'
+      flash[:notice] = t('app.controllers.user_controller.user_profile_not_found')
       redirect_to :action => 'dashboard'
     end
   end
@@ -223,11 +223,11 @@ class UserController < ApplicationController
       if user.reset_password_code_until > Time.now
         redirect_to :action => 'set_new_password', :id => user.reset_password_code
       else
-        flash[:notice] = 'Reset time expired'
+        flash[:notice] = t('app.controllers.user_controller.reset_time_expired')
         redirect_to :action => 'index'
       end
     else
-      flash[:notice]= 'Invalid reset link'
+      flash[:notice]= t('app.controllers.user_controller.invalid_reset_link')
       redirect_to :action => 'index'
     end
   end
@@ -250,14 +250,14 @@ class UserController < ApplicationController
           user.update_attributes(:password => user.password, :reset_password_code => nil, :reset_password_code_until => nil, :role => user.role_name)
           #User.update(user.id, :password => params[:set_new_password][:new_password],
            # :reset_password_code => nil, :reset_password_code_until => nil)
-          flash[:notice] = 'Password succesfully reset. Use new password to log in.'
+          flash[:notice] = t('app.controllers.user_controller.password_succesfully_reset_use_new_password_to_log_in')
           redirect_to :action => 'index'
         else
-          flash[:notice] = 'Password confirmation failed. Please enter password again.'
+          flash[:notice] = t('app.controllers.user_controller.password_confirmation_failed_please_enter_password_again')
           redirect_to :action => 'set_new_password', :id => user.reset_password_code
         end
       else
-        flash[:notice] = 'You have followed an invalid link. Please try again.'
+        flash[:notice] = t('app.controllers.user_controller.you_have_followed_an_invalid_link_please_try_again')
         redirect_to :action => 'index'
       end
     end
@@ -271,7 +271,7 @@ class UserController < ApplicationController
       new_privileges ||= []
       @user.privileges = Privilege.find_all_by_id(new_privileges)
 
-      flash[:notice] = 'Role updated.'
+      flash[:notice] = t('app.controllers.user_controller.role_updated')
       redirect_to :action => 'profile',:id => @user.username
     end
   end

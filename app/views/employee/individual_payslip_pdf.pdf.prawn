@@ -22,16 +22,16 @@ pdf.table info, :width => 400,
 end
 
 pdf.move_down(90)
-pdf.text "Employee Payslip" ,:align=>:center,:size=>14
+pdf.text t('app.views.employee.individual_payslip_pdf.employee_payslip') ,:align=>:center,:size=>14
 pdf.move_down(20)
 info = Array.new(){Array.new()}
-info.push ["Name ", @employee.full_name]
-info.push ["Id  ",@employee.employee_number]
-info.push ["Grade ",  EmployeeGrade.find(@employee.employee_grade_id).name]
-info.push ["Category ", EmployeeCategory.find(@employee.employee_category_id).name]
-info.push ["Department ",@employee.employee_department.name]
-info.push ["Joining Date ",@employee.joining_date.strftime("%d %B %Y")]
-info.push ["Payslip generated on ",@salary_date]
+info.push [t('app.views.employee.individual_payslip_pdf.name'), @employee.full_name]
+info.push [t('app.views.employee.individual_payslip_pdf.id'),@employee.employee_number]
+info.push [t('app.views.employee.individual_payslip_pdf.grade'),  EmployeeGrade.find(@employee.employee_grade_id).name]
+info.push [t('app.views.employee.individual_payslip_pdf.category'), EmployeeCategory.find(@employee.employee_category_id).name]
+info.push [t('app.views.employee.individual_payslip_pdf.department'),@employee.employee_department.name]
+info.push [t('app.views.employee.individual_payslip_pdf.joining_date'),@employee.joining_date.strftime("%d %B %Y")]
+info.push [t('app.views.employee.individual_payslip_pdf.payslip_generated_on'),@salary_date]
 
  pdf.table info, :width => 450,
                 :column_widths => {0=>130,1=>150},
@@ -59,13 +59,13 @@ unless @individual_payslip_category.empty?
         end
     end
 end
-data.push   ["Total Salary", @currency_type.to_s+@net_non_deductionable_amount.to_s]
+data.push   [t('app.views.employee.individual_payslip_pdf.total_salary'), @currency_type.to_s+@net_non_deductionable_amount.to_s]
 unless data.empty?
  pdf.table data, :width => 450,
                    :border_color => "000000",
                 :column_widths => {0=>300,1=>150},
                 :position => :center,
-                :headers => ["Salary",""],
+                :headers => [t('app.views.employee.individual_payslip_pdf.salary'),""],
                 :header_color => "DDDDDD",
                 :header_text_color => "97080e",
                 :row_colors => ["EEEEEE","FFFFFF"],
@@ -85,13 +85,13 @@ unless @individual_payslip_category.empty?
         end
     end
 end
-data.push   ["Total Deduction", @currency_type.to_s+@net_deductionable_amount.to_s]
+data.push   [t('app.views.employee.individual_payslip_pdf.total_deduction'), @currency_type.to_s+@net_deductionable_amount.to_s]
 unless data.empty?
 pdf.table data, :width => 450,
                 :column_widths => {0=>300,1=>150},
                   :border_color => "000000",
                 :position => :center,
-                :headers => ['Deductions',""],
+                :headers => [t('app.views.employee.individual_payslip_pdf.deductions'),""],
                 :header_color => "DDDDDD",
                 :header_text_color => "97080e",
                  :row_colors => ["EEEEEE","FFFFFF"],
@@ -100,12 +100,12 @@ data = Array.new(){Array.new()}
 end
 data = Array.new(){Array.new()}
 
-data.push  ["Net Salary", @currency_type.to_s+@net_amount.to_s]
+data.push  [t('app.views.employee.individual_payslip_pdf.net_salary'), @currency_type.to_s+@net_amount.to_s]
 pdf.table data, :width => 450,
                 :column_widths => {0=>300,1=>150},
                   :border_color => "000000",
                 :position => :center,
-                :headers => ['Total',""],
+                :headers => [t('app.views.employee.individual_payslip_pdf.total'),""],
                 :header_color => "DDDDDD",
                 :header_text_color => "97080e",
                 :row_colors => ["EEEEEE","FFFFFF"],
@@ -118,7 +118,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.employee.individual_payslip_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center

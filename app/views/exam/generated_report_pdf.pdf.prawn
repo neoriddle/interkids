@@ -23,16 +23,16 @@ end
 
 @students.each do |student|
   pdf.move_down(80)
-  pdf.text "Student wise report for "+@exam_group.name+", Batch:"+@batch.name
+  pdf.text t('app.views.exam.generated_report_pdf.student_wise_report_for') +@exam_group.name+", t('app.views.exam.generated_report_pdf.batch') +@batch.name
   pdf.move_down(10)
   pdf.stroke_horizontal_rule
   pdf.move_down(20)
   pdf.text student.full_name , :size => 18
-  pdf.text "Exam :"+@exam_group.name,:size => 7
+  pdf.text t('app.views.exam.generated_report_pdf.exam') +@exam_group.name,:size => 7
   data = Array.new(){Array.new()}
   pdf.move_down(20)
   if @exam_group.exam_type == 'Marks'
-    data.push ["Subject","Marks","Maximum marks","Percentage"]
+    data.push [t('app.views.exam.generated_report_pdf.subject'),t('app.views.exam.generated_report_pdf.marks'),t('app.views.exam.generated_report_pdf.maximum_marks'),t('app.views.exam.generated_report_pdf.percentage')]
     total_marks = 0
     total_max_marks = 0
     @exam_group.exams.each do |exam|
@@ -56,7 +56,7 @@ end
 
 
   elsif @exam_group.exam_type == 'Grades'
-    data.push ["Subject","Grade"]
+    data.push [t('app.views.exam.generated_report_pdf.subject'),t('app.views.exam.generated_report_pdf.grade')]
     @exam_group.exams.each do |exam|
       exam_score = ExamScore.find_by_student_id_and_exam_id(student,exam)
       unless exam_score.nil?
@@ -74,7 +74,7 @@ end
       :row_colors => ["FFFFFF","DDDDDD"]
 
   else
-    data.push ["Subject","Marks","Grade","Maximum marks","Percentage"]
+    data.push [t('app.views.exam.generated_report_pdf.subject'),t('app.views.exam.generated_report_pdf.marks'),t('app.views.exam.generated_report_pdf.grade'),t('app.views.exam.generated_report_pdf.maximum_marks'),t('app.views.exam.generated_report_pdf.percentage')]
     total_marks = 0
     total_max_marks = 0
     @exam_group.exams.each do |exam|
@@ -112,7 +112,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
     signature = [[""]]
     pdf.table signature, :width => 500,
       :align => {0 => :right,1 => :right},
-      :headers => ["Signature"],
+      :headers => [t('app.views.exam.generated_report_pdf.signature')],
       :header_text_color  => "DDDDDD",
       :border_color => "FFFFFF",
       :position => :center

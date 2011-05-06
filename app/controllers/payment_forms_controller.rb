@@ -44,7 +44,7 @@ class PaymentFormsController < ApplicationController
 
     respond_to do |format|
       if @payment_form.save
-        flash[:notice] = 'PaymentForm was successfully created.'
+        flash[:notice] = t('app.controllers.payment_forms_controller.paymentform_created')
         format.html { redirect_to(@payment_form) }
         format.xml  { render :xml => @payment_form, :status => :created, :location => @payment_form }
       else
@@ -61,7 +61,7 @@ class PaymentFormsController < ApplicationController
 
     respond_to do |format|
       if @payment_form.update_attributes(params[:payment_form])
-        flash[:notice] = 'PaymentForm was successfully updated.'
+        flash[:notice] = t('app.controllers.payment_forms_controller.paymentform_updeted')
         format.html { redirect_to(@payment_form) }
         format.xml  { head :ok }
       else

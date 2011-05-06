@@ -10,10 +10,10 @@ class ArchivedEmployeeController < ApplicationController
     @current_user = current_user
     @employee = ArchivedEmployee.find(params[:id])
     @new_reminder_count = Reminder.find_all_by_recipient(@current_user.id, :conditions=>"is_read = false")
-    @gender = "Male"
-    @gender = "Female" if @employee.gender == false
-    @status = "Active"
-    @status = "Inactive" if @employee.status == false
+    @gender = t('app.controllers.archived_employee_controller.male')
+    @gender = t('app.controllers.archived_employee_controller.female') if @employee.gender == false
+    @status = t('app.controllers.archived_employee_controller.active')
+    @status = t('app.controllers.archived_employee_controller.inactive') if @employee.status == false
     @reporting_manager = ArchivedEmployee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
     exp_years = @employee.experience_year
     exp_months = @employee.experience_month
@@ -28,10 +28,10 @@ class ArchivedEmployeeController < ApplicationController
 
   def profile_general
     @employee = ArchivedEmployee.find(params[:id])
-    @gender = "Male"
-    @gender = "Female" if @employee.gender == false
-    @status = "Active"
-    @status = "Inactive" if @employee.status == false
+    @gender = t('app.controllers.archived_employee_controller.male')
+    @gender = t('app.controllers.archived_employee_controller.female') if @employee.gender == false
+    @status = t('app.controllers.archived_employee_controller.active')
+    @status = t('app.controllers.archived_employee_controller.inactive') if @employee.status == false
     @reporting_manager = ArchivedEmployee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
     exp_years = @employee.experience_year
     exp_months = @employee.experience_month
@@ -84,10 +84,10 @@ class ArchivedEmployeeController < ApplicationController
 
   def profile_pdf
     @employee = ArchivedEmployee.find(params[:id])
-    @gender = "Male"
-    @gender = "Female" if @employee.gender == false
-    @status = "Active"
-    @status = "Inactive" if @employee.status == false
+    @gender = t('app.controllers.archived_employee_controller.male')
+    @gender = t('app.controllers.archived_employee_controller.female') if @employee.gender == false
+    @status = t('app.controllers.archived_employee_controller.active')
+    @status = t('app.controllers.archived_employee_controller.inactive') if @employee.status == false
     @reporting_manager = ArchivedEmployee.find(@employee.reporting_manager_id).first_name unless @employee.reporting_manager_id.nil?
     exp_years = @employee.experience_year
     exp_months = @employee.experience_month

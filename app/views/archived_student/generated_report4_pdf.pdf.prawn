@@ -91,8 +91,8 @@ aggregate = @marks_total*100/@max_total.to_f unless @max_total == 0
 
 
 pdf.text @student.full_name, :size => 18 ,:at=>[10,620]
-pdf.text "Examination results" ,:size => 7,:at=>[10,610]
-pdf.text "Total marks: #{@marks_total} , Aggregate: " + "%.2f" %aggregate + "%",  :at=>[350,620]
+pdf.text t('app.views.archived_student.generated_report4_pdf.examination_results') ,:size => 7,:at=>[10,610]
+pdf.text t('app.views.archived_student.generated_report4_pdf.total_marks') #{@marks_total} , t('app.views.archived_student.generated_report4_pdf.aggregate') " + "%.2f" %aggregate + "%",  :at=>[350,620]
 end
 pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
      pdf.font "Helvetica" do

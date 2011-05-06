@@ -65,7 +65,7 @@ class StudentController < ApplicationController
         sms_setting = SmsSetting.new()
         if sms_setting.application_sms_active and @student.is_sms_enabled
           recipients = []
-          message = "Student admission done. username is #{@student.admission_no} and password is #{@student.admission_no}123"
+          message = t('app.controllers.student_controller.student_admission_done_username_is') + "#{@student.admission_no}" + t('app.controllers.student_controller.and_password_is') + "#{@student.admission_no}123"
           if sms_setting.student_sms_active
             recipients.push @student.phone2 unless @student.phone2.nil?
           end
@@ -86,7 +86,7 @@ class StudentController < ApplicationController
         end
 
 
-        flash[:notice] = "Student Record Saved Successfully. Please fill the Parent Details."
+        flash[:notice] = t('app.controllers.student_controller.student_record_saved_successfully_please_fill_the_parent_details')
         redirect_to :controller => "student", :action => "admission2", :id => @student.id
       end
     end
@@ -112,7 +112,7 @@ class StudentController < ApplicationController
       @student = Student.update(@student.id, :immediate_contact_id => params[:immediate_contact][:contact])
       if sms_setting.application_sms_active and @student.is_sms_enabled
         recipients = []
-        message = "Student admission done. username is #{@student.admission_no} and password is #{@student.admission_no}123"
+        message = t('app.controllers.student_controller.student_admission_done_username_is') + "#{@student.admission_no}" + t('app.controllers.student_controller.and_password_is') + "#{@student.admission_no}123"
         if sms_setting.parent_sms_active
           guardian = Guardian.find(@student.immediate_contact_id)
           recipients.push guardian.mobile_phone unless guardian.mobile_phone.nil?
@@ -138,7 +138,7 @@ class StudentController < ApplicationController
       @student = Student.update(@student.id, :immediate_contact_id => params[:immediate_contact][:contact])
       if sms_setting.application_sms_active and @student.is_sms_enabled
         recipients = []
-        message = "Student admission done. username is #{@student.admission_no} and password is #{@student.admission_no}123"
+        message = t('app.controllers.student_controller.student_admission_done_username_is') + "#{@student.admission_no}" + t('app.controllers.student_controller.and_password_is') + "#{@student.admission_no}123"
         if sms_setting.parent_sms_active
           guardian = Guardian.find(@student.immediate_contact_id)
           recipients.push guardian.mobile_phone unless guardian.mobile_phone.nil?
@@ -186,7 +186,7 @@ class StudentController < ApplicationController
         StudentAdditionalDetails.create(:student_id => params[:id],
           :additional_field_id => k,:additional_info => v['additional_info'])
       end
-      flash[:notice] = "Student records saved for #{@student.first_name} #{@student.last_name}."
+      flash[:notice] = t('app.controllers.student_controller.student_records_saved_for') + "#{@student.first_name} #{@student.last_name}."
       redirect_to :controller => "student", :action => "profile", :id => @student.id
     end
   end
@@ -210,7 +210,7 @@ class StudentController < ApplicationController
           StudentAdditionalDetails.create(:student_id=>@student.id,:additional_field_id=>k,:additional_info=>v['additional_info'])
         end
       end
-      flash[:notice] = "Student #{@student.first_name} additional details updated"
+      flash[:notice] = t('app.controllers.student_controller.student') + "#{@student.first_name}" + t('app.controllers.student_controller.additional_details_updated')
       redirect_to :action => "profile", :id => @student.id
     end
   end
@@ -218,7 +218,7 @@ class StudentController < ApplicationController
     @additional_details = StudentAdditionalField.find(:all)
     @additional_field = StudentAdditionalField.new(params[:additional_field])
     if request.post? and @additional_field.save
-      flash[:notice] = "Additional field created"
+      flash[:notice] = t('app.controllers.student_controller.additional_field_created')
       redirect_to :controller => "student", :action => "add_additional_details"
     end
   end
@@ -226,7 +226,7 @@ class StudentController < ApplicationController
   def edit_additional_details
     @additional_details = StudentAdditionalField.find(params[:id])
     if request.post? and @additional_details.update_attributes(params[:additional_details])
-      flash[:notice] = "Additional details updated"
+      flash[:notice] = t('app.controllers.student_controller.additional_details_updated')
       redirect_to :action => "add_additional_details"
     end
   end
@@ -236,10 +236,10 @@ class StudentController < ApplicationController
     if students.empty?
       StudentAdditionalField.find(params[:id]).destroy
       @additional_details = StudentAdditionalField.find(:all)
-      flash[:notice]="Successfully deleted!"
+      flash[:notice]= t('app.controllers.student_controller.successfully_deleted')
       redirect_to :action => "add_additional_details"
     else
-      flash[:notice]="Unable to delete!"
+      flash[:notice]= t('app.controllers.student_controller.unable_to_delete')
       redirect_to :action => "add_additional_details"
     end
   end
@@ -278,7 +278,7 @@ class StudentController < ApplicationController
     student = Student.find(params[:id])
     user = User.destroy_all(:username => student.admission_no) unless user.nil?
     Student.destroy(params[:id])
-    flash[:notice] = "All records have been deleted for student with admission no. #{student.admission_no}."
+    flash[:notice] = t('app.controllers.student_controller.all_records_have_been_deleted_for_student_with_admission_no') + "#{student.admission_no}."
     redirect_to :controller => 'user', :action => 'dashboard'
   end
 
@@ -288,7 +288,7 @@ class StudentController < ApplicationController
     @application_sms_enabled = SmsSetting.find_by_settings_key("ApplicationEnabled")
 
     if request.post? and @student.update_attributes(params[:student])
-      flash[:notice] = "Student's Record updated successfully!"
+      flash[:notice] = t('app.controllers.student_controller.students_record_updated_successfully')
       redirect_to :controller => "student", :action => "profile", :id => @student.id
     end
   end
@@ -298,7 +298,7 @@ class StudentController < ApplicationController
     @student = Student.find(@parent.ward_id)
     @countries = Country.all
     if request.post? and @parent.update_attributes(params[:parent_detail])
-      flash[:notice] = "Parent Record updated!"
+      flash[:notice] = t('app.controllers.student_controller.parent_record_updated')
       redirect_to :controller => "student", :action => "guardians", :id => @student.id
     end
   end
@@ -318,7 +318,7 @@ class StudentController < ApplicationController
       end
       recipients = recipient_list.join(', ')
       FedenaMailer::deliver_email(sender,recipients, params['email']['subject'], params['email']['message'])
-      flash[:notice] = "Mail sent to #{recipients}"
+      flash[:notice] = t('app.controllers.student_controller.mail_sent_to') + "#{recipients}"
       redirect_to :controller => 'student', :action => 'profile', :id => @student.id
     end
   end
@@ -403,7 +403,7 @@ class StudentController < ApplicationController
     @parent_info = Guardian.new(params[:parent_detail])
     @countries = Country.all
     if request.post? and @parent_info.save
-      flash[:notice] = "Parent details saved for #{@parent_info.ward_id}"
+      flash[:notice] = t('app.controllers.student_controller.parent_details_saved_for') + "#{@parent_info.ward_id}"
       redirect_to :controller => "student" , :action => "admission3_1", :id => @parent_info.ward_id
     end
   end
@@ -444,12 +444,12 @@ class StudentController < ApplicationController
     @student = @guardian.ward
     if @guardian.is_immediate_contact?
       if @guardian.destroy
-        flash[:notice] = "Guardian has been deleted"
+        flash[:notice] = t('app.controllers.student_controller.guardian_has_been_deleted')
         redirect_to :controller => 'student', :action => 'admission3', :id => @student.id
       end
     else
       if @guardian.destroy
-        flash[:notice] = "Guardian has been deleted"
+        flash[:notice] = t('app.controllers.student_controller.guardian_has_been_deleted')
         redirect_to :controller => 'student', :action => 'profile', :id => @student.id
       end
     end
@@ -484,7 +484,7 @@ class StudentController < ApplicationController
     @student_categories = StudentCategory.find :all
     @student_category = StudentCategory.new(params[:student_category])
     if request.post? and @student_category.save
-      flash[:notice] = "Student category has been saved."
+      flash[:notice] = t('app.controllers.student_controller.student_category_has_been_saved')
       redirect_to :action => 'categories'
     end
   end
@@ -514,7 +514,7 @@ class StudentController < ApplicationController
     if params[:search]
       unless params[:advv_search][:course_id].empty?
         if params[:search][:batch_id_equals].empty?
-          flash[:notice] ="Please select a batch."
+          flash[:notice] = t('app.controllers.student_controller.please_select_a_batch')
           redirect_to :action=>'advanced_search'
         end
       end
@@ -770,10 +770,10 @@ class StudentController < ApplicationController
   #
   #    title = Title.new(student.full_name)
   #
-  #    x_legend = XLegend.new("Academic year")
+  #    x_legend = XLegend.new t('app.controllers.student_controller.academic_year')
   #    x_legend.set_style('{font-size: 14px; color: #778877}')
   #
-  #    y_legend = YLegend.new("Total marks")
+  #    y_legend = YLegend.new t('app.controllers.student_controller.total_marks')
   #    y_legend.set_style('{font-size: 14px; color: #770077}')
   #
   #    chart = OpenFlashChart.new
@@ -816,12 +816,12 @@ class StudentController < ApplicationController
   #    y = YAxis.new
   #    y.set_range(0,100,20)
   #
-  #    title = Title.new('Title')
+  #    title = Title.new t('app.controllers.student_controller.title')
   #
-  #    x_legend = XLegend.new("Examination name")
+  #    x_legend = XLegend.new t('app.controllers.student_controller.examination_name')
   #    x_legend.set_style('{font-size: 14px; color: #778877}')
   #
-  #    y_legend = YLegend.new("Average marks")
+  #    y_legend = YLegend.new t('app.controllers.student_controller.average_marks')
   #    y_legend.set_style('{font-size: 14px; color: #770077}')
   #
   #    chart = OpenFlashChart.new
@@ -867,10 +867,10 @@ class StudentController < ApplicationController
   #
   #    title = Title.new(subject.name)
   #
-  #    x_legend = XLegend.new("Examination name")
+  #    x_legend = XLegend.new t('app.controllers.student_controller.examination_name')
   #    x_legend.set_style('{font-size: 14px; color: #778877}')
   #
-  #    y_legend = YLegend.new("Marks")
+  #    y_legend = YLegend.new t('app.controllers.student_controller.marks')
   #    y_legend.set_style('{font-size: 14px; color: #770077}')
   #
   #    chart = OpenFlashChart.new
@@ -909,14 +909,14 @@ class StudentController < ApplicationController
   #    bargraph.width = 1;
   #    bargraph.colour = '#bb0000';
   #    bargraph.dot_size = 5;
-  #    bargraph.text = "Student's marks"
+  #    bargraph.text = t('app.controllers.student_controller.students_marks')
   #    bargraph.values = data
   #
   #    bargraph2 = BarFilled.new
   #    bargraph2.width = 1;
   #    bargraph2.colour = '#5E4725';
   #    bargraph2.dot_size = 5;
-  #    bargraph2.text = "Class average"
+  #    bargraph2.text = t('app.controllers.student_controller.class_average')
   #    bargraph2.values = data2
   #
   #    x_axis = XAxis.new
@@ -927,10 +927,10 @@ class StudentController < ApplicationController
   #
   #    title = Title.new(student.full_name)
   #
-  #    x_legend = XLegend.new("Academic year")
+  #    x_legend = XLegend.new t('app.controllers.student_controller.academic_year')
   #    x_legend.set_style('{font-size: 14px; color: #778877}')
   #
-  #    y_legend = YLegend.new("Total marks")
+  #    y_legend = YLegend.new t('app.controllers.student_controller.total_marks')
   #    y_legend.set_style('{font-size: 14px; color: #770077}')
   #
   #    chart = OpenFlashChart.new
@@ -983,14 +983,14 @@ class StudentController < ApplicationController
   #    bargraph.width = 1;
   #    bargraph.colour = '#bb0000';
   #    bargraph.dot_size = 5;
-  #    bargraph.text = "Student's average"
+  #    bargraph.text = t('app.controllers.student_controller.students_average')
   #    bargraph.values = data
   #
   #    bargraph2 = BarFilled.new
   #    bargraph2.width = 1;
   #    bargraph2.colour = '#5E4725';
   #    bargraph2.dot_size = 5;
-  #    bargraph2.text = "Class average"
+  #    bargraph2.text = t('app.controllers.student_controller.class_average')
   #    bargraph2.values = data2
   #
   #    x_axis = XAxis.new
@@ -998,10 +998,10 @@ class StudentController < ApplicationController
   #    y_axis = YAxis.new
   #    y_axis.set_range(0,100,20)
   #
-  #    x_legend = XLegend.new("Examinations")
+  #    x_legend = XLegend.new t('app.controllers.student_controller.examinations')
   #    x_legend.set_style('{font-size: 14px; color: #778877}')
   #
-  #    y_legend = YLegend.new("Percentage")
+  #    y_legend = YLegend.new t('app.controllers.student_controller.percentage')
   #    y_legend.set_style('{font-size: 14px; color: #770077}')
   #
   #    chart = OpenFlashChart.new
@@ -1029,7 +1029,7 @@ class StudentController < ApplicationController
   #    data = []
   #    data2 = []
   #
-  #    x_labels << "Annual report".to_s
+  #    x_labels << t('app.controllers.student_controller.annual_report').to_s
   #    data << student.annual_weighted_marks(student.course.academic_year_id)
   #    data2 << t
   #
@@ -1037,14 +1037,14 @@ class StudentController < ApplicationController
   #    bargraph.width = 1;
   #    bargraph.colour = '#bb0000';
   #    bargraph.dot_size = 5;
-  #    bargraph.text = "Student's average"
+  #    bargraph.text = t('app.controllers.student_controller.students_average')
   #    bargraph.values = data
   #
   #    bargraph2 = BarFilled.new
   #    bargraph2.width = 1;
   #    bargraph2.colour = '#5E4725';
   #    bargraph2.dot_size = 5;
-  #    bargraph2.text = "Class average"
+  #    bargraph2.text = t('app.controllers.student_controller.class_average')
   #    bargraph2.values = data2
   #
   #    x_axis = XAxis.new
@@ -1053,10 +1053,10 @@ class StudentController < ApplicationController
   #    y_axis = YAxis.new
   #    y_axis.set_range(0,100,20)
   #
-  #    x_legend = XLegend.new("Examinations")
+  #    x_legend = XLegend.new t('app.controllers.student_controller.examinations')
   #    x_legend.set_style('{font-size: 14px; color: #778877}')
   #
-  #    y_legend = YLegend.new("Weightage")
+  #    y_legend = YLegend.new t('app.controllers.student_controller.weightage')
   #    y_legend.set_style('{font-size: 14px; color: #770077}')
   #
   #    chart = OpenFlashChart.new

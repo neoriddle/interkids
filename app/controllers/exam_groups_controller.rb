@@ -19,7 +19,7 @@ class ExamGroupsController < ApplicationController
     @exam_group = ExamGroup.new(params[:exam_group])
     @exam_group.batch_id = @batch.id
     if @exam_group.save
-      flash[:notice] = 'Exam group created successfully.'
+      flash[:notice] = t('app.controllers.exam_groups_controller.exam_group_created_successfully')
       redirect_to batch_exam_groups_path(@batch)
     else
       render 'new'
@@ -33,7 +33,7 @@ class ExamGroupsController < ApplicationController
   def update
     @exam_group = ExamGroup.find params[:id]
     if @exam_group.update_attributes(params[:exam_group])
-      flash[:notice] = 'Updated exam group successfully.'
+      flash[:notice] = t('app.controllers.exam_groups_controller.updated_exam_group_successfully')
       redirect_to [@batch, @exam_group]
     else
       render 'edit'

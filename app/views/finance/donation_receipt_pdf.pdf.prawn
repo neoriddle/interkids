@@ -22,17 +22,17 @@ pdf.table info, :width => 400,
 end
 
 pdf.move_down(80)
-pdf.text "Donation Receipt" , :size => 14 ,:align => :center
+pdf.text t('app.views.finance.donation_receipt_pdf.donation_receipt') , :size => 14 ,:align => :center
 pdf.move_down(20)
-pdf.text "Donor : #{@donation.donor} " , :size => 14
+pdf.text t('app.views.finance.donation_receipt_pdf.donor') + "#{@donation.donor} " , :size => 14
 pdf.move_down(30)
 data = Array.new(){Array.new()}
 
-data.push [ "Description",@donation.description  ]
-data.push [ "Amount", @currency_type.to_s+@donation.amount.to_s  ]
+data.push [ t('app.views.finance.donation_receipt_pdf.description'),@donation.description  ]
+data.push [ t('app.views.finance.donation_receipt_pdf.amount'), @currency_type.to_s+@donation.amount.to_s  ]
 
 unless @donation.transaction_id.nil?
-    data.push [ "Transaction id", @donation.transaction.id  ]
+    data.push [ t('app.views.finance.donation_receipt_pdf.transaction_id'), @donation.transaction.id  ]
 end
 
 pdf.table data, :width => 500,
@@ -50,7 +50,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
         signature = [[""]]
         pdf.table signature, :width => 500,
                 :align => {0 => :right,1 => :right},
-                :headers => ["Signature"],
+                :headers => [t('app.views.finance.donation_receipt_pdf.signature')],
                 :header_text_color  => "DDDDDD",
                 :border_color => "FFFFFF",
                 :position => :center
