@@ -25,6 +25,7 @@ class CreateConfigurations < ActiveRecord::Migration
     Configuration.create :config_key => "AvailableModules", :config_value=>"Finance"
     Configuration.create :config_key => "MaximumCashLimit", :config_value=>"4000"
     Configuration.create :config_key => "MinimumCashLimit", :config_value=>"1000"
+    Configuration.create :config_key => "Tax", :config_value=>"16"
   end
 
 end
