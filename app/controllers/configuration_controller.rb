@@ -15,7 +15,8 @@ class ConfigurationController < ApplicationController
                                                           'AdmissionNumberAutoIncrement',
                                                           'EmployeeNumberAutoIncrement',
                                                           'MaximumCashLimit',
-                                                          'MinimumCashLimit']
+                                                          'MinimumCashLimit',
+                                                          'Tax']
 
     if request.post?
 

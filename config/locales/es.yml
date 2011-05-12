@@ -2082,6 +2082,7 @@ es:
           update: 'Actualizar'
           maximum_limit_cash: 'L&iacutemite m&aacuteximo caja chica'
           minimum_limit_cash: 'L&iacutemite m&iacutenimo caja chica'
+          tax: 'Impuesto'
           enable_auto_increment_student_admission_no: 'Autoincrementar el folio de los alumnos'
           enable_auto_increment_employee_no: 'Autoincrementar el folio de los empleados'
       course:

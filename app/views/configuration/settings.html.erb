@@ -68,6 +68,15 @@
       </div>
 
       <div class="label-field-pair">
+        <label for="configuration_currency_type"><%= t('app.views.configuration.settings.tax') %></label>
+        <div class="text-input-bg">
+          <%= text_field :configuration, 
+                         :tax, 
+                         :value => @config[:tax] %>
+        </div>
+      </div>
+
+      <div class="label-field-pair">
         <label for="configuration_currency_type"><%= t('app.views.configuration.settings.upload_logo') %></label>
         <div class="text-input-bg">
           <%= file_field 'upload', 'datafile' %>

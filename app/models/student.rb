@@ -9,6 +9,7 @@ class Student < ActiveRecord::Base
   has_many   :guardians, :foreign_key => 'ward_id', :dependent => :destroy
   has_many   :finance_transactions
   has_many   :fee_category ,:class_name => "FinanceFeeCategory"
+  has_one    :student_invoice_data
 
   has_and_belongs_to_many :graduated_batches, :class_name => 'Batch', :join_table => 'batch_students'
 
