@@ -1,0 +1,36 @@
+<h1>Student Invoice Data</h1>
+
+<% form_for(@student_invoice_data) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :street %>
+    <%= f.text_field :street %>
+  </p>
+
+  <p>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+  </p>
+
+  <p>
+    <%= f.label :rfc %>
+    <%= f.text_field :rfc %>
+  </p>
+
+  <p>
+    <%= f.label :student_id %>
+    <%= f.select :student_id, options_from_collection_for_select(@students, 'id', 'full_name'), { :include_blank => true } %>
+  </p>
+
+  <p>
+    <%= f.submit 'Create', :confirm => 'Are you sure?' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', student_invoice_datas_path %>
