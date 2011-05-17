@@ -390,6 +390,33 @@ es:
         receipt: ' Recibo '
         salary: ' N&oacute;mina '
     views:
+      student_invoice_datas:
+        index:
+          name: 'Nombre'
+          rfc: 'RFC'
+          edit: 'Editar'
+          delete: 'Borrar'
+          finance_manager: 'Gestor de finanzas'
+          invoice_data: 'Datos de facturaci&oacute;n'
+          new: 'Nuevo RFC'
+        new:
+          finance_manager: 'Gestor de finanzas'
+          add_relatioship: 'Relacionar datos de facturaci&oacute;n'
+          name: 'Nombre'
+          street: 'Calle'
+          colony: 'Colonia'
+          rfc: 'RFC'
+          student: 'Alumno'
+          create: 'Crear'
+        edit:
+          finance_manager: 'Gestor de finanzas'
+          edit_relatioship: 'Editar datos de facturaci&oacute;n'
+          name: 'Nombre'
+          street: 'Calle'
+          colony: 'Colonia'
+          rfc: 'RFC'
+          student: 'Alumno'
+          update: 'update'
       archived_employee:
         profile_pdf:
           employee_profile: 'Perfil de empleado'
@@ -1178,6 +1205,8 @@ es:
           asset_liability_manager_desc: 'Gestor entradas y salidas por separado'
           export: 'Exportar datos'
           export_description: 'Exportar las transacciones en formato xml'
+          invoice: 'Datos de facturaci&oacute;n'
+          invoice_description: 'Capture los datos de facturaci&oacute;n para los alumnos'
         categories:
           categories: 'Categorias'
           manage_finance: 'Gesti&oacute;n de finanzas'

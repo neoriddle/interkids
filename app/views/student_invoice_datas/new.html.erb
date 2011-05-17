@@ -1,36 +1,59 @@
-<h1>Student Invoice Data</h1>
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%= t('app.views.student_invoice_datas.new.finance_manager') %></h1>
+  <h3><%= t('app.views.student_invoice_datas.new.add_relatioship') %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
 
-<% form_for(@student_invoice_data) do |f| %>
-  <%= f.error_messages %>
 
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
+<div id="page-yield">
 
-  <p>
-    <%= f.label :street %>
-    <%= f.text_field :street %>
-  </p>
+	<% form_for(@student_invoice_data) do |f| %>
 
-  <p>
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </p>
+	  <%= f.error_messages %>
 
-  <p>
-    <%= f.label :rfc %>
-    <%= f.text_field :rfc %>
-  </p>
+	    <div class="box">
+		<div class="label-field-pair">
+		  <label><%= t('app.views.student_invoice_datas.new.name') %></label>
+		  <div class="text-input-bg">
+		    <%= f.text_field :name %>
+		  </div>
+		</div>
 
-  <p>
-    <%= f.label :student_id %>
-    <%= f.select :student_id, options_from_collection_for_select(@students, 'id', 'full_name'), { :include_blank => true } %>
-  </p>
+		<div class="label-field-pair">
+		  <label><%= t('app.views.student_invoice_datas.new.street') %></label>
+		  <div class="text-input-bg">
+		    <%= f.text_field :street %>
+		  </div>
+		</div>
 
-  <p>
-    <%= f.submit 'Create', :confirm => 'Are you sure?' %>
-  </p>
-<% end %>
+		<div class="label-field-pair">
+		  <label><%= t('app.views.student_invoice_datas.new.colony') %></label>
+		  <div class="text-input-bg">
+		    <%= f.text_field :address %>
+		  </div>
+		</div>
 
-<%= link_to 'Back', student_invoice_datas_path %>
+		<div class="label-field-pair">
+		  <label><%= t('app.views.student_invoice_datas.new.rfc') %></label>
+		  <div class="text-input-bg">
+		    <%= f.text_field :rfc %>
+		  </div>
+		</div>
+
+		<div class="label-field-pair">
+		  <label><%= t('app.views.student_invoice_datas.new.student') %></label>
+		  <div class="text-input-bg">
+		    <%= f.select :student_id, options_from_collection_for_select(@students, 'id', 'full_name'), { :include_blank => true } %>
+		  </div>
+		</div>
+
+		<div id="submit-button">
+			<%= submit_tag t('app.views.student_invoice_datas.new.create') %>
+		</div>
+	     </div>	    
+
+	<% end %>
+</div>

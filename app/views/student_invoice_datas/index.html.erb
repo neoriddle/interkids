@@ -1,20 +1,64 @@
-<h1>Student Invoice Data</h1>
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%= t('app.views.student_invoice_datas.index.finance_manager') %></h1>
+  <h3><%= t('app.views.student_invoice_datas.index.invoice_data') %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to t('app.views.student_invoice_datas.index.new'), new_student_invoice_data_path %> </li>
 
-<table>
-  <tr>
-    <td><%= 'Name' %></td>
-    <td><%= 'RFC' %></td>
-  </tr>
+  </ul>
+</div>
 
-<% @student_invoice_datas.each do |sid| %>
-  <tr>
-    <td><%= sid.name %></td>
-    <td><%= sid.rfc %></td>
-    <td><%= link_to 'Edit', edit_student_invoice_data_path(sid) %></td>
-  </tr>
-<% end %>
-</table>
+<div id="page-yield">
+<div class="box">
+<div class="students-table">
+  <table align="center" width="100%" cellpadding="1" cellspacing="1">
+    <tr class="tr-head">
+      <td>
+        <%=t('app.views.student_invoice_datas.index.name')%>
+      </td>
+      <td>
+        <%=t('app.views.student_invoice_datas.index.rfc')%>
+      </td>
+      <td>
+      </td>
+    </tr>
+    <tr>
+      <td>
 
-<br />
+      </td>
+      <td>
 
-<%= link_to 'New student_invoice_data', new_student_invoice_data_path %>
+      </td>
+      <td>
+
+      </td>
+    </tr>
+    
+    <% @student_invoice_datas.each do |sid| %>
+      <tr class="tr-<%= cycle('odd', 'even') %>">
+        <td class="col-1">
+          <%= sid.name %>
+        </td>
+
+        <td class="col-2">
+          <%=  sid.rfc %>
+        </td>
+        
+        <td class="col-3">
+          <%= link_to t('app.views.student_invoice_datas.index.edit'), edit_student_invoice_data_path(sid) %>
+        </td>
+
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+</div>  
+ 
+</div>
+
