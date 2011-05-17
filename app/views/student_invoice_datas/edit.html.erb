@@ -10,7 +10,7 @@
 
 <div id="page-yield">
 
-	<% form_for(@student_invoice_data) do |f| %>
+	<% form_for :student_invoice_data, :url => {:action => 'edit'} do |f| %>
 
 	  <%= f.error_messages %>
 
@@ -51,7 +51,7 @@
 		</div>
 
 		<div id="submit-button">
-			<%= submit_tag t('app.views.student_invoice_datas.edit.update') %>
+			<%= submit_tag "", :value => t('app.views.student_invoice_datas.edit.update'), :class => "submit_button" %>
 		</div>
 	     </div>	    
 

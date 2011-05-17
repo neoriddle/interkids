@@ -416,7 +416,7 @@ es:
           colony: 'Colonia'
           rfc: 'RFC'
           student: 'Alumno'
-          update: 'update'
+          update: 'Actualizar'
       archived_employee:
         profile_pdf:
           employee_profile: 'Perfil de empleado'
