@@ -1,0 +1,16 @@
+<p>
+<%= @student_invoice_data.name %>
+</p>
+<p>
+<%= @student_invoice_data.street %>
+</p>
+<p>
+<%= @student_invoice_data.address %>
+</p>
+<p>
+<%= @student_invoice_data.student.full_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_student_invoice_data_path(@student_invoice_data) %> |
+<%= link_to 'Back', student_invoice_datas_path %>

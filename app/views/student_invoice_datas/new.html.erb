@@ -10,50 +10,50 @@
 
 <div id="page-yield">
 
-	<% form_for(@student_invoice_data) do |f| %>
+  <% form_for(@student_invoice_data) do |f| %>
+    
+    <%= f.error_messages %>
+    
+    <div class="box">
+      <div class="label-field-pair">
+	<label><%= t('app.views.student_invoice_datas.new.name') %></label>
+	<div class="text-input-bg">
+	  <%= f.text_field :name %>
+	</div>
+      </div>
+      
+      <div class="label-field-pair">
+	<label><%= t('app.views.student_invoice_datas.new.street') %></label>
+	<div class="text-input-bg">
+	  <%= f.text_field :street %>
+	</div>
+      </div>
 
-	  <%= f.error_messages %>
+      <div class="label-field-pair">
+	<label><%= t('app.views.student_invoice_datas.new.colony') %></label>
+	<div class="text-input-bg">
+	  <%= f.text_field :address %>
+	</div>
+      </div>
 
-	    <div class="box">
-		<div class="label-field-pair">
-		  <label><%= t('app.views.student_invoice_datas.new.name') %></label>
-		  <div class="text-input-bg">
-		    <%= f.text_field :name %>
-		  </div>
-		</div>
+      <div class="label-field-pair">
+	<label><%= t('app.views.student_invoice_datas.new.rfc') %></label>
+	<div class="text-input-bg">
+	  <%= f.text_field :rfc %>
+	</div>
+      </div>
 
-		<div class="label-field-pair">
-		  <label><%= t('app.views.student_invoice_datas.new.street') %></label>
-		  <div class="text-input-bg">
-		    <%= f.text_field :street %>
-		  </div>
-		</div>
+      <div class="label-field-pair">
+	<label><%= t('app.views.student_invoice_datas.new.student') %></label>
+	<div class="text-input-bg">
+	  <%= f.select :student_id, options_from_collection_for_select(@students, 'id', 'full_name'), { :include_blank => true } %>
+	</div>
+      </div>
 
-		<div class="label-field-pair">
-		  <label><%= t('app.views.student_invoice_datas.new.colony') %></label>
-		  <div class="text-input-bg">
-		    <%= f.text_field :address %>
-		  </div>
-		</div>
+      <div id="submit-button">
+	<%= f.submit t('app.views.student_invoice_datas.new.create') %>
+      </div>
+    </div>	    
 
-		<div class="label-field-pair">
-		  <label><%= t('app.views.student_invoice_datas.new.rfc') %></label>
-		  <div class="text-input-bg">
-		    <%= f.text_field :rfc %>
-		  </div>
-		</div>
-
-		<div class="label-field-pair">
-		  <label><%= t('app.views.student_invoice_datas.new.student') %></label>
-		  <div class="text-input-bg">
-		    <%= f.select :student_id, options_from_collection_for_select(@students, 'id', 'full_name'), { :include_blank => true } %>
-		  </div>
-		</div>
-
-		<div id="submit-button">
-			<%= submit_tag t('app.views.student_invoice_datas.new.create') %>
-		</div>
-	     </div>	    
-
-	<% end %>
+  <% end %>
 </div>
