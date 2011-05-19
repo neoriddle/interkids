@@ -421,6 +421,16 @@ es:
           student: 'Alumno'
           batch: 'Grado/Curso'
           update: 'Actualizar'
+        show:
+          finance_manager: 'Gestor de finanzas'
+          success_operation: 'Operaci&oacute;n ejecutada correctamente'
+          name: 'Nombre'
+          street: 'Calle'
+          colony: 'Colonia'
+          full_name: 'Nombre'
+          rfc: 'RFC'
+          student: 'Alumno'
+          edit: 'Editar'
       archived_employee:
         profile_pdf:
           employee_profile: 'Perfil de empleado'
