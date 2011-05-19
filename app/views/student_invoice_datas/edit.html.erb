@@ -44,9 +44,16 @@
       </div>
 
       <div class="label-field-pair">
+	<label><%= t('app.views.student_invoice_datas.edit.batch') %></label>
+	<div class="text-input-bg">
+	  <%= "#{@student_invoice_data.student.batch.name} - #{@student_invoice_data.student.batch.course.course_name} " %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
 	<label><%= t('app.views.student_invoice_datas.edit.student') %></label>
 	<div class="text-input-bg">
-	  <%= f.select :student_id, options_from_collection_for_select(@students, 'id', 'full_name'), { :include_blank => true } %>
+	  <%= @student_invoice_data.student.full_name %>
 	</div>
       </div>
 

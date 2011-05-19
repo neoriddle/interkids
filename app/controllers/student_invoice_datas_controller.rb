@@ -25,12 +25,20 @@ class StudentInvoiceDatasController < ApplicationController
   # GET /student_invoice_datas/new.xml
   def new
     @student_invoice_data = StudentInvoiceData.new
-    @students = Student.all(:conditions => {:student_invoice_data_id => nil})
+    @students = [] 
+    @batches = Batch.all
 
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @student_invoice_data }
     end
+  end
+
+  def update_students_on_new_student_invoice_data
+    @batch = Batch.find(params[:batch_id])
+    @students = @batch.students
+
+    render :partial => 'update_students_on_new_student_invoice_data'
   end
 
   # GET /student_invoice_datas/1/edit
@@ -50,6 +58,8 @@ class StudentInvoiceDatasController < ApplicationController
         format.html { redirect_to(@student_invoice_data, :notice => 'StudentInvoiceData was successfully created.') }
         format.xml  { render :xml => @student_invoice_data, :status => :created, :location => @student_invoice_data }
       else
+        @batches = Batch.all
+        @students = Batch.find(params[:student_invoice_data][:batch_id]).students
         format.html { render :action => "new" }
         format.xml  { render :xml => @student_invoice_data.errors, :status => :unprocessable_entity }
       end
