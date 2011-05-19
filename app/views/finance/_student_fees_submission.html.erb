@@ -19,7 +19,9 @@
 
 <br />
 
+<% unless @financefee.nil? %>
 <%= render :partial => "fine_submission" unless @financefee.transaction %>
+<% end %>
 
 <div id="register">
   <div class="header">

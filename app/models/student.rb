@@ -137,7 +137,8 @@ class Student < ActiveRecord::Base
   end
   
   def student_user
-    User.find_by_username(self.admission_no).id
+    u = User.find_by_username(self.admission_no)
+    u.nil? ? nil : u.id
   end
 
   private

@@ -935,13 +935,14 @@ class FinanceController < ApplicationController
                           :body => body,
                           :is_read=>false,
                           :is_deleted_by_sender=>false,
-                          :is_deleted_by_recipient=>false)
-       end
-          Event.create(:title=> t('app.controllers.finance_controller.fees_due'), 
-                       :description =>fee_category.name,
-                       :start_date => @finance_fee_collection.due_date,
-                       :end_date => @finance_fee_collection.due_date,
-                       :is_due => true)
+                          :is_deleted_by_recipient=>false) unless s.student_user.nil?
+        end
+
+        Event.create(:title=> t('app.controllers.finance_controller.fees_due'), 
+                     :description =>fee_category.name,
+                     :start_date => @finance_fee_collection.due_date,
+                     :end_date => @finance_fee_collection.due_date,
+                     :is_due => true)
         
       else
         @error = true
