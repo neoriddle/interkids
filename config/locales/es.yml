@@ -394,6 +394,8 @@ es:
         index:
           name: 'Nombre'
           rfc: 'RFC'
+          options: 'Opciones'
+          show: 'Mostrar'
           edit: 'Editar'
           delete: 'Borrar'
           finance_manager: 'Gestor de finanzas'

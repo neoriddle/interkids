@@ -14,51 +14,40 @@
 </div>
 
 <div id="page-yield">
-<div class="box">
-<div class="students-table">
-  <table align="center" width="100%" cellpadding="1" cellspacing="1">
-    <tr class="tr-head">
-      <td>
-        <%=t('app.views.student_invoice_datas.index.name')%>
-      </td>
-      <td>
-        <%=t('app.views.student_invoice_datas.index.rfc')%>
-      </td>
-      <td>
-      </td>
-    </tr>
-    <tr>
-      <td>
-
-      </td>
-      <td>
-
-      </td>
-      <td>
-
-      </td>
-    </tr>
+  <div class="box">
+    <div class="students-table">
+      <table align="center" width="100%" cellpadding="1" cellspacing="1">
+	<tr class="tr-head">
+	  <td style="text-align: center;">
+	    <%=t('app.views.student_invoice_datas.index.name')%>
+	  </td>
+	  <td style="text-align: center;">
+	    <%=t('app.views.student_invoice_datas.index.rfc')%>
+	  </td>
+	  <td colspan="2" style="text-align: center;">
+	    <%= t('app.views.student_invoice_datas.index.options')%>
+	  </td>
+	</tr>
     
-    <% @student_invoice_datas.each do |sid| %>
-      <tr class="tr-<%= cycle('odd', 'even') %>">
-        <td class="col-1">
-          <%= sid.name %>
-        </td>
+	<% @student_invoice_datas.each do |sid| %>
+	<tr class="tr-<%= cycle('odd', 'even') %>">
+	  <td class="col-1">
+	    <%= sid.name %>
+	  </td>
 
-        <td class="col-2">
-          <%=  sid.rfc %>
-        </td>
-        
-        <td class="col-3">
-          <%= link_to t('app.views.student_invoice_datas.index.edit'), edit_student_invoice_data_path(sid) %>
-        </td>
-
-      </tr>
-    <% end %>
-  </table>
+	  <td class="col-2">
+	    <%=  sid.rfc %>
+	  </td>
+	  
+	  <td class="col-3">
+	    <%= link_to t('app.views.student_invoice_datas.index.show'), sid %>
+	  </td>
+	  <td class="col-3">
+	    <%= link_to t('app.views.student_invoice_datas.index.edit'), edit_student_invoice_data_path(sid) %>
+	  </td>
+	</tr>
+        <% end %>
+      </table>
+    </div>
+  </div>  
 </div>
-
-</div>  
- 
-</div>
-
