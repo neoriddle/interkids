@@ -1076,6 +1076,17 @@ class FinanceController < ApplicationController
       transaction.save
 
       @financefee.update_attribute(:transaction_id, transaction.id)
+
+      # Search fee particulars
+      if @fee_collection.fee_category && !@fee_collection.fee_category.is_deleted
+        @fee_particulars = FinanceFeeParticulars.fees(@fee_collection, 
+                                                      @fee_collection.fee_category, 
+                                                      @student)
+      else
+        @fee_particulars = nil
+      end
+      logger.debug "FeeParticulars found\t#{@fee_particulars.inspect}"
+
     else 
       @fee_particulars = nil
     end
