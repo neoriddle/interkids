@@ -106,6 +106,16 @@
         <td class="col-1" ><%=t('app.views.finance._student_fees_submission.total_fees')%></td>
         <td class="col-1" ></td>
         <td class="col-6" ><%= total_fees %></td>
+	<% if total_fees==0 %>
+        <td class="col-1" >
+	  <%= link_to 'Crear factura', {:controller => :invoices, 
+                        :action => :new, 
+                        :collection_id => @fee_collection.id, 
+                        :student_id => @student.id, 
+                        :category_id => @fee_collection.fee_category_id}, 
+                       :class => 'submit_button' %>
+	</td>
+	<% end %>
       </tr>
 
       <p>

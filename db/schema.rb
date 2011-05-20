@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100731055437) do
+ActiveRecord::Schema.define(:version => 20110512171829) do
+
+  create_table "additional_exam_groups", :force => true do |t|
+    t.string  "name"
+    t.integer "batch_id"
+    t.string  "exam_type"
+    t.boolean "is_published",     :default => false
+    t.boolean "result_published", :default => false
+    t.string  "students_list"
+    t.date    "exam_date"
+  end
 
   create_table "additional_exam_scores", :force => true do |t|
     t.integer  "student_id"
@@ -189,6 +199,7 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.boolean  "is_deleted",                               :default => false
     t.integer  "immediate_contact_id"
     t.boolean  "is_sms_enabled",                           :default => true
+    t.string   "former_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -237,6 +248,12 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.boolean  "is_deleted", :default => false
   end
 
+  create_table "cash_boxes", :force => true do |t|
+    t.string  "name",     :limit => 50
+    t.string  "location", :limit => 200
+    t.integer "manager"
+  end
+
   create_table "class_timings", :force => true do |t|
     t.integer "batch_id"
     t.string  "name"
@@ -256,8 +273,8 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
 
   create_table "courses", :force => true do |t|
     t.string   "course_name"
-    t.string   "section_name"
     t.string   "code"
+    t.string   "section_name"
     t.boolean  "is_deleted",   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -408,6 +425,7 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.boolean  "is_common",   :default => false
     t.boolean  "is_holiday",  :default => false
     t.boolean  "is_exam",     :default => false
+    t.boolean  "is_due",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -416,14 +434,15 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.string  "name"
     t.integer "batch_id"
     t.string  "exam_type"
-    t.boolean "is_published", :default => false
+    t.boolean "is_published",     :default => false
+    t.boolean "result_published", :default => false
     t.date    "exam_date"
   end
 
   create_table "exam_scores", :force => true do |t|
     t.integer  "student_id"
     t.integer  "exam_id"
-    t.integer  "marks",            :limit => 10, :precision => 10, :scale => 0
+    t.decimal  "marks",            :precision => 7, :scale => 2
     t.integer  "grading_level_id"
     t.string   "remarks"
     t.boolean  "is_failed"
@@ -477,15 +496,18 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
   create_table "finance_fee_particulars", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.decimal  "amount",                  :precision => 8, :scale => 2
+    t.decimal  "amount",                    :precision => 8, :scale => 2
     t.integer  "finance_fee_category_id"
     t.integer  "student_category_id"
     t.string   "admission_no"
     t.integer  "student_id"
-    t.boolean  "is_deleted",                                            :default => false, :null => false
+    t.boolean  "is_deleted",                                              :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "finance_fee_collection_id"
   end
+
+  add_index "finance_fee_particulars", ["finance_fee_collection_id"], :name => "fk_particulars_collection"
 
   create_table "finance_fee_structure_elements", :force => true do |t|
     t.decimal "amount",              :precision => 8, :scale => 2
@@ -509,6 +531,7 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.string  "description"
     t.boolean "is_income"
     t.boolean "deleted",     :default => false, :null => false
+    t.integer "cash_box_id"
   end
 
   create_table "finance_transaction_triggers", :force => true do |t|
@@ -528,6 +551,7 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.integer  "finance_fees_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "payment_form_id"
   end
 
   create_table "grading_levels", :force => true do |t|
@@ -576,6 +600,17 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.boolean "include_every_month"
   end
 
+  create_table "invoices", :force => true do |t|
+    t.string   "concept",                 :null => false
+    t.integer  "invoice_number",          :null => false
+    t.integer  "amount_before_tax",       :null => false
+    t.integer  "tax",                     :null => false
+    t.string   "alpha_amount",            :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "cancelled_at"
+    t.integer  "student_invoice_data_id", :null => false
+  end
+
   create_table "liabilities", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -607,6 +642,12 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.text     "content"
     t.integer  "news_id"
     t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payment_forms", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -671,6 +712,14 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.boolean "is_deleted"
   end
 
+  create_table "student_invoice_datas", :force => true do |t|
+    t.string  "name"
+    t.string  "street"
+    t.string  "address"
+    t.string  "rfc",        :limit => 13
+    t.integer "student_id"
+  end
+
   create_table "student_previous_datas", :force => true do |t|
     t.integer "student_id"
     t.string  "institution"
@@ -711,15 +760,16 @@ ActiveRecord::Schema.define(:version => 20100731055437) do
     t.string   "phone2"
     t.string   "email"
     t.integer  "immediate_contact_id"
-    t.boolean  "is_sms_enabled",                           :default => true
+    t.boolean  "is_sms_enabled",                              :default => true
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data",           :limit => 16777215
+    t.binary   "photo_data",              :limit => 16777215
     t.string   "status_description"
-    t.boolean  "is_active",                                :default => true
-    t.boolean  "is_deleted",                               :default => false
+    t.boolean  "is_active",                                   :default => true
+    t.boolean  "is_deleted",                                  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_invoice_data_id"
   end
 
   create_table "students_subjects", :force => true do |t|

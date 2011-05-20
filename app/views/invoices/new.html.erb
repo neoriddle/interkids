@@ -1,0 +1,72 @@
+<div id="page-yield">
+
+  <% form_for(@invoice) do |f| %>
+    
+    <%= f.error_messages %>
+    
+    <div class="box">
+      
+      <% unless @student_invoice_data.nil? -%>
+	  <%= f.hidden_field :student_invoice_data_id  %>
+      <div class="label-field-pair">
+	<label>Alumno</label>
+	<div class="text-input-bg">
+	  <%= @student_invoice_data.student.full_name %>
+	</div>
+      </div>
+      <% end -%>
+
+      <div class="label-field-pair">
+	<label>Concepto</label>
+	<div class="text-input-bg">
+	  <%= f.text_field :concept, :readonly => true %>
+	</div>
+      </div>
+      
+      <div class="label-field-pair">
+	<label>Folio</label>
+	<div class="text-input-bg">
+	  <%= f.text_field :invoice_number %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
+	<label>Subtotal</label>
+	<div class="text-input-bg">
+	  <%= f.text_field :amount_before_tax, :readonly => true %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
+	<label>Impuesto</label>
+	<div class="text-input-bg">
+	  <%= f.text_field :tax, :readonly => true %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
+	<label>Total</label>
+	<div class="text-input-bg">
+	  <%= f.text_field :amount_after_tax, :readonly => true %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
+	<label>Monto con letra</label>
+	<div class="text-input-bg">
+	  <%= f.text_field :alpha_amount %>
+	</div>
+      </div>
+
+      <%= hidden_field :fee_collection, :id  %>
+      <%= hidden_field :fee_category, :id  %>
+
+      <div id="submit-button">
+	<%= f.submit 'Crear factura' %>
+      </div>
+    </div>	    
+
+  <% end %>
+</div>
+
+<%= link_to 'Atras', invoices_path %>
