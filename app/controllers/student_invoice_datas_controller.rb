@@ -26,7 +26,7 @@ class StudentInvoiceDatasController < ApplicationController
   def new
     @student_invoice_data = StudentInvoiceData.new
     @students = [] 
-    @batches = Batch.all
+    @batches = Batch.all(:include => :course)
 
     respond_to do |format|
       format.html # new.html.erb

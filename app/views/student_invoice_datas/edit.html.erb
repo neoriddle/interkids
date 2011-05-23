@@ -1,3 +1,4 @@
+# -*- coding: undecided -*-
 <div id="content-header">
   <img src="/images/show_finance.png" alt="" />
   <h1><%= t('app.views.student_invoice_datas.edit.finance_manager') %></h1>
@@ -46,7 +47,7 @@
       <div class="label-field-pair">
 	<label><%= t('app.views.student_invoice_datas.edit.batch') %></label>
 	<div class="text-input-bg">
-	  <%= "#{@student_invoice_data.student.batch.name} - #{@student_invoice_data.student.batch.course.course_name} " %>
+	  <%= @student_invoice_data.student.batch.name_for_label %>
 	</div>
       </div>
 
