@@ -1,61 +1,36 @@
 # Header
-pdf.header pdf.margin_box.top_left do
-  if FileTest.exists?("#{RAILS_ROOT}/public/uploads/image/institute_logo.jpg")
-    logo = "#{RAILS_ROOT}/public/uploads/image/institute_logo.jpg"
-  else
-    logo = "#{RAILS_ROOT}/public/images/application/app_fedena_logo.jpg"
-  end
+pdf = Prawn::Document.new(:page_size => "A5", :page_layout => :landscape)
 
-  @institute_name = Configuration.get_config_value('InstitutionName');
-  @institute_address = Configuration.get_config_value('InstitutionAddress');
+pdf.text "#{@invoice.invoice_number}", :at => [445,282]
 
-  pdf.image logo, :position=>:left, :height=>50, :width=>50
-  pdf.font "Helvetica" do
-    info = [[@institute_name],
-            [@institute_address]]
-    pdf.move_up(50)
-    pdf.fill_color "97080e"
-    pdf.table info, 
-              :width => 400,
-              :align => {0 => :center},
-              :position => :center,
-              :border_color => "FFFFFF"
-    pdf.move_down(20)
-    pdf.stroke_horizontal_rule
-  end
-end
+pdf.text "a", :at => [0,0]
 
-# pdf.move_down(80)
-# pdf.text "Fee Reciept" , :size => 14 ,:align => :center
-# pdf.move_down(20)
-# pdf.text "Name : #{@student.full_name}" , :size => 11
-# pdf.text "Admission no : #{@particular.admission_no}" , :size => 11
-# pdf.text "Payment : #{@collection.name}" , :size => 11
-# pdf.text "Amount paid : #{@particular.amount * -1}" , :size => 11
-# pdf.text "Total left : #{@total_left_to_pay}" , :size => 11
+pdf.text "dia", :at => [314,243]
 
-pdf.text "Concepto : #{@invoice.concept}"
-pdf.text "Folio : #{@invoice.invoice_number}"
-pdf.text "Subtotal : #{@invoice.amount_before_tax}"
-pdf.text "Impuesto : #{@invoice.tax}"
-#pdf.text "Total : #{@invoice.amount_after_tax}"
-pdf.text "Total (letra) : #{@invoice.alpha_amount}"
-pdf.text "Categoria : #{@fee_category.name}"
-pdf.text "Colleccion : #{@fee_collection.name}"
+pdf.text "mes", :at => [367,243]
 
+pdf.text "anio", :at => [472,243]
 
-pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
-  pdf.font "Helvetica" do
-    signature = [[""]]
-    pdf.table(signature,
-              :width => 500,
-              :align => {0 => :right,1 => :right},
-              :headers => ["Signature"],
-              :header_text_color  => "DDDDDD",
-              :border_color => "FFFFFF",
-              :position => :center)
-    pdf.move_down(20)
-    pdf.stroke_horizontal_rule
-  end
-end
+#pdf.text "#{@student_invoice_data.student.full_name}", :at => [131,225]
+
+#pdf.text "#{@student_invoice_datas.street}", :at => [131,208]
+
+#pdf.text "#{@student_invoice_datas.address}", :at => [131,190]
+
+#pdf.text "#{@student_invoice_datas.rfc}", :at => [131,173]
+
+#pdf.text "#{@student_invoice_data.student.full_name}", :at => [210,158]
+
+pdf.text "#{@fee_category.name}", :at => [210,98]
+
+pdf.text "#{@fee_collection.name}", :at => [210,83]
+
+pdf.text "#{@invoice.alpha_amount}", :at => [65,38]
+
+pdf.text "#{@invoice.amount_before_tax}", :at => [445,100]
+
+pdf.text "#{@invoice.tax}", :at => [445,85]
+
+pdf.text "#{@invoice.amount_after_tax}", :at => [445,70]
+
 

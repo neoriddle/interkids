@@ -1,3 +1,12 @@
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%= t('app.views.invoices.new.finance_manager') %></h1>
+  <h3><%= t('app.views.invoices.new.invoice') %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
 <div id="page-yield">
 
   <% form_for(@invoice) do |f| %>
@@ -9,7 +18,7 @@
       <% unless @student_invoice_data.nil? -%>
 	  <%= f.hidden_field :student_invoice_data_id  %>
       <div class="label-field-pair">
-	<label>Alumno</label>
+	<label><%=t('app.views.invoices.new.student')%></label>
 	<div class="text-input-bg">
 	  <%= @student_invoice_data.student.full_name %>
 	</div>
@@ -17,42 +26,42 @@
       <% end -%>
 
       <div class="label-field-pair">
-	<label>Concepto</label>
+	<label><%=t('app.views.invoices.new.concept')%></label>
 	<div class="text-input-bg">
 	  <%= f.text_field :concept, :readonly => true %>
 	</div>
       </div>
       
       <div class="label-field-pair">
-	<label>Folio</label>
+	<label><%=t('app.views.invoices.new.invoice_number')%></label>
 	<div class="text-input-bg">
 	  <%= f.text_field :invoice_number %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label>Subtotal</label>
+	<label><%=t('app.views.invoices.new.subtotal')%></label>
 	<div class="text-input-bg">
 	  <%= f.text_field :amount_before_tax, :readonly => true %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label>Impuesto</label>
+	<label><%=t('app.views.invoices.new.taxes')%></label>
 	<div class="text-input-bg">
 	  <%= f.text_field :tax, :readonly => true %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label>Total</label>
+	<label><%=t('app.views.invoices.new.total')%></label>
 	<div class="text-input-bg">
 	  <%= f.text_field :amount_after_tax, :readonly => true %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label>Monto con letra</label>
+	<label><%=t('app.views.invoices.new.amount')%></label>
 	<div class="text-input-bg">
 	  <%= f.text_field :alpha_amount %>
 	</div>
@@ -62,11 +71,9 @@
       <%= hidden_field :fee_category, :id  %>
 
       <div id="submit-button">
-	<%= f.submit 'Crear factura' %>
+	<%= f.submit t('app.views.invoices.new.paper') %>
       </div>
     </div>	    
 
   <% end %>
 </div>
-
-<%= link_to 'Atras', invoices_path %>

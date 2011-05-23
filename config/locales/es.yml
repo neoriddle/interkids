@@ -390,6 +390,18 @@ es:
         receipt: ' Recibo '
         salary: ' N&oacute;mina '
     views:
+      invoices:
+        new:
+          finance_manager: 'Gestor de finanzas'
+          invoice: 'Facturaci&oacute;n'
+          student: 'Alumno'
+          concept: 'Concepto'
+          invoice_number: 'Folio'
+          subtotal: 'Subtotal'
+          taxes: 'IVA'
+          total: 'Total'
+          amount: 'Monto con letra'
+          paper: 'Crear factura'
       student_invoice_datas:
         index:
           name: 'Nombre'
