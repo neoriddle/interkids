@@ -53,7 +53,13 @@ class Batch < ActiveRecord::Base
   def normal_batch_subject
     Subject.find_all_by_batch_id(self.id,:conditions=>["elective_group_id IS NULL AND is_deleted = false"])
   end
+
   def elective_batch_subject(elect_group)
     Subject.find_all_by_batch_id_and_elective_group_id(self.id,elect_group,:conditions=>["elective_group_id IS NOT NULL AND is_deleted = false"])
   end
+
+  def name_for_label
+    [self.name, self.course.course_name].join(' - ')
+  end
+
 end
