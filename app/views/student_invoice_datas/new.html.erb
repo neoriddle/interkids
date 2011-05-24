@@ -16,48 +16,47 @@
     
     <div class="box">
       <div class="label-field-pair">
-	<label><%= t('app.views.student_invoice_datas.new.name') %></label>
+	<%= f.label :name, t('app.views.student_invoice_datas.new.name') %>
 	<div class="text-input-bg">
 	  <%= f.text_field :name %>
 	</div>
       </div>
       
       <div class="label-field-pair">
-	<label><%= t('app.views.student_invoice_datas.new.street') %></label>
+	<%= f.label :street, t('app.views.student_invoice_datas.new.street') %>
 	<div class="text-input-bg">
 	  <%= f.text_field :street %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label><%= t('app.views.student_invoice_datas.new.colony') %></label>
+	<%= f.label :address, t('app.views.student_invoice_datas.new.colony') %>
 	<div class="text-input-bg">
 	  <%= f.text_field :address %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label><%= t('app.views.student_invoice_datas.new.rfc') %></label>
+	<%= f.label :rfc, t('app.views.student_invoice_datas.new.rfc') %>
 	<div class="text-input-bg">
 	  <%= f.text_field :rfc %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label><%= t('app.views.student_invoice_datas.new.batch') %></label>
+	<%= f.label :batch_id, t('app.views.student_invoice_datas.new.batch') %>
 	<div class="text-input-bg">
 	  <%= f.select(:batch_id, 
                        options_from_collection_for_select(@batches, :id, :name_for_label), 
                        {:prompt => t('app.views.student_invoice_datas.new.select_a_batch') },
-                       {:onChange => "#{remote_function(:update => :student_invoice_data_student_id,
-                                                        :url => { 
-                                                           :action => :update_students_on_new_student_invoice_data, 
-                                                           :batch_id => 1 } ) }" } ) %>
+                       {:onChange => remote_function(:update => :student_invoice_data_student_id,
+                                                     :url => {:action => :update_students_on_new_student_invoice_data},
+                                                     :with => "'batch_id=' + this.value" )  } ) %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label><%= t('app.views.student_invoice_datas.new.student') %></label>
+	<%= f.label :student_id, t('app.views.student_invoice_datas.new.student') %>
 	<div class="text-input-bg">
 	  <%= f.select(:student_id, 
                        options_from_collection_for_select(@students, :id, :full_name), :onChange => 'hola' ) %>
