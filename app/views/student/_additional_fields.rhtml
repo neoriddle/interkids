@@ -1,6 +1,6 @@
 <ul id="category-list">
 <% unless @additional_details.empty? %>
-  <li class="heading"> Field name </li>
+  <li class="heading"> <%=t('app.views.student._additional_fields.field_name')%> </li>
     <%- @additional_details.each do |c| -%>
       <li class="list<%=cycle('odd', 'even')%>">
         <div class="category-name"><%= c.name %></div>

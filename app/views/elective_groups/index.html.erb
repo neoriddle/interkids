@@ -1,14 +1,14 @@
 <div id="content-header">
   <img src="/images/examination/show_exam.png" alt="Exam" />
-  <h1>Batches</h1>
-  <h3>Electives</h3>
+  <h1><%= t('app.views.elective_groups.index.batches') %></h1>
+  <h3><%= t('app.views.elective_groups.index.electives') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
 </div>
 <div id="inner-tab-menu">
   <ul>
-    <li><%= link_to 'New', new_batch_elective_group_path(@batch) %></li>
+    <li><%= link_to t('app.views.elective_groups.index.new'), new_batch_elective_group_path(@batch) %></li>
 
   </ul>
 </div>
@@ -21,10 +21,10 @@
   <div class="box">
 
     <div class="bread_crumb">
-        <%= link_to 'Courses', courses_path %> &raquo;
+        <%= link_to t('app.views.elective_groups.index.courses'), courses_path %> &raquo;
         <%= link_to @course.full_name, @course %> &raquo;
         <%= link_to @batch.name, [@course, @batch] %> &raquo;
-        Elective Group
+        <%=t('app.views.elective_groups.index.elective_groups')%>
         </div>
 
 

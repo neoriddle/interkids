@@ -1,6 +1,11 @@
 es:
   activerecord:
     errors:
+      models:
+        student_additional_field:
+          attributes:
+            name:
+              taken: ': Atributo existente'
       template:
         body: 'Por favor revise los siguientes campos'
         header: 
@@ -37,6 +42,12 @@ es:
       student: 
         male: 'Masculino'
         female: 'Femenino'
+      configuration:
+        marks: 'Aciertos'
+        grades: 'Nivel'
+        marksandgrades: 'Nivel y aciertos'
+        daily: 'Diario'
+        subjectwise: 'Por materia'
     controllers:
       weekday_controller:
         sunday: 'Domingo'
@@ -390,6 +401,71 @@ es:
         receipt: ' Recibo '
         salary: ' N&oacute;mina '
     views:
+      batches:
+        show:
+          courses: 'Cursos'
+          batches: 'Ciclo/Grado'
+          exams: 'Ex&aacute;menes'
+          electives: 'Talleres'
+          edit: 'Editar'
+          delete: 'Borrar'
+          subjects: 'Materias'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
+          batch: 'Ciclo'
+          id: 'Id'
+          name: 'Nombre'
+          admission_number: 'No. Admisi&oacute;n'
+        edit:
+          courses: 'Cursos'
+          edit_batch: 'Editar Ciclo'
+          batch: 'Ciclo'
+          name: 'Nombre'
+          start_date: 'Fecha inicial'
+          end_date: 'Fecha final'
+          save: 'Guardar'
+          edit: 'Editar'
+        new:
+          courses: 'Cursos'
+          new_batch: 'Nuevo ciclo'
+          name: 'Nombre'
+          start_date: 'Fecha inicial'
+          end_date: 'Fecha final'
+          save: 'Guardar'          
+      elective_groups:
+        index:
+          batches: 'Ciclos'
+          electives: 'Talleres'
+          new: 'Nuevo'
+          courses: 'Cursos'
+          elective_groups: 'Talleres'
+        edit:
+          courses: 'Cursos'
+          edit_batch: 'Editar ciclo'
+          batch: 'Ciclo'
+          name: 'Nombre'
+          start_date: 'Fecha inicial'
+          end_date: 'Fecha final'
+          save: 'Guardar'          
+        new:
+          batches: 'Ciclos'
+          new_electives: 'Nuevo taller'
+          new: 'Nuevo'
+          courses: 'Cursos'
+          batch: 'Ciclo'
+          electives: 'Talleres'
+          name: 'Nombre'
+          save: 'Guardar'
+        show:
+          batches: 'Ciclos'
+          show_electives: 'Mostrar talleres'
+          add: 'Agregar'
+          courses: 'Cursos'
+          batch: 'Ciclo'
+          electives: 'Talleres'
+          edit: 'Editar'
+          delete: 'Borrar'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
+          assign_students: 'Asignar alumnos'
       invoices:
         new:
           finance_manager: 'Gestor de finanzas'
@@ -509,7 +585,7 @@ es:
           add_subject_to_this_elective_group: 'Agregar materia a este sub-grupo'
           edit: 'Editar'
           delete: 'Borrar'
-          are_you_sure: '¿Est&aacute; seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
           assing_students: 'Asignar alumnos'
           new_elective_group: 'Crear Sub-curso'
         _new:
@@ -537,7 +613,7 @@ es:
           min_score: 'Calificaci&oacute;n m&iacute;nima'
           edit: 'Editar'
           delete: 'Borrar'
-          are_you_sure: '¿Est&aacute; seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
           set_in_common: 'Asignar grado com&uacute;n'
         _new:
           name: 'Nombre'
@@ -588,9 +664,9 @@ es:
         subject_transfer:
           subjects: 'Materias'
           assign_subjects: 'Asignacion de materias'
-          add_normal_subject: 'Agrega una materia base'
-          add_electives: 'Agrega elecciones'
-          assign_old_batch_subjects: 'Adigna una materia de ciclo anterior'
+          add_normal_subject: 'Agrega materia base'
+          add_electives: 'Agrega taller'
+          assign_old_batch_subjects: 'Asigna una materia de ciclo anterior'
           normal_subjects: 'Materias base'
       attendances:
         _edit:
@@ -600,21 +676,21 @@ es:
           afternoon: 'vespertino'
           update: 'Actualizar'
           delete: 'Borrar'
-          are_you_sure: '¿Est&aacute; usted seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
         _new:
           edit_attendance_for: 'Crear falta para: '
           reason_for_absence: 'Raz&oacute;n de ausencia'
           forenoon: 'Matutino'
           afternoon: 'Vespertino'
           add: 'Agregar'
-          are_you_sure: '¿Est&aacute; usted seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
         _register:
           name: 'Nombre'
         _subjects:
           select_a_subject: 'Selecciona materia'
         index:
           attendance: 'Asistencia'
-          attendance_register: 'Registro de asistencia'
+          attendance_register: 'Principal'
           select_a_batch: 'Seleccion el curso'
       xmlfolder:
         index:
@@ -932,7 +1008,7 @@ es:
           batch_name: 'Grado'
           created_date: 'Creaci&oacute;n'
           delete: 'Borrar'
-          edit: 'Modificar'
+          edit: 'Editar'
           no_categories_to_display: 'No hay categorias'
         _master_category_edit_form:
           edit_master_category: 'Editar categoria de servicio'
@@ -977,6 +1053,12 @@ es:
           student_category_: 'Sel categor&iacute;a'
         _student_admission_particulars:
           admission_no: 'No. alumno'
+        _master_category_create_form:
+          create_master_category_fees: 'Crear categoria base de servicio'
+          name: 'Nombre'
+          description: 'Descripci&oacute;n'
+          select_course: 'Selecciona curso'
+          save: 'Guardar'
         additional_fees:
           fees: 'Servicio adicional'
           additional_fees: 'Gestor de servicios'
@@ -1305,6 +1387,8 @@ es:
           student_id: 'No. Alumno'
           batches: 'Grado/Curso'
           payment_id: 'Tipo de pago'
+          select_payform: 'Sel. forma de pago'
+          select_category: 'Sel. categoria'
         income_create:
           create_income: 'Agregar ingreso'
           manage_transactions: 'gesti&oacute;n de transacciones'
@@ -1490,10 +1574,11 @@ es:
           emergencies: 'Emergencias'
           signature: 'Firma'
         _additional_fields:
-          edit: 'â–º Editar'
-          delete: 'â–º Borrar'
-          are_you_sure: '¿Est&aacute; seguro?'
+          edit: 'Editar'
+          delete: 'Borrar'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
           no_additional_details: 'No se encontraron detalles adicionales'
+          field_name: 'Atributo'
         _all_assign:
           assign_all: 'Asignar todos'
           remove_all: 'Borrar todos'
@@ -1520,17 +1605,17 @@ es:
           details: 'Detalles'
           subject: 'Materia'
           mark: 'Promedio'
-          save: 'â–º Guardar'
+          save: ' Guardar'
         _search_ajax:
           no_users_found: 'No existen usuarios'
           course_batch: 'Ciclo & grado: '
           adm_no: 'adm no. :'
         _student_category_create_form:
           enter_new_category: 'Nueva categoria: '
-          save: 'â–º Guardar'
+          save: 'Guardar'
         _student_category_edit_form:
           editing_category: 'Editar categoria: '
-          save: 'â–º Guardar'
+          save: ' Guardar'
         _student_category_list:
           edit: 'Editar'
           remove: 'Borrar'
@@ -1543,7 +1628,7 @@ es:
           no_result_found: 'No se encontraron resultados'
         _student_tc_generate:
           student_delete_successfully: 'Alumno borrado exitosamente'
-          generate_tc: 'â–º Generar TC'
+          generate_tc: ' Generar TC'
         _students_by_course:
           id: 'Id'
           name: 'Nombre'
@@ -1664,24 +1749,24 @@ es:
           phone_1: 'Tel&eacute;fono 1'
           phone_2: 'Tel&eacute;fono 2'
           mobile_phone_no: 'Celular'
-          finish: 'â–º Continuar'
-          skip: 'â–º Omitir Secci&oacute;n'
-          another_guardian: 'â–º Agregar Tutor'
+          finish: ' Continuar'
+          skip: ' Omitir Secci&oacute;n'
+          another_guardian: ' Agregar Tutor'
         admission3:
           admission: 'Nuevo Ingreso'
           step_3_emergency_contact: 'Paso 3 - Contacto para emergencias'
           select_one_of_the_guardians_as_emergency_contact: 'Selecciona al tutor-contacto para emergencias'
-          finish: 'â–º Continuar'
+          finish: ' Continuar'
         admission3_1:
           admission: 'Nuevo Ingreso'
           step_3_emergency_contact: 'Paso 3 - Contacto para emergencias'
           select_one_of_the_guardians_as_emergency_contact: 'Selecciona al tutor-contacto para emergencias'
-          finish: 'â–º Continuar'
+          finish: ' Continuar'
         admission4:
           admission: 'Nuevo Ingreso'
           step_4: 'Paso 4'
           additional_details: 'Detalles adicionales'
-          save_&_proceed: 'â–º Guardar & Continuar'
+          save_&_proceed: ' Guardar & Continuar'
         advanced_search:
           student: 'Alumno'
           advanced_search: 'B&uacute;squeda avanzada'
@@ -1851,7 +1936,7 @@ es:
         email:
           students: 'Alumnos'
           send_email: 'Mandar Email'
-          course_&_batch: 'Ciclo y grado'
+          course_&_batch: 'Ciclo y grado: '
           adm_no: 'Adm. no.'
           subject: 'Materia'
           recipients: 'Buz&oacute;n Entrada'
@@ -1868,7 +1953,7 @@ es:
           parents_profile: 'Perfil tutor'
           student_profile: 'Perfil alumno'
           add_guardian: 'Agregar tutor'
-          course_&_batch: 'Ciclo y grado'
+          course_&_batch: 'Ciclo y grado: '
           adm_no: 'Adm. no.'
           parents_guardian: 'Tutor'
           name: 'Nombre'
@@ -1903,9 +1988,9 @@ es:
           course: 'Nivel'
           year: 'A&ntildeo'
           total_mark: 'Promedio'
-          save_proceed: 'â–º Continuar'
+          save_proceed: ' Continuar'
           add_subject: 'Agregar Materias'
-          skip: 'â–º Omitir'
+          skip: ' Omitir'
         previous_years_marks_overview:
           student_info: 'Informaci&oacute;n del alumno'
           previous_years_results_overview: 'Boleta a&ntildeo anterior'
@@ -2178,13 +2263,13 @@ es:
           grading_system: 'Escala'
           batch_transfers: 'Graduar grupo'
         manage_course:
-          courses: 'Grados-Clico'
+          courses: 'Ciclo-Curso'
           courses_: 'Grado / Curso'
-          manage_course: 'Gestor'
+          manage_course: 'Configuraci&oacute;n'
           new: 'Nuevo'
           edit: 'Editar'
           delete: 'Borrar'
-          are_you_sure: '&iquest;Est&aacute;; seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
         new:
           course: 'Gestor de grado-ciclo'
           new: 'Nuevo'
@@ -2198,12 +2283,12 @@ es:
           start_date: 'Fecha de inicio'
           final_date: 'Fecha de fin'
         show:
-          courses: 'courses'
-          show: 'show'
-          new: 'new'
-          edit: 'edit'
-          delete: 'delete'
-          are_you_sure: '&iquest;Est&aacute;; seguro?'
+          courses: 'Cursos'
+          show: 'Mostrar'
+          new: 'Nuevo'
+          edit: 'Editar'
+          delete: 'Borrar'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
       employee:
         advanced_search_pdf:
           employee: 'Empleado'
@@ -2314,8 +2399,9 @@ es:
           field_name: 'Nombre del campo'
           edit: 'Editar'
           delete: 'Borrar'
-          are_you_sure: '&iquest;Est&aacute;; seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
           no_additional_details_record_found: 'no_additional_details_record_found'
+          field_name: 'Atributo'
         _address:
           home_address: 'Direcci&oacute;n'
           city: 'Ciudad'
@@ -2544,9 +2630,9 @@ es:
           employee_settings: 'Configuraci&oacute;n de empleado'
           add_grade: 'Agregar nivel'
           name: 'Nombre'
-          priority: 'Prioridad'
-          max_periods_per_day: 'Periodos por dia'
-          max_periods_per_week: 'Periodods por semana'
+          priority: 'Prioridad de empleado'
+          max_periods_per_day: 'Horas por dia'
+          max_periods_per_week: 'Horas por semana'
           status: 'Estatus'
           active: 'activo'
           inactive: 'inactivo'
@@ -2568,7 +2654,7 @@ es:
           employee_number_of_last_employee_is: 'El &uacute;ltimo n&uacute;mero de empleado es: '
           fields_marked_with: 'Los campos marcados con '
           must_be__filled: ' son obligatorios.'
-          general_details: 'general_details'
+          general_details: 'Detalles generales'
           employee_no: 'Numero de empleado'
           joining_date: 'Fec. ingreso'
           first _name: 'Nombre'
@@ -2611,7 +2697,7 @@ es:
           ab+: 'ab+'
           ab-: 'ab-'
           nationality: 'Nacionalidad'
-          upload_photo: 'Actualizar foto'
+          upload_photo: 'Fotograf&iacute;a (50kb max)'
           save_&_proceed: 'Guardar y continuar'
         admission2:
           employee_admission: 'Ingreso de empleado'
@@ -2678,7 +2764,7 @@ es:
           country: 'Pa&iacute;s'
           position: 'Posici&oacute;n'
           grade: 'Nivel'
-          date_of_joining: 'Fec. admici&oacute;n'
+          date_of_joining: 'Fec. admisi&oacute;n'
           choose_your_option: 'Elige'
           birth_date: 'Fec nacimiento'
           status: 'Estatus'
@@ -2898,7 +2984,7 @@ es:
           employee_management: 'Gesti&oacute;n de empleados'
           manage_all_employees_: 'Administraci&oacute;n de empleados'
           employee_admissions_form: 'Carga de informaci&oacute;n de nuevo empleado'
-          assign_an_employee_with_one_or_more_subjects: 'Asignacci&oacute;n de una o mas materias por empleado'
+          assign_an_employee_with_one_or_more_subjects: 'Asignaci&oacute;n de una o mas materias por empleado'
           employee_admission: 'Alta de empleados'
           employee_subject_association: 'Asignaci&oacute;n de materias'
         hr:
@@ -3160,7 +3246,7 @@ es:
           leave_types: 'Tipo falta'
           edit: 'Editar'
           inactive: 'inactivo'
-          employee_leave_types_records_not_found: 'No se encontrarono tipos de falta'
+          employee_leave_types_records_not_found: 'No se encontraron tipos de falta'
         _new_leave_applications:
           new_applications_from_reporting_employees: 'Agregar tipo de faltas'
           name: 'Concepto'
@@ -3318,7 +3404,7 @@ es:
           non_deductible: 'Pago de servicios'
           edit: 'Editar'
           delete: 'Borrar'
-          are_you_sure: '¿Est&aacute; seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
           inactivate: 'Deshabilitar'
           are_you_sure_you_want_to_inactivate_this_category: '¿Est&aacute; seguro en deshabilitar este concepto?'
           activate: 'Habilitar'
@@ -3486,7 +3572,7 @@ es:
           operations: 'Operaciones'
           edit: 'Editar'
           delete: 'Borrar'
-          are_you_sure: '¿Est&aacute; seguro?'
+          are_you_sure: '&iquest;Est&aacute; seguro?'
         _edit:
           edit_title: 'Editar horario de clase para '
           name: 'Nombre'

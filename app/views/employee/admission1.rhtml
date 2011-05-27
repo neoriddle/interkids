@@ -80,7 +80,7 @@
       <div class="label-field-pair">
         <label for="employee_category"><%= t('app.views.employee.admission1.category') %> <span class="necessary-field">*</span> </label>
         <div class="text-input-bg"><%= select :employee, :employee_category_id, @categories.map { |s| [s.name, s.id] },
-            {:prompt => "Select"},
+            {:prompt => t('app.views.employee.admission1.select')},
             {:onChange => "#{remote_function(:url => {:action => "update_positions"}, :with => "'category_id='+value")}"} %></div>
       </div>
       <hr class="label-underline"></hr>
@@ -164,7 +164,7 @@
       <hr class="label-underline"></hr>
       <div class="label-field-pair">
         <label for="employee_nationality"><%= t('app.views.employee.admission1.nationality') %></label>
-        <div class="text-input-bg"><%= select :employee, :nationality_id, @nationalities.map {|c| [c.name, c.id]}, :selected => 76 %></div>
+        <div class="text-input-bg"><%= select :employee, :nationality_id, @nationalities.map {|c| [c.name, c.id]}, :selected => 115 %></div>
       </div>
       <hr class="label-underline"></hr>
       <script>

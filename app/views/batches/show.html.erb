@@ -1,7 +1,7 @@
  <div id="content-header">
     <img src="/images/show_settings.png" />
-  <h1>Courses</h1>
-  <h3>Batches</h3>
+  <h1><%= t('app.views.batches.show.courses') %></h1>
+  <h3><%= t('app.views.batches.show.batches') %></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -10,12 +10,12 @@
   <div id="inner-tab-menu">
   <ul>
     <%  if permitted_to? :index,:exam_groups %>
-    <li><%= link_to 'Exams', batch_exam_groups_path(@batch) %> </li>
+    <li><%= link_to t('app.views.batches.show.exams'), batch_exam_groups_path(@batch) %> </li>
     <% end %>
-    <li><%= link_to 'Electives', batch_elective_groups_path(@batch) %></li>
-    <li><%= link_to 'Edit', edit_course_batch_path(@course, @batch) %></li>
-    <li><%= link_to('Delete', [@course, @batch], :method => 'delete', :confirm => 'Are you sure?') %></li>
-    <li><%= link_to 'Subjects', :controller=>"batch_transfers", :action=>'subject_transfer', :id=>@batch %></li>
+    <li><%= link_to t('app.views.batches.show.electives'), batch_elective_groups_path(@batch) %></li>
+    <li><%= link_to t('app.views.batches.show.edit'), edit_course_batch_path(@course, @batch) %></li>
+    <li><%= link_to(t('app.views.batches.show.delete'), [@course, @batch], :method => 'delete', :confirm => t('app.views.batches.show.are_you_sure')) %></li>
+    <li><%= link_to t('app.views.batches.show.subjects'), :controller=>"batch_transfers", :action=>'subject_transfer', :id=>@batch %></li>
   </ul>
 </div>
 <div id="page-yield">
@@ -30,17 +30,17 @@
 
  <div class="box">
    <div class="bread_crumb">
-    <%= link_to 'Courses', courses_path %> &raquo;
+    <%= link_to t('app.views.batches.show.courses'), courses_path %> &raquo;
     <%= link_to @course.full_name, @course %> &raquo;
-    Batch <%= @batch.name %>
+    <%=t('app.views.batches.show.batch')%> <%= @batch.name %>
         </div>
 
 
 <table id="listing" width="100%">
   <tr class="tr-head">
-    <td>Sl.no</td>
-    <td>Name</td>
-    <td>Admission Number</td>
+    <td><%=t('app.views.batches.show.id')%></td>
+    <td><%=t('app.views.batches.show.name')%></td>
+    <td><%=t('app.views.batches.show.admission_number')%></td>
   </tr>
   <% @slno = 0 %>
   <% @students.each do |student| %>
