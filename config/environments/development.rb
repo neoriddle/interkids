@@ -29,3 +29,5 @@ config.action_mailer.raise_delivery_errors = false
 #  rescue MissingSourceFile
 #  end
 #end
+
+config.logger = Logger.new(STDOUT)
