@@ -1,7 +1,7 @@
 class Configuration < ActiveRecord::Base
 
-  EXAM_RESULT_TYPE_OPTIONS        = ['Marks', 'Grades', 'MarksAndGrades']
-  STUDENT_ATTENDANCE_TYPE_OPTIONS = ['Daily', 'SubjectWise']
+  EXAM_RESULT_TYPE_OPTIONS        = [I18n.t('app.models.configuration.marks'), I18n.t('app.models.configuration.grades'), I18n.t('app.models.configuration.marksandgrades')]
+  STUDENT_ATTENDANCE_TYPE_OPTIONS = [I18n.t('app.models.configuration.daily'), I18n.t('app.models.configuration.subjectwise')]
 
   class << self
 

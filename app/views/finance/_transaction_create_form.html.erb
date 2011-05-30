@@ -43,14 +43,14 @@
     <div class="label-field-pair">
       <%= f.label t('app.views.finance._transaction_create_form.payment_id') %>
       <div class="text-input-bg">
-	<%= f.select :payment_form_id, options_from_collection_for_select(@payment_forms, :id, :name), :prompt => 'Select a payment form' %>
+	<%= f.select :payment_form_id, options_from_collection_for_select(@payment_forms, :id, :name), :prompt => t('app.views.finance._transaction_create_form.select_payform') %>
       </div>
     </div>
 
     <div class="label-field-pair">
       <%= f.label t('app.views.finance._transaction_create_form.category') %>
       <div class="text-input-bg">
-	<%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name), :prompt => 'Select a category' %>
+	<%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name), :prompt => t('app.views.finance._transaction_create_form.select_category')%>
       </div>
     </div>
 
