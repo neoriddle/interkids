@@ -8,7 +8,7 @@ class CashBoxesController < ApplicationController
       format.html # index.html.erb
       format.xml  { render :xml => @cash_boxes }
       format.xls  { send_data @cash_boxes.to_xls }
-      format.csv  { send_data @cash_boxes.to_csv ( :except => [:id] ) }
+      format.csv  { send_data @cash_boxes.to_csv(:except => [:id]) }
     end
   end
 
@@ -46,7 +46,7 @@ class CashBoxesController < ApplicationController
 
     respond_to do |format|
       if @cash_box.save
-        format.html { redirect_to(@cash_box, :notice =>  t('app.controllers.cash_boxes_controller.cashbox_created')}
+        format.html { redirect_to(@cash_box, :notice =>  t('app.controllers.cash_boxes_controller.cashbox_created'))}
         format.xml  { render :xml => @cash_box, :status => :created, :location => @cash_box }
       else
         format.html { render :action => "new" }
@@ -62,7 +62,7 @@ class CashBoxesController < ApplicationController
 
     respond_to do |format|
       if @cash_box.update_attributes(params[:cash_box])
-        format.html { redirect_to(@cash_box, :notice => t('app.controllers.cash_boxes_controller.cashbox_updated')}
+        format.html { redirect_to(@cash_box, :notice => t('app.controllers.cash_boxes_controller.cashbox_updated'))}
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
