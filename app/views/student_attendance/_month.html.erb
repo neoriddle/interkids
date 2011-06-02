@@ -1,10 +1,10 @@
 <div class="label-field-pair"><label>
-  <%= t('app.views.student_attendance._month.select_a_month_&_year') %>
+  <%= t('app.views.student_attendance._month.select_month_year') %>
 </label>
 <div class="text-input-bg2">
 <%= select :advance_search, :month,
-  {t('app.views.student_attendance._month.jan')=>"01",t('app.views.student_attendance._month.feb_02')=>"02",t('app.views.student_attendance._month.mar_03')=>"03",t('app.views.student_attendance._month.apr_04')=>"04",t('app.views.student_attendance._month.may_05')=>"05",t('app.views.student_attendance._month.jun_06')=>"06",t('app.views.student_attendance._month.jul_07')=>"07",t('app.views.student_attendance._month.aug_08')=>"08",t('app.views.student_attendance._month.sep_09')=>"09",t('app.views.student_attendance._month.oct_10')=>"10",t('app.views.student_attendance._month.nov_11')=>"11",t('app.views.student_attendance._month.dec_12')=>"12"},
-  {:prompt => t('app.views.student_attendance._month.month')} %>
+  {t('app.views.student_attendance._month.jan')=>"01",t('app.views.student_attendance._month.feb')=>"02",t('app.views.student_attendance._month.mar')=>"03",t('app.views.student_attendance._month.apr')=>"04",t('app.views.student_attendance._month.may')=>"05",t('app.views.student_attendance._month.jun')=>"06",t('app.views.student_attendance._month.jul')=>"07",t('app.views.student_attendance._month.aug')=>"08",t('app.views.student_attendance._month.sep')=>"09",t('app.views.student_attendance._month.oct')=>"10",t('app.views.student_attendance._month.nov')=>"11",t('app.views.student_attendance._month.dec')=>"12"},
+  {:prompt => t('app.views.student_attendance._month.select_month')} %>
 </div>
 <div id="year"><%= render :partial => 'year' %></div>
 </div>

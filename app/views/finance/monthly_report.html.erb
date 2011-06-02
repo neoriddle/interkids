@@ -7,29 +7,28 @@
   </div>
 </div>
 
-</div>
 
     <% form_for :report, :url => {:action => 'generate_transaction_report'} do |f| %>
       <div class="label-field-pair">
-	<label><%=t('app.views.finance.monthly_report.select_start_date')%></label>
+	<label><%=t('app.views.finance.monthly_report.start_date')%></label>
 	<div class="input-container">
 	  <%= calendar_date_select_tag 'start_date', Date.today %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label><%=t('app.views.finance.monthly_report.select_end_date')%></label>
+	<label><%=t('app.views.finance.monthly_report.end_date')%></label>
 	<div class="input-container">
 	  <%= calendar_date_select_tag 'end_date', Date.today %>
 	</div>
       </div>
 
       <div class="label-field-pair">
-	<label>Type:</label>
+	<label><%=t('app.views.finance.monthly_report.type')%></label>
 	<div class="text-input-bg">
 	  <%= select(:transaction,
                      :is_income,
-                     options_for_select([['Income',1],['Expense',0]]),
+                     options_for_select([[t('app.views.finance.monthly_report.income'),1],[t('app.views.finance.monthly_report.expense'),0]]),
                      {:prompt => t('app.views.finance.monthly_report.select_type')},
                      {:onChange => "#{remote_function(:update => 'categories', :url => {:action => 'update_categories_for_transaction_report'}, :with => "'is_income='+value")}"} ) %>
 	</div>

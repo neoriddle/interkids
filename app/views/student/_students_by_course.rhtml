@@ -1,4 +1,3 @@
-
 <div class="students-table">
   <table align="center" width="100%" cellpadding="1" cellspacing="1">
     <tr class="tr-head">
@@ -37,7 +36,7 @@
         </td>
 
         <td class="col-2">
-          <%=  r.first_name + " " + r.last_name %>
+          <%= r.first_name + " " + r.last_name %>
         </td>
         
         <td class="col-3">
@@ -45,9 +44,10 @@
         </td>
 
         <td class="col-4">
-          <%=  link_to t('app.views.student._students_by_course.view_profile'), :controller => "student", :action => "profile", :id => r.id %>
+          <%= link_to t('app.views.student._students_by_course.view_profile'), :controller => "student", :action => "profile", :id => r.id %>
         </td>
       </tr>
     <% end %>
   </table>
 </div>
+

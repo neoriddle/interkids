@@ -1,7 +1,7 @@
 <div id="content-header">
    <img src="/images/show_finance.png" alt="" />
-  <h1>Finance</h1>
-  <h3>Tally</h3>
+  <h1><%=t('app.views.xmlfolder.index.finance_manager')%></h1>
+  <h3><%=t('app.views.xmlfolder.index.export_data')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -12,13 +12,13 @@
 
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to "Tally settings", :action => "settings" %></div>
-    <div class="link-descr">Change ledger settings for Tally</div>
+    <div class="link-heading"><%= link_to t('app.views.xmlfolder.index.tally_settings'), :action => "settings" %></div>
+    <div class="link-descr"><%=t('app.views.xmlfolder.index.change_ledger_settings')%></div>
   </div>
 
   <div class="link-box">
-    <div class="link-heading"><%= link_to " Export for Tally",:controller => 'xml', :action => "create_xml" %></div>
-    <div class="link-descr"> Creates xml import file for tally</div>
+    <div class="link-heading"><%= link_to t('app.views.xmlfolder.index.export_for_tally'),:controller => 'xml', :action => "create_xml" %></div>
+    <div class="link-descr"><%=t('app.views.xmlfolder.index.creates_xml_import_file')%></div>
   </div>
 </div>
 </div>

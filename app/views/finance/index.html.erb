@@ -31,10 +31,11 @@
     <div class="link-descr"><%=t('app.views.finance.index.create_new_donations')%></div>
   </div>
 
+  <!--
   <div class="link-box">
     <div class="link-heading"><%= link_to t('app.views.finance.index.auto_transaction'), :action => "automatic_transactions" %></div>
     <div class="link-descr"><%=t('app.views.finance.index.add_automatic_transaction')%></div>
-  </div>
+  </div>-->
   <% unless @hr.nil? %>
     <div class="link-box">
       <div class="link-heading"><%= link_to t('app.views.finance.index.payslip'), :action => "payslip_index" %></div>

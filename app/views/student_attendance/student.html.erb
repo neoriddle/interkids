@@ -36,7 +36,7 @@
       </label>
       <div class="text-input-bg">
         <%= f.select :mode,
-          {t('app.views.student_attendance.student.monthly') => "Monthly", t('app.views.student_attendance.student.overall')=> "Overall"],
+          {t('app.views.student_attendance.student.monthly') => "Monthly", t('app.views.student_attendance.student.overall') => "Overall"},
           {:prompt => t('app.views.student_attendance.student.select_a_mode')},
           {:onchange => "#{remote_function(
           :url => { :action => 'month' },

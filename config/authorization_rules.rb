@@ -735,20 +735,20 @@ authorization do
   role :admin do
     has_permission_on [:user],  :to => [:edit_privilege]
     has_permission_on [:weekday], :to => [:index, :week, :create]
-    has_permission_on [:event],
-      :to => [
-        :index,
-        :event_group,
-        :select_course,
-        :course_event,
-        :remove_batch,
-        :select_employee_department,
-        :department_event,
-        :remove_department,
-        :show,
-        :confirm_event,
-        :cancel_event
-    ]
+    #has_permission_on [:event],
+    #  :to => [
+    #    :index,
+    #    :event_group,
+    #    :select_course,
+    #    :course_event,
+    #    :remove_batch,
+    #    :select_employee_department,
+    #    :department_event,
+    #    :remove_department,
+    #    :show,
+    #    :confirm_event,
+    #    :cancel_event
+    #]
     has_permission_on [:academic_year],
       :to => [
         :index,
@@ -768,8 +768,8 @@ authorization do
         :destroy,
         :list_subject
     ]
-    has_permission_on [:sms],  :to => [:index, :settings, :update_general_sms_settings, :students, :list_students, :batches, :sms_all, :employees, :list_employees, :departments, :all]
-    has_permission_on [:sms_settings],  :to => [:index, :update_general_sms_settings]
+    #has_permission_on [:sms],  :to => [:index, :settings, :update_general_sms_settings, :students, :list_students, :batches, :sms_all, :employees, :list_employees, :departments, :all]
+    #has_permission_on [:sms_settings],  :to => [:index, :update_general_sms_settings]
     has_permission_on [:class_timings],  :to => [:index, :edit, :destroy, :show, :new, :create, :update]
     has_permission_on [:attendance_reports], :to => [:index, :subject, :mode, :show, :year, :report, :filter, :student_details]
     has_permission_on [:student_attendance], :to => [:index, :student, :month]
@@ -1167,7 +1167,7 @@ authorization do
         :download
     ]
         
-    has_permission_on [:holiday], :to => [:index,:edit,:delete]
+    #has_permission_on [:holiday], :to => [:index,:edit,:delete]
 #    has_permission_on [:news],
 #      :to => [
 #        :index,
