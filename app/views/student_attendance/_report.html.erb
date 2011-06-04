@@ -20,7 +20,7 @@
 <%= t('app.views.student_attendance._report.total_working_days') %> <%= working_days %>
 <% else %>
   <%= t('app.views.student_attendance._report.total_working_hours') %> <%= working_days %>
-<% end %>|t('app.views.student_attendance._report.total_present') <%= total = (working_days - leaves).to_f %> |
+<% end %>|<%=t('app.views.student_attendance._report.total_present')%> <%= total = (working_days - leaves).to_f %> |
 <% percentage =  (total/working_days)*100 unless working_days == 0 %>
  <%= t('app.views.student_attendance._report.percentage') %> <%= percentage.round.to_f unless percentage.nil? %>
 </div>

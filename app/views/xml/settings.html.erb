@@ -1,7 +1,7 @@
 <div id="content-header">
    <img src="/images/show_finance.png" alt="" />
-  <h1>Tally</h1>
-  <h3>Settings</h3>
+  <h1><%=t('app.views.xmlfolder.settings.finance_manager')%></h1>
+  <h3><%=t('app.views.xmlfolder.settings.settings')%></h3>
   <div id="app-back-button">
     <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
   </div>
@@ -14,22 +14,22 @@
   <div class="box">
   <% form_for :xml_settings do |f| %>
     <div class="label-field-pair">
-      <label for="student_grade">Ledger name corresponding to salary</label>
+      <label for="student_grade"><%=t('app.views.xmlfolder.settings.ledger_name_to_salary')%></label>
       <div class="text-input-bg"> <%= text_field :xml_settings, :salary, :value => @xml[:salary] %>
     </div>
       </div>
   <div class="label-field-pair">
-    <label for="student_grade">Ledger name corresponding to fees</label>
+    <label for="student_grade"><%=t('app.views.xmlfolder.settings.ledger_name_to_fees')%></label>
     <div class="text-input-bg"><%= text_field :xml_settings, :fee, :value => @xml[:fee]%>
     </div>
   </div>
     <div class="label-field-pair">
-      <label for="student_grade">Ledger name corresponding to donation</label>
+      <label for="student_grade"><%=t('app.views.xmlfolder.settings.ledger_name_to_donation')%></label>
       <div class="text-input-bg"> <%= text_field :xml_settings, :donation, :value => @xml[:donation] %>
       </div>
     </div>
   
-  <%= submit_tag "► Save Changes",:class=>'submit_button' %>
+  <%= submit_tag t('app.views.xmlfolder.settings.save_changes'),:class=>'submit_button' %>
 <% end %>
 </div>
 </div>

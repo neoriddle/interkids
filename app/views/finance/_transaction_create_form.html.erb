@@ -9,7 +9,7 @@
 	<%= select(:batch, 
                    :id, 
                    options_from_collection_for_select(@batches, :id, :full_name),
-                   {:prompt => 'Select a batch'},
+                   {:prompt => t('app.views.finance._transaction_create_form.select_batch')},
                    {:onChange => "#{remote_function(:url => {:action => 'load_students_for_income'}, :with => "'batch_id='+value")}" } ) %>
       </div>
     </div>
