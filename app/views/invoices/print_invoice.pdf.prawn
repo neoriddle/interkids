@@ -5,11 +5,11 @@ pdf.text "#{@invoice.invoice_number}", :at => [445,282]
 
 pdf.text "a", :at => [0,0]
 
-pdf.text "dia", :at => [314,243]
+pdf.text "#{Time.new.day}", :at => [314,243]
 
-pdf.text "mes", :at => [367,243]
+pdf.text "#{Time.new.month}", :at => [367,243]
 
-pdf.text "anio", :at => [472,243]
+pdf.text "#{Time.new.year}", :at => [472,243]
 
 #pdf.text "#{@student_invoice_data.student.full_name}", :at => [131,225]
 
