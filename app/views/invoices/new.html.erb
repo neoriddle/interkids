@@ -67,8 +67,26 @@
 	</div>
       </div>
 
-      <%= hidden_field :fee_collection, :id  %>
+      <% unless @fee_category.nil? -%>
       <%= hidden_field :fee_category, :id  %>
+      <div class="label-field-pair">
+	<label><%=t('app.views.invoices.new.category')%></label>
+	<div class="text-input-bg">
+	  <%= @fee_collection.name %>
+	</div>
+      </div>
+      <% end -%>
+
+      <% unless @fee_collection.nil? -%>
+      <%= hidden_field :fee_collection, :id  %>
+      <div class="label-field-pair">
+	<label><%=t('app.views.invoices.new.collection')%></label>
+	<div class="text-input-bg">
+	  <%= @fee_collection.start_date %> -
+	  <%= @fee_collection.end_date %>
+	</div>
+      </div>
+      <% end -%>
 
       <div id="submit-button">
 	<%= f.submit t('app.views.invoices.new.paper') %>

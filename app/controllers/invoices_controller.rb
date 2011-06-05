@@ -37,12 +37,15 @@ class InvoicesController < ApplicationController
     @invoice.student_invoice_data_id = @student_invoice_data.id
 
     @fee_category = FinanceFeeCategory.find(params[:category_id])
+    logger.warn "Fee category not found with id => #{params[:category_id]}" if @fee_category.nil?
     @fee_collection = FinanceFeeCollection.find(params[:collection_id])
+    logger.warn "Fee collection not found with id => #{params[:collection_id]}" if @fee_collection.nil?
     
     @invoice.concept = "#{@fee_category.name} #{@fee_collection.name}"
 
     # Load particulars
     particulars = FinanceFeeParticulars.all(:conditions => ['finance_fee_collection_id = ? AND finance_fee_category_id = ?', @fee_collection.id, @fee_category.id])
+    logger.debug "Found #{particulars} with {collection_id => #{@fee_collection.id}, category_id => #{@fee_category.id}}"
 
     # Compute invoice amount
     @invoice.amount_before_tax = 0.0
