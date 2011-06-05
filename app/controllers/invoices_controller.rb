@@ -74,8 +74,10 @@ class InvoicesController < ApplicationController
     @fee_category = FinanceFeeCategory.find(params[:fee_category][:id])
     @fee_collection = FinanceFeeCollection.find(params[:fee_collection][:id])
 
-    if true
-        print_invoice(@invoice, @fee_category, @fee_collection)
+    logger.debug "Print requested with {:invoice => #{@invoice.inspect}, :fee_collection => #{@fee_category.inspect}, :fee_category => #{@fee_collection.inspect}}"
+
+    if @invoice.save
+      print_invoice(@invoice, @fee_category, @fee_collection)
     else
       respond_to do |format|
         format.html { render :action => "new" }
@@ -116,10 +118,10 @@ class InvoicesController < ApplicationController
   private
   def print_invoice(invoice, fee_category, fee_collection)
     @invoice, @fee_category, @fee_collection = invoice, fee_category, fee_collection
+    logger.debug "Print requested with {:invoice => #{@invoice.inspect}, :fee_collection => #{@fee_category.inspect}, :fee_category => #{@fee_collection.inspect}}"
 
     respond_to do |format|
       format.pdf { render :print_invoice, :layout => false }
     end
-
   end
 end
