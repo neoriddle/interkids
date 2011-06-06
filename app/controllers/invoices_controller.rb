@@ -120,6 +120,9 @@ class InvoicesController < ApplicationController
     @invoice, @fee_category, @fee_collection = invoice, fee_category, fee_collection
     logger.debug "Print requested with {:invoice => #{@invoice.inspect}, :fee_collection => #{@fee_category.inspect}, :fee_category => #{@fee_collection.inspect}}"
 
+    @student_invoice_data = StudentInvoiceData.find(@invoice.student_invoice_data_id)
+    logger.warn "Student invoice data found with id => #{@invoice.student_invoice_data_id}"
+
     respond_to do |format|
       format.pdf { render :print_invoice, :layout => false }
     end

@@ -11,15 +11,15 @@ pdf.text "#{Time.new.month}", :at => [367,243]
 
 pdf.text "#{Time.new.year}", :at => [472,243]
 
-#pdf.text "#{@student_invoice_data.student.full_name}", :at => [131,225]
+pdf.text "#{@student_invoice_data.student.full_name}", :at => [131,225]
 
-#pdf.text "#{@student_invoice_datas.street}", :at => [131,208]
+pdf.text "#{@student_invoice_data.street}", :at => [131,208]
 
-#pdf.text "#{@student_invoice_datas.address}", :at => [131,190]
+pdf.text "#{@student_invoice_data.address}", :at => [131,190]
 
-#pdf.text "#{@student_invoice_datas.rfc}", :at => [131,173]
+pdf.text "#{@student_invoice_data.rfc}", :at => [131,173]
 
-#pdf.text "#{@student_invoice_data.student.full_name}", :at => [210,158]
+pdf.text "#{@student_invoice_data.student.full_name}", :at => [210,158]
 
 pdf.text "#{@fee_category.name}", :at => [210,98]
 
