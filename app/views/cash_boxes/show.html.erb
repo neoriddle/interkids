@@ -1,16 +1,16 @@
 <p>
   <b>Name:</b>
-  <%=h @cash_box.name %>
+  <%=@cash_box.name %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%=h @cash_box.location %>
+  <%=@cash_box.location %>
 </p>
 
 <p>
-  <b>Manager:</b>
-  <%=h @cash_box.manager %>
+  <b>Employee:</b>
+  <%=@cash_box.employee.full_name unless @cash_box.employee.nil? %>
 </p>
 
 

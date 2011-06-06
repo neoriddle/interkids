@@ -12,8 +12,9 @@
     <%= f.text_field :location %>
   </p>
   <p>
-    <%= f.label :manager %><br />
-    <%= f.text_field :manager %>
+    <%= f.label :employee_id %><br />
+    <%= f.select(:employee_id, 
+                 options_from_collection_for_select(@employees, :id, :full_name), :prompt => 'Select an employee' ) %>
   </p>
   <p>
     <%= f.submit 'Create' %>

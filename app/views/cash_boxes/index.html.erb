@@ -4,14 +4,14 @@
   <tr>
     <th>Name</th>
     <th>Location</th>
-    <th>Manager</th>
+    <th>Employee</th>
   </tr>
 
 <% @cash_boxes.each do |cash_box| %>
   <tr>
-    <td><%=h cash_box.name %></td>
-    <td><%=h cash_box.location %></td>
-    <td><%=h cash_box.manager %></td>
+    <td><%= cash_box.name %></td>
+    <td><%= cash_box.location %></td>
+    <td><%= cash_box.employee.full_name unless cash_box.employee.nil? %></td>
     <td><%= link_to 'Show', cash_box %></td>
     <td><%= link_to 'Edit', edit_cash_box_path(cash_box) %></td>
     <td><%= link_to 'Destroy', cash_box, :confirm => 'Are you sure?', :method => :delete %></td>
