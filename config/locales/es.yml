@@ -401,6 +401,39 @@ es:
         receipt: ' Recibo '
         salary: ' N&oacute;mina '
     views:
+      cash_boxes:
+        index:
+          configuration: 'Configuraci&oacute;n'
+          cash_boxes_manager: 'Cat&aacute;logo cajas chica'
+          name: 'Nombre'
+          location: 'Ubicaci&oacute;n'
+          employee: 'Encargado'
+          show: 'Mostrar'
+          edit: 'Editar'
+          new: 'Nuevo'
+          options: 'Opciones'
+        new:
+          configuration: 'Configuraci&oacute;n'
+          add_box_cash: 'Agregar caja chica'
+          name: 'Nombre'
+          location: 'Ubicaci&oacute;n'
+          employee: 'Encargado'
+          create: 'Crear'
+          select_employee: 'Sel. encargado'
+        show:
+          configuration: 'Configuraci&oacute;n'
+          show_cash_boxes: 'Mostrar caja chica'
+          name: 'Nombre'
+          location: 'Ubicaci&oacute;n'
+          employee: 'Encargado'
+          edit: 'Editar'
+        edit:
+          configuration: 'Configuraci&oacute;n'
+          edit_cash_boxes: 'Editar caja chica'
+          name: 'Nombre'
+          location: 'Ubicaci&oacute;n'
+          employee: 'Encargado'
+          update: 'Actualizar'
       batches:
         show:
           courses: 'Cursos'
@@ -875,6 +908,9 @@ es:
           hr: 'HR'
           finance: 'Finanzas'
           update: 'Actualizar'
+          all: 'Todos'
+          none: 'Ninguno'
+          select: 'Seleccionar: '
         forgot_password:
           fedena: '.:.'
           help: 'Ayuda'
@@ -2220,6 +2256,8 @@ es:
           sms: 'sms'
           sms_module: 'M&oacute;dulo SMS'
           enable_disable_sms_settings: 'Activa o deactiva el m&oacute;dulo sms'
+          cash_box: 'Caja Chica'
+          cash_box_description: 'Crea cajas chicas que clasifiquen los ingresos'
         settings:
           configuration: 'Configuraci&oacute;n'
           general_settings: 'Caracter&iacute;sticas generales'

@@ -1,24 +1,60 @@
-<h1>Listing cash_boxes</h1>
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%= t('app.views.cash_boxes.index.configuration') %></h1>
+  <h3><%= t('app.views.cash_boxes.index.cash_boxes_manager') %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to t('app.views.cash_boxes.index.new'), new_cash_box_path %> </li>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Employee</th>
-  </tr>
+  </ul>
+</div>
 
-<% @cash_boxes.each do |cash_box| %>
-  <tr>
-    <td><%= cash_box.name %></td>
-    <td><%= cash_box.location %></td>
-    <td><%= cash_box.employee.full_name unless cash_box.employee.nil? %></td>
-    <td><%= link_to 'Show', cash_box %></td>
-    <td><%= link_to 'Edit', edit_cash_box_path(cash_box) %></td>
-    <td><%= link_to 'Destroy', cash_box, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+<div id="page-yield">
+  <div class="box">
+    <div class="students-table">
+      <table align="center" width="100%" cellpadding="1" cellspacing="1">
+	<tr class="tr-head">
+	  <td style="text-align: center;">
+	    <%=t('app.views.cash_boxes.index.name')%>
+	  </td>
+	  <td style="text-align: center;">
+	    <%=t('app.views.cash_boxes.index.location')%>
+	  </td>
+	  <td style="text-align: center;">
+	    <%= t('app.views.cash_boxes.index.employee')%>
+	  </td>
+	  <td colspan="2" style="text-align: center;">
+	    <%= t('app.views.cash_boxes.index.options')%>
+	  </td>
+	</tr>
+    
+	<% @cash_boxes.each do |cash_box| %>
+	<tr class="tr-<%= cycle('odd', 'even') %>">
+	  <td class="col-1">
+	    <%= cash_box.name %>
+	  </td>
 
-<br />
-
-<%= link_to 'New cash_box', new_cash_box_path %>
+	  <td class="col-2">
+	    <%= cash_box.location %>
+	  </td>
+	  
+	  <td class="col-2">
+	    <%= cash_box.employee.full_name unless cash_box.employee.nil? %></td>
+	  </td>
+	  
+	  <td class="col-3">
+	    <%= link_to t('app.views.cash_boxes.index.show'), cash_box %>
+	  </td>
+	  <td class="col-3">
+	    <%= link_to t('app.views.cash_boxes.index.edit'), edit_cash_box_path(cash_box) %>
+	  </td>
+	</tr>
+        <% end %>
+      </table>
+    </div>
+  </div>  
+</div>

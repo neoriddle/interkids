@@ -1,25 +1,47 @@
-<h1>Editing cash_box</h1>
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%= t('app.views.cash_boxes.edit.configuration') %></h1>
+  <h3><%= t('app.views.cash_boxes.edit.edit_cash_boxes') %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
 
-<% form_for(@cash_box) do |f| %>
-  <%= f.error_messages %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
-  </p>
-  <p>
-    <%= f.label :employee_id %><br />
-    <%= f.select(:employee_id, 
+<div id="page-yield">
+
+  <% form_for(@cash_box) do |f| %>
+
+    <%= f.error_messages %>
+
+    <div class="box">
+      <div class="label-field-pair">
+	<label><%= t('app.views.cash_boxes.edit.name') %></label>
+	<div class="text-input-bg">
+	  <%= f.text_field :name %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
+	<label><%= t('app.views.cash_boxes.edit.location') %></label>
+	<div class="text-input-bg">
+	  <%= f.text_field :location %>
+	</div>
+      </div>
+
+      <div class="label-field-pair">
+	<label><%= t('app.views.cash_boxes.edit.employee') %></label>
+	<div class="text-input-bg">
+	  <%= f.select(:employee_id, 
                  options_from_collection_for_select(@employees, :id, :full_name), :prompt => 'Select an employee' ) %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+	</div>
+      </div>
 
-<%= link_to 'Show', @cash_box %> |
-<%= link_to 'Back', cash_boxes_path %>
+      <div id="submit-button">
+	<%= f.submit t('app.views.cash_boxes.edit.update'), :class => "submit_button" %>
+      </div>
+
+    </div>	    
+
+  <% end %>
+</div>

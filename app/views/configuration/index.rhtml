@@ -49,6 +49,12 @@
         <div class="link-descr"><%= t('app.views.configuration.index.set_some_additional_details_for_admission') %></div>
       </div>
     <% end %>
+    
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('app.views.configuration.index.cash_box'), :controller=>"cash_boxes" %></div>
+        <div class="link-descr"><%= t('app.views.configuration.index.cash_box_description') %></div>
+      </div>
+
 
     <% if permitted_to? :index, :sms %>
       <% @config = Configuration.available_modules %>

@@ -758,6 +758,13 @@ authorization do
         :list_students,
         :update_courses,
         :upcoming_exams ]
+    has_permission_on [:cash_boxes],
+      :to => [
+        :index,
+        :show,
+        #:edit,
+        :new,
+        :create ]
     has_permission_on [:attendances],
       :to => [
         :index,

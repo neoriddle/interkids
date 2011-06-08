@@ -1,18 +1,40 @@
-<p>
-  <b>Name:</b>
-  <%=@cash_box.name %>
-</p>
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%= t('app.views.cash_boxes.show.configuration') %></h1>
+  <h3><%= t('app.views.cash_boxes.show.show_cash_boxes') %> </h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
 
-<p>
-  <b>Location:</b>
-  <%=@cash_box.location %>
-</p>
+<div id="page-yield">
+	<div class="box">
 
-<p>
-  <b>Employee:</b>
-  <%=@cash_box.employee.full_name unless @cash_box.employee.nil? %>
-</p>
+	      <div class="label-field-pair">
+		<label><%= t('app.views.cash_boxes.show.name') %></label>
+		<div class="text-input-bg">
+		  <%=@cash_box.name %>
+		</div>
+	      </div>
 
+	      <div class="label-field-pair">
+		<label><%= t('app.views.cash_boxes.show.location') %></label>
+		<div class="text-input-bg">
+		  <%=@cash_box.location %>
+		</div>
+	      </div>
 
-<%= link_to 'Edit', edit_cash_box_path(@cash_box) %> |
-<%= link_to 'Back', cash_boxes_path %>
+	      <div class="label-field-pair">
+		<label><%= t('app.views.cash_boxes.show.employee') %></label>
+		<div class="text-input-bg">
+		  <%=@cash_box.employee.full_name unless @cash_box.employee.nil? %>
+		</div>
+	      </div>
+
+	      <div class="link-heading">
+	 	<%= link_to t('app.views.cash_boxes.show.edit'), edit_cash_box_path(@cash_box) %>
+	      </div>
+
+	
+	</div>
+</div>
