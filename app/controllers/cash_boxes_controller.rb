@@ -27,6 +27,7 @@ class CashBoxesController < ApplicationController
   # GET /cash_boxes/new.xml
   def new
     @cash_box = CashBox.new
+    @employees = Employee.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,6 +38,7 @@ class CashBoxesController < ApplicationController
   # GET /cash_boxes/1/edit
   def edit
     @cash_box = CashBox.find(params[:id])
+    @employees = Employee.all
   end
 
   # POST /cash_boxes
@@ -49,6 +51,7 @@ class CashBoxesController < ApplicationController
         format.html { redirect_to(@cash_box, :notice =>  t('app.controllers.cash_boxes_controller.cashbox_created'))}
         format.xml  { render :xml => @cash_box, :status => :created, :location => @cash_box }
       else
+        @employees = Employee.all
         format.html { render :action => "new" }
         format.xml  { render :xml => @cash_box.errors, :status => :unprocessable_entity }
       end
@@ -65,6 +68,7 @@ class CashBoxesController < ApplicationController
         format.html { redirect_to(@cash_box, :notice => t('app.controllers.cash_boxes_controller.cashbox_updated'))}
         format.xml  { head :ok }
       else
+        @employees = Employee.all
         format.html { render :action => "edit" }
         format.xml  { render :xml => @cash_box.errors, :status => :unprocessable_entity }
       end

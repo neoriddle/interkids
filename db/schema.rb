@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110512171829) do
+ActiveRecord::Schema.define(:version => 20110606211842) do
 
   create_table "additional_exam_groups", :force => true do |t|
     t.string  "name"
@@ -193,12 +193,12 @@ ActiveRecord::Schema.define(:version => 20110512171829) do
     t.string   "email"
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data",           :limit => 16777215
+    t.binary   "photo_data"
     t.string   "status_description"
-    t.boolean  "is_active",                                :default => true
-    t.boolean  "is_deleted",                               :default => false
+    t.boolean  "is_active",            :default => true
+    t.boolean  "is_deleted",           :default => false
     t.integer  "immediate_contact_id"
-    t.boolean  "is_sms_enabled",                           :default => true
+    t.boolean  "is_sms_enabled",       :default => true
     t.string   "former_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -249,9 +249,9 @@ ActiveRecord::Schema.define(:version => 20110512171829) do
   end
 
   create_table "cash_boxes", :force => true do |t|
-    t.string  "name",     :limit => 50
-    t.string  "location", :limit => 200
-    t.integer "manager"
+    t.string  "name",        :limit => 50
+    t.string  "location",    :limit => 200
+    t.integer "employee_id"
   end
 
   create_table "class_timings", :force => true do |t|
@@ -647,9 +647,7 @@ ActiveRecord::Schema.define(:version => 20110512171829) do
   end
 
   create_table "payment_forms", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "name"
   end
 
   create_table "payroll_categories", :force => true do |t|
@@ -760,13 +758,13 @@ ActiveRecord::Schema.define(:version => 20110512171829) do
     t.string   "phone2"
     t.string   "email"
     t.integer  "immediate_contact_id"
-    t.boolean  "is_sms_enabled",                              :default => true
+    t.boolean  "is_sms_enabled",          :default => true
     t.string   "photo_filename"
     t.string   "photo_content_type"
-    t.binary   "photo_data",              :limit => 16777215
+    t.binary   "photo_data"
     t.string   "status_description"
-    t.boolean  "is_active",                                   :default => true
-    t.boolean  "is_deleted",                                  :default => false
+    t.boolean  "is_active",               :default => true
+    t.boolean  "is_deleted",              :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "student_invoice_data_id"

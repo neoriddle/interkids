@@ -6,6 +6,7 @@ class ArchivedEmployee < ActiveRecord::Base
   belongs_to  :nationality, :class_name => 'Country'
   has_many    :archived_employee_bank_details
   has_many    :archived_employee_additional_details
+  has_many    :cash_boxes
 
   def image_file=(input_data)
     return if input_data.blank?
