@@ -10,6 +10,7 @@ Rails::Initializer.run do |config|
   config.gem 'searchlogic'
   config.gem 'prawn', :version=> '0.6.3'
   config.gem 'fastercsv', :version=> '1.5.4'
+  config.gem 'number_to_words'
 
   config.autoload_once_paths += %W( #{RAILS_ROOT}/lib )
   config.autoload_paths += Dir["#{RAILS_ROOT}/app/models/*"].find_all { |f| File.stat(f).directory? }

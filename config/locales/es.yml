@@ -476,7 +476,6 @@ es:
           subtotal: 'Subtotal'
           taxes: 'IVA'
           total: 'Total'
-          amount: 'Monto con letra'
           category: 'Categor&iacute;a'
           collection: 'Periodo'
           paper: 'Crear factura'
