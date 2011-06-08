@@ -749,6 +749,7 @@ authorization do
     #    :confirm_event,
     #    :cancel_event
     #]
+    has_permission_on [:cash_boxes], :to => [:index, :show, :new, :edit, :create, :update, :destroy]
     has_permission_on [:academic_year],
       :to => [
         :index,

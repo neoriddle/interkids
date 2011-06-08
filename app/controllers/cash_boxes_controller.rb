@@ -1,4 +1,7 @@
 class CashBoxesController < ApplicationController
+
+  filter_access_to :all
+
   # GET /cash_boxes
   # GET /cash_boxes.xml
   def index

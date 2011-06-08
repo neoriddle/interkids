@@ -60,13 +60,6 @@
 	</div>
       </div>
 
-      <div class="label-field-pair">
-	<label><%=t('app.views.invoices.new.amount')%></label>
-	<div class="text-input-bg">
-	  <%= f.text_field :alpha_amount %>
-	</div>
-      </div>
-
       <% unless @fee_category.nil? -%>
       <%= hidden_field :fee_category, :id  %>
       <div class="label-field-pair">
