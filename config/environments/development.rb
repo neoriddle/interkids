@@ -30,4 +30,4 @@ config.action_mailer.raise_delivery_errors = false
 #  end
 #end
 
-config.logger = Logger.new(STDOUT)
+config.log_level = :debug
