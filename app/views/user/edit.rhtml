@@ -51,7 +51,7 @@
 
       <% if @user.username == "admin"  %>
    <%= select :user, :role,
-                  {t('app.views.user.edit.admin') => {'Admin'}}, :selected => @user.role_name %>
+                  {t('app.views.user.edit.admin') => 'Admin'}, :selected => @user.role_name %>
 
       <%  else %>
       <%= select :user, :role,
