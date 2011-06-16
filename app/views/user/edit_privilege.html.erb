@@ -15,7 +15,7 @@
   <div id="list">
 
     <div class="sel-list">
-      Select: <%= link_to_function t('app.views.user.edit_privilege.all'), "$$('input.right').each(function(checkbox) { checkbox.checked = true; });" %>,
+      <%=t('app.views.user.edit_privilege.select')%> <%= link_to_function t('app.views.user.edit_privilege.all'), "$$('input.right').each(function(checkbox) { checkbox.checked = true; });" %>,
       <%= link_to_function t('app.views.user.edit_privilege.none'), "$$('input.right').each(function(checkbox) { checkbox.checked = false; });" %>
     </div>
 

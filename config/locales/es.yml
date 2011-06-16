@@ -6,6 +6,12 @@ es:
           attributes:
             name:
               taken: ': Atributo existente'
+        user:
+          attributes:
+            username:
+              taken: ': Atributo existente'
+            email:
+              taken: ': Atributo existente'
       template:
         body: 'Por favor revise los siguientes campos'
         header: 
@@ -208,6 +214,10 @@ es:
         successfully_deleted_employee: ' Empleado borrado exit&oacute;samente '
         all_records_have_been_deleted_for_employee_with_employee_no: ' Todos los registros han sido borrados para el No. empleado:  '
         payslip_has_been_approved: ' N&oacute;mina ha sido aprobada '
+        male: 'Masculino'
+        female: 'Femenino'
+        active: 'Activo'
+        inactive: 'Inactivo'
       event_controller:
         new_event_description: 'new_event_description'
         start_date: 'start_date'
@@ -903,7 +913,6 @@ es:
           user_privileges: 'Privilegios de usuario'
           edit_privilege: 'Editar privilegios '
           set_privileges_for: 'Asignar privilegios a: '
-          select: 'Seleccionar'
           hr: 'HR'
           finance: 'Finanzas'
           update: 'Actualizar'
@@ -2968,7 +2977,7 @@ es:
           user_privileges: 'Ingreso de empleado'
           set_privilege: 'Privilegios'
           set_privileges_for_: 'Asignar privilegios a: '
-          select:_: 'Seleccionar: '
+          select: 'Seleccionar: '
           update: 'Actualizar'
           all: 'Todos'
           none: 'Ninguno'
