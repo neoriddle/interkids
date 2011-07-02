@@ -5,6 +5,7 @@ gem 'searchlogic'
 gem 'prawn', '0.6.3'
 gem 'fastercsv', '1.5.4'
 gem 'mysql', '2.8.1'
+gem 'will_paginate', '2.3.12'
 
 # Deploy with Capistrano
 gem 'capistrano'
