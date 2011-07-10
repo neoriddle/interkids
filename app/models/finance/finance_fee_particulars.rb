@@ -33,7 +33,7 @@ class FinanceFeeParticulars < ActiveRecord::Base
   end
 
   def can_print_receipt?
-    self.amount < 0
+    self.amount < 0 && self.name == 'Abono'
   end
 
 end
