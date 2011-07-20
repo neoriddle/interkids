@@ -28,13 +28,13 @@
 	<div class="text-input-bg">
 	  <%= select(:transaction,
                      :is_income,
-                     options_for_select([[t('app.views.finance.monthly_report.income'),1],[t('app.views.finance.monthly_report.expense'),0]]),
+                     options_for_select([[t('app.views.finance.monthly_report.expenses_and_incomes'),3],
+                                         [t('app.views.finance.monthly_report.income'),1],
+                                         [t('app.views.finance.monthly_report.expense'),0]]),
                      {:prompt => t('app.views.finance.monthly_report.select_type')},
                      {:onChange => "#{remote_function(:update => 'categories', :url => {:action => 'update_categories_for_transaction_report'}, :with => "'is_income='+value")}"} ) %>
 	</div>
       </div>
-
-      <%=  submit_tag t('app.views.finance.monthly_report.monthly_report'),:class=>'submit_button' %>
 
       <div id="categories"></div>
 

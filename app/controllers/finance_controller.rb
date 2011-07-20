@@ -176,8 +176,16 @@ class FinanceController < ApplicationController
 
     
   def update_categories_for_transaction_report
-    @categories = params[:is_income]=='1' ? FinanceTransactionCategory.income_categories : 
-      (params[:is_income]=='0' ? FinanceTransactionCategory.expense_categories : [])
+    @categories = if params[:is_income]=='1'
+                    FinanceTransactionCategory.income_categories
+                  elsif params[:is_income]=='0'
+                    FinanceTransactionCategory.expense_categories
+                  elsif params[:is_income]=='3'
+                    FinanceTransactionCategory.expense_categories + FinanceTransactionCategory.income_categories
+                  else
+                    logger.warn "Wrong value passed as 'is_income': #{params[:is_income]}"
+                    []
+                  end
 
     render :partial => 'transaction_categories_select'
   end
@@ -187,15 +195,18 @@ class FinanceController < ApplicationController
     end_date = Date.parse(params[:end_date])
     category_id = params[:transaction][:category_id]
 
-    query = "SELECT 
-        ft.title  AS title, 
+    query = "
+    SELECT 
+        ft.title     AS title, 
         CONCAT(s.first_name, ' ',s.last_name) AS full_name, 
-        pf.name   AS payform, 
-        ft.amount AS amount
+        pf.name      AS payform, 
+        ft.amount    AS amount,
+        tc.is_income AS is_income
     FROM 
         finance_transactions ft 
-        INNER JOIN students s       ON ft.student_id = s.id 
-        INNER JOIN payment_forms pf ON ft.payment_form_id = pf.id 
+        INNER JOIN students s                        ON ft.student_id = s.id 
+        INNER JOIN payment_forms pf                  ON ft.payment_form_id = pf.id
+        INNER JOIN finance_transaction_categories tc ON ft.category_id = tc.id
     WHERE 
         ft.created_at BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s}' "
 
@@ -206,9 +217,9 @@ class FinanceController < ApplicationController
     respond_to do |format|
       format.csv  { 
         tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
-          tsv << [t('app.controllers.finance_controller.title'),t('app.controllers.finance_controller.student'),t('app.controllers.finance_controller.payment_form'),t('app.controllers.finance_controller.amount')]
+          tsv << [t('app.controllers.finance_controller.title'),t('app.controllers.finance_controller.student'),t('app.controllers.finance_controller.payment_form'),t('app.controllers.finance_controller.amount'),t('app.controllers.finance_controller.income_expense')]
           transactions.each do |t|
-            tsv << [t.title,t.full_name,t.payform,t.amount]
+            tsv << [t.title,t.full_name,t.payform,t.amount,(t.is_income ? t('app.controllers.finance_controller.income') : t('app.controllers.finance_controller.expense'))]
           end
         end
         send_data(tsv_str,

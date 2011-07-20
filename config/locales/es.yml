@@ -318,6 +318,9 @@ es:
         payment_form: 'Forma de pago'
         amount: 'Monto'
         datetime: 'Fecha'
+        income_expense: 'Ingreso/Egreso'
+        income: 'Ingreso'
+        expense: 'Egreso'
       grading_levels_controller:
         grading_level_was_successfully_created: ' El nivel del grado/curso ha sido creado exit&oacute;samente '
         grading_level_update_successfully: ' El nivel del grado/curso ha sido actualizado exit&oacute;samente '
@@ -1450,8 +1453,9 @@ es:
           start_date: 'Fecha de inicio: '
           end_date: 'Fecha final: '
           type: 'Transacci&oacute;n: '
+          expenses_and_incomes: 'Ingreso y Egresos'
           income: 'Ingreso'
-          expense: 'Gasto'
+          expense: 'Egresos'
         update_monthly_report:
           transactions_report: 'Reporte financiero'
           manage_transactions: 'Gesti&oacute;n de transacciones'
