@@ -11,6 +11,7 @@ Rails::Initializer.run do |config|
   config.gem 'prawn', :version=> '0.6.3'
   config.gem 'fastercsv', :version=> '1.5.4'
   config.gem 'number_to_words'
+  config.gem 'will_paginate', :version => '2.3.12'
 
   config.autoload_once_paths += %W( #{RAILS_ROOT}/lib )
   config.autoload_paths += Dir["#{RAILS_ROOT}/app/models/*"].find_all { |f| File.stat(f).directory? }
