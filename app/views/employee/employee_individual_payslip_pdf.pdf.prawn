@@ -2,7 +2,7 @@ pdf.header pdf.margin_box.top_left do
 if FileTest.exists?("#{RAILS_ROOT}/public/uploads/image/institute_logo.jpg")
 logo = "#{RAILS_ROOT}/public/uploads/image/institute_logo.jpg"
 else
-logo = "#{RAILS_ROOT}/public/images/application/app_fedena_logo.jpg"
+logo = "#{RAILS_ROOT}/public/images/application/app_interkids_logo.jpg"
 end
 @institute_name=Configuration.get_config_value('InstitutionName');
 @institute_address=Configuration.get_config_value('InstitutionAddress');
