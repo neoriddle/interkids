@@ -96,12 +96,14 @@ class FinanceController < ApplicationController
       flash[:notice] = t('app.controllers.finance_controller.the_entry_has_been_edited')
     end
   end
+
   def income_create
     @transaction = FinanceTransaction.new(params[:transaction])
     logger.debug "FinanceTransaction found\t#{@transaction.inspect}"
     @categories = FinanceTransactionCategory.income_categories
     @payment_forms = PaymentForm.all
-    @batches = Batch.all(:joins => :course, :conditions => {:is_deleted => false} )
+    @batches = Batch.all(:joins => :course, 
+                         :conditions => {:is_deleted => false} )
 
     if @categories.empty?
       flash[:notice] = t('app.controllers.finance_controller.please_create_category_for_income')
@@ -109,6 +111,11 @@ class FinanceController < ApplicationController
     if request.post? and @transaction.save
       flash[:notice] = t('app.controllers.finance_controller.income_has_been_added')
       check_maximum_minimum_cash(1.day.ago)
+
+      respond_to do |format|
+        format.pdf { render :layout => false }
+      end
+
       @transaction = FinanceTransaction.new
     end
   end
