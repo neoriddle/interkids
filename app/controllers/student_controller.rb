@@ -45,6 +45,24 @@ class StudentController < ApplicationController
     @graph2 = open_flash_chart_object(965, 350, "/student/graph_for_annual_academic_report?course=#{@course.id}&student=#{@student.id}")
   end
 
+  def create_user_for_student(student, random_suffix_size = 5)
+    suffix = Digest::SHA512.hexdigest(student.full_name)
+    username = ''
+    [student.first_name, student.middle_name].each { |s| username << s[0,1] unless s.nil? }
+    username << student.last_name.strip.split(' ',2)[0] unless student.last_name.nil?
+    random_suffix_size.times { username << suffix[rand(suffix.size)]  } unless suffix.nil?
+    username.downcase!
+    
+    user = User.new(:username => username,
+                    :password => username,
+                    :first_name => student.first_name,
+                    :last_name => student.last_name,
+                    :email => student.email,
+                    :role => 'Student')
+    logger.debug "User not valid\t#{user.inspect} " if user.valid?
+    user.save
+  end
+
   def admission1
     @student = Student.new(params[:student])
     @application_sms_enabled = SmsSetting.find_by_settings_key("ApplicationEnabled")
@@ -59,6 +77,10 @@ class StudentController < ApplicationController
         @student.admission_no = @last_admitted_student.admission_no.next
         @student.save
       end
+
+      # Create user for student
+      create_user_for_student(@student)
+
       if @student.save
 
         # Send id and password by SMS message
