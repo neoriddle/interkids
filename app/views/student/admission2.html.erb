@@ -54,7 +54,7 @@
         <hr class="sub-heading"></hr>
 
         <div class="label-field-pair">
-          <label for="parent_detail_name"><%= t('app.views.student.admission2.first_name') %></label>
+          <label for="parent_detail_name"><%= t('app.views.student.admission2.first_name') %><span class="necessary-field">*</span></label>
           <div class="text-input-bg"><%= f.text_field :first_name %></div>
         </div>
 
@@ -68,7 +68,7 @@
         <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
-          <label for="parent_detail_relation"><%= t('app.views.student.admission2.relationship') %></label>
+          <label for="parent_detail_relation"><%= t('app.views.student.admission2.relationship') %><span class="necessary-field">*</span></label>
           <div class="text-input-bg"><%= f.text_field :relation %></div>
         </div>
 
@@ -109,7 +109,7 @@
         <hr class="sub-heading"></hr>
 
         <div class="label-field-pair">
-          <label for="parent_detail_email"><%= t('app.views.student.admission2.email') %></label>
+          <label for="parent_detail_email"><%= t('app.views.student.admission2.email') %><span class="necessary-field">*</span></label>
           <div class="text-input-bg"><%= f.text_field :email %></div>
         </div>
 
@@ -147,7 +147,7 @@
         <hr class="label-underline"></hr>
 
         <div class="label-field-pair">
-          <label for="parent_detail_country"><%= t('app.views.student.admission2.country') %></label>
+          <label for="parent_detail_country"><%= t('app.views.student.admission2.country') %><span class="necessary-field">*</span> </label>
           <div class="text-input-bg"> <%= select :guardian, :country_id, Country.all.map {|c| [c.name, c.id]}, :selected => 115 %> </div>
         </div>
 

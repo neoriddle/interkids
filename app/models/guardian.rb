@@ -2,7 +2,7 @@ class Guardian < ActiveRecord::Base
   belongs_to :country
   belongs_to :ward, :class_name => 'Student'
 
-  validates_presence_of :first_name, :relation
+  validates_presence_of :first_name, :relation, :email, :country_id
 
   def validate
     errors.add(:dob, "cannot be a future date.") if self.dob > Date.today unless self.dob.nil?

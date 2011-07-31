@@ -122,22 +122,23 @@
 
       <div class="profile_info_label_top2"> </div>
       <div class="profile_info_text_top2">
-        <%= link_to @immediate_contact.full_name, :controller => "student", :action => "guardians", :id => @student.id \
-          unless @immediate_contact.nil? %>
+        <%= link_to @immediate_contact.full_name, :controller => "student", :action => "guardians", :id => @student.id unless @immediate_contact.nil? %>
         <%= "(" + @immediate_contact.mobile_phone + ")" if @immediate_contact && !@immediate_contact.mobile_phone.nil? && !@immediate_contact.mobile_phone.empty? %>
+        <%= "User: #{@user.username}" unless @user.nil? %>
         <% if @current_user.admin? %>
-          <% unless @immediate_contact.nil? %>
-            <span>(<%= link_to t('app.views.student.profile.change_contact'), :controller => 'student', :action => 'admission3_1', :id => @student.id %>)</span>
-          <%else%>
+          <% if @immediate_contact.nil? %>
             <% if permitted_to? :add_guardian,:student %>
-              <span> <%=t('app.views.student.profile.no_guardians_added_yet')%>(<%= link_to t('app.views.student.profile.add_guardian'),:controller => 'student',:action => 'add_guardian', :id => @student.id %>)</span>
+              <span><%=t('app.views.student.profile.no_guardians_added_yet')%>(<%= link_to t('app.views.student.profile.add_guardian'),:controller => 'student',:action => 'add_guardian', :id => @student.id %>)</span>
             <%else%>
-              <span> <%=t('app.views.student.profile.no_guardians_added_yet')%></span>
+              <span><%=t('app.views.student.profile.no_guardians_added_yet')%></span>
             <%end%>
-          <%end%>
+          <% else %>
+            <span>(<%= link_to t('app.views.student.profile.change_contact'), :controller => 'student', :action => 'admission3_1', :id => @student.id %>)</span>
+          <% end %>
         <% end %>
       </div>
     </div>
+
     <div class="new_profile_info_area1">
       <% unless  @additional_fields.empty? %>
 

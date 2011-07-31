@@ -45,7 +45,7 @@ class StudentController < ApplicationController
     @graph2 = open_flash_chart_object(965, 350, "/student/graph_for_annual_academic_report?course=#{@course.id}&student=#{@student.id}")
   end
 
-  def create_user_for_student(student, random_suffix_size = 5)
+  def create_user_for_student(student, guardian, random_suffix_size = 5)
     suffix = Digest::SHA512.hexdigest(student.full_name)
     username = ''
     [student.first_name, student.middle_name].each { |s| username << s[0,1] unless s.nil? }
@@ -57,9 +57,9 @@ class StudentController < ApplicationController
                     :password => username,
                     :first_name => student.first_name,
                     :last_name => student.last_name,
-                    :email => student.email,
+                    :email => guardian.email,
                     :role => 'Student')
-    logger.debug "User not valid\t#{user.inspect} " if user.valid?
+    logger.debug "User\t#{user.inspect}"
     user.save
   end
 
@@ -77,9 +77,6 @@ class StudentController < ApplicationController
         @student.admission_no = @last_admitted_student.admission_no.next
         @student.save
       end
-
-      # Create user for student
-      create_user_for_student(@student)
 
       if @student.save
 
@@ -117,8 +114,18 @@ class StudentController < ApplicationController
   def admission2
     @student = Student.find params[:id], :include => [:guardians]
     @guardian = Guardian.new params[:guardian]
+
+    logger.debug "Student\t#{@student.inspect}"
+    logger.debug "Guardian\t#{@guardian.inspect}"
+    
     if request.post? and @guardian.save
-      redirect_to :controller => "student", :action => "admission2", :id => @student.id
+
+      # Create user for student
+      create_user_for_student(@student, @guardian)
+
+      redirect_to :controller => "student", 
+                  :action => "admission2", 
+                  :id => @student.id
     end
   end
 
@@ -440,8 +447,13 @@ class StudentController < ApplicationController
     #@address = @student.address_line1 + ' ' + @student.address_line2
     @additional_fields = StudentAdditionalField.all(:conditions=>"status = true")
     @previous_data = StudentPreviousData.find_by_student_id(@student.id)
-    @immediate_contact = Guardian.find(@student.immediate_contact_id) \
-      unless @student.immediate_contact_id.nil? or @student.immediate_contact_id == ''
+    unless @student.immediate_contact_id.nil? or @student.immediate_contact_id == ''
+      @immediate_contact = Guardian.find(@student.immediate_contact_id)
+      @user = User.first(:conditions => {
+                           :first_name => @student.first_name, 
+                           :last_name => @student.last_name, 
+                           :email => @immediate_contact.email})
+    end
   end
 
   def show_previous_details
