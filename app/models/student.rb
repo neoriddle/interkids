@@ -147,7 +147,7 @@ class Student < ActiveRecord::Base
       u.first_name, u.last_name, u.username = first_name, last_name, admission_no.to_s
       u.password = "#{admission_no.to_s}123"
       u.role = 'Student'
-      u.email = ( email == '' or User.find_by_email(email) ) ? "noreply#{admission_no.to_s}@fedena.com" : email
+      u.email = ( email.nil? or email == '' or User.find_by_email(email) ) ? "noreply#{admission_no.to_s}@interkidsonline.com" : email
     end
     user.save
   end

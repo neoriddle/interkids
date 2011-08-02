@@ -45,24 +45,6 @@ class StudentController < ApplicationController
     @graph2 = open_flash_chart_object(965, 350, "/student/graph_for_annual_academic_report?course=#{@course.id}&student=#{@student.id}")
   end
 
-  def create_user_for_student(student, guardian, random_suffix_size = 5)
-    suffix = Digest::SHA512.hexdigest(student.full_name)
-    username = ''
-    [student.first_name, student.middle_name].each { |s| username << s[0,1] unless s.nil? }
-    username << student.last_name.strip.split(' ',2)[0] unless student.last_name.nil?
-    random_suffix_size.times { username << suffix[rand(suffix.size)]  } unless suffix.nil?
-    username.downcase!
-    
-    user = User.new(:username => username,
-                    :password => username,
-                    :first_name => student.first_name,
-                    :last_name => student.last_name,
-                    :email => guardian.email,
-                    :role => 'Student')
-    logger.debug "User\t#{user.inspect}"
-    user.save
-  end
-
   def admission1
     @student = Student.new(params[:student])
     @application_sms_enabled = SmsSetting.find_by_settings_key("ApplicationEnabled")
@@ -119,10 +101,6 @@ class StudentController < ApplicationController
     logger.debug "Guardian\t#{@guardian.inspect}"
     
     if request.post? and @guardian.save
-
-      # Create user for student
-      create_user_for_student(@student, @guardian)
-
       redirect_to :controller => "student", 
                   :action => "admission2", 
                   :id => @student.id
