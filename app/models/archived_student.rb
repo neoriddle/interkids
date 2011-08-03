@@ -5,6 +5,7 @@ class ArchivedStudent < ActiveRecord::Base
   belongs_to :nationality, :class_name => 'Country'
   has_many :archived_guardians, :foreign_key => 'ward_id', :dependent => :destroy
   has_one :immediate_contact
+  has_one    :student_invoice_data
 
   #has_and_belongs_to_many :graduated_batches, :class_name => 'Batch', :join_table => 'batch_students',:foreign_key => 'student_id' ,:finder_sql =>'SELECT * FROM `batches`,`archived_students`  INNER JOIN `batch_students` ON `batches`.id = `batch_students`.batch_id WHERE (`batch_students`.student_id = `archived_students`.former_id )'
 

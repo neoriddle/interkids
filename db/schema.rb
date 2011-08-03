@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110606211842) do
+ActiveRecord::Schema.define(:version => 20110803020313) do
 
   create_table "additional_exam_groups", :force => true do |t|
     t.string  "name"
@@ -195,13 +195,14 @@ ActiveRecord::Schema.define(:version => 20110606211842) do
     t.string   "photo_content_type"
     t.binary   "photo_data"
     t.string   "status_description"
-    t.boolean  "is_active",            :default => true
-    t.boolean  "is_deleted",           :default => false
+    t.boolean  "is_active",               :default => true
+    t.boolean  "is_deleted",              :default => false
     t.integer  "immediate_contact_id"
-    t.boolean  "is_sms_enabled",       :default => true
+    t.boolean  "is_sms_enabled",          :default => true
     t.string   "former_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_invoice_data_id"
   end
 
   create_table "assets", :force => true do |t|
