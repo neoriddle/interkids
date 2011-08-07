@@ -12,8 +12,14 @@ class Employee < ActiveRecord::Base
   has_many    :monthly_payslips
   has_many    :employee_salary_structures
 
-  validates_presence_of :employee_category_id, :employee_number, :first_name, :employee_position_id,
-    :employee_department_id, :employee_grade_id, :date_of_birth
+  validates_presence_of :employee_category_id,
+                        :employee_number,
+                        :first_name,
+                        :employee_position_id,
+                        :employee_department_id,
+                        :employee_grade_id,
+                        :date_of_birth,
+                        :joining_date
   validates_uniqueness_of  :employee_number
 
   def image_file=(input_data)
