@@ -14,14 +14,12 @@
 
 <div class="name">Student Category</div>
 <div class="val">
-  <span>:</span><%= @student.student_category.nil? ? 'N.A.' : @student.student_category.name %>
+  <span>:</span><%= @student.student_category ? @student.student_category.name : 'N.A.' %>
 </div>
 
 <br />
 
-<% unless @financefee.nil? %>
-<%= render :partial => "fine_submission" unless @financefee.transaction %>
-<% end %>
+<%= render :partial => "fine_submission" unless @financefee && @financefee.transaction %>
 
 <div id="register">
   <div class="header">
@@ -91,7 +89,7 @@
         <% total_fees += @fine.to_f %>
       <% end %>
 
-      <% if @financefee.transaction && @financefee.transaction.fine_included %>
+      <% if @financefee && @financefee.transaction && @financefee.transaction.fine_included %>
         <tr class="tr-<%= cycle("odd","even") %>">
 	  <td class="col-1"><%= @fee_particulars.size+1 %></td>
             <td class="col-2"><%=t('app.views.finance._student_fees_submission.fine')%></td>
@@ -141,5 +139,3 @@
     </table>
   <%end%>
 <%end%>
-
-
