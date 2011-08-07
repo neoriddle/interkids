@@ -469,6 +469,7 @@ class EmployeeController < ApplicationController
   def profile
     @current_user = current_user
     @employee = Employee.find(params[:id])
+    logger.debug "Employee by id #{params[:id]}\t#{@employee.inspect}"
     @new_reminder_count = Reminder.find_all_by_recipient(@current_user.id, :conditions=>"is_read = false")
     @gender = t('app.controllers.employee_controller.male')
     @gender = t('app.controllers.employee_controller.female') if @employee.gender == false
