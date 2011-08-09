@@ -40,6 +40,8 @@ class InvoicesController < ApplicationController
     logger.warn "Fee category not found with id => #{params[:category_id]}" if @fee_category.nil?
     @fee_collection = FinanceFeeCollection.find(params[:collection_id])
     logger.warn "Fee collection not found with id => #{params[:collection_id]}" if @fee_collection.nil?
+    @invoice.fee_category = @fee_category
+    @invoice.fee_collection = @fee_collection
     
     @invoice.concept = "#{@fee_category.name} #{@fee_collection.name}"
 
