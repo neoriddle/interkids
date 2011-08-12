@@ -7,6 +7,7 @@ class FinanceFeeCollection < ActiveRecord::Base
   has_many   :fee_particulars, 
              :class_name => "FinanceFeeParticulars", 
              :foreign_key => 'finance_fee_collection_id'
+  has_many   :invoices, :foreign_key => 'fee_collection_id'
 
   validates_presence_of :name,:start_date,:fee_category_id,:end_date,:due_date
 

@@ -4,6 +4,7 @@ class FinanceFeeCategory < ActiveRecord::Base
   
   has_many   :fee_particulars, :class_name => "FinanceFeeParticulars"
   has_many   :fee_collections, :class_name => "FinanceFeeCollection"
+  has_many   :invoices, :foreign_key => 'fee_category_id'
 
   cattr_reader :per_page
 

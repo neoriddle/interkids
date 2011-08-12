@@ -1,4 +1,7 @@
 class Invoice < ActiveRecord::Base
+  belongs_to :fee_collection, :class_name => "FinanceFeeCollection"
+  belongs_to :fee_category, :class_name => "FinanceFeeCategory"
+
   has_one :student_invoice_data
 
   attr_accessor :amount_after_tax
