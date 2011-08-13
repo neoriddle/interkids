@@ -1,0 +1,56 @@
+<%= link_to "", 
+    {:controller => "student", :action => "admission1"},
+    :class => "option_buttons", 
+    :id => "admission_button", 
+    :title => t('app.views.user.dashboard.enter_students_admision') %>
+<%= link_to "", 
+    {:controller => "student", :action => "index"},
+    :class => "option_buttons", 
+    :id => "student_details_button", 
+    :title => t('app.views.user.dashboard.search_for_existing') %>
+<%= link_to "", 
+    {:controller => "user", :action => "index"},
+    :class => "option_buttons", 
+    :id => "manage_users_button", 
+    :title => t('app.views.user.dashboard.manage_users_fedena') %>
+<%#= link_to "", 
+    {:controller => "news", :action => "index"},
+    :class => "option_buttons", 
+    :id => "manage_news_button", 
+    :title => t('app.views.user.dashboard.view_publish_school') %>
+<%#= link_to "", 
+    {:controller => "exam", :action => "index"},
+    :class => "option_buttons", 
+    :id => "examinations_button", 
+    :title => t('app.views.user.dashboard.see_examination_details') %>
+<%= link_to "", 
+    {:controller => "timetable", :action => "index"},
+    :class => "option_buttons", 
+    :id => "timetable_button", 
+    :title => t('app.views.user.dashboard.timetable_management') %>
+<%= link_to "", 
+    {:controller => "student_attendance", :action => "index"},
+    :class => "option_buttons", 
+    :id => "student_attendance_button", 
+    :title => t('app.views.user.dashboard.manage_attendance') %>
+<%= link_to "", 
+    {:controller => "configuration", :action => "index"},
+    :class => "option_buttons", 
+    :id => "settings_button", 
+    :title => t('app.views.user.dashboard.configure_basic_school') %>
+
+<% if @config.include?('HR') %>
+<%= link_to "",
+    {:controller => "employee", :action => "hr"},
+    :class => "option_buttons", 
+    :id => "hr_button", 
+    :title => t('app.views.user.dashboard.human_resource_department')%>
+<% end %>
+
+<% if @config.include?('Finance') %>
+<%= link_to "", 
+    {:controller => "finance", :action => "index"},
+    :class => "option_buttons", 
+    :id => "finance_button", 
+    :title => t('app.views.user.dashboard.manages_finance_module')%>
+<% end %>

@@ -1,0 +1,40 @@
+<%= link_to "", 
+    {:controller => "student", :action => "profile", :id => @student.id},
+    :class => "option_buttons", 
+    :id => "student_details_button", 
+    :title => t('app.views.user.dashboard.view_your_profile') %>
+<%= link_to "", 
+    {:controller => "news", :action => "index"},
+    :class => "option_buttons", 
+    :id => "campus_news_button", 
+    :title => t('app.views.user.dashboard.search_news_announcements') %>
+<%= link_to "", 
+    {:controller => "timetable", :action => "student_view", :id=>@student.id},
+    :class => "option_buttons", 
+    :id => "timetable_button", 
+    :title => t('app.views.user.dashboard.timetable_management') %>
+
+<% unless @user.check_reminders == 0 %>
+<div class="reminder1">
+  <%= link_to "", 
+      {:controller => "reminder", :action => "index"},
+      :class => "option_buttons", 
+      :id => "reminders_button", 
+      :title => t('app.views.user.dashboard.student_messages') %>
+  <div class ="count">
+     <%= render :partial => 'layouts/reminder_count' %>
+  </div>
+</div>
+<% else %>
+<%= link_to "", 
+    {:controller => "reminder", :action => "index"},
+    :class => "option_buttons", 
+    :id => "reminders_button", 
+    :title => t('app.views.user.dashboard.student_messages') %>
+<% end %>
+
+<%= link_to "", 
+    {:controller => "student", :action => "reports", :id => @student.id},
+    :class => "option_buttons", 
+    :id => "academic_button", 
+    :title => t('app.views.user.dashboard.academic_reports') %>

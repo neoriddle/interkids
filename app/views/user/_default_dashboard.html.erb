@@ -1,0 +1,130 @@
+<% if @config.include?('HR') %>
+<%= link_to "", 
+    {:controller => "employee", :action => "profile",:id => @employee.id},
+    :class => "option_buttons", 
+    :id => "my_profile_button", 
+    :title => t('app.views.user.dashboard.employee_profile_details') unless @employee.nil? %>
+<% end  %>
+
+
+<% if permitted_to? :admission1, :student %>
+<%= link_to "", 
+    {:controller => "student", :action => "admission1"},
+    :class => "option_buttons", 
+    :id => "admission_button", 
+    :title => t('app.views.user.dashboard.enter_students_admision') %>
+<%end%>
+
+<% if permitted_to? :index, :student %>
+<%= link_to "", 
+    {:controller => "student", :action => "index"},
+    :class => "option_buttons", 
+    :id => "student_details_button", 
+    :title => t('app.views.user.dashboard.search_existing_former_student_records') %>
+<%end%>
+
+<% if permitted_to? :index, :user %>
+<%= link_to "", 
+    {:controller => "user", :action => "index"},
+    :class => "option_buttons", 
+    :id => "manage_users_button", 
+    :title => t('app.views.user.dashboard.manage_users_fedena') %>
+<% end %>
+
+<% if permitted_to? :add,:news %>
+<%= link_to "", 
+    {:controller => "news", :action => "index"},
+    :class => "option_buttons", 
+    :id => "manage_news_button", 
+    :title => t('app.views.user.dashboard.search_news_announcements') %>
+<% else %>
+<%= link_to "", 
+    {:controller => "news", :action => "index"},
+    :class => "option_buttons", 
+    :id => "campus_news_button", 
+    :title => t('app.views.user.dashboard.search_news_announcements') %>
+<%end%>
+
+<% if permitted_to? :leave_management, :employee %>
+<%= link_to "", 
+    {:controller => "employee", :action => "leave_management"},
+    :class => "option_buttons", 
+    :id => "leaves_button", 
+    :title => t('app.views.user.dashboard.leave_management') %>
+<% else %>
+<% if @config.include?('HR') %>
+  <%= link_to "", 
+      {:controller => "employee_attendance", :action => "leaves",:id => @employee.id},
+      :class => "option_buttons", 
+      :id => "leaves_button", 
+      :title => t('app.views.user.dashboard.employee_leave_details') unless @employee.nil? %>
+  <%end%>
+<%end%>
+
+<% if @user.check_reminders == 0 %>
+<%= link_to "", 
+    {:controller => "reminder", :action => "index"},
+    :class => "option_buttons", 
+    :id => "reminders_button", 
+    :title => t('app.views.user.dashboard.student_messages') %>
+<% else %>
+<div class="reminder1">
+<%= link_to "", 
+    {:controller => "reminder", :action => "index"},
+    :class => "option_buttons", 
+    :id => "reminders_button", 
+    :title => t('app.views.user.dashboard.employee_messages') %>
+  <div class ="count">
+    <%= render :partial => 'layouts/reminder_count' %>
+  </div>
+</div>
+<% end %>
+
+<% if permitted_to? :index, :student_attendance or permitted_to? :index, :attendances %>
+<%= link_to "", 
+    {:controller => "student_attendance", :action => "index"},
+    :class => "option_buttons", 
+    :id => "student_attendance_button", 
+    :title => t('app.views.user.dashboard.manage_attendance_students') %>
+<%end%>
+
+<% if permitted_to? :index, :exam %>
+<%= link_to "", {:controller => "exam", :action => "index"},
+    :class => "option_buttons", 
+    :id => "examinations_button", 
+    :title => t('app.views.user.dashboard.see_examination_details_and_results') %>
+<%end%>
+
+<% if permitted_to? :index, :timetable %>
+<%= link_to "", 
+    {:controller => "timetable", :action => "index"},
+    :class => "option_buttons", 
+    :id => "timetable_button", 
+    :title => t('app.views.user.dashboard.timetable_management_module') %>
+<%end%>
+
+<% if permitted_to? :index, :configuration %>
+<%= link_to "", 
+    {:controller => "configuration", :action => "index"},
+    :class => "option_buttons", 
+    :id => "settings_button", 
+    :title => t('app.views.user.dashboard.configure_the_basic_school_settings') %>
+<% end %>
+
+<% if @config.include?('HR') %>
+  <% if permitted_to? :hr,:employee %>
+  <%= link_to "", 
+      {:controller => "employee", :action => "hr"},
+      :class => "option_buttons", 
+      :id => "hr_button", 
+      :title => t('app.views.user.dashboard.human_resource_department') %>
+  <% end %>
+<% end %>
+
+<% if permitted_to? :index,:finance %>
+<%= link_to "", 
+      {:controller => "finance", :action => "index"},
+      :class => "option_buttons", 
+      :id => "finance_button", 
+      :title => t('app.views.user.dashboard.manages_finance_module') %>
+<% end %>
