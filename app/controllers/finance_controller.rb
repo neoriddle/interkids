@@ -204,16 +204,20 @@ class FinanceController < ApplicationController
 
     query = "
     SELECT 
-        ft.title     AS title, 
+        ft.title          AS title, 
         CONCAT(s.first_name, ' ',s.last_name) AS full_name, 
-        pf.name      AS payform, 
-        ft.amount    AS amount,
-        tc.is_income AS is_income
+        pf.name           AS payform, 
+        ft.amount         AS amount,
+        ft.created_at     AS created,
+        tc.name           AS category_name,
+        tc.is_income      AS is_income,
+        cb.name           AS cash_box_name
     FROM 
         finance_transactions ft 
         INNER JOIN students s                        ON ft.student_id = s.id 
         INNER JOIN payment_forms pf                  ON ft.payment_form_id = pf.id
         INNER JOIN finance_transaction_categories tc ON ft.category_id = tc.id
+        INNER JOIN cash_boxes cb                     ON tc.cash_box_id = cb.id
     WHERE 
         ft.created_at BETWEEN '#{start_date.to_s}' AND '#{end_date.to_s}' "
 
@@ -224,9 +228,25 @@ class FinanceController < ApplicationController
     respond_to do |format|
       format.csv  { 
         tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
-          tsv << [t('app.controllers.finance_controller.title'),t('app.controllers.finance_controller.student'),t('app.controllers.finance_controller.payment_form'),t('app.controllers.finance_controller.amount'),t('app.controllers.finance_controller.income_expense')]
+          tsv << [t('app.controllers.finance_controller.title'),
+                  t('app.controllers.finance_controller.student'),
+                  t('app.controllers.finance_controller.payment_form'),
+                  t('app.controllers.finance_controller.amount'),
+                  t('app.controllers.finance_controller.created'),
+                  t('app.controllers.finance_controller.category_name'),
+                  t('app.controllers.finance_controller.income_expense'),
+                  t('app.controllers.finance_controller.cash_box')]
           transactions.each do |t|
-            tsv << [t.title,t.full_name,t.payform,t.amount,(t.is_income ? t('app.controllers.finance_controller.income') : t('app.controllers.finance_controller.expense'))]
+            tsv << [t.title,
+                    t.full_name,
+                    t.payform,
+                    t.amount,
+                    t.created,
+                    t.category_name,
+                    (t.is_income ? 
+                     t('app.controllers.finance_controller.income') : 
+                     t('app.controllers.finance_controller.expense')),
+                    t.cash_box_name]
           end
         end
         send_data(tsv_str,
