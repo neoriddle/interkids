@@ -38,3 +38,11 @@
     :class => "option_buttons", 
     :id => "academic_button", 
     :title => t('app.views.user.dashboard.academic_reports') %>
+
+<% if @config.include?('Finance') %>
+<%= link_to "", 
+    {:controller => "finance", :action => "index"},
+    :class => "option_buttons", 
+    :id => "finance_button", 
+    :title => t('app.views.user.dashboard.manages_finance_module')%>
+<% end %>

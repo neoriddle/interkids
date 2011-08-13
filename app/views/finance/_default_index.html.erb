@@ -1,0 +1,43 @@
+<div class="link-box">
+  <div class="link-heading"><%= link_to t('app.views.finance.index.fees'), :action => "fees_index" %> </div>
+  <div class="link-descr"><%=t('app.views.finance.index.manage_fees')%></div>
+</div>
+
+<div class="link-box">
+  <div class="link-heading"><%= link_to t('app.views.finance.index.category'), :action => "categories" %> </div>
+  <div class="link-descr"><%=t('app.views.finance.index.manages_category')%></div>
+</div>
+
+<div class="link-box">
+  <div class="link-heading"><%= link_to t('app.views.finance.index.transactions'), :action => "transactions" %> </div>
+  <div class="link-descr"><%=t('app.views.finance.index.transaction_description')%></div>
+</div>
+
+<div class="link-box">
+  <div class="link-heading"><%= link_to t('app.views.finance.index.donations'), :action => "donation" %></div>
+  <div class="link-descr"><%=t('app.views.finance.index.create_new_donations')%></div>
+</div>
+
+<!--
+<div class="link-box">
+  <div class="link-heading"><%= link_to t('app.views.finance.index.auto_transaction'), :action => "automatic_transactions" %></div>
+  <div class="link-descr"><%=t('app.views.finance.index.add_automatic_transaction')%></div>
+</div>
+-->
+
+<% unless @hr.nil? %>
+  <div class="link-box">
+    <div class="link-heading"><%= link_to t('app.views.finance.index.payslip'), :action => "payslip_index" %></div>
+    <div class="link-descr"><%=t('app.views.finance.index.employee_payslip')%></div>
+  </div>
+<% end %>
+
+<div class="link-box">
+  <div class="link-heading"><%= link_to t('app.views.finance.index.export'),:controller => 'xml', :action => "index" %></div>
+  <div class="link-descr"> <%=t('app.views.finance.index.export_description')%></div>
+</div>
+
+<div class="link-box">
+  <div class="link-heading"><%= link_to t('app.views.finance.index.invoice'),:controller => 'student_invoice_datas', :action => "index" %></div>
+  <div class="link-descr"> <%=t('app.views.finance.index.invoice_description')%></div>
+</div>

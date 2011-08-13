@@ -268,6 +268,16 @@ es:
         updated_exam_details_successfully: 'updated_exam_details_successfully'
         exam_scores_updated: 'exam_scores_updated'
       finance_controller:
+        generate_invoices_report:
+          invoice_number: 'Factura'  
+          fee_collection_name: 'Colleccion'
+          fee_category_name: 'Categoria'
+          amount_before_tax: 'Subtotal'
+          tax_amount: 'Impuesto'  
+          amount_after_tax: 'Total'  
+          created_date: 'Fecha'  
+          student_data_not_found: 'No se encontraron datos del estudiante'
+          no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
         donation_accepted: ' Donaci&oacute;n aceptada '
         please_create_category_for_expense: ' Crear una categor&iacute;a para los gastos '
         expense_has_been_added_to_the_accounts: ' El gasto ha sido agregado a las cuentas correspondientes '
@@ -1370,6 +1380,18 @@ es:
           export_description: 'Exportar las transacciones en formato xml'
           invoice: 'Datos de facturaci&oacute;n'
           invoice_description: 'Capture los datos de facturaci&oacute;n para los alumnos'
+        _student_index:
+          reports: 'Reportes'
+          reports_desc: 'Reportes e informes del estudiante'
+        student_reports_index:
+          invoices: 'Facturas'
+          invoices_desc: 'Facturas del estudiante'
+        request_invoices_report:
+          start_date: 'Fecha de inicio'
+          end_date: 'Fecha de fin'
+          submit: 'Enviar'
+          reports: 'Reportes'
+          invoices_report: 'Reporte de Facturas'
         categories:
           categories: 'Categorias'
           manage_finance: 'Gesti&oacute;n de finanzas'

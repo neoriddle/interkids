@@ -7,59 +7,14 @@
   </div>
 </div>
 <div id="page-yield">
+
   <% unless flash[:notice].nil? %><p class="flash-msg"><%= flash[:notice] %></p><% end %>
   
   <div class="box">
-
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.fees'), :action => "fees_index" %> </div>
-    <div class="link-descr"><%=t('app.views.finance.index.manage_fees')%></div>
-  </div>
-
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.category'), :action => "categories" %> </div>
-    <div class="link-descr"><%=t('app.views.finance.index.manages_category')%></div>
-  </div>
-
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.transactions'), :action => "transactions" %> </div>
-    <div class="link-descr"><%=t('app.views.finance.index.transaction_description')%></div>
-  </div>
-
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.donations'), :action => "donation" %></div>
-    <div class="link-descr"><%=t('app.views.finance.index.create_new_donations')%></div>
-  </div>
-
-  <!--
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.auto_transaction'), :action => "automatic_transactions" %></div>
-    <div class="link-descr"><%=t('app.views.finance.index.add_automatic_transaction')%></div>
-  </div>-->
-  <% unless @hr.nil? %>
-    <div class="link-box">
-      <div class="link-heading"><%= link_to t('app.views.finance.index.payslip'), :action => "payslip_index" %></div>
-      <div class="link-descr"><%=t('app.views.finance.index.employee_payslip')%></div>
-    </div>
-  <% end %>
-
-  <!-- Se comenta ya que se analizo que la manipulación de los activos y pasivos ya se realiza dentro de las tranasacciones
-  Y dentro de la base de datos no se encuentra una relación seria con las demñas tablas
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.asset_liability_manager'), :action => "asset_liability" %></div>
-    <div class="link-descr"> t('app.views.finance.index.asset_liability_manager_desc')</div>
-  </div>
-  -->
-
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.export'),:controller => 'xml', :action => "index" %></div>
-    <div class="link-descr"> <%=t('app.views.finance.index.export_description')%></div>
-  </div>
-
-  <div class="link-box">
-    <div class="link-heading"><%= link_to t('app.views.finance.index.invoice'),:controller => 'student_invoice_datas', :action => "index" %></div>
-    <div class="link-descr"> <%=t('app.views.finance.index.invoice_description')%></div>
-  </div>
-
+    <% if @user.student? %>
+      <%= render :partial => 'student_index' %>
+    <% else %>
+      <%= render :partial => 'default_index' %>
+    <% end %>
   </div>
 </div>

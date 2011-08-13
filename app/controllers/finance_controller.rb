@@ -4,6 +4,7 @@ class FinanceController < ApplicationController
 
   def index
     @hr = Configuration.find_by_config_value("HR")
+    @user = User.find(session[:user_id])
   end
 
 
@@ -1777,6 +1778,92 @@ class FinanceController < ApplicationController
     render :text => chart.render
  
    
+  end
+
+#  def student_reports_index
+#  end
+
+  def request_invoices_report
+    @start_date, @end_date = Date.today, Date.today
+  end
+
+  def generate_invoices_report
+    @start_date = params[:start_date] ? Date.parse(params[:start_date]) : Date.today
+    @end_date = params[:end_date] ? Date.parse(params[:end_date]) : Date.today
+    current_user = User.find(session[:user_id])
+    logger.debug "Current user => #{current_user.inspect}"
+    @student = Student.find_by_admission_no(current_user.username)
+    logger.debug "Student found => #{@student.inspect}"
+
+    unless @student
+      logger.debug "ERROR: Student not found"
+      # Notify student not found
+      flash[:notice] = t('app.controllers.finance_controller.generate_invoices_report.student_data_not_found')
+      # Return to page
+      render :action => 'request_invoices_report'      
+    end
+
+    invoices = Invoice.find_by_sql(
+    """
+SELECT
+	iv.invoice_number                     AS invoice_number,
+	o.name                                AS fee_collection_name,
+	a.name                                AS fee_category_name,
+	iv.amount_before_tax                  AS amount_before_tax_r,
+	iv.tax                                AS tax_amount,
+	(iv.amount_before_tax + iv.tax)       AS amount_after_tax_r,
+	iv.created_at                         AS created_date
+FROM
+	invoices iv
+	INNER JOIN student_invoice_datas sid ON iv.student_invoice_data_id = sid.id
+	INNER JOIN students s                ON sid.student_id = s.id
+	LEFT JOIN  finance_fee_collections o ON iv.fee_collection_id = o.id
+	LEFT JOIN  finance_fee_categories a  ON iv.fee_category_id = a.id
+WHERE
+	s.id = #{@student.id}
+	AND
+	iv.created_at BETWEEN '#{@start_date.to_s}' AND '#{@end_date.to_s}';
+    """)
+
+    logger.debug "Results => #{invoices.inspect}"
+    
+    if invoices.empty?
+      logger.debug "ERROR: Results not found"
+      # Notify no results found
+      flash[:notice] = t('app.controllers.finance_controller.generate_invoices_report.no_results_not_found')
+      # Return to page
+      redirect_to :action => 'request_invoices_report'
+    else
+      # Render CSV
+      respond_to do |format|
+        format.csv  { 
+          tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
+            tsv << [t('app.controllers.finance_controller.generate_invoices_report.invoice_number'),
+                    t('app.controllers.finance_controller.generate_invoices_report.fee_collection_name'),
+                    t('app.controllers.finance_controller.generate_invoices_report.fee_category_name'),
+                    t('app.controllers.finance_controller.generate_invoices_report.amount_before_tax'),
+                    t('app.controllers.finance_controller.generate_invoices_report.tax_amount'),
+                    t('app.controllers.finance_controller.generate_invoices_report.amount_after_tax'),
+                    t('app.controllers.finance_controller.generate_invoices_report.created_date')]
+            invoices.each do |t|
+              tsv << [t.invoice_number,
+                      t.fee_collection_name,
+                      t.fee_category_name,
+                      t.amount_before_tax_r,
+                      t.tax_amount,
+                      t.amount_after_tax_r,
+                      t.created_date]
+            end
+          end
+          send_data(tsv_str,
+                    :filename => "invoices_report-#{Time.now.to_date.to_s}.csv",
+                    :type => 'text/csv')
+        }
+      end
+
+
+    end
+
   end
 
 end
