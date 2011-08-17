@@ -1380,10 +1380,10 @@ es:
           export_description: 'Exportar las transacciones en formato xml'
           invoice: 'Datos de facturaci&oacute;n'
           invoice_description: 'Capture los datos de facturaci&oacute;n para los alumnos'
-        _student_index:
+        _admin_index:
           reports: 'Reportes'
-          reports_desc: 'Reportes e informes del estudiante'
-        student_reports_index:
+          reports_desc: 'Reportes e informes'
+        admin_reports_index:
           invoices: 'Facturas'
           invoices_desc: 'Facturas del estudiante'
         request_invoices_report:

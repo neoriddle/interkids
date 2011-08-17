@@ -1167,7 +1167,7 @@ authorization do
         :generate_receipts_report,
 
         :student_fees_structure, 
-        :student_reports_index,
+        :admin_reports_index,
         :request_invoices_report,
         :generate_invoices_report
 
