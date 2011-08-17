@@ -1780,9 +1780,6 @@ class FinanceController < ApplicationController
    
   end
 
-#  def student_reports_index
-#  end
-
   def request_invoices_report
     @start_date, @end_date = Date.today, Date.today
   end
@@ -1790,18 +1787,6 @@ class FinanceController < ApplicationController
   def generate_invoices_report
     @start_date = params[:start_date] ? Date.parse(params[:start_date]) : Date.today
     @end_date = params[:end_date] ? Date.parse(params[:end_date]) : Date.today
-    current_user = User.find(session[:user_id])
-    logger.debug "Current user => #{current_user.inspect}"
-    @student = Student.find_by_admission_no(current_user.username)
-    logger.debug "Student found => #{@student.inspect}"
-
-    unless @student
-      logger.debug "ERROR: Student not found"
-      # Notify student not found
-      flash[:notice] = t('app.controllers.finance_controller.generate_invoices_report.student_data_not_found')
-      # Return to page
-      render :action => 'request_invoices_report'      
-    end
 
     invoices = Invoice.find_by_sql(
     """
@@ -1820,11 +1805,8 @@ FROM
 	LEFT JOIN  finance_fee_collections o ON iv.fee_collection_id = o.id
 	LEFT JOIN  finance_fee_categories a  ON iv.fee_category_id = a.id
 WHERE
-	s.id = #{@student.id}
-	AND
 	iv.created_at BETWEEN '#{@start_date.to_s}' AND '#{@end_date.to_s}';
     """)
-
     logger.debug "Results => #{invoices.inspect}"
     
     if invoices.empty?
