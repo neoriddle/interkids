@@ -1791,6 +1791,7 @@ class FinanceController < ApplicationController
     invoices = Invoice.find_by_sql(
     """
 SELECT
+        CONCAT_WS(' ', s.first_name, s.middle_name, s.last_name) AS student_name, 
 	iv.invoice_number                     AS invoice_number,
 	o.name                                AS fee_collection_name,
 	a.name                                AS fee_category_name,
@@ -1821,6 +1822,7 @@ WHERE
         format.csv  { 
           tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
             tsv << [t('app.controllers.finance_controller.generate_invoices_report.invoice_number'),
+                    t('app.controllers.finance_controller.generate_invoices_report.student_name'),
                     t('app.controllers.finance_controller.generate_invoices_report.fee_collection_name'),
                     t('app.controllers.finance_controller.generate_invoices_report.fee_category_name'),
                     t('app.controllers.finance_controller.generate_invoices_report.amount_before_tax'),
@@ -1829,6 +1831,7 @@ WHERE
                     t('app.controllers.finance_controller.generate_invoices_report.created_date')]
             invoices.each do |t|
               tsv << [t.invoice_number,
+                      t.student_name,
                       t.fee_collection_name,
                       t.fee_category_name,
                       t.amount_before_tax_r,

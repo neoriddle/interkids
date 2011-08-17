@@ -270,6 +270,7 @@ es:
       finance_controller:
         generate_invoices_report:
           invoice_number: 'Factura'  
+          student_name: 'Alumno'  
           fee_collection_name: 'Colleccion'
           fee_category_name: 'Categoria'
           amount_before_tax: 'Subtotal'
