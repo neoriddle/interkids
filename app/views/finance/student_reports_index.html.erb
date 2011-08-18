@@ -13,5 +13,15 @@
 
   <div class="box">
 
+    <div class="link-box">
+      <div class="link-heading">
+        <%= link_to t('app.views.finance.student_reports_index.payments'), 
+                    :action => "request_payment_report" %>
+      </div>
+      <div class="link-descr">
+        <%=t('app.views.finance.student_reports_index.payments_desc')%>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -279,6 +279,15 @@ es:
           created_date: 'Fecha'  
           student_data_not_found: 'No se encontraron datos del estudiante'
           no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
+        generate_payments_report:
+          student_data_not_found: 'No se encontraron datos del estudiante'
+          no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
+          title: 'Titulo'
+          payform: 'Forma de pago'
+          amount: 'Cantidad'
+          created: 'Fecha'
+          category_name: 'Categoria'
+          cash_box_name: 'Caja'
         donation_accepted: ' Donaci&oacute;n aceptada '
         please_create_category_for_expense: ' Crear una categor&iacute;a para los gastos '
         expense_has_been_added_to_the_accounts: ' El gasto ha sido agregado a las cuentas correspondientes '
@@ -1393,6 +1402,18 @@ es:
           submit: 'Enviar'
           reports: 'Reportes'
           invoices_report: 'Reporte de Facturas'
+        _student_index:
+          reports: 'Reportes'
+          reports_desc: 'Reportes e informes'
+        student_reports_index:
+          payments: 'Pagos'
+          payments_desc: 'Pagos del estudiante'
+        request_payment_report:
+          start_date: 'Fecha de inicio'
+          end_date: 'Fecha de fin'
+          submit: 'Enviar'
+          reports: 'Reportes'
+          payments_report: 'Reporte de Pagos'
         categories:
           categories: 'Categorias'
           manage_finance: 'Gesti&oacute;n de finanzas'

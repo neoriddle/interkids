@@ -1488,6 +1488,13 @@ authorization do
     has_permission_on [:timetable], :to => [:student_view,:update_timetable_view]
     has_permission_on [:attendance], :to => [:student_report]
     has_permission_on [:student_attendance], :to => [:index, :student, :month]
+    has_permission_on [:finance], 
+      :to => [
+              :index,
+              :student_reports_index,
+              :request_payment_report,
+              :generate_payment_report
+             ]
   end
 
   # employee -privileges

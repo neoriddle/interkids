@@ -1851,4 +1851,81 @@ WHERE
 
   end
 
+  def request_payment_report
+    @start_date, @end_date = Date.today, Date.today
+  end
+
+
+  def generate_payment_report
+    @start_date = params[:start_date] ? Date.parse(params[:start_date]) : Date.today
+    @end_date = params[:end_date] ? Date.parse(params[:end_date]) : Date.today
+    
+    current_user = User.find(session[:user_id])
+    logger.debug "Current user => #{current_user.inspect}"
+    @student = Student.find_by_admission_no(current_user.username)
+    logger.debug "Student found => #{@student.inspect}"
+    
+    unless @student
+      logger.debug "ERROR: Student not found"
+      # Notify student not found
+      flash[:notice] = t('app.controllers.finance_controller.generate_payments_report.student_data_not_found')
+      # Return to page
+      render :action => 'request_payment_report'      
+    end
+
+    transactions = FinanceTransaction.find_by_sql(
+    """
+    SELECT 
+        ft.title          AS title, 
+        pf.name           AS payform, 
+        ft.amount         AS amount,
+        ft.created_at     AS created,
+        tc.name           AS category_name,
+        cb.name           AS cash_box_name
+    FROM 
+        finance_transactions ft 
+        INNER JOIN payment_forms pf                  ON ft.payment_form_id = pf.id
+        INNER JOIN finance_transaction_categories tc ON ft.category_id = tc.id
+        INNER JOIN cash_boxes cb                     ON tc.cash_box_id = cb.id
+    WHERE 
+        ft.student_id = #{@student.id}
+        AND
+	ft.created_at BETWEEN '#{@start_date.to_s}' AND '#{@end_date.to_s}'
+    """)
+    logger.debug "Results => #{transactions.inspect}"
+    
+    if transactions.empty?
+      logger.warn "WARN: Results not found"
+      # Notify no results found
+      flash[:notice] = t('app.controllers.finance_controller.generate_payments_report.no_results_not_found')
+      # Return to page
+      redirect_to :action => 'request_payment_report'
+    else
+      # Render CSV
+      respond_to do |format|
+        format.csv  { 
+          tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
+            tsv << [t('app.controllers.finance_controller.generate_payments_report.title'),
+                    t('app.controllers.finance_controller.generate_payments_report.payform'),
+                    t('app.controllers.finance_controller.generate_payments_report.amount'),
+                    t('app.controllers.finance_controller.generate_payments_report.created'),
+                    t('app.controllers.finance_controller.generate_payments_report.category_name'),
+                    t('app.controllers.finance_controller.generate_payments_report.cash_box_name')]
+            transactions.each do |t|
+              tsv << [t.title,
+                      t.payform,
+                      t.amount,
+                      t.created,
+                      t.category_name,
+                      t.cash_box]
+            end
+          end
+          send_data(tsv_str,
+                    :filename => "payments_report-#{Time.now.to_date.to_s}.csv",
+                    :type => 'text/csv')
+        }
+      end
+    end
+  end
+
 end
