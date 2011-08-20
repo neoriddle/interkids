@@ -78,7 +78,7 @@ class StudentController < ApplicationController
 
         # Add collections to new student
         logger.debug "Adding collections to new student..."
-        collections = FinanceFeeCollection.all(:conditions => ["batch_id = ? AND start_date >= ? AND is_deleted = ?", @student.batch, @student.admission_date, false] )
+        collections = FinanceFeeCollection.all(:conditions => ["batch_id = ? AND end_date >= ? AND is_deleted = ?", @student.batch, @student.admission_date, false] )
         collections.each do |c|
           logger.debug "Adding collection #{c.id} to student #{@student.id}"
           fee = FinanceFee.new(:student => @student)
