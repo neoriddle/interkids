@@ -1881,12 +1881,15 @@ WHERE
         ft.amount         AS amount,
         ft.created_at     AS created,
         tc.name           AS category_name,
-        cb.name           AS cash_box_name
+        ffc.name          AS service,
+        ffcat.name        AS service_name
     FROM 
         finance_transactions ft 
         INNER JOIN payment_forms pf                  ON ft.payment_form_id = pf.id
         INNER JOIN finance_transaction_categories tc ON ft.category_id = tc.id
-        INNER JOIN cash_boxes cb                     ON tc.cash_box_id = cb.id
+        INNER JOIN finance_fees ff                   ON ff.id = ft.finance_fees_id
+        INNER JOIN finance_fee_collections ffc       ON ffc.id = ff.fee_collection_id
+        INNER JOIN finance_fee_categories ffcat      ON ffcat.id = ffc.fee_category_id
     WHERE 
         ft.student_id = #{@student.id}
         AND
@@ -1910,14 +1913,16 @@ WHERE
                     t('app.controllers.finance_controller.generate_payments_report.amount'),
                     t('app.controllers.finance_controller.generate_payments_report.created'),
                     t('app.controllers.finance_controller.generate_payments_report.category_name'),
-                    t('app.controllers.finance_controller.generate_payments_report.cash_box_name')]
+                    t('app.controllers.finance_controller.generate_payments_report.service'),
+                    t('app.controllers.finance_controller.generate_payments_report.service_name')]
             transactions.each do |t|
               tsv << [t.title,
                       t.payform,
                       t.amount,
                       t.created,
                       t.category_name,
-                      t.cash_box]
+                      t.service,
+                      t.service_name]
             end
           end
           send_data(tsv_str,
