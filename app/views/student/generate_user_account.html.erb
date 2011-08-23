@@ -1,0 +1,30 @@
+<div id="content-header">
+  <img src="/images/student_details/student_details_logo.jpg" />
+  <h1><%= t('app.views.student.generate_user_account.user_account_for_students') %></h1>
+  <h3><%= t('app.views.student.generate_user_account.student_data') %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% if flash[:notice] -%>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end -%>
+
+
+  <% if @student.user -%>
+
+  <div class="label-field-pair-select-class">
+    <label for="student-detail-select-class">
+      <%= t('app.views.student.generate_user_account.username') %>
+    </label>
+    <div class="text-input-bg">
+      <%= @student.user.username %>
+    </div>
+  </div>
+
+  <% end -%>
+
+</div>

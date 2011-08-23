@@ -45,6 +45,10 @@
 
         <td class="col-4">
           <%= link_to t('app.views.student._students_by_course.view_profile'), :controller => "student", :action => "profile", :id => r.id %>
+	  <% unless r.user -%>
+	      |
+            <%= link_to t('app.views.student._students_by_course.generate_user'), :action => "generate_user_account", :id => r.id %>
+	  <% end -%>
         </td>
       </tr>
     <% end %>

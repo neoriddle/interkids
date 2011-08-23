@@ -141,6 +141,10 @@ class Student < ActiveRecord::Base
     u.nil? ? nil : u.id
   end
 
+  def request_user_account_creation
+    create_user_account unless student_user
+  end
+
   private
   def create_user_account
     user = User.new do |u|
@@ -149,6 +153,8 @@ class Student < ActiveRecord::Base
       u.role = 'Student'
       u.email = ( email.nil? or email == '' or User.find_by_email(email) ) ? "noreply#{admission_no.to_s}@interkidsonline.com" : email
     end
+
+    logger.error "Errors => #{user.errors.inspect}" unless user.valid?
     user.save
   end
 

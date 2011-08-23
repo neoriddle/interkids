@@ -1085,6 +1085,24 @@ class StudentController < ApplicationController
   #
   #  end
 
+  def generate_user_account
+    find_student
+
+    if @student
+      @user = @student.user
+      if @user
+        logger.warn "User registered for student => #{@user.inspect}"
+        flash[:notice] = t('app.controllers.student_controller.generate_user_account.user_registered_for_student')
+      else
+        @student.request_user_account_creation
+        logger.debug "Triggered save"
+      end
+    else
+      logger.error "Student not found"
+      flash[:notice] = t('app.controllers.student_controller.generate_user_account.student_not_found')
+    end
+
+  end
 
   private
   def find_student

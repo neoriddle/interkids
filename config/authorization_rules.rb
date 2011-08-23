@@ -1217,6 +1217,7 @@ authorization do
         :guardians,
         :del_guardian,
         :list_students_by_course,
+        :generate_user_account,
         :show,
         :view_all,
         :index,

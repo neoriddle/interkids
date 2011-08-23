@@ -374,6 +374,10 @@ es:
         sms_sent_successfully_to_selected_employees: 'sms_sent_successfully_to_selected_employees'
         sms_sent_successfully_to_employees_of_selected_department: 'sms_sent_successfully_to_employees_of_selected_department'
       student_controller:
+        generate_user_account:
+          student_not_found: 'El estudiante no fue encontrado'
+          user_registered_for_student: 'El estudiante ya tiene un usuario registrado'
+          username: 'Usuario'
         student_admission_done_username_is: ' El usuario del alumno registrado es:  '
         and_password_is: ' y su password es: '
         student_record_saved_successfully_please_fill_the_parent_details: ' El registro del alumno se ha realizado exit&oacute;samente, continua con los datos del padre o tutor '
@@ -1739,6 +1743,7 @@ es:
           name: 'Nombre'
           adm_no: 'Adm. no.'
           view_profile: 'Ver perfil'
+          generate_user: 'Generar usuario'
         _unassign_students:
           remove: 'Borrar'
         academic_report:
@@ -2226,6 +2231,9 @@ es:
           view_details: 'Ver detalles'
           select_a_course: 'Grado'
           select_a_batch: 'Sel. Grado'
+        generate_user_account:
+          student_data: 'Detalles del alumno'
+          user_account_for_students: 'Cuenta de usuario para alumnos'
       student_attendance:
         _month:
           select_month_year: 'Selecciona mes y a&ntildeo'
