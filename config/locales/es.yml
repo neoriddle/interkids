@@ -279,6 +279,13 @@ es:
           created_date: 'Fecha'  
           student_data_not_found: 'No se encontraron datos del estudiante'
           no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
+        generate_student_debtors_report:
+          student_id: 'Id'  
+          student_name: 'Alumno'  
+          group: 'Grupo'
+          debt: 'Servicio Pendiente'
+          admin: 'Control Admin'
+          no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
         generate_payments_report:
           student_data_not_found: 'No se encontraron datos del estudiante'
           no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
@@ -1401,6 +1408,8 @@ es:
         admin_reports_index:
           invoices: 'Facturas'
           invoices_desc: 'Facturas del estudiante'
+          student_debtors: 'Estudiantes deudores'
+          student_debtors_desc: 'Listado de los estudiantes registrados con deudas pendientes'
         request_invoices_report:
           start_date: 'Fecha de inicio'
           end_date: 'Fecha de fin'
@@ -1419,6 +1428,10 @@ es:
           submit: 'Enviar'
           reports: 'Reportes'
           payments_report: 'Reporte de Pagos'
+        request_student_debtors_report:
+          debt_report: 'Reporte de Deudas'
+          reports: 'Reportes'
+          submit: 'Enviar'
         categories:
           categories: 'Categorias'
           manage_finance: 'Gesti&oacute;n de finanzas'

@@ -21,5 +21,16 @@
 	<%= t('app.views.finance.admin_reports_index.invoices_desc') %>
       </div>
     </div>
+
+    <div class="link-box">
+      <div class="link-heading">
+	<%= link_to t('app.views.finance.admin_reports_index.student_debtors'), 
+                    :action => "request_student_debtors_report" %>
+      </div>
+      <div class="link-descr">
+	<%= t('app.views.finance.admin_reports_index.student_debtors_desc') %>
+      </div>
+    </div>
+
   </div>
 </div>

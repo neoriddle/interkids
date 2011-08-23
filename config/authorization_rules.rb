@@ -1169,7 +1169,9 @@ authorization do
         :student_fees_structure, 
         :admin_reports_index,
         :request_invoices_report,
-        :generate_invoices_report
+        :generate_invoices_report,
+        :request_student_debtors_report,
+        :generate_student_debtors_report
 
     ]
         
