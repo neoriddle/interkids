@@ -147,15 +147,75 @@ class Student < ActiveRecord::Base
 
   private
   def create_user_account
-    user = User.new do |u|
-      u.first_name, u.last_name, u.username = first_name, last_name, admission_no.to_s
-      u.password = "#{admission_no.to_s}123"
-      u.role = 'Student'
-      u.email = ( email.nil? or email == '' or User.find_by_email(email) ) ? "noreply#{admission_no.to_s}@interkidsonline.com" : email
-    end
+    if self.user  # Student has user account
+      logger.error "Student (:id => #{self.id}) has an user (#{self.user.inspect}) associated."
+      logger.error "No user account will be created for student (:id => #{self.id})."
+    else  # Student does not have user account
+      existing_user = User.find_by_username(self.admission_no)
 
-    logger.error "Errors => #{user.errors.inspect}" unless user.valid?
-    user.save
+      if existing_user
+        logger.warn "User (:id => #{existing_user.id}) has reserved this username."
+        logger.warn "No user account will be created for student (:id => #{self.id})."
+      else
+        user = User.new do |u|
+          u.first_name, u.last_name, u.username = first_name, last_name, admission_no.to_s
+          u.password = "#{admission_no.to_s}123"
+          u.role = 'Student'
+          u.email = ( email.nil? or email == '' or User.find_by_email(email) ) ? "noreply#{admission_no.to_s}@interkidsonline.com" : email
+        end
+
+        logger.error "Errors on save user => #{user.errors.inspect}" unless user.valid?
+        user.save
+      end
+    end
+  end
+
+  def self.fix_student_admission_no(students = [])
+
+    students.each do |s|
+      old = s.admission_no
+      new = s.admission_no.delete('-')
+
+      logger.info "Checking student (:id => #{s.id}, :admission_no => #{s.admission_no})"
+      
+      if old == new
+        logger.info "\tStudent does not requiere and will not be changed"
+      else
+        logger.info "\tAttempt to fix student (:admission_no => #{old}, :new_admission_no => #{new})"
+
+        existing_user = User.find_by_username(new)
+        existing_student = Student.find_by_admission_no(new)
+
+        if existing_student and existing_user
+          logger.warn "\tUser (id => #{existing_user.id}) and student (id => #{existing_student.id}) existing."
+          logger.info "\tStudent will not be changed"
+        elsif existing_student and not existing_user
+          logger.error "\tStudent (id => #{existing_student.id}) has reserved this admission_no."
+        elsif not existing_student and existing_user
+          logger.error "\tUser (id => #{existing_user.id}) has reserved this username."
+        else
+          
+          if s.user  # Student has an user associated
+            logger.info "\tUser associated #{s.user.inspect}"
+            s.user.username = new
+            puts "\tErrors on save user => #{s.user.errors.inspect}" unless s.user.valid?
+
+            if s.user.save
+              s.admission_no = s.user.username
+              puts "\tErrors on save student => #{s.errors.inspect}" unless s.valid?
+              s.save
+            end
+          else  # Student has not an user associated
+            logger.info "\tNo user associated #{s.user.inspect}"
+            s.admission_no = new
+            logger.error "\tErrors on save => #{s.errors.inspect}" unless s.valid?
+            s.save
+          end
+
+        end
+
+      end
+    end
   end
 
 end
