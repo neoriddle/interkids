@@ -35,12 +35,8 @@ data = Array.new(){Array.new()}
   @fee_category = FinanceFeeCategory.find(@fee_collection.fee_category_id,:conditions => ["is_deleted IS NOT NULL"])
   @fee_particulars = @fee_category.fees(s)
   total_fees = 0
-  @fee_particulars.each do |p|
-    total_fees += p.amount
-  end
-  if s.check_fees_paid(@date) == false
-    data.push = [ i+1, s.full_name, total_fees  ]
-  end
+  @fee_particulars.each { |p| total_fees += p.amount }
+  data.push [ i+1, s.full_name, total_fees ] unless s.check_fees_paid(@date)
 end
 
 
