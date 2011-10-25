@@ -1,4 +1,5 @@
 # Header
+pdf = Prawn::Document.new(:page_size => [596,385], :page_layout => :portrait)
 pdf.header pdf.margin_box.top_left do
   if FileTest.exists?("#{RAILS_ROOT}/public/uploads/image/institute_logo.jpg")
     logo = "#{RAILS_ROOT}/public/uploads/image/institute_logo.jpg"
@@ -26,13 +27,17 @@ pdf.header pdf.margin_box.top_left do
 end
 
 pdf.move_down(80)
-pdf.text "Fee Reciept" , :size => 14 ,:align => :center
+pdf.text t('app.views.finance.student_fee_particular_receipt_pdf.fee_receipt') , :size => 14 ,:align => :center
 pdf.move_down(20)
-pdf.text "Name : #{@student.full_name}" , :size => 11
-pdf.text "Admission no : #{@particular.admission_no}" , :size => 11
-pdf.text "Payment : #{@collection.name}" , :size => 11
-pdf.text "Amount paid : #{@particular.amount * -1}" , :size => 11
-pdf.text "Total left : #{@total_left_to_pay}" , :size => 11
+pdf.text t('app.views.finance.student_fee_particular_receipt_pdf.name') + " : #{@student.full_name}" , :size => 11
+pdf.move_down(20)
+pdf.text t('app.views.finance.student_fee_particular_receipt_pdf.admission_no') + " : #{@particular.admission_no}" , :size => 11
+pdf.move_down(20)
+pdf.text t('app.views.finance.student_fee_particular_receipt_pdf.payment') + " : #{@collection.name}" , :size => 11
+pdf.move_down(20)
+pdf.text t('app.views.finance.student_fee_particular_receipt_pdf.amount_paid') + " : $ #{@particular.amount * -1}" , :size => 11
+pdf.move_down(20)
+pdf.text t('app.views.finance.student_fee_particular_receipt_pdf.total_left') + " : $ #{@total_left_to_pay}" , :size => 11
 
 
 pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
@@ -41,7 +46,7 @@ pdf.footer [pdf.margin_box.left, pdf.margin_box.bottom + 25] do
     pdf.table(signature,
               :width => 500,
               :align => {0 => :right,1 => :right},
-              :headers => ["Signature"],
+              :headers => [t('app.views.finance.student_fee_particular_receipt_pdf.signature')],
               :header_text_color  => "DDDDDD",
               :border_color => "FFFFFF",
               :position => :center)
