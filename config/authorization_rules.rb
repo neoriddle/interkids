@@ -793,7 +793,7 @@ authorization do
         :graph_for_compare_monthly_report,
         :graph_for_transaction_comparison,
         :fees_student_structure_search,
-        :reports
+        :reports,
         :request_invoices_report,
         :generate_invoices_report,
         :request_student_debtors_report,
