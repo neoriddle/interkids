@@ -730,6 +730,120 @@ authorization do
   role :employee_timetable_access do
     has_permission_on [:employee], :to => [:timetable,:timetable_pdf]
   end
+  
+  role :consultor do
+        has_permission_on [:student],
+          :to => [
+            :profile,
+            :previous_data,
+            :previous_subject,
+            :admission4,
+            :profile,
+            :guardians,
+            :list_students_by_course,
+            :show,
+            :view_all,
+            :profile_pdf,
+            :show_previous_details,
+            :generate_tc_pdf,
+        :academic_reports_pdf,
+        :academic_report,
+        :academic_report_all,
+        :show,
+        :view_all,
+        :index,
+        :email,
+        :reports,
+        :search_ajax,
+        :subject_wise_report,
+        :graph_for_previous_years_marks_overview,
+        :graph_for_student_annual_overview,
+        :graph_for_subject_wise_report_for_one_subject,
+        :graph_for_exam_report,
+        :graph_for_academic_report,
+        :generate_tc_pdf,
+        :generate_all_tc_pdf,
+        :advanced_search,
+        :advanced_search_pdf,
+        :profile_pdf,
+        :show_previous_details,
+        :list_doa_year,
+        :list_dob_year,
+        :list_batches,
+        :find_student
+    ]
+    
+    has_permission_on [:attendance], :to => [:index,:report,:student_report]
+    has_permission_on [:attendance_reports], :to => [:index, :subject, :mode, :show, :year, :report, :filter, :student_details]
+    has_permission_on [:student_attendance], :to => [:index, :student]
+    
+    has_permission_on [:finance],
+      :to => [
+        :index,
+        :admin_reports_index,
+        :donation_receipt,
+        :fees_student_search,
+        :search_logic,
+        :fees_defaulters,
+        :fees_index,
+        :additional_fees_list,
+        :report_compare,
+        :pdf_fee_structure,
+        :graph_for_update_monthly_report,
+        :graph_for_compare_monthly_report,
+        :graph_for_transaction_comparison,
+        :fees_student_structure_search,
+        :reports
+        :request_invoices_report,
+        :generate_invoices_report,
+        :request_student_debtors_report,
+        :generate_student_debtors_report
+    ]
+    
+    has_permission_on [:xml],
+          :to => [
+            :index,
+            :settings,
+            :create_xml
+        ]
+    
+    has_permission_on [:employee],
+      :to => [
+        :index,
+        :admission1,
+        :admission2,
+        :admission3,
+        :admission3_1,
+        :admission4,
+        :change_reporting_manager,
+        :reporting_manager_search,
+        :update_reporting_manager_name,
+        :edit4,
+        :search,
+        :search_ajax,
+        :select_reporting_manager,
+        :profile,
+        :profile_general,
+        :profile_personal,
+        :profile_address,
+        :profile_contact,
+        :profile_bank_details,
+        :profile_payroll_details,
+        :view_all,
+        :show,
+        :subject_assignment,
+        :select_department,
+        :hr,
+        :select_department_employee,
+        :settings,
+        :employee_management,
+        :employees_list,
+        :profile_pdf,
+        :leave_management,
+        :leave_list
+        
+    ]
+  end
 
   # admin privileges
   role :admin do
