@@ -279,6 +279,13 @@ es:
           created_date: 'Fecha'  
           student_data_not_found: 'No se encontraron datos del estudiante'
           no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
+        generate_student_debts_report:
+          student_id: 'Id'  
+          student_name: 'Alumno'  
+          group: 'Grupo'
+          debt: 'Servicio Pendiente'
+          admin: 'Control Admin'
+          no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
         generate_student_debtors_report:
           student_id: 'Id'  
           student_name: 'Alumno'  
@@ -1430,12 +1437,18 @@ es:
         student_reports_index:
           payments: 'Pagos'
           payments_desc: 'Pagos del estudiante'
+          debts: 'Deudas'
+          debts_desc: 'Deudas del estudiante'
         request_payment_report:
           start_date: 'Fecha de inicio'
           end_date: 'Fecha de fin'
           submit: 'Enviar'
           reports: 'Reportes'
           payments_report: 'Reporte de Pagos'
+        request_student_debts_report:
+          debts_report: 'Reporte de Deudas'
+          reports: 'Reportes'
+          generate_report: 'Generar reporte'
         request_student_debtors_report:
           debt_report: 'Reporte de Deudas'
           reports: 'Reportes'

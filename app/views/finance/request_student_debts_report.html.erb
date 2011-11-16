@@ -1,0 +1,22 @@
+<div id="content-header">
+  <img src="/images/show_finance.png" alt="" />
+  <h1><%=t('app.views.finance.request_student_debts_report.debts_report')%></h1>
+  <h3><%=t('app.views.finance.request_student_debts_report.reports')%></h3>
+  
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png", :border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? -%>
+    <p class="flash-msg"><%= flash[:notice] %></p>
+  <% end -%>
+
+  <% form_for :report, :url => {:action => 'generate_student_debts_report'} do |f| %>
+    <%= submit_tag t('app.views.finance.request_student_debts_report.generate_report'), 
+                   :class=>'submit_button' %>
+  <%end%>
+
+</div>

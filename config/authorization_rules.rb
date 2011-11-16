@@ -1610,7 +1610,9 @@ authorization do
               :index,
               :student_reports_index,
               :request_payment_report,
-              :generate_payment_report
+              :generate_payment_report,
+              :request_student_debts_report,
+              :generate_student_debts_report
              ]
   end
 
