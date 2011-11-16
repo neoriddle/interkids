@@ -2065,82 +2065,22 @@ SELECT s.admission_no AS id_alumno,
 
     results = FinanceFeeCollection.find_by_sql(
     """
-SELECT s.admission_no AS id_alumno,
-       CONCAT_WS(' ', s.first_name, s.middle_name, s.last_name) AS name, 
-       CONCAT_WS(' ', c.course_name, b.name) AS grupo,
-       concat(ffcol.name) AS servicioPendiente,
-       ff.id AS control_admin
-  FROM finance_fee_collections ffcol,
-       finance_fee_categories ffcat,
-       finance_fees ff,
-       students s,
-       batches b,
-       courses c
- WHERE ffcol.due_date < sysdate()
-       AND ffcol.fee_category_id = ffcat.id
-       AND ff.fee_collection_id = ffcol.id
-       AND ff.student_id = s.id
-       AND s.batch_id = b.id
-       AND ffcol.is_deleted = FALSE
-       AND ffcat.is_deleted = FALSE
-       AND b.course_id = c.id
-       AND b.is_deleted = FALSE
-       AND c.is_deleted = FALSE
-       AND ff.transaction_id IS NULL
-       AND s.admission_no = '#{@student.admission_no}'
-UNION DISTINCT
-SELECT s.admission_no AS id_alumno,
-       CONCAT_WS(' ', s.first_name, s.middle_name, s.last_name) AS name, 
-       CONCAT_WS(' ', c.course_name, b.name) AS grupo,
-       concat(ffcol.name) AS servicioPendiente,
-       ff.id AS control_admin
-  FROM finance_fee_collections ffcol,
-       finance_fee_categories ffcat,
-       finance_fees ff,
-       students s,
-       batches b,
-       courses c
- WHERE     ffcol.due_date < sysdate()
-       AND ffcol.fee_category_id = ffcat.id
-       AND ff.fee_collection_id = ffcol.id
-       AND ff.student_id = s.id
-       AND s.batch_id = b.id
-       AND ffcol.is_deleted = FALSE
-       AND ffcat.is_deleted = FALSE
-       AND b.course_id = c.id
-       AND b.is_deleted = FALSE
-       AND c.is_deleted = FALSE
-       AND ff.transaction_id IS NOT NULL
-       AND s.admission_no = '#{@student.admission_no}'
-       AND ff.id NOT IN
-              (SELECT ff.id
-                 FROM finance_fee_collections ffcol,
-                      finance_fee_categories ffcat,
-                      finance_fee_particulars ffpar,
-                      finance_fees ff,
-                      students s,
-                      batches b,
-                      courses c
-                WHERE     ffcol.due_date < sysdate()
-                      AND ffcol.fee_category_id = ffcat.id
-                      AND ff.fee_collection_id = ffcol.id
-                      AND ff.student_id = s.id
-                      AND s.batch_id = b.id
-                      AND ffcol.is_deleted = FALSE
-                      AND ffcat.is_deleted = FALSE
-                      AND s.admission_no = '#{@student.admission_no}'
-                      AND (ffpar.finance_fee_category_id = ffcat.id
-                           AND ffpar.student_id IS NULL
-                           AND ffpar.amount =
-                                  ANY (SELECT abs(sum(ffp2.amount))
-                                         FROM finance_fee_particulars ffp2
-                                        WHERE ffp2.finance_fee_category_id =
-                                                 ffcat.id
-                                              AND ffp2.admission_no =
-                                                     s.admission_no))
-                      AND b.course_id = c.id
-                      AND b.is_deleted = FALSE
-                      AND c.is_deleted = FALSE) ORDER BY grupo, name;
+SELECT if(p.finance_fee_collection_id IS NULL,
+          p.name,
+          concat(p.name, " ", col.name)),
+       sum(p.amount) AS deuda
+  FROM finance_fee_collections col
+       INNER JOIN finance_fee_categories c
+          ON col.fee_category_id = c.id
+       INNER JOIN finance_fee_particulars p
+          ON p.finance_fee_category_id = c.id
+ WHERE     (col.is_deleted = FALSE)
+       AND (col.`batch_id` = #{@student.batch_id})
+       AND col.due_date < sysdate()
+       AND p.amount <> 0
+       AND (p.admission_no IS NULL OR p.admission_no = '#{@student.admission_no}')
+GROUP BY p.finance_fee_category_id
+ORDER BY col.start_date, p.created_at
     """)
 
     logger.debug "Results => #{results.inspect}"
