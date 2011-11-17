@@ -280,11 +280,8 @@ es:
           student_data_not_found: 'No se encontraron datos del estudiante'
           no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
         generate_student_debts_report:
-          student_id: 'Id'  
-          student_name: 'Alumno'  
-          group: 'Grupo'
-          debt: 'Servicio Pendiente'
-          admin: 'Control Admin'
+          concept: 'Concepto'  
+          amount: 'Monto'  
           no_results_not_found: 'La b&uacute;squeda no regres&oacute; resultados'
         generate_student_debtors_report:
           student_id: 'Id'  

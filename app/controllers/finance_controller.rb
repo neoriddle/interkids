@@ -2065,22 +2065,30 @@ SELECT s.admission_no AS id_alumno,
 
     results = FinanceFeeCollection.find_by_sql(
     """
-SELECT if(p.finance_fee_collection_id IS NULL,
-          p.name,
-          concat(p.name, " ", col.name)),
-       sum(p.amount) AS deuda
-  FROM finance_fee_collections col
-       INNER JOIN finance_fee_categories c
-          ON col.fee_category_id = c.id
-       INNER JOIN finance_fee_particulars p
-          ON p.finance_fee_category_id = c.id
- WHERE     (col.is_deleted = FALSE)
-       AND (col.`batch_id` = #{@student.batch_id})
-       AND col.due_date < sysdate()
-       AND p.amount <> 0
-       AND (p.admission_no IS NULL OR p.admission_no = '#{@student.admission_no}')
-GROUP BY p.finance_fee_category_id
-ORDER BY col.start_date, p.created_at
+SELECT 
+  IF(p.finance_fee_collection_id IS NULL, p.name, CONCAT_WS(' ', p.name, col.name)) AS concept,
+  SUM(p.amount) AS amount
+FROM 
+  finance_fee_collections col
+  INNER JOIN finance_fee_categories c  ON col.fee_category_id       = c.id
+  INNER JOIN finance_fee_particulars p ON p.finance_fee_category_id = c.id
+WHERE
+  col.is_deleted = FALSE
+  AND 
+  col.batch_id = #{@student.batch_id}
+  AND 
+  col.due_date < sysdate()
+  AND 
+  p.amount <> 0
+  AND (
+    p.admission_no IS NULL 
+    OR 
+    p.admission_no = '#{@student.admission_no}')
+GROUP BY 
+  p.finance_fee_category_id
+ORDER BY 
+  col.start_date, 
+  p.created_at
     """)
 
     logger.debug "Results => #{results.inspect}"
@@ -2096,18 +2104,9 @@ ORDER BY col.start_date, p.created_at
       respond_to do |format|
         format.csv  { 
           tsv_str = FasterCSV.generate(:col_sep => "\t") do |tsv|
-            tsv << [t('app.controllers.finance_controller.generate_student_debts_report.student_id'),
-                    t('app.controllers.finance_controller.generate_student_debts_report.student_name'),
-                    t('app.controllers.finance_controller.generate_student_debts_report.group'),
-                    t('app.controllers.finance_controller.generate_student_debts_report.debt'),
-                    t('app.controllers.finance_controller.generate_student_debts_report.admin')]
-            results.each do |t|
-              tsv << [t.id_alumno,
-                      t.name,
-                      t.grupo,
-                      t.servicioPendiente,
-                      t.control_admin]
-            end
+            tsv << [t('app.controllers.finance_controller.generate_student_debts_report.concept'),
+                    t('app.controllers.finance_controller.generate_student_debts_report.amount')]
+            results.each { |t| tsv << [t.concept, t.amount] }
           end
           send_data(tsv_str,
                     :filename => "students_debts_report-#{Time.now.to_date.to_s}.csv",
